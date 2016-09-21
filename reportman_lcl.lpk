@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <Name Value="reportman_lcl"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Files Count="7">
+      <Item1>
+        <Filename Value="rppreviewcontrol.pas"/>
+        <UnitName Value="rppreviewcontrol"/>
+      </Item1>
+      <Item2>
+        <Filename Value="rppreviewmetalcl.pas"/>
+        <UnitName Value="rppreviewmetalcl"/>
+      </Item2>
+      <Item3>
+        <Filename Value="rpmaskedit.pas"/>
+        <UnitName Value="rpmaskedit"/>
+      </Item3>
+      <Item4>
+        <Filename Value="rpreglcl.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="rpreglcl"/>
+      </Item4>
+      <Item5>
+        <Filename Value="rplclpreview.pas"/>
+        <UnitName Value="rplclpreview"/>
+      </Item5>
+      <Item6>
+        <Filename Value="rppagesetuplcl.pas"/>
+        <UnitName Value="rppagesetuplcl"/>
+      </Item6>
+      <Item7>
+        <Filename Value="rplclreport.pas"/>
+        <UnitName Value="rplclreport"/>
+      </Item7>
+    </Files>
+    <RequiredPkgs Count="5">
+      <Item1>
+        <PackageName Value="DateTimeCtrls"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="Printer4Lazarus"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="reportman"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="FCL"/>
+      </Item5>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

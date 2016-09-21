@@ -1,0 +1,687 @@
+object FRpPageSetupVCL: TFRpPageSetupVCL
+  Left = 245
+  Height = 471
+  Top = 108
+  Width = 537
+  BorderStyle = bsDialog
+  Caption = 'Dialog'
+  ClientHeight = 471
+  ClientWidth = 537
+  Color = clBtnFace
+  OnCreate = FormCreate
+  OnShow = FormShow
+  ParentFont = True
+  Position = poScreenCenter
+  ShowHint = True
+  LCLVersion = '1.6.0.4'
+  object PControl: TPageControl
+    Left = 0
+    Height = 430
+    Top = 0
+    Width = 537
+    ActivePage = TabPage
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    object TabPage: TTabSheet
+      Caption = 'Page setup'
+      ClientHeight = 399
+      ClientWidth = 533
+      object SColor: TShape
+        Left = 160
+        Height = 33
+        Top = 276
+        Width = 33
+        OnMouseDown = SColorMouseDown
+      end
+      object LLinesperInch: TLabel
+        Left = 4
+        Height = 17
+        Top = 252
+        Width = 91
+        Caption = 'Lines per inch'
+        ParentColor = False
+      end
+      object GUserDefined: TGroupBox
+        Left = 184
+        Height = 93
+        Top = 8
+        Width = 340
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Custom page size (Windows only)'
+        ClientHeight = 74
+        ClientWidth = 336
+        TabOrder = 1
+        Visible = False
+        object LMetrics7: TLabel
+          Left = 289
+          Height = 17
+          Top = 24
+          Width = 31
+          Anchors = [akTop, akRight]
+          Caption = 'inch.'
+          ParentColor = False
+        end
+        object LMetrics8: TLabel
+          Left = 289
+          Height = 17
+          Top = 48
+          Width = 31
+          Anchors = [akTop, akRight]
+          Caption = 'inch.'
+          ParentColor = False
+        end
+        object LWidth: TLabel
+          Left = 12
+          Height = 17
+          Top = 24
+          Width = 41
+          Caption = 'Width'
+          ParentColor = False
+        end
+        object LHeight: TLabel
+          Left = 12
+          Height = 17
+          Top = 48
+          Width = 44
+          Caption = 'Height'
+          ParentColor = False
+        end
+        object LForceFormName: TLabel
+          Left = 12
+          Height = 17
+          Top = 72
+          Width = 115
+          Caption = 'Force form name'
+          ParentColor = False
+        end
+        object EPageheight: TRpMaskEdit
+          Left = 128
+          Height = 27
+          Top = 44
+          Width = 156
+          Anchors = [akTop, akLeft, akRight]
+          CharCase = ecNormal
+          MaxLength = 0
+          TabOrder = 1
+          EditType = tecurrency
+        end
+        object EPageWidth: TRpMaskEdit
+          Left = 128
+          Height = 27
+          Top = 20
+          Width = 156
+          Anchors = [akTop, akLeft, akRight]
+          CharCase = ecNormal
+          MaxLength = 0
+          TabOrder = 0
+          EditType = tecurrency
+        end
+        object EForceFormName: TRpMaskEdit
+          Left = 128
+          Height = 27
+          Top = 68
+          Width = 156
+          Anchors = [akTop, akLeft, akRight]
+          CharCase = ecNormal
+          MaxLength = 0
+          TabOrder = 2
+        end
+      end
+      object RPageSize: TRadioGroup
+        Left = 4
+        Height = 93
+        Top = 8
+        Width = 177
+        AutoFill = True
+        Caption = 'Page size'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 74
+        ClientWidth = 173
+        Items.Strings = (
+          'Default'
+          'Custom'
+          'User defined'
+        )
+        OnClick = RPageSizeClick
+        TabOrder = 0
+      end
+      object GPageSize: TGroupBox
+        Left = 184
+        Height = 65
+        Top = 12
+        Width = 339
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Custom size'
+        ClientHeight = 46
+        ClientWidth = 335
+        TabOrder = 2
+        Visible = False
+        object ComboPageSize: TComboBox
+          Left = 4
+          Height = 31
+          Top = 32
+          Width = 269
+          ItemHeight = 0
+          Style = csDropDownList
+          TabOrder = 0
+        end
+      end
+      object RPageOrientation: TRadioGroup
+        Left = 4
+        Height = 67
+        Top = 104
+        Width = 177
+        AutoFill = True
+        Caption = 'Page orientation'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 48
+        ClientWidth = 173
+        Items.Strings = (
+          'Default'
+          'Custom'
+        )
+        OnClick = RPageOrientationClick
+        TabOrder = 3
+      end
+      object RCustomOrientation: TRadioGroup
+        Left = 188
+        Height = 67
+        Top = 104
+        Width = 336
+        Anchors = [akTop, akLeft, akRight]
+        AutoFill = True
+        Caption = 'Custom page orientation'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 48
+        ClientWidth = 332
+        Items.Strings = (
+          'Portrait'
+          'Landscape'
+        )
+        TabOrder = 4
+        Visible = False
+      end
+      object BBackground: TButton
+        Left = 4
+        Height = 33
+        Top = 276
+        Width = 149
+        Caption = 'Background color'
+        OnClick = BBackgroundClick
+        TabOrder = 7
+      end
+      object GPageMargins: TGroupBox
+        Left = 4
+        Height = 69
+        Top = 172
+        Width = 520
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Page Margins'
+        ClientHeight = 50
+        ClientWidth = 516
+        TabOrder = 5
+        object LLeft: TLabel
+          Left = 16
+          Height = 17
+          Top = 16
+          Width = 28
+          Caption = 'Left'
+          ParentColor = False
+        end
+        object LTop: TLabel
+          Left = 16
+          Height = 17
+          Top = 44
+          Width = 25
+          Caption = 'Top'
+          ParentColor = False
+        end
+        object LMetrics3: TLabel
+          Left = 168
+          Height = 17
+          Top = 16
+          Width = 31
+          Caption = 'inch.'
+          ParentColor = False
+        end
+        object LMetrics4: TLabel
+          Left = 168
+          Height = 17
+          Top = 40
+          Width = 31
+          Caption = 'inch.'
+          ParentColor = False
+        end
+        object LMetrics5: TLabel
+          Left = 463
+          Height = 17
+          Top = 16
+          Width = 31
+          Anchors = [akTop, akRight]
+          Caption = 'inch.'
+          ParentColor = False
+        end
+        object LRight: TLabel
+          Left = 244
+          Height = 17
+          Top = 16
+          Width = 35
+          Caption = 'Right'
+          ParentColor = False
+        end
+        object LBottom: TLabel
+          Left = 244
+          Height = 17
+          Top = 44
+          Width = 52
+          Caption = 'Bottom'
+          ParentColor = False
+        end
+        object LMetrics6: TLabel
+          Left = 463
+          Height = 17
+          Top = 44
+          Width = 31
+          Anchors = [akTop, akRight]
+          Caption = 'inch.'
+          ParentColor = False
+        end
+        object ELeftMargin: TRpMaskEdit
+          Left = 80
+          Height = 27
+          Top = 12
+          Width = 77
+          CharCase = ecNormal
+          MaxLength = 0
+          TabOrder = 0
+          EditType = tecurrency
+        end
+        object ETopMargin: TRpMaskEdit
+          Left = 80
+          Height = 27
+          Top = 40
+          Width = 77
+          CharCase = ecNormal
+          MaxLength = 0
+          TabOrder = 2
+          EditType = tecurrency
+        end
+        object ERightMargin: TRpMaskEdit
+          Left = 304
+          Height = 27
+          Top = 12
+          Width = 156
+          Anchors = [akTop, akLeft, akRight]
+          CharCase = ecNormal
+          MaxLength = 0
+          TabOrder = 1
+          EditType = tecurrency
+        end
+        object EBottomMargin: TRpMaskEdit
+          Left = 304
+          Height = 27
+          Top = 40
+          Width = 156
+          Anchors = [akTop, akLeft, akRight]
+          CharCase = ecNormal
+          MaxLength = 0
+          TabOrder = 3
+          EditType = tecurrency
+        end
+      end
+      object ELinesPerInch: TRpMaskEdit
+        Left = 232
+        Height = 27
+        Top = 248
+        Width = 124
+        Anchors = [akTop, akLeft, akRight]
+        CharCase = ecNormal
+        MaxLength = 0
+        TabOrder = 6
+        EditType = tecurrency
+      end
+    end
+    object TabPrint: TTabSheet
+      Caption = 'Print setup'
+      ClientHeight = 399
+      ClientWidth = 533
+      ImageIndex = 1
+      object LSelectPrinter: TLabel
+        Left = 8
+        Height = 13
+        Top = 92
+        Width = 63
+        Caption = 'Select Printer'
+        ParentColor = False
+      end
+      object LCopies: TLabel
+        Left = 8
+        Height = 13
+        Top = 212
+        Width = 32
+        Caption = 'Copies'
+        ParentColor = False
+      end
+      object LPrinterFonts: TLabel
+        Left = 8
+        Height = 13
+        Top = 8
+        Width = 158
+        Caption = 'Printer Fonts (Windows GDI Only)'
+        ParentColor = False
+      end
+      object LRLang: TLabel
+        Left = 8
+        Height = 13
+        Top = 36
+        Width = 79
+        Caption = 'Report language'
+        ParentColor = False
+      end
+      object LPreview: TLabel
+        Left = 8
+        Height = 13
+        Top = 60
+        Width = 126
+        Caption = 'Preview window and scale'
+        ParentColor = False
+      end
+      object LPaperSource: TLabel
+        Left = 8
+        Height = 13
+        Top = 120
+        Width = 95
+        Caption = 'Select paper source'
+        ParentColor = False
+      end
+      object LDuplex: TLabel
+        Left = 8
+        Height = 13
+        Top = 148
+        Width = 65
+        Caption = 'Duplex option'
+        ParentColor = False
+      end
+      object ComboSelPrinter: TComboBox
+        Left = 252
+        Height = 21
+        Top = 88
+        Width = 272
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 3
+      end
+      object BConfigure: TButton
+        Left = 8
+        Height = 25
+        Top = 176
+        Width = 213
+        Caption = 'Configure printers'
+        OnClick = BConfigureClick
+        TabOrder = 5
+      end
+      object CheckPrintOnlyIfData: TCheckBox
+        Left = 8
+        Height = 21
+        Top = 284
+        Width = 209
+        Caption = 'Print only if data available'
+        TabOrder = 9
+      end
+      object CheckTwoPass: TCheckBox
+        Left = 8
+        Height = 21
+        Top = 260
+        Width = 209
+        Caption = 'Two pass report'
+        TabOrder = 8
+      end
+      object ECopies: TRpMaskEdit
+        Left = 152
+        Height = 21
+        Top = 208
+        Width = 69
+        CharCase = ecNormal
+        MaxLength = 0
+        TabOrder = 6
+        EditType = teinteger
+      end
+      object CheckCollate: TCheckBox
+        Left = 8
+        Height = 21
+        Top = 236
+        Width = 213
+        Caption = 'Collate copies'
+        TabOrder = 7
+      end
+      object ComboPrinterFonts: TComboBox
+        Left = 252
+        Height = 21
+        Top = 4
+        Width = 272
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 0
+        Items.Strings = (
+          'Default'
+          'Always use printer fonts'
+          'Never use printer fonts'
+          'Recalculte report'
+        )
+        Style = csDropDownList
+        TabOrder = 0
+      end
+      object ComboLanguage: TComboBox
+        Left = 252
+        Height = 21
+        Top = 32
+        Width = 272
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 1
+      end
+      object ComboPreview: TComboBox
+        Left = 252
+        Height = 21
+        Top = 60
+        Width = 118
+        ItemHeight = 0
+        Items.Strings = (
+          'Normal'
+          'Maxmized'
+        )
+        Style = csDropDownList
+        TabOrder = 2
+      end
+      object ComboStyle: TComboBox
+        Left = 376
+        Height = 21
+        Top = 60
+        Width = 148
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 0
+        Items.Strings = (
+          'Wide'
+          'Normal'
+          'Page'
+        )
+        Style = csDropDownList
+        TabOrder = 4
+      end
+      object CheckDrawerAfter: TCheckBox
+        Left = 8
+        Height = 21
+        Top = 332
+        Width = 373
+        Caption = 'Open drawer after printing'
+        TabOrder = 11
+      end
+      object CheckDrawerBefore: TCheckBox
+        Left = 8
+        Height = 21
+        Top = 308
+        Width = 405
+        Caption = 'Open drawer before printing'
+        TabOrder = 10
+      end
+      object CheckPreviewAbout: TCheckBox
+        Left = 228
+        Height = 21
+        Top = 232
+        Width = 296
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'About box in preview'
+        TabOrder = 12
+      end
+      object CheckMargins: TCheckBox
+        Left = 228
+        Height = 21
+        Top = 256
+        Width = 297
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Printable margins in preview'
+        TabOrder = 13
+      end
+      object ComboPaperSource: TComboBox
+        Left = 300
+        Height = 21
+        Top = 116
+        Width = 224
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 0
+        OnClick = ComboPaperSourceClick
+        Style = csDropDownList
+        TabOrder = 14
+      end
+      object ComboDuplex: TComboBox
+        Left = 252
+        Height = 21
+        Top = 144
+        Width = 272
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 15
+      end
+      object EPaperSource: TRpMaskEdit
+        Left = 252
+        Height = 21
+        Top = 116
+        Width = 45
+        CharCase = ecNormal
+        MaxLength = 0
+        TabOrder = 16
+        OnChange = EPaperSourceChange
+        EditType = teinteger
+      end
+      object CheckDefaultCopies: TCheckBox
+        Left = 228
+        Height = 21
+        Top = 208
+        Width = 237
+        Caption = 'Default printer copies'
+        OnClick = CheckDefaultCopiesClick
+        TabOrder = 17
+      end
+    end
+    object TabOptions: TTabSheet
+      Caption = 'Options'
+      ClientHeight = 399
+      ClientWidth = 533
+      ImageIndex = 2
+      object LPreferedFormat: TLabel
+        Left = 8
+        Height = 13
+        Top = 12
+        Width = 98
+        Caption = 'Prefered save format'
+        ParentColor = False
+      end
+      object ComboFormat: TComboBox
+        Left = 184
+        Height = 21
+        Top = 8
+        Width = 336
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 0
+      end
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 41
+    Top = 430
+    Width = 537
+    Align = alBottom
+    ClientHeight = 41
+    ClientWidth = 537
+    TabOrder = 1
+    object BOK: TButton
+      Left = 8
+      Height = 25
+      Top = 8
+      Width = 101
+      Caption = 'OK'
+      OnClick = BOKClick
+      TabOrder = 0
+    end
+    object BCancel: TButton
+      Left = 116
+      Height = 25
+      Top = 8
+      Width = 97
+      Caption = 'Cancel'
+      OnClick = BCancelClick
+      TabOrder = 1
+    end
+  end
+  object ColorDialog1: TColorDialog
+    Color = clBlack
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    left = 336
+    top = 288
+  end
+end

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2004/11/29 22:09:56.657.pas,C:\prog\toni\cvsroot\reportman\reportman\D7ComboBoxStringsGetPatch.pas=</Transaction>
+    <Transaction>2004/11/29 22:10:02.844.dcp,rppack_del.dcp=</Transaction>
+    <Transaction>2007/04/04 13:06:49.359.dproj,C:\prog\toni\cvsroot\reportman\reportman\rppackdesignvcl_del2005.dproj=C:\prog\toni\cvsroot\reportman\reportman\rppackdesignvcl_del2007.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

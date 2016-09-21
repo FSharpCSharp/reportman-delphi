@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2008/10/16 09:45:58.669.dproj,\\basedatos08\Users\Raul\Mis documentos\RAD Studio\Projects\Package1.dproj=\\basedatos08\Users\Raul\Mis documentos\RAD Studio\Projects\rppack_builder2007.dproj</Transaction>
+    <Transaction>2008/10/16 09:46:16.434.dproj,\\basedatos08\Users\Raul\Mis documentos\RAD Studio\Projects\rppack_builder2007.dproj=C:\ComponentesB2007\reportman\rppack_builder2007.dproj</Transaction>
+    <Transaction>2008/10/16 09:49:23.349.dproj,C:\ComponentesB2007\reportman\rppack_builder2007.dproj=C:\ComponentesB2007\reportman\rppack_builder2007.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

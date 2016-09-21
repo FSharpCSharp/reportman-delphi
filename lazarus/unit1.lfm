@@ -1,0 +1,67 @@
+object Form1: TForm1
+  Left = 327
+  Height = 415
+  Top = 157
+  Width = 688
+  Caption = 'Form1'
+  ClientHeight = 415
+  ClientWidth = 688
+  LCLVersion = '1.6.0.4'
+  object Button1: TButton
+    Left = 224
+    Height = 54
+    Top = 56
+    Width = 118
+    Caption = 'Button1'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object DateTimePicker1: TDateTimePicker
+    Left = 158
+    Height = 23
+    Top = 119
+    Width = 99
+    CenturyFrom = 1941
+    MaxDate = 2958465
+    MinDate = -53780
+    TabOrder = 1
+    TrailingSeparator = False
+    TextForNullDate = 'NULL'
+    LeadingZeros = True
+    Kind = dtkDate
+    TimeFormat = tf24
+    TimeDisplay = tdHMS
+    DateMode = dmComboBox
+    Date = 42431
+    Time = 0.999559710646281
+    UseDefaultSeparators = True
+    HideDateTimeParts = []
+    MonthNames = 'Long'
+  end
+  object Button2: TButton
+    Left = 392
+    Height = 54
+    Top = 56
+    Width = 118
+    Caption = 'Button2'
+    OnClick = Button2Click
+    TabOrder = 2
+  end
+  object PDFReport1: TPDFReport
+    AsyncExecution = False
+    Title = 'Sin t'#237'tulo'
+    ShowPrintDialog = False
+    left = 80
+    top = 56
+  end
+  object PrintDialog1: TPrintDialog
+    left = 378
+    top = 174
+  end
+  object LCLReport1: TLCLReport
+    AsyncExecution = False
+    Title = 'Untitled'
+    left = 165
+    top = 218
+  end
+end

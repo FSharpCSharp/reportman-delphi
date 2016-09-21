@@ -1,0 +1,204 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{818FEC1F-7417-48F7-8D1D-C6B2F707F52C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="repmandxp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="utils\printreptopdf\printreptopdf.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="utils\reptotxt\reptotxt.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="utils\txttorep\txttorep.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\activex\reportman.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="utils\compilerep\compilerep.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="utils\metaview\metaviewxp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="utils\printrep\printrepxp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="utils\metaprint\metaprintxp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="utils\rptranslator\rptranslate.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\webactivex\WebReportManX.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\server\app\reportserverappxp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\server\web\repwebexe.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\server\config\repserverconfigxp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\server\web\repwebserver.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="repmandxp">
+        <MSBuild Projects="repmandxp.dproj"/>
+    </Target>
+    <Target Name="repmandxp:Clean">
+        <MSBuild Projects="repmandxp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="repmandxp:Make">
+        <MSBuild Projects="repmandxp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="printreptopdf">
+        <MSBuild Projects="utils\printreptopdf\printreptopdf.dproj"/>
+    </Target>
+    <Target Name="printreptopdf:Clean">
+        <MSBuild Projects="utils\printreptopdf\printreptopdf.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="printreptopdf:Make">
+        <MSBuild Projects="utils\printreptopdf\printreptopdf.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="reptotxt">
+        <MSBuild Projects="utils\reptotxt\reptotxt.dproj"/>
+    </Target>
+    <Target Name="reptotxt:Clean">
+        <MSBuild Projects="utils\reptotxt\reptotxt.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="reptotxt:Make">
+        <MSBuild Projects="utils\reptotxt\reptotxt.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="txttorep">
+        <MSBuild Projects="utils\txttorep\txttorep.dproj"/>
+    </Target>
+    <Target Name="txttorep:Clean">
+        <MSBuild Projects="utils\txttorep\txttorep.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="txttorep:Make">
+        <MSBuild Projects="utils\txttorep\txttorep.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="reportman">
+        <MSBuild Projects="..\activex\reportman.dproj"/>
+    </Target>
+    <Target Name="reportman:Clean">
+        <MSBuild Projects="..\activex\reportman.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="reportman:Make">
+        <MSBuild Projects="..\activex\reportman.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="compilerep">
+        <MSBuild Projects="utils\compilerep\compilerep.dproj"/>
+    </Target>
+    <Target Name="compilerep:Clean">
+        <MSBuild Projects="utils\compilerep\compilerep.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="compilerep:Make">
+        <MSBuild Projects="utils\compilerep\compilerep.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="metaviewxp">
+        <MSBuild Projects="utils\metaview\metaviewxp.dproj"/>
+    </Target>
+    <Target Name="metaviewxp:Clean">
+        <MSBuild Projects="utils\metaview\metaviewxp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="metaviewxp:Make">
+        <MSBuild Projects="utils\metaview\metaviewxp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="printrepxp">
+        <MSBuild Projects="utils\printrep\printrepxp.dproj"/>
+    </Target>
+    <Target Name="printrepxp:Clean">
+        <MSBuild Projects="utils\printrep\printrepxp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="printrepxp:Make">
+        <MSBuild Projects="utils\printrep\printrepxp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="metaprintxp">
+        <MSBuild Projects="utils\metaprint\metaprintxp.dproj"/>
+    </Target>
+    <Target Name="metaprintxp:Clean">
+        <MSBuild Projects="utils\metaprint\metaprintxp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="metaprintxp:Make">
+        <MSBuild Projects="utils\metaprint\metaprintxp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="rptranslate">
+        <MSBuild Projects="utils\rptranslator\rptranslate.dproj"/>
+    </Target>
+    <Target Name="rptranslate:Clean">
+        <MSBuild Projects="utils\rptranslator\rptranslate.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rptranslate:Make">
+        <MSBuild Projects="utils\rptranslator\rptranslate.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="WebReportManX">
+        <MSBuild Projects="..\webactivex\WebReportManX.dproj"/>
+    </Target>
+    <Target Name="WebReportManX:Clean">
+        <MSBuild Projects="..\webactivex\WebReportManX.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="WebReportManX:Make">
+        <MSBuild Projects="..\webactivex\WebReportManX.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="reportserverappxp">
+        <MSBuild Projects="..\server\app\reportserverappxp.dproj"/>
+    </Target>
+    <Target Name="reportserverappxp:Clean">
+        <MSBuild Projects="..\server\app\reportserverappxp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="reportserverappxp:Make">
+        <MSBuild Projects="..\server\app\reportserverappxp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="repwebexe">
+        <MSBuild Projects="..\server\web\repwebexe.dproj"/>
+    </Target>
+    <Target Name="repwebexe:Clean">
+        <MSBuild Projects="..\server\web\repwebexe.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="repwebexe:Make">
+        <MSBuild Projects="..\server\web\repwebexe.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="repserverconfigxp">
+        <MSBuild Projects="..\server\config\repserverconfigxp.dproj"/>
+    </Target>
+    <Target Name="repserverconfigxp:Clean">
+        <MSBuild Projects="..\server\config\repserverconfigxp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="repserverconfigxp:Make">
+        <MSBuild Projects="..\server\config\repserverconfigxp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="repwebserver">
+        <MSBuild Projects="..\server\web\repwebserver.dproj"/>
+    </Target>
+    <Target Name="repwebserver:Clean">
+        <MSBuild Projects="..\server\web\repwebserver.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="repwebserver:Make">
+        <MSBuild Projects="..\server\web\repwebserver.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="repmandxp;printreptopdf;reptotxt;txttorep;reportman;compilerep;metaviewxp;printrepxp;metaprintxp;rptranslate;WebReportManX;reportserverappxp;repwebexe;repserverconfigxp;repwebserver"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="repmandxp:Clean;printreptopdf:Clean;reptotxt:Clean;txttorep:Clean;reportman:Clean;compilerep:Clean;metaviewxp:Clean;printrepxp:Clean;metaprintxp:Clean;rptranslate:Clean;WebReportManX:Clean;reportserverappxp:Clean;repwebexe:Clean;repserverconfigxp:Clean;repwebserver:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="repmandxp:Make;printreptopdf:Make;reptotxt:Make;txttorep:Make;reportman:Make;compilerep:Make;metaviewxp:Make;printrepxp:Make;metaprintxp:Make;rptranslate:Make;WebReportManX:Make;reportserverappxp:Make;repwebexe:Make;repserverconfigxp:Make;repwebserver:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

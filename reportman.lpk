@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <PathDelim Value="\"/>
+    <Name Value="reportman"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="."/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Files Count="18">
+      <Item1>
+        <Filename Value="rptypes.pas"/>
+        <UnitName Value="rptypes"/>
+      </Item1>
+      <Item2>
+        <Filename Value="rptranslator.pas"/>
+        <UnitName Value="rptranslator"/>
+      </Item2>
+      <Item3>
+        <Filename Value="rpmdconsts.pas"/>
+        <UnitName Value="rpmdconsts"/>
+      </Item3>
+      <Item4>
+        <Filename Value="rpmetafile.pas"/>
+        <UnitName Value="rpmetafile"/>
+      </Item4>
+      <Item5>
+        <Filename Value="rpmdcharttypes.pas"/>
+        <UnitName Value="rpmdcharttypes"/>
+      </Item5>
+      <Item6>
+        <Filename Value="rpprintitem.pas"/>
+        <UnitName Value="rpprintitem"/>
+      </Item6>
+      <Item7>
+        <Filename Value="rpalias.pas"/>
+        <UnitName Value="rpalias"/>
+      </Item7>
+      <Item8>
+        <Filename Value="rpeval.pas"/>
+        <UnitName Value="rpeval"/>
+      </Item8>
+      <Item9>
+        <Filename Value="rpevalfunc.pas"/>
+        <UnitName Value="rpevalfunc"/>
+      </Item9>
+      <Item10>
+        <Filename Value="rplabelitem.pas"/>
+        <UnitName Value="rplabelitem"/>
+      </Item10>
+      <Item11>
+        <Filename Value="rpdrawitem.pas"/>
+        <UnitName Value="rpdrawitem"/>
+      </Item11>
+      <Item12>
+        <Filename Value="rpbasereport.pas"/>
+        <UnitName Value="rpbasereport"/>
+      </Item12>
+      <Item13>
+        <Filename Value="rpreport.pas"/>
+        <UnitName Value="rpreport"/>
+      </Item13>
+      <Item14>
+        <Filename Value="rplastsav.pas"/>
+        <UnitName Value="rplastsav"/>
+      </Item14>
+      <Item15>
+        <Filename Value="rpmdchart.pas"/>
+        <UnitName Value="rpmdchart"/>
+      </Item15>
+      <Item16>
+        <Filename Value="rppdffile.pas"/>
+        <UnitName Value="rppdffile"/>
+      </Item16>
+      <Item17>
+        <Filename Value="rppdfreport.pas"/>
+        <UnitName Value="rppdfreport"/>
+      </Item17>
+      <Item18>
+        <Filename Value="rpmreg.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="rpmreg"/>
+      </Item18>
+    </Files>
+    <RequiredPkgs Count="1">
+      <Item1>
+        <PackageName Value="FCL"/>
+      </Item1>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

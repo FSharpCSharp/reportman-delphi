@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2012/12/13 21:36:44.702,C:\Users\Toni\Documents\prog\toni\reportman\rppack_delxe3_designtime.dproj=C:\Users\Toni\Documents\prog\toni\reportman\rppack_delxe2_designtime.dproj</Transaction>
+    <Transaction>2012/12/13 21:37:37.146,=DbxClientDriver.dcp</Transaction>
+    <Transaction>2012/12/13 21:37:37.163,=CustomIPTransport.dcp</Transaction>
+    <Transaction>2012/12/13 21:37:37.179,=dbexpress.dcp</Transaction>
+    <Transaction>2012/12/13 21:37:37.197,=bdertl.dcp</Transaction>
+    <Transaction>2012/12/13 21:37:37.215,=ZComponent.dcp</Transaction>
+    <Transaction>2012/12/13 21:37:37.232,=ZParseSql.dcp</Transaction>
+    <Transaction>2012/12/13 21:37:37.238,=ZCore.dcp</Transaction>
+    <Transaction>2012/12/13 21:37:37.245,=ZDbc.dcp</Transaction>
+    <Transaction>2012/12/13 21:37:37.251,=ZPlain.dcp</Transaction>
+  </Transactions>
+</BorlandProject>

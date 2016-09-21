@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{640FE570-017F-4F4B-BD0B-D69710C2752E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="rppack_delxe3.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="rppack_delxe3_designtime.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="rppack_delxe3">
+        <MSBuild Projects="rppack_delxe3.dproj"/>
+    </Target>
+    <Target Name="rppack_delxe3:Clean">
+        <MSBuild Projects="rppack_delxe3.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rppack_delxe3:Make">
+        <MSBuild Projects="rppack_delxe3.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="rppack_delxe3_designtime">
+        <MSBuild Projects="rppack_delxe3_designtime.dproj"/>
+    </Target>
+    <Target Name="rppack_delxe3_designtime:Clean">
+        <MSBuild Projects="rppack_delxe3_designtime.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rppack_delxe3_designtime:Make">
+        <MSBuild Projects="rppack_delxe3_designtime.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="rppack_delxe3;rppack_delxe3_designtime"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="rppack_delxe3:Clean;rppack_delxe3_designtime:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="rppack_delxe3:Make;rppack_delxe3_designtime:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

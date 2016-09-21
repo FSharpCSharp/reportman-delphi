@@ -1,0 +1,123 @@
+object FRpMessageDlgVCL: TFRpMessageDlgVCL
+  Left = 148
+  Top = 218
+  BorderStyle = bsDialog
+  Caption = 'Dialog'
+  ClientHeight = 128
+  ClientWidth = 596
+  Color = clBtnFace
+  ParentFont = True
+  KeyPreview = True
+  OldCreateOrder = True
+  Position = poScreenCenter
+  ShowHint = True
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object LMessage: TLabel
+    Left = 4
+    Top = 4
+    Width = 556
+    Height = 76
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'LMessage'
+    WordWrap = True
+  end
+  object PBottom: TPanel
+    Left = 0
+    Top = 93
+    Width = 596
+    Height = 35
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 0
+    object BOk: TButton
+      Left = 168
+      Top = 7
+      Width = 79
+      Height = 24
+      Cancel = True
+      Caption = 'OK'
+      TabOrder = 0
+      Visible = False
+      OnClick = BYesClick
+    end
+    object BYes: TButton
+      Left = 3
+      Top = 7
+      Width = 79
+      Height = 24
+      Cancel = True
+      Caption = 'Yes'
+      TabOrder = 1
+      Visible = False
+      OnClick = BYesClick
+    end
+    object BNo: TButton
+      Left = 86
+      Top = 7
+      Width = 79
+      Height = 24
+      Cancel = True
+      Caption = 'No'
+      TabOrder = 2
+      Visible = False
+      OnClick = BYesClick
+    end
+    object BAbort: TButton
+      Left = 334
+      Top = 7
+      Width = 79
+      Height = 24
+      Cancel = True
+      Caption = 'Abort'
+      TabOrder = 3
+      Visible = False
+      OnClick = BYesClick
+    end
+    object BRetry: TButton
+      Left = 417
+      Top = 7
+      Width = 78
+      Height = 24
+      Cancel = True
+      Caption = 'Retry'
+      TabOrder = 4
+      Visible = False
+      OnClick = BYesClick
+    end
+    object BIgnore: TButton
+      Left = 499
+      Top = 7
+      Width = 79
+      Height = 24
+      Cancel = True
+      Caption = 'Ignore'
+      TabOrder = 5
+      Visible = False
+      OnClick = BYesClick
+    end
+    object BCancel: TButton
+      Left = 251
+      Top = 7
+      Width = 79
+      Height = 24
+      Cancel = True
+      Caption = 'Cancel'
+      TabOrder = 6
+      Visible = False
+      OnClick = BYesClick
+    end
+  end
+  object EInput: TEdit
+    Left = 4
+    Top = 27
+    Width = 560
+    Height = 21
+    TabOrder = 1
+    Visible = False
+  end
+end

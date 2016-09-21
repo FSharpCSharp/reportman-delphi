@@ -1,0 +1,730 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{d1ccfac4-c150-4038-9215-c34bde5040e6}</ProjectGuid>
+        <MainSource>repmandxp.dpr</MainSource>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+        <DCC_DependencyCheckOutputName>repmandxp.exe</DCC_DependencyCheckOutputName>
+        <ProjectVersion>18.1</ProjectVersion>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Base>True</Base>
+        <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>3</TargetedPlatforms>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
+        <Cfg_1_Win64>true</Cfg_1_Win64>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
+        <Cfg_2_Win64>true</Cfg_2_Win64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <Custom_Styles>Amakrits|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Amakrits.vsf;&quot;Amethyst Kamri|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\AmethystKamri.vsf&quot;;&quot;Aqua Graphite|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\AquaGraphite.vsf&quot;;&quot;Aqua Light Slate|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\AquaLightSlate.vsf&quot;;Auric|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Auric.vsf;Carbon|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Carbon.vsf;&quot;Charcoal Dark Slate|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\CharcoalDarkSlate.vsf&quot;;&quot;Cobalt XEMedia|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\CobaltXEMedia.vsf&quot;;&quot;Cyan Dusk|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\CyanDusk.vsf&quot;;&quot;Cyan Night|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\CyanNight.vsf&quot;;&quot;Emerald Light Slate|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\EmeraldLightSlate.vsf&quot;;Glossy|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Glossy.vsf;Glow|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Glow.vsf;&quot;Golden Graphite|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\GoldenGraphite.vsf&quot;;&quot;Iceberg Classico|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\IcebergClassico.vsf&quot;;&quot;Lavender Classico|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\LavenderClassico.vsf&quot;;Light|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Light.vsf;Luna|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Luna.vsf;&quot;Metropolis UI Black|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\MetropolisUIBlack.vsf&quot;;&quot;Metropolis UI Blue|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\MetropolisUIBlue.vsf&quot;;&quot;Metropolis UI Dark|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\MetropolisUIDark.vsf&quot;;&quot;Metropolis UI Green|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\MetropolisUIGreen.vsf&quot;;Obsidian|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Obsidian.vsf;&quot;Onyx Blue|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\OnyxBlue.vsf&quot;;&quot;Ruby Graphite|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\RubyGraphite.vsf&quot;;&quot;Sapphire Kamri|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\SapphireKamri.vsf&quot;;Silver|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Silver.vsf;Sky|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Sky.vsf;&quot;Slate Classico|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\SlateClassico.vsf&quot;;&quot;Smokey Quartz Kamri|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\SmokeyQuartzKamri.vsf&quot;;&quot;Tablet Light|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\TabletLight.vsf&quot;;TabletDark|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\TabletDark.vsf;&quot;Turquoise Gray|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\TurquoiseGray.vsf&quot;;Windows10|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Windows10.vsf;&quot;Windows10 Blue|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Windows10Blue.vsf&quot;;&quot;Windows10 Dark|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\17.0\Styles\Windows10Dark.vsf&quot;</Custom_Styles>
+        <SanitizedProjectName>repmandxp</SanitizedProjectName>
+        <Manifest_File>None</Manifest_File>
+        <Icon_MainIcon>repmandxp2009_Icon2.ico</Icon_MainIcon>
+        <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_MajorVer>2</VerInfo_MajorVer>
+        <VerInfo_MinorVer>8</VerInfo_MinorVer>
+        <VerInfo_Keys>CompanyName=Toni Martir;FileDescription=Report Manager Designer;FileVersion=2.8.0.117;InternalName=repmandxp;LegalCopyright=MPL/GPL License;LegalTrademarks=;OriginalFilename=repmandxp;ProductName=Report Manager Designer;ProductVersion=2.4.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Build>117</VerInfo_Build>
+        <DCC_Define>UNICODE;REPMANRELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_UsePackage>adortl;bdertl;CustomIPTransport;dbexpress;DBXCLientDriver;DBXInterBaseDriver;DBXMySQLDriver;dsnap;ibxpress;IndyCore;IndyProtocols;IndySystem;rtl;tee;vcldb;vclimg;VclSmp;vclx;xmlrtl;ZCore;ZComponent;ZDbc;ZParseSql;ZPlain;vcl;dbrtl;reportmanxe2;reportmanvclxe2;reportmanvcldesxe2;DbxCommonDriver;Tee;vclx;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_OutputDRCFile>true</DCC_OutputDRCFile>
+        <DCC_DependencyCheckOutputName>repmandxp2009.exe</DCC_DependencyCheckOutputName>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <Version>7.0</Version>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_IOChecking>False</DCC_IOChecking>
+        <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+        <DCC_Optimize>False</DCC_Optimize>
+        <DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+        <DCC_RangeChecking>True</DCC_RangeChecking>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_Define>RELEASE;MIDASOUT;$(DCC_Define)</DCC_Define>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <Icon_MainIcon>repmandxp_Icon.ico</Icon_MainIcon>
+        <DCC_ExeOutput>./binr32</DCC_ExeOutput>
+        <DCC_DcpOutput>./dcur32</DCC_DcpOutput>
+        <DCC_DcuOutput>./dcur32</DCC_DcuOutput>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <DCC_ExeOutput>./binr64</DCC_ExeOutput>
+        <DCC_DcuOutput>./dcur64</DCC_DcuOutput>
+        <DCC_DcpOutput>./dcur64</DCC_DcpOutput>
+        <Icon_MainIcon>repmandxe2_Icon.ico</Icon_MainIcon>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <Version>7.0</Version>
+        <DCC_IOChecking>False</DCC_IOChecking>
+        <DCC_Optimize>False</DCC_Optimize>
+        <DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+        <DCC_RangeChecking>True</DCC_RangeChecking>
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_OutputDRCFile>True</DCC_OutputDRCFile>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <DCC_RangeChecking>false</DCC_RangeChecking>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_ExeOutput>.\bin32</DCC_ExeOutput>
+        <DCC_DcuOutput>.\dcu32</DCC_DcuOutput>
+        <DCC_DcpOutput>.\dcu32</DCC_DcpOutput>
+        <Icon_MainIcon>repmandxe2_Icon.ico</Icon_MainIcon>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.8.0.117;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
+        <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+        <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <DCC_DcuOutput>.\dcu64</DCC_DcuOutput>
+        <DCC_DcpOutput>.\dcu64</DCC_DcpOutput>
+        <DCC_ExeOutput>.\bin64</DCC_ExeOutput>
+        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_MajorVer>1</VerInfo_MajorVer>
+        <Icon_MainIcon>repmandxe2_Icon.ico</Icon_MainIcon>
+        <VerInfo_Build>0</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+    </PropertyGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Parameters/>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">True</VersionInfo>
+                    <VersionInfo Name="MajorVer">2</VersionInfo>
+                    <VersionInfo Name="MinorVer">8</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">188</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1033</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName">Toni Martir</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileDescription">Report Manager Designer</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileVersion">2.8.0.188</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName">repmandxp</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalCopyright">MPL/GPL License</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename">repmandxp</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductName">Report Manager Designer</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductVersion">2.4.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                </VersionInfoKeys>
+                <Source>
+                    <Source Name="MainSource">repmandxp.dpr</Source>
+                </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k230.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp230.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k230.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp230.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">True</Platform>
+            </Platforms>
+            <Deployment Version="3">
+                <DeployFile LocalName="repmandxe2.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="repmandxe2.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>repmandxe2.rsm</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXResource">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidClassesDexFile">
+                    <Platform Name="Android">
+                        <RemoteDir>classes</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon144">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AdditionalDebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeMipsFile">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\mips</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch768">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Required="true" Name="ProjectOutput">
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="Linux64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DependencyFramework">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.framework</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch640">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeX86File"/>
+                <DeployClass Name="ProjectiOSDeviceDebug">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch1024">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch320">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSInfoPList"/>
+                <DeployClass Name="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DebugSymbols">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch1536">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-normal</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon96">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-large</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch640x1136">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSEntitlements"/>
+                <DeployClass Name="AndroidGDBServer">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon72">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-hdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXInfoPList"/>
+                <DeployClass Name="ProjectOSXEntitlements"/>
+                <DeployClass Name="iPad_Launch2048">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStyles">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage426">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-small</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashImageDef">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSResource">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectAndroidManifest">
+                    <Platform Name="Android">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_DefaultAppIcon">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="File">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="Android">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidServiceOutput">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Required="true" Name="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.bpl</Extensions>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon48">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-mdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage960">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xlarge</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon36">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-ldpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceResourceRules"/>
+                <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+            </Deployment>
+            <ModelSupport>False</ModelSupport>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="..\rpmdfmainvcl.pas">
+            <Form>FRpMainFVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfdesignvcl.pas">
+            <Form>FRpDesignFrameVCL</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfaboutvcl.pas">
+            <Form>FRpAboutBoxVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfstrucvcl.pas">
+            <Form>FRpStructureVCL</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\rpmdobjinspvcl.pas">
+            <Form>FRpObjInspVCL</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\rppagesetupvcl.pas">
+            <Form>FRpPageSetupVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpfparamsvcl.pas">
+            <Form>FRpParamsVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpgraphutilsvcl.pas">
+            <Form>FRpMessageDlgVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpexpredlgvcl.pas">
+            <Form>FRpExpredialogVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rprfvparams.pas">
+            <Form>FRpRTParams</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfsearchvcl.pas">
+            <Form>TFRpSearchParamVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfsectionintvcl.pas"/>
+        <DCCReference Include="..\rptextdriver.pas"/>
+        <DCCReference Include="..\rpxmlstream.pas"/>
+        <DCCReference Include="..\rpcolumnar.pas"/>
+        <DCCReference Include="..\rpstringhash.pas"/>
+        <DCCReference Include="..\rpcomparable.pas"/>
+        <DCCReference Include="..\rphashtable.pas"/>
+        <DCCReference Include="..\rpactivexreport.pas"/>
+        <DCCReference Include="..\rpalias.pas"/>
+        <DCCReference Include="..\rpdatatext.pas"/>
+        <DCCReference Include="..\rpcompobase.pas"/>
+        <DCCReference Include="..\rpdatainfo.pas"/>
+        <DCCReference Include="..\rpdataset.pas"/>
+        <DCCReference Include="..\rpdbxconfigvcl.pas">
+            <Form>FRpDBXConfigVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpdbbrowservcl.pas">
+            <Form>FRpBrowserVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpdrawitem.pas"/>
+        <DCCReference Include="..\rpeval.pas"/>
+        <DCCReference Include="..\rpevalfunc.pas"/>
+        <DCCReference Include="..\rpgdidriver.pas">
+            <Form>FRpVCLProgress</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpexceldriver.pas">
+            <Form>FRpExcelProgress</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpcsvdriver.pas"/>
+        <DCCReference Include="..\rpgdifonts.pas"/>
+        <DCCReference Include="..\rplabelitem.pas"/>
+        <DCCReference Include="..\rplastsav.pas"/>
+        <DCCReference Include="..\rpmaskedit.pas"/>
+        <DCCReference Include="..\rpmdbarcode.pas"/>
+        <DCCReference Include="..\rpbarcodecons.pas"/>
+        <DCCReference Include="..\rpmdchart.pas"/>
+        <DCCReference Include="..\rpmdcharttypes.pas"/>
+        <DCCReference Include="..\rpmdconsts.pas"/>
+        <DCCReference Include="..\rpcompilerep.pas"/>
+        <DCCReference Include="..\rpmdfbarcodeintvcl.pas"/>
+        <DCCReference Include="..\rpmdfchartintvcl.pas"/>
+        <DCCReference Include="..\rpmdfdatatextvcl.pas">
+            <Form>FRpDataTextVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfdinfovcl.pas">
+            <Form>FRpDInfoVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfdrawintvcl.pas"/>
+        <DCCReference Include="..\rpmdfgridvcl.pas">
+            <Form>FRpGridOptionsVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdflabelintvcl.pas"/>
+        <DCCReference Include="..\rpmdfsampledatavcl.pas">
+            <Form>FRpShowSampledataVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdobinsintvcl.pas"/>
+        <DCCReference Include="..\rpmdprintconfigvcl.pas">
+            <Form>FRpPrinterConfigVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdshfolder.pas"/>
+        <DCCReference Include="..\rpmetafile.pas"/>
+        <DCCReference Include="..\rpmunits.pas"/>
+        <DCCReference Include="..\rpparams.pas"/>
+        <DCCReference Include="..\rpparser.pas"/>
+        <DCCReference Include="..\rppdfdriver.pas"/>
+        <DCCReference Include="..\rppdffile.pas"/>
+        <DCCReference Include="..\rppdfreport.pas"/>
+        <DCCReference Include="..\rpprintitem.pas"/>
+        <DCCReference Include="..\rpregvcl.pas"/>
+        <DCCReference Include="..\rpreport.pas"/>
+        <DCCReference Include="..\rpbasereport.pas"/>
+        <DCCReference Include="..\rprulervcl.pas"/>
+        <DCCReference Include="..\rpsection.pas"/>
+        <DCCReference Include="..\rpsecutil.pas"/>
+        <DCCReference Include="..\rpsubreport.pas"/>
+        <DCCReference Include="..\rptranslator.pas"/>
+        <DCCReference Include="..\rptypes.pas"/>
+        <DCCReference Include="..\rptypeval.pas"/>
+        <DCCReference Include="..\rpvclreport.pas"/>
+        <DCCReference Include="..\rpvgraphutils.pas"/>
+        <DCCReference Include="..\rpvpreview.pas">
+            <Form>FRpVPreview</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpwriter.pas"/>
+        <DCCReference Include="..\rphtmldriver.pas"/>
+        <DCCReference Include="..\rpmdfconnectionvcl.pas">
+            <Form>FRpConnectionVCL</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfwizardvcl.pas">
+            <Form>FRpWizardVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfextsecvcl.pas">
+            <Form>FRpExtSectionVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfdatasetsvcl.pas">
+            <Form>FRpDatasetsVCL</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\rpfmetaviewvcl.pas">
+            <Form>FRpMetaVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpfmainmetaviewvcl.pas">
+            <Form>FRpMainMetaVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdsysinfo.pas">
+            <Form>FRpSysInfo</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpeditconnvcl.pas">
+            <Form>FRpEditConVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpmdftreevcl.pas">
+            <Form>FRpDBTreeVCL</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\rpmdfopenlibvcl.pas">
+            <Form>FRpOpenLibVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\rpsvgdriver.pas"/>
+        <DCCReference Include="..\rpinfoprovgdi.pas"/>
+        <DCCReference Include="..\rpinfoprovid.pas"/>
+        <DCCReference Include="..\rpdatetimepicker.pas"/>
+        <DCCReference Include="..\rppreviewcontrol.pas"/>
+        <DCCReference Include="..\rppreviewmeta.pas"/>
+        <None Include="Profiling\AQtimeModule1.aqt"/>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+    <Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+    <Import Condition="Exists('$(MSBuildProjectName).deployproj')" Project="$(MSBuildProjectName).deployproj"/>
+</Project>

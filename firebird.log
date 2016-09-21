@@ -1,0 +1,32 @@
+
+X8000 (Client)	Thu Jan 21 13:06:51 2010
+	INET/inet_error: connect errno = 10061
+
+
+X8000 (Client)	Thu Jan 21 13:07:07 2010
+	INET/inet_error: connect errno = 10060
+
+
+X8000 (Client)	Thu Jan 21 13:08:07 2010
+	INET/inet_error: connect errno = 10061
+
+
+X8000 (Client)	Thu Jan 21 13:08:10 2010
+	INET/inet_error: connect errno = 10061
+
+
+X8000 (Client)	Sat Jan 30 10:53:21 2010
+	INET/inet_error: connect errno = 10061
+
+
+X8000 (Client)	Sat Jan 30 10:53:24 2010
+	INET/inet_error: connect errno = 10061
+
+
+X8000 (Client)	Sat Jan 30 10:53:57 2010
+	INET/inet_error: connect errno = 10061
+
+
+X8000 (Client)	Sat Jan 30 10:54:01 2010
+	INET/inet_error: connect errno = 10061
+

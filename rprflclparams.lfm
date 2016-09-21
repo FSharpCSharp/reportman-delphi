@@ -1,0 +1,96 @@
+object FRpRTParams: TFRpRTParams
+  Left = 65
+  Height = 300
+  Top = 31
+  Width = 589
+  VertScrollBar.Range = 41
+  Caption = 'Report parameters'
+  ClientHeight = 300
+  ClientWidth = 589
+  Color = clBtnFace
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  ParentFont = True
+  Position = poScreenCenter
+  ShowHint = True
+  LCLVersion = '1.6.0.4'
+  object PModalButtons: TPanel
+    Left = 0
+    Height = 41
+    Top = 259
+    Width = 589
+    Align = alBottom
+    ClientHeight = 41
+    ClientWidth = 589
+    TabOrder = 0
+    object BOK: TButton
+      Left = 63
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = 'OK'
+      Default = True
+      OnClick = BOKClick
+      TabOrder = 0
+    end
+    object BCancel: TButton
+      Left = 203
+      Height = 25
+      Top = 8
+      Width = 75
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object MainScrollBox: TScrollBox
+    Left = 0
+    Height = 259
+    Top = 0
+    Width = 589
+    HorzScrollBar.Page = 269
+    VertScrollBar.Page = 205
+    Align = alClient
+    BorderStyle = bsNone
+    ClientHeight = 259
+    ClientWidth = 589
+    TabOrder = 1
+    object PParent: TPanel
+      Left = 0
+      Height = 205
+      Top = 0
+      Width = 589
+      Align = alTop
+      BevelOuter = bvNone
+      ClientHeight = 205
+      ClientWidth = 589
+      TabOrder = 0
+      object Splitter1: TSplitter
+        Left = 260
+        Height = 205
+        Top = 0
+        Width = 8
+        Beveled = True
+      end
+      object PLeft: TPanel
+        Left = 0
+        Height = 205
+        Top = 0
+        Width = 260
+        Align = alLeft
+        BevelOuter = bvNone
+        TabOrder = 0
+      end
+      object PRight: TPanel
+        Left = 268
+        Height = 205
+        Top = 0
+        Width = 321
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 1
+      end
+    end
+  end
+end
