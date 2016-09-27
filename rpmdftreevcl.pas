@@ -287,8 +287,8 @@ begin
      end
      else
      begin
-       if (not DReportGroups2.FindKey([Integer(agroup)])) then
-        DReportsREPORT_GROUP.Value:=0;
+       if (not DReportGroups2.Locate('GROUP_CODE',VarArrayOf([DReportsREPORT_GROUP.Value]),[])) then
+          DReportsREPORT_GROUP.Value:=0;
      end;
     end
     else
