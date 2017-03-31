@@ -6,7 +6,7 @@
 // However, when applying changes via the Editor this file will be regenerated
 // and comments or formatting changes will be lost.
 // ************************************************************************ //
-// File generated on 09/01/2010 14:45:51 (- $Rev: 12980 $, 9210470).
+// File generated on 30/03/2017 16:26:25 (- $Rev: 12980 $, 1736652109).
 
 [
   uuid(D4D26F6B-6564-44F4-A913-03C91CE37740),
@@ -158,6 +158,11 @@ library reportman
   };
 
   [
+    custom(8B342977-45CB-4A01-A8F2-E47B61F3539E, 0)
+  ]
+  typedef IFontDisp** PPUserType1;
+
+  [
     uuid(B3AE1470-158D-4855-83DB-BC3A2746C26E),
     version(2.1),
     helpstring("Dispatch interface for ReportManX Control"),
@@ -296,6 +301,8 @@ library reportman
     HRESULT _stdcall AsyncExecution([in] VARIANT_BOOL Value);
     [id(0x000000CD)]
     HRESULT _stdcall SaveToHTMLSingle([in] BSTR filename);
+    [id(0x000000CE)]
+    HRESULT _stdcall SaveToFile([in] BSTR filename);
   };
 
   [
@@ -317,6 +324,8 @@ library reportman
     HRESULT _stdcall AutoResizeColumns([out, retval] VARIANT_BOOL* Value);
     [propput, id(0x00000004)]
     HRESULT _stdcall AutoResizeColumns([in] VARIANT_BOOL Value);
+    [id(0x000000C9)]
+    HRESULT _stdcall SaveToFile([in] BSTR filename);
   };
 
   [

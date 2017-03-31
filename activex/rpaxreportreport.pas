@@ -14,11 +14,12 @@ type
     FAutoResizeColumns:Boolean;
   protected
     function Get_Params: ReportParameters; safecall;
-    function Get_VCLReport: PChar; safecall;
+    function Get_VCLReport: PAnsiChar; safecall;
     procedure AddColumn(Width: Integer; const Expression, ExpFormat, Caption,
       CaptionFormat, SumaryExpression, SumaryFormat: WideString); safecall;
     function Get_AutoResizeColumns: WordBool; safecall;
     procedure Set_AutoResizeColumns(Value: WordBool); safecall;
+    procedure SaveToFile(const filename: WideString); safecall;
     { Protected declarations }
   public
    FReport:TRpReport;
@@ -40,7 +41,7 @@ begin
 end;
 
 
-function TReportReport.Get_VCLReport: PChar;
+function TReportReport.Get_VCLReport: PAnsiChar;
 begin
  Result:=PChar(FReport);
 end;
@@ -77,6 +78,12 @@ end;
 procedure TReportReport.Set_AutoResizeColumns(Value: WordBool);
 begin
  FAutoResizeColumns:=Value;
+end;
+
+
+procedure TReportReport.SaveToFile(const filename: WideString);
+begin
+
 end;
 
 initialization

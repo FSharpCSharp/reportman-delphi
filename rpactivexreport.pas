@@ -84,6 +84,7 @@ type
 {$IFNDEF DOTNETD}
    procedure SetRecordset(datasetname:string; recordset: Pointer);
 {$ENDIF}
+  procedure SaveToFile(filename:String);
    { Public declarations }
   published
     { Published declarations }
@@ -112,6 +113,11 @@ begin
  AWidth:=AX_CONSWIDTH;
  AHeight:=AX_CONSHEIGHT;
  inherited SetBounds(ALeft,ATop,AWidth,AHeight);
+end;
+
+procedure TRpActiveXReport.SaveToFile(filename:String);
+begin
+  FVCLReport.Report.SaveToFile(filename);
 end;
 
 constructor TRpActiveXReport.Create(AOwner:TComponent);

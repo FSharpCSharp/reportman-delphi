@@ -104,6 +104,7 @@ type
     procedure SaveToCSV2(const filename, separator: WideString); safecall;
     procedure Set_AsyncExecution(Value: WordBool); safecall;
     procedure SaveToHTMLSingle(const filename: WideString); safecall;
+    procedure SaveToFile(const filename: WideString); safecall;
   end;
 
 implementation
@@ -548,6 +549,11 @@ end;
 procedure TReportManX.SaveToHTMLSingle(const filename: WideString);
 begin
 
+end;
+
+procedure TReportManX.SaveToFile(const filename: WideString);
+begin
+ FDelphiControl.SaveToFile(filename);
 end;
 
 initialization
