@@ -14,7 +14,7 @@ type
     FAutoResizeColumns:Boolean;
   protected
     function Get_Params: ReportParameters; safecall;
-    function Get_VCLReport: PAnsiChar; safecall;
+    function Get_VCLReport: PWideChar; safecall;
     procedure AddColumn(Width: Integer; const Expression, ExpFormat, Caption,
       CaptionFormat, SumaryExpression, SumaryFormat: WideString); safecall;
     function Get_AutoResizeColumns: WordBool; safecall;
@@ -41,9 +41,9 @@ begin
 end;
 
 
-function TReportReport.Get_VCLReport: PAnsiChar;
+function TReportReport.Get_VCLReport: PWideChar;
 begin
- Result:=PChar(FReport);
+ Result:=PWideChar(FReport);
 end;
 
 procedure TReportReport.AddColumn(Width: Integer; const Expression,

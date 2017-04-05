@@ -3,7 +3,7 @@ unit rpaxreportparameters;
 interface
 
 uses
-  ComObj, ActiveX, reportman_TLB, StdVcl,rpreport,rpaxreportparam;
+  ComObj, ActiveX, reportman_TLB, StdVcl,rpreport,rpaxreportparam,System.Classes;
 
 type
   TReportParameters = class(TAutoObject, IReportParameters)
