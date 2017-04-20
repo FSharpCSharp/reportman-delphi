@@ -32,9 +32,8 @@ uses
   {$ENDIF }
   {$IFDEF DELPHI2009UP}
   Vcl.Themes,
-  Vcl.Styles,
   {$ENDIF }
-    Forms,
+  Forms,
   Controls,
   Dialogs,
   ActiveX,
@@ -129,7 +128,8 @@ uses
   rpinfoprovid in '..\rpinfoprovid.pas',
   rpdatetimepicker in '..\rpdatetimepicker.pas',
   rppreviewcontrol in '..\rppreviewcontrol.pas',
-  rppreviewmeta in '..\rppreviewmeta.pas';
+  rppreviewmeta in '..\rppreviewmeta.pas',
+  Vcl.Styles;
 
 {$R *.res}
 

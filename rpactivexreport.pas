@@ -84,7 +84,7 @@ type
 {$IFNDEF DOTNETD}
    procedure SetRecordset(datasetname:string; recordset: Pointer);
 {$ENDIF}
-  procedure SaveToFile(filename:String);
+    procedure SaveToFile(filename:String);
    { Public declarations }
   published
     { Published declarations }
@@ -225,6 +225,7 @@ procedure TRpActiveXReport.SaveToHTMLSingle(filename:string);
 begin
  FVCLReport.SaveToHtmlSingle(filename);
 end;
+
 
 procedure TRpActiveXReport.SaveToCustomText(filename:string);
 begin

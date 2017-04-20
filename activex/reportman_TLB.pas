@@ -268,12 +268,13 @@ type
     procedure Set_DefaultPrinter(const Value: WideString); safecall;
     function Get_PrintersAvailable: WideString; safecall;
     procedure GetRemoteParams(const hostname: WideString; port: Integer; const user: WideString; 
-                              const password: WideString; const aliasname: WideString; 
+                              const password: WideString; const aliasname: WideString;
                               const reportname: WideString); safecall;
     procedure SaveToCSV2(const filename: WideString; const separator: WideString); safecall;
     function Get_AsyncExecution: WordBool; safecall;
     procedure Set_AsyncExecution(Value: WordBool); safecall;
     procedure SaveToHTMLSingle(const filename: WideString); safecall;
+    procedure SaveToFile(const filename: WideString); safecall;
     property filename: WideString read Get_filename write Set_filename;
     property Preview: WordBool read Get_Preview write Set_Preview;
     property ShowProgress: WordBool read Get_ShowProgress write Set_ShowProgress;
@@ -351,12 +352,13 @@ type
     procedure SaveToExcel2(const filename: WideString); dispid 39;
     property DefaultPrinter: WideString dispid 42;
     property PrintersAvailable: WideString readonly dispid 44;
-    procedure GetRemoteParams(const hostname: WideString; port: Integer; const user: WideString; 
-                              const password: WideString; const aliasname: WideString; 
+    procedure GetRemoteParams(const hostname: WideString; port: Integer; const user: WideString;
+                              const password: WideString; const aliasname: WideString;
                               const reportname: WideString); dispid 40;
     procedure SaveToCSV2(const filename: WideString; const separator: WideString); dispid 41;
     property AsyncExecution: WordBool dispid 43;
     procedure SaveToHTMLSingle(const filename: WideString); dispid 205;
+    procedure SaveToFile(const filename: WideString); dispid 206;
   end;
 
 // *********************************************************************//
@@ -700,11 +702,12 @@ type
     procedure SaveToSVG(const filename: WideString);
     procedure SaveToMetafile(const filename: WideString);
     procedure SaveToExcel2(const filename: WideString);
-    procedure GetRemoteParams(const hostname: WideString; port: Integer; const user: WideString; 
-                              const password: WideString; const aliasname: WideString; 
+    procedure GetRemoteParams(const hostname: WideString; port: Integer; const user: WideString;
+                              const password: WideString; const aliasname: WideString;
                               const reportname: WideString);
     procedure SaveToCSV2(const filename: WideString; const separator: WideString);
     procedure SaveToHTMLSingle(const filename: WideString);
+    procedure SaveToFile(const filename: WideString);
     property  ControlInterface: IReportManX read GetControlInterface;
     property  DefaultInterface: IReportManX read GetControlInterface;
     property DoubleBuffered: WordBool index 18 read GetWordBoolProp write SetWordBoolProp;
@@ -1357,6 +1360,11 @@ end;
 procedure TReportManX.SaveToHTMLSingle(const filename: WideString);
 begin
   DefaultInterface.SaveToHTMLSingle(filename);
+end;
+
+procedure TReportManX.SaveToFile(const filename: WideString);
+begin
+  DefaultInterface.SaveToFile(filename);
 end;
 
 class function CoReportReport.Create: IReportReport;

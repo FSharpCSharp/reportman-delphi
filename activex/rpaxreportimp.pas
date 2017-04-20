@@ -548,12 +548,12 @@ end;
 
 procedure TReportManX.SaveToHTMLSingle(const filename: WideString);
 begin
-
+ rphtmldriver.ExportReportToHtmlSingle(FDelphiControl.GetReport,filename);
 end;
 
 procedure TReportManX.SaveToFile(const filename: WideString);
 begin
- FDelphiControl.SaveToFile(filename);
+ FDelphiControl.GetReport.SaveToFile(filename);
 end;
 
 initialization
