@@ -2680,7 +2680,7 @@ var
  devicefonts:boolean;
  istextonly:boolean;
  drivername:String;
- S:String;
+ S:AnsiString;
  pconfig:TPrinterConfig;
 begin
  pconfig.Changed:=false;
