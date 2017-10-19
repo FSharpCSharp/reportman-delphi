@@ -1355,6 +1355,8 @@ var
   needed:DWord;
   printererror:boolean;
   laste:integer;
+  asize:LONG;
+  PrinterHandle:NativeUInt;
 begin
  if printer.Printers.count<1 then
   exit;
@@ -1370,7 +1372,21 @@ begin
   printererror:=true;
  if printererror then
   exit;
- PDevMode := GlobalLock(DeviceMode);
+ if (Printer.Printing) then
+ begin
+   OpenPrinter (Device, PrinterHandle, Nil);
+   asize:=DocumentProperties(0,PrinterHandle,Device,nil,nil,0);
+   //pdevmode:=@adevmode;
+   if asize>0 then
+   begin
+    DeviceMode:=GlobalAlloc(GHND,asize);
+    pdevmode:=GlobalLock(DeviceMode);
+   end;
+ end
+ else
+ begin
+  PDevMode := GlobalLock(DeviceMode);
+ end;
  try
   // Custom page size, warning not all drivers supports it
   // especially Windows NT drivers
@@ -1500,9 +1516,9 @@ begin
  end
  else
  begin
-  DocumentProperties(0,Printer.Handle,Device, PDevMode^,
+  DocumentProperties(0,PrinterHandle,Device, PDevMode^,
         PDevMode^, DM_MODIFY);
-  ResetDC(Printer.Handle,PDevMode^);
+  ResetDC(PrinterHandle,PDevMode^);
  end;
 end;
 
@@ -1615,7 +1631,7 @@ begin
   printererror:=true;
  if printererror then
   exit;
- if (printer.Printing) then
+ (*if (printer.Printing) then
  begin
   maxcopies:=1;
   exit;
@@ -1633,7 +1649,7 @@ begin
   begin
    printer.Copies:=oldcopies;
   end;
- end;
+ end;*)
  try
    maxcopies:=DeviceCapabilities(Device,Port,DC_COPIES,nil,nil);
    if maxcopies<0 then
@@ -1916,6 +1932,8 @@ var
   DeviceMode: THandle;
   PDevmode:^TDevicemode;
   printererror:boolean;
+  PrinterHandle:THandle;
+  asize:LONG;
 begin
  if printer.Printers.count<1 then
   exit;
@@ -1937,7 +1955,21 @@ begin
   printererror:=true;
  if printererror then
   exit;
- PDevMode := GlobalLock(DeviceMode);
+ if (Printer.Printing) then
+ begin
+   OpenPrinter (Device, PrinterHandle, Nil);
+   asize:=DocumentProperties(0,PrinterHandle,Device,nil,nil,0);
+   //pdevmode:=@adevmode;
+   if asize>0 then
+   begin
+    DeviceMode:=GlobalAlloc(GHND,asize);
+    pdevmode:=GlobalLock(DeviceMode);
+   end;
+ end
+ else
+ begin
+  PDevMode := GlobalLock(DeviceMode);
+ end;
  try
   PDevMode.dmFields:=PDevMode.dmFields or dm_copies or dm_collate;
   PDevMode.dmCopies  := copies;
@@ -1950,9 +1982,9 @@ begin
  end
  else
  begin
-  DocumentProperties(0,Printer.Handle,Device, PDevMode^,
+  DocumentProperties(0,PrinterHandle,Device, PDevMode^,
         PDevMode^, DM_MODIFY);
-  ResetDC(Printer.Handle,PDevMode^);
+  ResetDC(PrinterHandle,PDevMode^);
  end;
 end;
 
@@ -1963,6 +1995,8 @@ var
   DeviceMode: THandle;
   PDevmode:^TDevicemode;
   printererror:boolean;
+    PrinterHandle:THandle;
+  asize:LONG;
 begin
  if printer.Printers.count<1 then
   exit;
@@ -1977,7 +2011,21 @@ begin
   printererror:=true;
  if printererror then
   exit;
- PDevMode := GlobalLock(DeviceMode);
+   if (Printer.Printing) then
+ begin
+   OpenPrinter (Device, PrinterHandle, Nil);
+   asize:=DocumentProperties(0,PrinterHandle,Device,nil,nil,0);
+   //pdevmode:=@adevmode;
+   if asize>0 then
+   begin
+    DeviceMode:=GlobalAlloc(GHND,asize);
+    pdevmode:=GlobalLock(DeviceMode);
+   end;
+ end
+ else
+ begin
+  PDevMode := GlobalLock(DeviceMode);
+ end;
  try
   PDevMode.dmFields:=PDevMode.dmFields or dm_copies or dm_collate;
   PDevMode.dmCopies  := printer.copies;
@@ -1994,9 +2042,9 @@ begin
  end
  else
  begin
-  DocumentProperties(0,Printer.Handle,Device, PDevMode^,
+  DocumentProperties(0,PrinterHandle,Device, PDevMode^,
         PDevMode^, DM_MODIFY);
-  ResetDC(Printer.Handle,PDevMode^);
+  ResetDC(PrinterHandle,PDevMode^);
  end;
 end;
 
