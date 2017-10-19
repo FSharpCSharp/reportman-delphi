@@ -87,6 +87,7 @@ requires
 
 contains
   rpregvcl in 'rpregvcl.pas',
-  rpmreg in 'rpmreg.pas';
+  rpmreg in 'rpmreg.pas',
+  rpmregdesignvcl in 'rpmregdesignvcl.pas';
 
 end.

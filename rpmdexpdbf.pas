@@ -11,7 +11,11 @@ uses
 {$IFDEF USEVARIANTS}
   Variants,
 {$ENDIF}
-  db,dbtables, StdCtrls, ComCtrls,registry,rpmdconsts;
+  db,
+  {$IFDEF BDE}
+  dbtables,
+  {$ENDIF}
+  StdCtrls, ComCtrls,registry,rpmdconsts;
 
 type
   TFRpExpDBF = class(TForm)
@@ -29,7 +33,9 @@ type
   public
     { Public declarations }
     numfiles:integer;
+  {$IFDEF BDE}
     desti:TTable;
+{$ENDIF}
     origen:TDataset;
     cancelar:boolean;
     maxrecords:integer;
@@ -37,7 +43,9 @@ type
 
 
 procedure SaveToDBF(data:TDataset);
-function CopyTableNoIndex(origen:TDataSet;databasename,tablename:string;tabletype:TTableType;maxrecords:integer=MAXINT):integer;
+      {$IFDEF BDE}
+      function CopyTableNoIndex(origen:TDataSet;databasename,tablename:string;tabletype:TTableType;maxrecords:integer=MAXINT):integer;
+      {$ENDIF}
 function CheckDBaseLevel(level:integer;langdriver:String):boolean;
 
 implementation
@@ -56,12 +64,15 @@ begin
   savedialog1.filename:='*.dbf';
   savedialog1.FilterIndex:=0;
   savedialog1.DefaultExt:='DBF';
+        {$IFDEF BDE}
   if savedialog1.execute then
    CopyTableNoIndex(data,ExtractFilePath(savedialog1.filename),ExtractFileName(savedialog1.Filename),ttdbase);
+   {$ENDIF}
  finally
   savedialog1.free;
  end;
 end;
+      {$IFDEF BDE}
 
 function CopyTableNoIndex(origen:TDataSet;databasename,tablename:string;tabletype:TTableType;maxrecords:integer=MAXINT):integer;
 var
@@ -104,6 +115,7 @@ begin
   desti.free;
  end;
 end;
+{$ENDIF}
 
 procedure TFRpExpDBF.FormShow(Sender: TObject);
 begin
@@ -139,6 +151,8 @@ var
  atablename:String;
  fileext:String;
 begin
+  {$IFDEF BDE}
+
  fileext:=ExtractFileExt(Desti.TableName);
  atablename:=ChangeFileExt(Desti.TableName,'');
  numfiles:=1;
@@ -185,6 +199,7 @@ begin
   cancelar:=true;
   Close;
  end;
+ {$ENDIF}
 end;
 
 

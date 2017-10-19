@@ -125,7 +125,6 @@ contains
   rpmdcharttypes in 'rpmdcharttypes.pas',
   rpmdclitreevcl in 'rpmdclitreevcl.pas' {FRpCliTreeVCL: TFrame},
   rpmdconsts in 'rpmdconsts.pas',
-  rpmdesignervcl in 'rpmdesignervcl.pas',
   rpmdexpdbf in 'rpmdexpdbf.pas' {FRpExpDBF},
   rpmdexpexcel in 'rpmdexpexcel.pas' {FRpExpExcel},
   rpmdfsampledatavcl in 'rpmdfsampledatavcl.pas' {FRpShowSampledataVCL},
@@ -199,6 +198,7 @@ contains
   rpmdfbarcodeintvcl in 'rpmdfbarcodeintvcl.pas',
   rpmdfchartintvcl in 'rpmdfchartintvcl.pas',
   rpvpreview in 'rpvpreview.pas' {FRpVPreview},
-  rppreviewcontrol in 'rppreviewcontrol.pas';
+  rppreviewcontrol in 'rppreviewcontrol.pas',
+  rpmdesignervcl in 'rpmdesignervcl.pas';
 
 end.
