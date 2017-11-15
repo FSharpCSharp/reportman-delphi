@@ -80,12 +80,17 @@ Libc,
  {$IFDEF FIREDAC}
   FireDAC.Comp.Client,FireDAC.Stan.Def,FireDAC.DApt,FireDAC.Stan.Option,
   FireDAC.Stan.Async, FireDac.ConsoleUI.Wait,
-  FireDAC.Phys.ADS,FireDAC.Phys.ASA,FireDAC.Phys.DB2,FireDAC.Phys.DS,
-  FireDAC.Phys.FB,FireDAC.Phys.IB,FireDAC.Phys.IBBase,FireDAC.Phys.Infx,
-  FireDAC.Phys.Intf,FireDAC.Phys.MSAcc,FireDAC.Phys.MSSQL,
-  FireDAC.Phys.MySQL,FireDAC.Phys.ODBC,FireDAC.Phys.ODBCBase,FireDAC.Phys.ODBCWrapper,
-  FireDAC.Phys.Oracle,FireDAC.Phys.PG,FireDAC.Phys.SQLite,FireDAC.Phys.SQLiteVDataset,
+  FireDAC.Phys.ADS,  FireDAC.Phys.ODBCBase,FireDAC.Phys.ODBCWrapper,
+  FireDAC.Phys.FB,FireDAC.Phys.IB,FireDAC.Phys.IBBase,
+ FireDAC.Phys.PG,FireDAC.Phys.SQLite,FireDAC.Phys.SQLiteVDataset,
+  FireDAC.Phys.Intf,FireDAC.Phys.MSAcc,
+  FireDAC.Phys.MySQL,
+{$IFDEF DELPHIENTERPRISE}
+    FireDAC.Phys.ODBC,FireDAC.Phys.MSSQL,
+  FireDAC.Phys.ASA,FireDAC.Phys.DB2,FireDAC.Phys.DS,  FireDAC.Phys.Infx,
   FireDAC.Phys.TData,FireDAC.Phys.TDBX,FireDAC.Phys.TDBXBase,
+  FireDAC.Phys.Oracle,
+{$ENDIF}
  {$ENDIF}
 {$IFDEF USEBDE}
   dbtables,
@@ -430,7 +435,9 @@ function CombineParallel(data1:TMemDataset;data2:TDataset;prefix:string;commonfi
 {$IFNDEF FPC}
 procedure CombineAddDataset(client:TClientDataset;data:TDataset;group:boolean);
 function CombineParallel(data1:TClientDataset;data2:TDataset;prefix:string;commonfields:TStrings;originalfields:TStrings):TClientDataset;
+{$IFDEF USEIBX}
 procedure ConvertParamsFromDBXToIBX(base:TIBDatabase);
+{$ENDIF}
 {$ENDIF}
 {$ENDIF}
 procedure FillFieldsInfo(adata:TDataset;fieldnames,fieldtypes,fieldsizes:TStrings);
@@ -2741,7 +2748,7 @@ begin
        FDataLink.datainfoitem:=self;
        FDataLink.DataSource:=FMasterSource;
        FDataLink.dbinfoitem:=databaseinfo.ItemByName(FDatabaseAlias);
-       TIBQuery(FSQLInternalQuery).DataSource:=FMasterSource;
+       TFDQuery(FSQLInternalQuery).DataSource:=FMasterSource;
 {$IFDEF USERPDATASET}
        if datainfosource.cached then
         FMasterSource.DataSet:=datainfosource.CachedDataset

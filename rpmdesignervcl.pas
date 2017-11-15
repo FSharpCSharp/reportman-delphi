@@ -20,6 +20,8 @@ unit rpmdesignervcl;
 
 interface
 
+{$R rpmdesignervcl.dcr}
+
 uses Classes,SysUtils,rpmdconsts,rpreport,rpmdfmainvcl;
 
 type

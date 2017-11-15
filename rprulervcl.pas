@@ -20,6 +20,8 @@ interface
 
 {$I rpconf.inc}
 
+{$R rprulervcl.dcr}
+
 uses
 {$IFDEF USEVARIANTS}
   Types,
