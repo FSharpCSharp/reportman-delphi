@@ -409,8 +409,7 @@ begin
     DReportGroups2.Locate('GROUP_CODE',DReportGroups.FieldByName('GROUP_CODE').Value,[]);
     FillTreeForCurrentRecord(ANode);
     // Add the reports for this group
-    if DReports.FindKey([DReportGroupsGROUP_CODE.Value]) then
-    begin
+    DReports.FindNearest([DReportGroupsGROUP_CODE.Value]);
      While Not DReports.Eof do
      begin
       if DReportsREPORT_GROUP.IsNull then
@@ -430,7 +429,6 @@ begin
       DReports.Next;
       CheckCancel(0);
      end;
-    end;
    end;
    DReportGroups.Next;
   end;
