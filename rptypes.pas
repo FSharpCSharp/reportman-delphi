@@ -1043,9 +1043,9 @@ var
 begin
  CheckLoadedPrinterConfig;
  def:='';
- if printerindex=prpTicketPrinter then
-  def:='EPSONTMU210'
- else
+ //if printerindex=prpTicketPrinter then
+ // def:='EPSONTMU210'
+ //else
  if printerindex=prpCharacterPrinter then
   def:='EPSON'
  else

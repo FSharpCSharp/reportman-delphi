@@ -204,8 +204,9 @@ begin
  defdriver:=' ';
  if LSelPrinter.ItemIndex=Integer(pRpCharacterprinter) then
   defdriver:='EPSON';
- if LSelPrinter.ItemIndex=Integer(pRpTicketprinter) then
-  defdriver:='EPSONTMU210';
+ // Para impresora tiquets driver por omision (el de windows)
+ // if LSelPrinter.ItemIndex=Integer(pRpTicketprinter) then
+ //  defdriver:='EPSONTMU210';
  defdriver:=configinifile.ReadString('PrinterDriver','Printer'+IntToStr(LSelPrinter.ItemIndex),defdriver);
  if Length(defdriver)<1 then
  defdriver:=' ';
