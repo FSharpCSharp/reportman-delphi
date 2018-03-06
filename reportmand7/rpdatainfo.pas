@@ -3617,6 +3617,8 @@ begin
  groupfields:=TStringList.Create;
  groupfieldindex:=TStringList.Create;
  try
+  if (client.FieldDefs.Count = 0) then
+  begin
   // Combine the two datasets
   client.Close;
   client.FieldDefs.Assign(data.FieldDefs);
@@ -3626,6 +3628,7 @@ begin
 {$IFDEF FPC}
    client.CreateTable;
 {$ENDIF}
+  end;
   if (data.fields.Count>client.Fields.Count) then
   begin
    Raise Exception.Create(SRpCannotCombine);
