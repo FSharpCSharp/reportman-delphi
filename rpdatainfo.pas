@@ -4157,6 +4157,8 @@ var
  groupfields:TStringList;
  groupfieldindex:TStringList;
  grouped:boolean;
+ fielddef:TFieldDef;
+ attributes:TFieldAttributes;
 begin
  groupfields:=TStringList.Create;
  groupfieldindex:=TStringList.Create;
@@ -4166,6 +4168,16 @@ begin
   // Combine the two datasets
   client.Close;
   client.FieldDefs.Assign(data.FieldDefs);
+  for i := 0 to client.FieldDefs.Count-1 do
+  begin
+    fielddef:=client.FieldDefs[i];
+    if (faReadOnly in fielddef.Attributes) then
+    begin
+     attributes:=fielddef.Attributes;
+     Exclude(attributes,faReadOnly);
+     fielddef.Attributes := attributes;
+    end
+  end;
 {$IFNDEF FPC}
    client.CreateDataSet;
 {$ENDIF}
