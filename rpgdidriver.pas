@@ -3134,7 +3134,7 @@ begin
    // Assigns the color for this serie
    for j:=0 to intserie.ValueCount-1 do
    begin
-    if Length(intSerie.ValuesX)>j then
+    if intSerie.ValueXCount>j then
     begin
      if series.count<2 then
      begin
