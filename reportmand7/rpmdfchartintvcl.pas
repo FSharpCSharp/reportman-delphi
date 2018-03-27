@@ -150,6 +150,14 @@ begin
  lcat.Add(SRpChartData);
  if Assigned(lvalues) then
   lvalues.Add(TRpChart(printitem).CaptionExpression);
+ // X Value Expression
+ lnames.Add(SrpSExpression+' X');
+ ltypes.Add(SRpSExpression);
+ lhints.Add('refchart.html');
+ lcat.Add(SRpChartData);
+ if Assigned(lvalues) then
+  lvalues.Add(TRpChart(printitem).ValueXExpression);
+
 
  // Serie Caption Expression
  lnames.Add(SrpSSerieCaptionExp);
@@ -335,6 +343,11 @@ begin
   TRpChart(fprintitem).ValueExpression:=value;
   exit;
  end;
+ if pname=SRpSExpression+' X' then
+ begin
+  TRpChart(fprintitem).ValueXExpression:=value;
+  exit;
+ end;
  if pname=SRpSIdentifier then
  begin
   TRpChart(fprintitem).Identifier:=value;
@@ -501,6 +514,11 @@ begin
  if pname=SrpSExpression then
  begin
   Result:=TRpChart(printitem).ValueExpression;
+  exit;
+ end;
+ if pname=SrpSExpression+' X' then
+ begin
+  Result:=TRpChart(printitem).ValueXExpression;
   exit;
  end;
  if pname=SrpSIdentifier then

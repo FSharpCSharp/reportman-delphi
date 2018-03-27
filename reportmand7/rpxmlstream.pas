@@ -439,6 +439,7 @@ begin
  begin
   compc:=TRpChart(comp);
   WritePropertyW('VALUEEXPRESSION',compc.ValueExpression,Stream);
+  WritePropertyW('VALUEXEXPRESSION',compc.ValueXExpression,Stream);
   WritePropertyW('GETVALUECONDITION',compc.GetValueCondition,Stream);
   WritePropertyW('CHANGESERIEEXPRESSION',compc.ChangeSerieExpression,Stream);
   WritePropertyW('CAPTIONEXPRESSION',compc.CaptionExpression,Stream);
@@ -457,7 +458,7 @@ begin
   WritePropertyI('PERSPECTIVE',compc.Perspective,Stream);
   WritePropertyI('ELEVATION',compc.Elevation,Stream);
   WritePropertyI('ROTATION',compc.Rotation,Stream);
-  WritePropertyI('ZOOM',compc.Rotation,Stream);
+  WritePropertyI('ZOOM',compc.Zoom,Stream);
   WritePropertyI('HORZOFFSET',compc.HorzOffset,Stream);
   WritePropertyI('VERTOFFSET',compc.VertOffset,Stream);
   WritePropertyI('TILT',compc.Tilt,Stream);
@@ -655,12 +656,24 @@ function RpDoubleToStr(avalue:double):Ansistring;
 var
  olddec:char;
 begin
+{$IFDEF DELPHI2009UP}
+ olddec:=FormatSettings.DecimalSeparator;
+{$ELSE}
  olddec:=DecimalSeparator;
+{$ENDIF}
  try
-  DecimalSeparator:='.';
+{$IFDEF DELPHI2009UP}
+  FormatSettings.DecimalSeparator:='.';
+{$ELSE}
+  DecimalSeparator:=olddec;
+{$ENDIF}
   Result:=FloatToStr(avalue);
  finally
+{$IFDEF DELPHI2009UP}
+  FormatSettings.DecimalSeparator:=olddec;
+{$ELSE}
   DecimalSeparator:=olddec;
+{$ENDIF}
  end;
 end;
 
@@ -669,6 +682,15 @@ function RpStrToDouble(avalue:Ansistring):double;
 var
  olddec:char;
 begin
+{$IFDEF DELPHI2009UP}
+ olddec:=FormatSettings.DecimalSeparator;
+ try
+  FormatSettings.DecimalSeparator:='.';
+  Result:=StrToFloat(avalue);
+ finally
+  FormatSettings.DecimalSeparator:=olddec;
+ end;
+{$ELSE}
  olddec:=DecimalSeparator;
  try
   DecimalSeparator:='.';
@@ -676,6 +698,7 @@ begin
  finally
   DecimalSeparator:=olddec;
  end;
+{$ENDIF}
 end;
 
 procedure WritePropertyD(propname:Ansistring;propvalue:double;stream:TStream);
@@ -1612,6 +1635,9 @@ begin
 
   if propname='VALUEEXPRESSION' then
    compc.ValueExpression:=RpStringToWString(propvalue)
+  else
+  if propname='VALUEXEXPRESSION' then
+   compc.ValueXExpression:=RpStringToWString(propvalue)
   else
   if propname='GETVALUECONDITION' then
    compc.GetValueCondition:=RpStringToWString(propvalue)

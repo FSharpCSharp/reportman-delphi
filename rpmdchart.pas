@@ -39,10 +39,12 @@ type
   private
    FChartType:TRpChartType;
    FValue:Variant;
+   FValueX:Variant;
    FUpdated:Boolean;
    FSeries:TRpSeries;
    FGetValuecondition:widestring;
    FValueExpression:widestring;
+   FValueXExpression:widestring;
    FChangeSerieExpression:widestring;
    FChangeSerieBool,FClearExpressionBool:Boolean;
    FCaptionExpression,FSerieCaption,FClearExpression:widestring;
@@ -71,7 +73,8 @@ type
    FHorzFontRotation:Integer;
    FVertFontRotation:Integer;
    procedure OnClear(Sender:TObject);
-   procedure OnNewValue(Y:Single;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
+   procedure OnNewValue(Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
+   procedure OnNewValueXY(X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
    procedure OnBoundsValue(autol,autoh:boolean;lvalue,hvalue:double;
     logaritmic:boolean;logbase:double;inverted:boolean);
    procedure OnSerieColor(color:Integer);
@@ -87,6 +90,8 @@ type
    procedure ReadGetValueCondition(Reader:TReader);
    procedure WriteValueExpression(Writer:TWriter);
    procedure ReadValueExpression(Reader:TReader);
+   procedure WriteValueXExpression(Writer:TWriter);
+   procedure ReadValueXExpression(Reader:TReader);
    procedure WriteChangeSerieExpression(Writer:TWriter);
    procedure ReadChangeSerieExpression(Reader:TReader);
    procedure WriteCaptionExpression(Writer:TWriter);
@@ -121,6 +126,8 @@ type
     write FGetValuecondition;
    property ValueExpression:widestring read FValueExpression
     write FValueExpression;
+   property ValueXExpression:widestring read FValueXExpression
+    write FValueXExpression;
    property CaptionExpression:widestring read FCaptionExpression
     write FCaptionExpression;
    property SerieCaption:widestring read FSerieCaption
@@ -200,6 +207,7 @@ begin
  FIdenChart:=TVariableGrap.Create(Self);
  FIdenChart.OnClear:=OnClear;
  FIdenChart.OnNewValue:=OnNewValue;
+ FIdenChart.OnNewValueXY:=OnNewValueXY;
  FIdenChart.OnSerieColor:=OnSerieColor;
  FIdenChart.OnValueColor:=OnValueColor;
  FIdenChart.OnBounds:=OnBoundsValue;
@@ -314,7 +322,10 @@ begin
   Caption:=IntToStr(aserie.ValueCount+1)
  else
   Caption:=EvaluateCaption;
- aserie.AddValue(FValue,Caption);
+ if (Length(FValueXExpression)>0) then
+  aserie.AddValueXY(FValueX,FValue,Caption)
+ else
+   aserie.AddValue(FValue,Caption);
  if Length(Trim(FColorExpression))>0 then
  begin
   try
@@ -340,6 +351,12 @@ begin
   fevaluator.Expression:=FValueExpression;
   fevaluator.Evaluate;
   FValue:=fevaluator.EvalResult;
+  if (Length(FValueXExpression)>0) then
+  begin
+   fevaluator.Expression:=FValueXExpression;
+   fevaluator.Evaluate;
+   FValueX:=fevaluator.EvalResult;
+  end;
   FUpdated:=true;
  except
   on E:Exception do
@@ -545,7 +562,7 @@ begin
  aserie.SetLastValueColor(Color);
 end;
 
-procedure TRpChart.OnNewValue(Y:Single;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
+procedure TRpChart.OnNewValue(Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
 var
  aserie:TRpSeriesItem;
  firstserie:Boolean;
@@ -571,6 +588,34 @@ begin
   aserie.Caption:=textserie;
  end;
  aserie.AddValue(Y,leyen);
+end;
+
+procedure TRpChart.OnNewValueXY(X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
+var
+ aserie:TRpSeriesItem;
+ firstserie:Boolean;
+begin
+ firstserie:=false;
+ if FSeries.Count<1 then
+ begin
+  aserie:=FSeries.Add;
+  aserie.charttype:=newChartType;
+  aserie.Caption:=textserie;
+  firstserie:=true;
+ end
+ else
+ begin
+  aserie:=FSeries.Items[FSeries.Count-1];
+ end;
+  // Looks if the serie has changed
+ if Cambio then
+ begin
+  if not firstserie then
+   aserie:=FSeries.Add;
+  aserie.charttype:=newChartType;
+  aserie.Caption:=textserie;
+ end;
+ aserie.AddValueXY(X,Y,leyen);
 end;
 
 procedure TRpChart.OnBoundsValue(autol,autoh:boolean;lvalue,hvalue:double;
@@ -609,6 +654,17 @@ procedure TRpChart.ReadValueExpression(Reader:TReader);
 begin
  FValueExpression:=ReadWideString(Reader);
 end;
+
+procedure TRpChart.WriteValueXExpression(Writer:TWriter);
+begin
+ WriteWideString(Writer, FValueXExpression);
+end;
+
+procedure TRpChart.ReadValueXExpression(Reader:TReader);
+begin
+ FValueXExpression:=ReadWideString(Reader);
+end;
+
 
 procedure TRpChart.WriteChangeSerieExpression(Writer:TWriter);
 begin
@@ -681,6 +737,7 @@ begin
 
  Filer.DefineProperty('GetValueCondition',ReadGetValueCondition,WriteGetValueCondition,True);
  Filer.DefineProperty('ValueExpression',ReadValueExpression,WriteValueExpression,True);
+ Filer.DefineProperty('ValueXExpression',ReadValueXExpression,WriteValueXExpression,True);
  Filer.DefineProperty('ChangeSerieExpression',ReadChangeSerieExpression,WriteChangeSerieExpression,True);
  Filer.DefineProperty('CaptionExpression',ReadCaptionExpression,WriteCaptionExpression,True);
  Filer.DefineProperty('SerieCaption',ReadSerieCaption,WriteSerieCaption,True);

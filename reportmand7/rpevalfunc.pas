@@ -31,6 +31,9 @@ uses
 {$IFNDEF FPC}
   MaskUtils,
 {$ENDIF}
+{$IFDEF FPC}
+  registry,
+{$ENDIF}
 {$ENDIF}
 {$IFNDEF USEVARIANTS}
   Mask,
@@ -237,6 +240,12 @@ type
    constructor Create(AOwner:TComponent);override;
   end;
  TIdenGraphicNew=class(TIdenFunction)
+  protected
+   function GetRpValue:TRpValue;override;
+  public
+   constructor Create(AOwner:TComponent);override;
+  end;
+ TIdenGraphicNewXY=class(TIdenFunction)
   protected
    function GetRpValue:TRpValue;override;
   public
@@ -488,7 +497,9 @@ type
   end;
 
 
- TRpNewValue=procedure (Y:Single;Cambio:Boolean;leyen,textleyen,
+ TRpNewValue=procedure (Y:Double;Cambio:Boolean;leyen,textleyen,
+  textserie:string;ChartType:TRpChartType) of object;
+ TRpNewValueXY=procedure (X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,
   textserie:string;ChartType:TRpChartType) of object;
  TRpColorEvent=procedure (Color:Integer) of object;
  TRpBoundsValue=procedure (autol,autoh:boolean;lvalue,hvalue:double;
@@ -497,6 +508,7 @@ type
  TVariableGrap=class(TIdenVariable)
   protected
    FOnNewValue:TRpNewValue;
+   FOnNewValueXY:TRpNewValueXY;
    FOnClear:TNotifyEvent;
    FOnBounds:TRpBoundsValue;
    FOnSerieColor:TRpColorEvent;
@@ -506,10 +518,12 @@ type
   public
    DefaultChartType:TRpChartType;
    constructor Create(AOwner:TComponent);override;
-   procedure NewValue(Y:Single;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
+   procedure NewValue(Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
+   procedure NewValueXY(X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
    procedure Clear;
    property OnClear:TNotifyEvent read FOnClear write FOnClear;
    property OnNewValue:TRpNewValue read FOnNewValue write FOnNewValue;
+   property OnNewValueXY:TRpNewValueXY read FOnNewValueXY write FOnNewValueXY;
    property OnBounds:TRpBoundsValue read FOnBounds write FOnBounds;
    property OnSerieColor:TRpColorEvent read FOnSerieColor write FOnSerieColor;
    property OnValueColor:TRpColorEvent read FOnValueColor write FOnValueColor;
@@ -539,6 +553,7 @@ type
   end;
 
 {$IFDEF MSWINDOWS}
+{$IFNDEF FPC}
   TIdenChsToCht=class(TIdenFunction)
   protected
     function GetRpValue:TRpvalue;override;
@@ -552,6 +567,7 @@ type
    public
     constructor Create(AOWner:TComponent);override;
   end;
+{$ENDIF}
 {$ENDIF}
 
  TIdenGetINIValue=class(TIdenFunction)
@@ -1396,7 +1412,17 @@ begin
  FParamcount:=5;
  IdenName:='GraphicNew';
  Help:=SRpGraphicNew;
- model:='function '+'GraphicNew'+'(Gr:string, V:Single, C:Boolean,Etiq:string,Caption:string):Boolean';
+ model:='function '+'GraphicNew'+'(Gr:string, V:Double, C:Boolean,Etiq:string,Caption:string):Boolean';
+ aParams:=SRPPgraphicnew;
+end;
+
+constructor TIdenGraphicNewXY.Create(AOwner:TComponent);
+begin
+ inherited Create(AOwner);
+ FParamcount:=6;
+ IdenName:='GraphicNewXY';
+ Help:=SRpGraphicNew;
+ model:='function '+'GraphicNewXY'+'(Gr:string, X:Double;Y:Double, C:Boolean,Etiq:string,Caption:string):Boolean';
  aParams:=SRPPgraphicnew;
 end;
 
@@ -1432,7 +1458,46 @@ begin
          IdenName+'-'+Params[0]);
 
  Result:=True;
- (iden As TVariableGrap).NewValue(single(Params[1]),Boolean(Params[2]),string(Params[3]),'',string(Params[4]),(iden As TVariableGrap).DefaultChartType);
+ (iden As TVariableGrap).NewValue(Double(Params[1]),Boolean(Params[2]),string(Params[3]),'',string(Params[4]),(iden As TVariableGrap).DefaultChartType);
+end;
+
+
+
+function TIdenGraphicNewXY.GeTRpValue:TRpValue;
+var
+ iden:TRpIdentifier;
+begin
+ if Not VarIsString(Params[0]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsNumber(Params[1]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsNumber(Params[2]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Vartype(Params[3])<>varBoolean then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsString(Params[4]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsString(Params[5]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ // Buscamos el identificador
+ iden:=(evaluator As TRpEvaluator).SearchIdentifier(String(Params[0]));
+ if iden=nil then
+ begin
+   Raise TRpNamedException.Create(SRpIdentifierexpected,
+         IdenName+'-'+Params[0]);
+ end;
+ if Not (iden is TVariableGrap) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName+'-'+Params[0]);
+
+ Result:=True;
+ (iden As TVariableGrap).NewValueXY(Double(Params[1]),Double(Params[2]),Boolean(Params[3]),string(Params[4]),'',string(Params[5]),(iden As TVariableGrap).DefaultChartType);
 end;
 
 constructor TIdenGraphicColor.Create(AOwner:TComponent);
@@ -1821,13 +1886,24 @@ begin
   if (not (mes in [1..12])) then
    Result:=''
   else
+  begin
+{$IFDEF DELPHIXE3UP}
+   Result:=SysUtils.FormatSettings.LongMonthNames[mes];
+{$ELSE}
    Result:=LongMonthNames[mes];
+{$ENDIF}
+
+  end;
  end
  else
  if varType(Params[0])=varDate then
  begin
   DecodeDate(TDateTime(Params[0]),Any,Mes,Dia);
-  Result:=LongMonthNames[Mes];
+{$IFDEF DELPHIXE3UP}
+   Result:=SysUtils.FormatSettings.LongMonthNames[mes];
+{$ELSE}
+   Result:=LongMonthNames[mes];
+{$ENDIF}
  end
  else
   Raise TRpNamedException.Create(SRpEvalType,
@@ -2229,11 +2305,18 @@ begin
 end;
 
 
-procedure TVariableGrap.NewValue(Y:Single;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
+procedure TVariableGrap.NewValue(Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
 begin
  if Assigned(FOnNewValue) then
   FOnNewValue(Y,Cambio,leyen,textleyen,textserie,DefaultChartType);
 end;
+
+procedure TVariableGrap.NewValueXY(X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
+begin
+ if Assigned(FOnNewValueXY) then
+  FOnNewValueXY(X,Y,Cambio,leyen,textleyen,textserie,DefaultChartType);
+end;
+
 
 procedure TVariableGrap.Clear;
 begin
@@ -2313,7 +2396,7 @@ begin
    Raise TRpNamedException.Create(SRpEvalType,IdenName);
  end;
  if Assigned((evaluator As TRpEvaluator).OnGraphicOp) then
-  Result:=(evaluator As TRpEvaluator).OnGraphicOp(Round(Params[0]),Round(Params[1]),Round(Params[2]),Round(Params[3]),Params[4],
+  Result:=(evaluator As TRpEvaluator).OnGraphicOp(Round(Currency(Params[0])),Round(Currency(Params[1])),Round(Currency(Params[2])),Round(Currency(Params[3])),Params[4],
    Params[5],Params[6],Params[7],Params[8],Params[9])
  else
   Result:=false;
@@ -2354,7 +2437,7 @@ begin
    Raise TRpNamedException.Create(SRpEvalType,IdenName);
 
  if Assigned((evaluator As TRpEvaluator).OnImageOp) then
-  Result:=(evaluator As TRpEvaluator).OnImageOp(Round(Params[0]),Round(Params[1]),Round(Params[2]),Round(Params[3]),Params[4],
+  Result:=(evaluator As TRpEvaluator).OnImageOp(Round(Currency(Params[0])),Round(Currency(Params[1])),Round(Currency(Params[2])),Round(Currency(Params[3])),Params[4],
    Params[5],Params[6],Params[7])
  else
   Result:=false;
@@ -2430,7 +2513,7 @@ begin
     Raise TRpNamedException.Create(SRpEvalType,IdenName);
  end;
  if Assigned((evaluator As TRpEvaluator).OnTextOp) then
-  Result:=(evaluator As TRpEvaluator).OnTextOp(Round(Params[0]),Round(Params[1]),Round(Params[2]),Round(Params[3]),Params[4],
+  Result:=(evaluator As TRpEvaluator).OnTextOp(Round(Currency(Params[0])),Round(Currency(Params[1])),Round(Currency(Params[2])),Round(Currency(Params[3])),Params[4],
    Params[5],Params[6],Params[7],Params[8],Params[9],
    Params[10],Params[11],Params[12],Params[13],Params[14],
    Params[15],Params[16],Params[17],Params[18])
@@ -2522,7 +2605,7 @@ begin
          IdenName);
 
  if Assigned((evaluator As TRpEvaluator).OnBarcodeOp) then
-  Result:=(evaluator As TRpEvaluator).OnBarcodeOp(Round(Params[0]),Round(Params[1]),Round(Params[2]),Round(Params[3]),
+  Result:=(evaluator As TRpEvaluator).OnBarcodeOp(Round(Currency(Params[0])),Round(Currency(Params[1])),Round(Currency(Params[2])),Round(Currency(Params[3])),
    WideString(Params[4]),WideString(Params[5]),
    Integer(Params[6]),Integer(Params[7]),
    Currency(Params[8]),Currency(Params[9]),
@@ -2652,6 +2735,7 @@ end;
 
 
 {$IFDEF MSWINDOWS}
+{$IFNDEF FPC}
 //added jasonpun 20060306
 { TIdenChsToCht }
 
@@ -2744,7 +2828,7 @@ begin
   FreeMem(buf);
 end;
 {$ENDIF}
-
+{$ENDIF}
 
 { TIdenGetINIValue }
 

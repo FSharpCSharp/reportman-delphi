@@ -383,6 +383,8 @@ begin
  Rpfunctions.AddObject('GRAPHICCLEAR',iden);
  iden:=TIdenGraphicNew.Create(nil);
  Rpfunctions.AddObject('GRAPHICNEW',iden);
+ iden:=TIdenGraphicNewXY.Create(nil);
+ Rpfunctions.AddObject('GRAPHICNEWXY',iden);
  iden:=TIdenGraphicColor.Create(nil);
  Rpfunctions.AddObject('GRAPHICCOLOR',iden);
  iden:=TIdenGraphicSerieColor.Create(nil);

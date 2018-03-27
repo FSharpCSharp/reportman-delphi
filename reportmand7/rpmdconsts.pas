@@ -41,7 +41,7 @@ const
 {$ENDIF}
 
 const
- RM_VERSION='2.9h';
+ RM_VERSION='3.4.0';
  REPMAN_WEBSITE='http://reportman.sourceforge.net';
  MAX_PAGECOUNT=999999;
 type
@@ -1030,6 +1030,7 @@ var
   SRpIBODesc:WideString='Interbase Objects -IBO is a Delphi native database driver '+
    '(and more) by Jason Wharton, this is a commercial product so it''s supported but '+
    'not distributed with Report Manager. It''s only available in Windows.';
+  SRpFireDacDesc:WideString='FireDac Native cross-platform drivers.';
   SRpErrorCreatePipe:WideString='Error creating pipe';
   SRpErrorForking:WideString='Error creating fork';
   SRpCreatingTempFile:WideString='Error creating temporary file';
@@ -1356,6 +1357,12 @@ var
   SRpSParamInitialExpression:WideString='Initial expression';
   //
   SRpCommonFields:WideString='Common fields that match with the first dataset, semicolon separated';
+  SRpTheme:WideString='Theme';
+  SRpSelectAll:WideString='Select all';
+  SRpClearSelection:WideString='Clear selection';
+
+
+
 implementation
 
 uses rptranslator;
@@ -2355,7 +2362,13 @@ begin
  TranslateVar(1442,SRpSParamSubsList);
  TranslateVar(1443,SRpSParamInitialExpression);
  TranslateVar(1444,SRpCommonFields);
-end;
+ TranslateVar(1445,SRpSelectAll);
+ TranslateVar(1446,SRpClearSelection);
+  TranslateVar(1447,SRpTheme);
+  TranslateVar(1448,SRpFireDacDesc);
+
+
+ end;
 
 
 
@@ -2415,35 +2428,64 @@ procedure RestoreEnviromentLocale;
 var
  avalue:string;
 begin
- avalue:=GetEnvironmentVariable('KYLIX_DEFINEDENVLOCALES');
+ avalue:=SysUtils.GetEnvironmentVariable('KYLIX_DEFINEDENVLOCALES');
  if Length(avalue)<1 then
   exit;
- avalue:=GetEnvironmentVariable('KYLIX_DECIMAL_SEPARATOR');
+ avalue:=SysUtils.GetEnvironmentVariable('KYLIX_DECIMAL_SEPARATOR');
  if Length(avalue)>0 then
+{$IFDEF DELPHI2009UP}
+  FormatSettings.DecimalSeparator:=avalue[1]
+ else
+  FormatSettings.DecimalSeparator:=chr(0);
+{$ELSE}
   DecimalSeparator:=avalue[1]
  else
   DecimalSeparator:=chr(0);
- avalue:=GetEnvironmentVariable('KYLIX_THOUSAND_SEPARATOR');
+{$ENDIF}
+ avalue:=SysUtils.GetEnvironmentVariable('KYLIX_THOUSAND_SEPARATOR');
+{$IFDEF DELPHI2009UP}
+ if Length(avalue)>0 then
+  FormatSettings.ThousandSeparator:=avalue[1]
+ else
+  FormatSettings.ThousandSeparator:=chr(0);
+ avalue:=GetEnvironmentVariable('KYLIX_DATE_SEPARATOR');
+ if Length(avalue)>0 then
+  FormatSettings.DateSeparator:=avalue[1]
+ else
+  FormatSettings.DateSeparator:=chr(0);
+ avalue:=GetEnvironmentVariable('KYLIX_TIME_SEPARATOR');
+ if Length(avalue)>0 then
+  FormatSettings.TimeSeparator:=avalue[1]
+ else
+  FormatSettings.TimeSeparator:=chr(0);
+ avalue:=GetEnvironmentVariable('KYLIX_DATE_FORMAT');
+ if Length(avalue)>0 then
+  FormatSettings.ShortDateFormat:=avalue;
+ avalue:=GetEnvironmentVariable('KYLIX_TIME_FORMAT');
+ if Length(avalue)>0 then
+  FormatSettings.ShortTimeFormat:=avalue;
+{$ELSE}
  if Length(avalue)>0 then
   ThousandSeparator:=avalue[1]
  else
   ThousandSeparator:=chr(0);
- avalue:=GetEnvironmentVariable('KYLIX_DATE_SEPARATOR');
+ avalue:=SysUtils.GetEnvironmentVariable('KYLIX_DATE_SEPARATOR');
  if Length(avalue)>0 then
   DateSeparator:=avalue[1]
  else
   DateSeparator:=chr(0);
- avalue:=GetEnvironmentVariable('KYLIX_TIME_SEPARATOR');
+ avalue:=SysUtils.GetEnvironmentVariable('KYLIX_TIME_SEPARATOR');
  if Length(avalue)>0 then
   TimeSeparator:=avalue[1]
  else
   TimeSeparator:=chr(0);
- avalue:=GetEnvironmentVariable('KYLIX_DATE_FORMAT');
+ avalue:=SysUtils.GetEnvironmentVariable('KYLIX_DATE_FORMAT');
  if Length(avalue)>0 then
   ShortDateFormat:=avalue;
- avalue:=GetEnvironmentVariable('KYLIX_TIME_FORMAT');
+ avalue:=SysUtils.GetEnvironmentVariable('KYLIX_TIME_FORMAT');
  if Length(avalue)>0 then
   ShortTimeFormat:=avalue;
+{$ENDIF}
 end;
 {$ENDIF}
 
@@ -2453,8 +2495,11 @@ end;
 
 initialization
 
+
+
 ConvertAllStrings;
 RestoreEnviromentLocale;
+
 
 finalization
  if assigned(atrans) then

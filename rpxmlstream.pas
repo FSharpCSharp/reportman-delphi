@@ -439,6 +439,7 @@ begin
  begin
   compc:=TRpChart(comp);
   WritePropertyW('VALUEEXPRESSION',compc.ValueExpression,Stream);
+  WritePropertyW('VALUEXEXPRESSION',compc.ValueXExpression,Stream);
   WritePropertyW('GETVALUECONDITION',compc.GetValueCondition,Stream);
   WritePropertyW('CHANGESERIEEXPRESSION',compc.ChangeSerieExpression,Stream);
   WritePropertyW('CAPTIONEXPRESSION',compc.CaptionExpression,Stream);
@@ -1634,6 +1635,9 @@ begin
 
   if propname='VALUEEXPRESSION' then
    compc.ValueExpression:=RpStringToWString(propvalue)
+  else
+  if propname='VALUEXEXPRESSION' then
+   compc.ValueXExpression:=RpStringToWString(propvalue)
   else
   if propname='GETVALUECONDITION' then
    compc.GetValueCondition:=RpStringToWString(propvalue)

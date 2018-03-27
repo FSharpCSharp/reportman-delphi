@@ -20,6 +20,7 @@ unit rpeval;
 interface
 
 {$I rpconf.inc}
+{$R rpeval.dcr}
 
 uses
   SysUtils, Classes,DB,rptypeval,
@@ -286,10 +287,12 @@ begin
  iden:=TIdenCheckExpression.Create(nil);
  Rpfunctions.AddObject('CHECKEXPRESSION',iden);
 {$IFDEF MSWINDOWS}
+{$IFNDEF FPC}
  iden:=TIdenChsToCht.Create(nil);
  Rpfunctions.AddObject('CHSTOCHT',iden);
  iden:=TIdenChtToChs.Create(nil);
  Rpfunctions.AddObject('CHTTOCHS',iden);
+{$ENDIF}
 {$ENDIF}
  iden := TIdenGetINIValue.Create(nil);
  Rpfunctions.AddObject('GETINIVALUE', iden);
@@ -380,6 +383,8 @@ begin
  Rpfunctions.AddObject('GRAPHICCLEAR',iden);
  iden:=TIdenGraphicNew.Create(nil);
  Rpfunctions.AddObject('GRAPHICNEW',iden);
+ iden:=TIdenGraphicNewXY.Create(nil);
+ Rpfunctions.AddObject('GRAPHICNEWXY',iden);
  iden:=TIdenGraphicColor.Create(nil);
  Rpfunctions.AddObject('GRAPHICCOLOR',iden);
  iden:=TIdenGraphicSerieColor.Create(nil);

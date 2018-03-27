@@ -45,9 +45,7 @@ uses Classes,rpbasereport,sysutils,rptypes,rpsubreport,rpsection,rpmdconsts,
  rpdataset,
 {$ENDIF}
 {$IFDEF LINUX}
-{$IFNDEF FPC}
   Libc,
-{$ENDIF}
 {$ENDIF}
 {$IFDEF MSWINDOWS}
   mmsystem,windows,
@@ -1053,6 +1051,7 @@ begin
  // Add the report items to the evaluator
  AddReportItemsToEvaluator(FEvaluator);
  // Maybe parameters are used in ActivateDatasets (BDESetRange)
+
 
  // Evaluates parameter expressions before open
  for i:=0 to Params.Count-1 do

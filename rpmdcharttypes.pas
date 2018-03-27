@@ -47,16 +47,20 @@ type
  TRpSeriesItem=class(TCollectionItem)
   private
    FValues:array of Double;
+   FValuesX:array of Double;
    FColors:array of Integer;
    FPoolPositions:array of integer;
    FPoolSizes:array of integer;
    FValueCount:Integer;
+   FValueXCount:Integer;
    FPool:widestring;
    FPoolPos:integer;
    FMaxAllocated:integer;
    FColor:integer;
    procedure SetValue(index:integer;AValue:double);
+   procedure SetValueX(index:integer;AValue:double);
    procedure SetValueColor(index:integer;AValue:integer);
+   function GetValueX(index:integer):double;
    function GetValue(index:integer):double;
    function GetValueCaption(index:integer):WideString;
    function GetValueColor(index:integer):Integer;
@@ -68,11 +72,15 @@ type
    charttype:TRpChartType;
    constructor Create(Collection: TCollection);override;
    property Values[index:integer]:double read GetValue write SetValue;
+   property ValuesX[index:integer]:double read GetValueX write SetValueX;
    property Colors[index:integer]:integer read GetValueColor write SetValueColor;
    property ValueCaptions[index:integer]:WideString read GetValueCaption;
    property ValueCount:integer read FValueCount;
+   property ValueXCount:integer read FValueXCount;
    procedure AddValue(avalue:double;acaption:widestring='');
+   procedure AddValueXY(valueX:double;avalue:double;acaption:widestring='');
    procedure AddValueColor(avalue:double;color:integer;acaption:widestring='');
+   procedure AddValueXYColor(valueX:double;avalue:double;color:integer;acaption:widestring='');
    procedure Assign(Source:TPersistent);override;
    procedure SetLastValueColor(color:integer);
    procedure ClearValues;
@@ -150,7 +158,9 @@ begin
 
  FColor:=-1;
  FValueCount:=0;
+ FValueXCount:=0;
  SetLength(FValues,DEFAULT_ALLOCATION);
+ SetLength(FValuesX,DEFAULT_ALLOCATION);
  SetLength(FColors,DEFAULT_ALLOCATION);
  SetLength(FPoolPositions,DEFAULT_ALLOCATION);
  SetLength(FPoolSizes,DEFAULT_ALLOCATION);
@@ -189,12 +199,27 @@ begin
  FValues[index]:=AValue;
 end;
 
+procedure TRpSeriesItem.SetValueX(index:integer;AValue:double);
+begin
+ if index>=FValueXCount then
+  Raise Exception.Create(SRpIndexOutOfBounds+':'+ClassName);
+ FValuesX[index]:=AValue;
+end;
+
 function TRpSeriesItem.GetValue(index:integer):double;
 begin
  if index>=FValueCount then
   Raise Exception.Create(SRpIndexOutOfBounds+':'+ClassName);
  Result:=FValues[index];
 end;
+
+function TRpSeriesItem.GetValueX(index:integer):double;
+begin
+ if index>=FValueXCount then
+  Raise Exception.Create(SRpIndexOutOfBounds+':'+ClassName);
+ Result:=FValuesX[index];
+end;
+
 
 function TRpSeriesItem.GetValueColor(index:integer):Integer;
 begin
@@ -213,6 +238,7 @@ end;
 procedure TRpSeriesItem.ClearValues;
 begin
  FValueCount:=0;
+ FValueXCount:=0;
  FPoolPos:=1;
  FPool:='';
  MaxValue:=-10e300;
@@ -265,6 +291,56 @@ begin
   FPoolSizes[FValueCount]:=0;
  end;
  inc(FValueCount);
+ if avalue>MaxValue then
+  MaxValue:=avalue;
+ if avalue<MinValue then
+  MinValue:=avalue;
+end;
+
+
+procedure TRpSeriesItem.AddValueXYColor(valueX:double;avalue:double;color:integer;acaption:widestring='');
+begin
+ AddValueXY(valueX,avalue,caption);
+ SetLastValueColor(color);
+end;
+
+procedure TRpSeriesItem.AddValueXY(valueX:double;avalue:double;acaption:widestring='');
+var
+ caplength:integer;
+begin
+ if FValueCount>=FMaxAllocated then
+ begin
+  SetLength(FValues,FMaxAllocated*2);
+  SetLength(FValuesX,FMaxAllocated*2);
+  SetLength(FPoolPositions,FMaxAllocated*2);
+  SetLength(FPoolSizes,FMaxAllocated*2);
+  SetLength(FColors,FMaxAllocated*2);
+  FMaxAllocated:=FMaxAllocated*2;
+ end;
+
+ FValues[FValueCount]:=avalue;
+ FValuesX[FValueXCount]:=valueX;
+ FColors[FValueCount]:=-1;
+ if FColor>=0 then
+ begin
+  FColors[FValueCount]:=FColor;
+ end;
+ // Adds the string
+ caplength:=Length(acaption);
+ if caplength>0 then
+ begin
+  FPool:=FPool+acaption;
+  FPoolPositions[FValueCount]:=FPoolPos;
+  FPoolSizes[FValueCount]:=caplength;
+  FPoolPos:=FPoolPos+caplength;
+ end
+ else
+ begin
+  FPoolPositions[FValueCount]:=0;
+  FPoolSizes[FValueCount]:=0;
+ end;
+ inc(FValueCount);
+ inc(FValueXCount);
  if avalue>MaxValue then
   MaxValue:=avalue;
  if avalue<MinValue then

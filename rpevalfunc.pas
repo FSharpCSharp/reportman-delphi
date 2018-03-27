@@ -245,6 +245,12 @@ type
   public
    constructor Create(AOwner:TComponent);override;
   end;
+ TIdenGraphicNewXY=class(TIdenFunction)
+  protected
+   function GetRpValue:TRpValue;override;
+  public
+   constructor Create(AOwner:TComponent);override;
+  end;
  TIdenGraphicColor=class(TIdenFunction)
   protected
    function GetRpValue:TRpValue;override;
@@ -491,7 +497,9 @@ type
   end;
 
 
- TRpNewValue=procedure (Y:Single;Cambio:Boolean;leyen,textleyen,
+ TRpNewValue=procedure (Y:Double;Cambio:Boolean;leyen,textleyen,
+  textserie:string;ChartType:TRpChartType) of object;
+ TRpNewValueXY=procedure (X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,
   textserie:string;ChartType:TRpChartType) of object;
  TRpColorEvent=procedure (Color:Integer) of object;
  TRpBoundsValue=procedure (autol,autoh:boolean;lvalue,hvalue:double;
@@ -500,6 +508,7 @@ type
  TVariableGrap=class(TIdenVariable)
   protected
    FOnNewValue:TRpNewValue;
+   FOnNewValueXY:TRpNewValueXY;
    FOnClear:TNotifyEvent;
    FOnBounds:TRpBoundsValue;
    FOnSerieColor:TRpColorEvent;
@@ -509,10 +518,12 @@ type
   public
    DefaultChartType:TRpChartType;
    constructor Create(AOwner:TComponent);override;
-   procedure NewValue(Y:Single;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
+   procedure NewValue(Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
+   procedure NewValueXY(X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
    procedure Clear;
    property OnClear:TNotifyEvent read FOnClear write FOnClear;
    property OnNewValue:TRpNewValue read FOnNewValue write FOnNewValue;
+   property OnNewValueXY:TRpNewValueXY read FOnNewValueXY write FOnNewValueXY;
    property OnBounds:TRpBoundsValue read FOnBounds write FOnBounds;
    property OnSerieColor:TRpColorEvent read FOnSerieColor write FOnSerieColor;
    property OnValueColor:TRpColorEvent read FOnValueColor write FOnValueColor;
@@ -1401,7 +1412,17 @@ begin
  FParamcount:=5;
  IdenName:='GraphicNew';
  Help:=SRpGraphicNew;
- model:='function '+'GraphicNew'+'(Gr:string, V:Single, C:Boolean,Etiq:string,Caption:string):Boolean';
+ model:='function '+'GraphicNew'+'(Gr:string, V:Double, C:Boolean,Etiq:string,Caption:string):Boolean';
+ aParams:=SRPPgraphicnew;
+end;
+
+constructor TIdenGraphicNewXY.Create(AOwner:TComponent);
+begin
+ inherited Create(AOwner);
+ FParamcount:=6;
+ IdenName:='GraphicNewXY';
+ Help:=SRpGraphicNew;
+ model:='function '+'GraphicNewXY'+'(Gr:string, X:Double;Y:Double, C:Boolean,Etiq:string,Caption:string):Boolean';
  aParams:=SRPPgraphicnew;
 end;
 
@@ -1437,7 +1458,46 @@ begin
          IdenName+'-'+Params[0]);
 
  Result:=True;
- (iden As TVariableGrap).NewValue(single(Params[1]),Boolean(Params[2]),string(Params[3]),'',string(Params[4]),(iden As TVariableGrap).DefaultChartType);
+ (iden As TVariableGrap).NewValue(Double(Params[1]),Boolean(Params[2]),string(Params[3]),'',string(Params[4]),(iden As TVariableGrap).DefaultChartType);
+end;
+
+
+
+function TIdenGraphicNewXY.GeTRpValue:TRpValue;
+var
+ iden:TRpIdentifier;
+begin
+ if Not VarIsString(Params[0]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsNumber(Params[1]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsNumber(Params[2]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Vartype(Params[3])<>varBoolean then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsString(Params[4]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsString(Params[5]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ // Buscamos el identificador
+ iden:=(evaluator As TRpEvaluator).SearchIdentifier(String(Params[0]));
+ if iden=nil then
+ begin
+   Raise TRpNamedException.Create(SRpIdentifierexpected,
+         IdenName+'-'+Params[0]);
+ end;
+ if Not (iden is TVariableGrap) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName+'-'+Params[0]);
+
+ Result:=True;
+ (iden As TVariableGrap).NewValueXY(Double(Params[1]),Double(Params[2]),Boolean(Params[3]),string(Params[4]),'',string(Params[5]),(iden As TVariableGrap).DefaultChartType);
 end;
 
 constructor TIdenGraphicColor.Create(AOwner:TComponent);
@@ -2245,11 +2305,18 @@ begin
 end;
 
 
-procedure TVariableGrap.NewValue(Y:Single;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
+procedure TVariableGrap.NewValue(Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
 begin
  if Assigned(FOnNewValue) then
   FOnNewValue(Y,Cambio,leyen,textleyen,textserie,DefaultChartType);
 end;
+
+procedure TVariableGrap.NewValueXY(X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
+begin
+ if Assigned(FOnNewValueXY) then
+  FOnNewValueXY(X,Y,Cambio,leyen,textleyen,textserie,DefaultChartType);
+end;
+
 
 procedure TVariableGrap.Clear;
 begin

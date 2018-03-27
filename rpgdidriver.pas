@@ -3134,6 +3134,31 @@ begin
    // Assigns the color for this serie
    for j:=0 to intserie.ValueCount-1 do
    begin
+    if Length(intSerie.ValuesX)>j then
+    begin
+     if series.count<2 then
+     begin
+      if intserie.Colors[j]>=0 then
+       aserie.AddXY(intserie.ValuesX[j],intserie.Values[j],
+        intSerie.ValueCaptions[j],intSerie.Colors[j])
+      else
+       aserie.AddXY(intserie.ValuesX[j],intserie.Values[j],
+        intSerie.ValueCaptions[j],SeriesColors[aColor]);
+      if (nchart.ChartType in [rpchartpie]) or nchart.ShowLegend then
+       acolor:=((acolor+1) mod (MAX_SERIECOLORS));
+     end
+     else
+     begin
+      if intserie.Colors[j]>=0 then
+       aserie.AddXY(intserie.ValuesX[j],intserie.Values[j],
+        intSerie.ValueCaptions[j],intserie.Colors[j])
+      else
+       aserie.AddXY(intserie.ValuesX[j],intserie.Values[j],
+        intSerie.ValueCaptions[j],SeriesColors[aColor]);
+     end;
+    end
+    else
+    begin
     if series.count<2 then
     begin
      if intserie.Colors[j]>=0 then
@@ -3154,6 +3179,7 @@ begin
       aserie.Add(intserie.Values[j],
        intSerie.ValueCaptions[j],SeriesColors[aColor]);
     end;
+	end;
     //achart.AddSeries(aserie);
    end;
    acolor:=((acolor+1) mod (MAX_SERIECOLORS));
