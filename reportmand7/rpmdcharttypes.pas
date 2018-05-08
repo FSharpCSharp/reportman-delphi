@@ -38,6 +38,8 @@ type
  TRpChartType=(rpchartline,rpchartbar,rpchartpoint,
   rpcharthorzbar,rpchartarea,rpchartpie,rpchartarrow,
   rpchartbubble,rpchartgantt);
+ TRpAutoRangeAxis = (rpAutoRangeDefault,rpAutoRangeBoth,rpAutoRangeUpper,
+  rpAutoRangeLower,rpAutoRangeNone);
 
  TRpChartDriver=(rpchartdriverdefault,rpchartdriverengine,rpchartdriverteechart);
 
@@ -93,8 +95,7 @@ type
   function GetItem(Index:Integer):TRpSeriesItem;
   procedure SetItem(index:integer;Value:TRpSeriesItem);
  public
-  AutoRangeL:Boolean;
-  AutoRangeH:Boolean;
+  AutoRange:TRpAutoRangeAxis;
   LowValue:double;
   HighValue:double;
   Logaritmic:Boolean;
@@ -126,6 +127,9 @@ procedure GetRpMultiBarPossibleValues(alist:TRpWideStrings);
 function RpMarkTypeToString(mtype:Integer):String;
 function StringToRpMarkType(Value:String):Integer;
 procedure GetRpMarTypePossibleValues(alist:TRpWideStrings);
+function RpAutoRangeAxisToString(auto:TRpAutoRangeAxis):String;
+procedure GetRpAutoRangePossibleValues(alist:TRpWideStrings);
+function StringToRpAutoRange(Value:String):TRpAutoRangeAxis;
 
 
 implementation
@@ -408,6 +412,24 @@ begin
  end;
 end;
 
+function RpAutoRangeAxisToString(auto:TRpAutoRangeAxis):String;
+begin
+ Result:=SRpAutoRangeDefault;
+ case auto of
+  rpAutoRangeDefault:
+   Result:=SRpAutoRangeDefault;
+  rpAutoRangeBoth:
+   Result:=SRpAutoRangeAuto;
+  rpAutoRangeUpper:
+   Result:=SRpAutoRangeMaximum;
+  rpAutoRangeLower:
+   Result:=SRpAutoRangeMin;
+  rpAutoRangeNone:
+   Result:=SRpAutoRangeNone;
+ end;
+end;
+
+
 function StringToRpChartType(Value:String):TRpChartType;
 begin
  Result:=rpchartline;
@@ -465,7 +487,7 @@ begin
  alist.Add(SRpChartArrow);
  alist.Add(SRpChartBubble);
  alist.Add(SRpChartGantt);
- 
+
 end;
 
 
@@ -579,6 +601,47 @@ begin
  alist.Add(SRpSMarkType6);
  alist.Add(SRpSMarkType7);
 end;
+
+procedure GetRpAutoRangePossibleValues(alist:TRpWideStrings);
+begin
+ alist.Clear;
+ alist.Add(SRpAutoRangeDefault);
+ alist.Add(SRpAutoRangeAuto);
+ alist.Add(SRpAutoRangeMaximum);
+ alist.Add(SRpAutoRangeMin);
+ alist.Add(SRpAutoRangeNone);
+end;
+
+function StringToRpAutoRange(Value:String):TRpAutoRangeAxis;
+begin
+ Result:=rpAutoRangeDefault;
+ if Value=SRpAutoRangeAuto then
+ begin
+  Result:=rpAutoRangeBoth;
+  exit;
+ end;
+ if Value=SRpAutoRangeDefault then
+ begin
+  Result:=rpAutoRangeDefault;
+  exit;
+ end;
+ if Value=SRpAutoRangeMin then
+ begin
+  Result:=rpAutoRangeLower;
+  exit;
+ end;
+ if Value=SRpAutoRangeMaximum then
+ begin
+  Result:=rpAutoRangeUpper;
+  exit;
+ end;
+ if Value=SRpAutoRangeNone then
+ begin
+  Result:=rpAutoRangeNone;
+  exit;
+ end;
+end;
+
 
 end.
 

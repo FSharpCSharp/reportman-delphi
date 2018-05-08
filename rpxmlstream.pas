@@ -472,6 +472,9 @@ begin
   WritePropertyI('VERTFONTSIZE',compc.VertFontSize,Stream);
   WritePropertyI('HORZFONTROTATION',compc.HorzFontRotation,Stream);
   WritePropertyI('VERTFONTROTATION',compc.VertFontRotation,Stream);
+  WritePropertyI('AUTORANGE', Integer(compc.AutoRange), Stream);
+  WritePropertyD('YMIN', compc.YMin, Stream);
+  WritePropertyD('YMAX', compc.YMax, Stream);
  end
  else
  // TRpBarcode
@@ -1730,7 +1733,16 @@ begin
    compc.HorzFontRotation:=StrToInt(propvalue)
   else
   if propname='VERTFONTROTATION' then
-   compc.VertFontRotation:=StrToInt(propvalue);
+   compc.VertFontRotation:=StrToInt(propvalue)
+  else
+  if propname='AUTORANGE' then
+   compc.AutoRange:=TRpAutoRangeAxis(StrToInt(propvalue))
+  else
+  if propname='YMIN' then
+   compc.YMin:=RpStrToDouble(propvalue)
+  else
+  if propname='YMAX' then
+   compc.YMax:=RpStrToDouble(propvalue);
  end
  else
  // TRpBarcode

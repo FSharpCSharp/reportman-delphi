@@ -8,7 +8,7 @@
 {       it includes printer and bitmap support          }
 {                                                       }
 {       Copyright (c) 1994-2002 Toni Martir             }
-{       toni@pala.com                                   }
+{       toni@reportman.es                               }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }
@@ -29,6 +29,12 @@ uses
  Classes,sysutils,rpmetafile,rpmdconsts,Graphics,Forms,
  rpmunits,Printers,Dialogs, Controls,rpgdifonts,Math,
  StdCtrls,ExtCtrls,rppdffile,rpgraphutilsvcl,WinSpool,rpmdcharttypes,
+{$IFDEF FIREDAC}
+ Firedac.VCLUI.Wait,
+{$ENDIF}
+{$IFDEF VCLNOTATION}
+  VCL.Imaging.jpeg,VCL.Imaging.pngimage,
+{$ENDIF}
 {$IFNDEF FORWEBAX}
  rpmdchart,
 {$ENDIF}
@@ -39,12 +45,6 @@ uses
  System.ComponentModel,
 {$ENDIF}
  rptypes,rpvgraphutils,
-{$IFDEF VCLNOTATION}
-  VCL.Imaging.jpeg,
-{$ELSE}
- jpeg,
-{$ENDIF}
-
 {$IFNDEF FORWEBAX}
  rpbasereport,rpreport,
 {$IFDEF USETEECHART}
@@ -55,13 +55,19 @@ uses
  {$IFNDEF VCLNOTATION}
   Chart,Series,rpdrawitem,
   teEngine,ArrowCha,BubbleCh,GanttCh,
+  jpeg,
+{$IFDEF DELPHI2009UP}
+  pngimage,VCLTee.TeCanvas,System.UITypes,
+{$ELSE}
+ TeCanvas,
+{$ENDIF}
  {$ENDIF}
 {$ENDIF}
 {$IFDEF EXTENDEDGRAPHICS}
  rpgraphicex,
 {$ENDIF}
 {$ENDIF}
- rppdfdriver,rptextdriver, Mask, rpmaskedit;
+ rppdfdriver,rptextdriver, Mask, rpmaskedit,registry;
 
 
 const
@@ -88,6 +94,7 @@ type
     EHorzRes: TRpMaskEdit;
     EVertRes: TRpMaskEdit;
     CheckMono: TCheckBox;
+
     procedure FormCreate(Sender: TObject);
     procedure BCancelClick(Sender: TObject);
     procedure BOKClick(Sender: TObject);
@@ -142,6 +149,8 @@ type
    selectedprinter:TRpPrinterSelect;
    DrawerBefore,DrawerAfter:Boolean;
    npdfdriver:TRpPDFDriver;
+       realdpix,realdpiy:integer;
+
    procedure PrintObject(Canvas:TCanvas;page:TRpMetafilePage;obj:TRpMetaObject;dpix,dpiy:integer;toprinter:boolean;pagemargins:TRect;devicefonts:boolean;offset:TPoint;selected:boolean);
    procedure SendAfterPrintOperations;
    function DoNewPage(aorientation:TRpOrientation;apagesizeqt:TPageSizeQt):Boolean;
@@ -870,6 +879,10 @@ var
  drawbackground:boolean;
  oldhandle:THandle;
  format:string;
+{$IFDEF DELPHI2009UP}
+ npng:TPngImage;
+{$ENDIF}
+ propx,propy:double;
 begin
  // Switch to device points
  oldhandle:=0;
@@ -1136,6 +1149,16 @@ begin
      end
      else
      // Looks if it's a jpeg image
+{$IFDEF DELPHI2009UP}
+      if (format = 'PNG') then
+      begin
+       npng:=TPngImage.Create;
+       npng.LoadFromStream(stream);
+       bitmap.Assign(npng);
+       npng.Free;
+      end
+      else
+{$ENDIF}
       if (format='BMP') then
         bitmap.LoadFromStream(stream)
       else
@@ -1173,11 +1196,31 @@ begin
        end;
       rpDrawCrop:
        begin
-        recsrc.Left:=0;
-        recsrc.Top:=0;
-        recsrc.Right:=rec.Right-rec.Left;
-        recsrc.Bottom:=rec.Bottom-rec.Top;
-        DrawBitmap(Canvas,bitmap,rec,recsrc);
+        //recsrc.Left:=0;
+        //recsrc.Top:=0;
+        //recsrc.Right:=rec.Right-rec.Left;
+        //recsrc.Bottom:=rec.Bottom-rec.Top;
+        //DrawBitmap(Canvas,bitmap,rec,recsrc);
+         recsrc.Left:=0;
+         recsrc.Top:=0;
+         recsrc.Right:=bitmap.Width-1;
+         recsrc.Bottom:=bitmap.Height-1;
+         propx:=(rec.Right-rec.Left)/bitmap.Width;
+         propy:=(rec.Bottom-rec.Top)/bitmap.Height;
+         if (propy>propx) then
+         begin
+          H:=Round((rec.Right-rec.Left)*propx/propy);
+          rec.Top:=rec.Top+((rec.Bottom-rec.Top)-H) div 2;
+          rec.Bottom:=rec.Top+H;
+         end
+         else
+         begin
+          W:=Round((rec.Right-rec.Left)*propy/propx);
+          rec.Left:=rec.Left+((rec.Right-rec.Left)-W) div 2;
+          rec.Right:=rec.Left+W;
+         end;
+         DrawBitmap(Canvas,bitmap,rec,recsrc);
+
        end;
       rpDrawTile,rpDrawTiledpi:
        begin
@@ -1433,86 +1476,115 @@ begin
 end;
 
 
-procedure TRpGDIDriver.DrawPage(apage:TRpMetaFilePage);
-var
- j:integer;
- rec:TRect;
- dpix,dpiy:integer;
- selected:boolean;
-begin
- if toprinter then
- begin
-  for j:=0 to apage.ObjectCount-1 do
+  procedure TRpGDIDriver.DrawPage(apage:TRpMetaFilePage);
+  var
+   j:integer;
+   rec:TRect;
+   dpix,dpiy:integer;
+   selected:boolean;
+   metadpix,metadpiy:integer;
+   regx:TRegistry;
   begin
-   IntDrawObject(apage,apage.Objects[j],false);
-  end;
- end
- else
- begin
-  UpdateBitmapSize(FReport,apage);
-  if assigned(metacanvas) then
-  begin
-   metacanvas.free;
-   metacanvas:=nil;
-  end;
-  if assigned(meta) then
-  begin
-   meta.free;
-   meta:=nil;
-  end;
-  meta:=TMetafile.Create;
-  try
-   meta.Enhanced:=true;
-   meta.Width:=bitmapwidth;
-   meta.Height:=bitmapheight;
-   metacanvas:=TMetafileCanvas.Create(meta,0);
-   try
+   if toprinter then
+   begin
     for j:=0 to apage.ObjectCount-1 do
     begin
-     selected:=FReport.IsFound(apage,j);
-     IntDrawObject(apage,apage.Objects[j],selected);
+     IntDrawObject(apage,apage.Objects[j],false);
     end;
-    //Draw page margins
-    if (showpagemargins) then
-    begin
-     rec:=rpvgraphutils.GetPageMarginsTWIPS;
-     // transform to dpi device
-     dpix:=Screen.PixelsPerInch;
-     dpiy:=Screen.PixelsPerInch;
-
-     rec.Left:=round(rec.Left*dpix/TWIPS_PER_INCHESS);
-     rec.Top:=round(rec.Top*dpiy/TWIPS_PER_INCHESS);
-     rec.Right:=round(rec.Right*dpix/TWIPS_PER_INCHESS);
-     rec.Bottom:=round(rec.Bottom*dpiy/TWIPS_PER_INCHESS);
-     metacanvas.Brush.Style:=bsClear;
-     metacanvas.Pen.Color:=clBlack;
-     metacanvas.Pen.Style:=psSolid;
-
-     metacanvas.Rectangle(rec);
-    end;
-   finally
-    metacanvas.free;
-    metacanvas:=nil;
-   end;
-   // Draws the metafile scaled
-   if Round(scale*1000)=1000 then
-   begin
-    Bitmap.Canvas.Draw(0,0,Meta);
    end
    else
    begin
-    rec.Top:=0;
-    rec.Left:=0;
-    rec.Right:=bitmap.Width-1;
-    rec.Bottom:=bitmap.Height-1;
-    Bitmap.Canvas.StretchDraw(rec,Meta);
+    UpdateBitmapSize(FReport,apage);
+    if assigned(metacanvas) then
+    begin
+     metacanvas.free;
+     metacanvas:=nil;
+    end;
+    if assigned(meta) then
+    begin
+     meta.free;
+     meta:=nil;
+    end;
+    meta:=TMetafile.Create;
+    try
+     meta.Enhanced:=true;
+     meta.Width:=bitmapwidth;
+     meta.Height:=bitmapheight;
+
+     metacanvas:=TMetafileCanvas.Create(meta,0);
+     try
+      metadpix:=GetDeviceCaps(metacanvas.Handle,LOGPIXELSX);
+      metadpiy:=GetDeviceCaps(metacanvas.Handle,LOGPIXELSY);
+      if (realdpix = 0) then
+      begin
+       regx := TRegistry.Create;
+       regx.RootKey := HKEY_CURRENT_USER;
+       if (regx.KeyExists('Control Panel\Desktop\WindowMetrics')) then
+       begin
+        regx.OpenKey('Control Panel\Desktop\WindowMetrics',false);
+        if (regx.ValueExists('AppliedDPI')) then
+        begin
+         realdpix:=regx.ReadInteger('AppliedDPI');
+         realdpiy:=realdpix;
+        end
+        else
+        begin
+         realdpix:=metadpix;
+         realdpiy:=metadpiy;
+        end
+       end
+       else
+       begin
+        realdpix:=metadpix;
+        realdpiy:=metadpiy;
+       end
+      end;
+      for j:=0 to apage.ObjectCount-1 do
+      begin
+       selected:=FReport.IsFound(apage,j);
+       IntDrawObject(apage,apage.Objects[j],selected);
+      end;
+      //Draw page margins
+      if (showpagemargins) then
+      begin
+       rec:=rpvgraphutils.GetPageMarginsTWIPS;
+       // transform to dpi device
+       dpix:=Screen.PixelsPerInch;
+       dpiy:=Screen.PixelsPerInch;
+
+       rec.Left:=round(rec.Left*dpix/TWIPS_PER_INCHESS);
+       rec.Top:=round(rec.Top*dpiy/TWIPS_PER_INCHESS);
+       rec.Right:=round(rec.Right*dpix/TWIPS_PER_INCHESS);
+       rec.Bottom:=round(rec.Bottom*dpiy/TWIPS_PER_INCHESS);
+       metacanvas.Brush.Style:=bsClear;
+       metacanvas.Pen.Color:=clBlack;
+       metacanvas.Pen.Style:=psSolid;
+
+       metacanvas.Rectangle(rec);
+      end;
+     finally
+      metacanvas.free;
+      metacanvas:=nil;
+     end;
+     // Draws the metafile scaled
+     if Round(scale*1000)=1000 then
+     begin
+      Bitmap.Canvas.Draw(0,0,Meta);
+     end
+     else
+     begin
+      rec.Top:=0;
+      rec.Left:=0;
+      rec.Right:=Round(bitmap.Width*realdpix/metadpix)-1;
+      rec.Bottom:=Round(bitmap.Height*realdpix/metadpix)-1;
+      Bitmap.Canvas.StretchDraw(rec,Meta);
+     end;
+    finally
+     meta.free;
+     meta:=nil;
+    end;
    end;
-  finally
-   meta.free;
-   meta:=nil;
   end;
- end;
-end;
 
 procedure TRpGDIDriver.DrawObject(page:TRpMetaFilePage;obj:TRpMetaObject);
 begin
@@ -2608,7 +2680,7 @@ var
  devicefonts:boolean;
  istextonly:boolean;
  drivername:String;
- S:String;
+ S:AnsiString;
  pconfig:TPrinterConfig;
 begin
  pconfig.Changed:=false;
@@ -2944,6 +3016,9 @@ var
  abitmap:TBitmap;
  FMStream:TMemoryStream;
  acolor:integer;
+{$IFDEF DELPHI2009UP}
+ nform:TForm;
+{$ENDIF}
 begin
  nchart:=TRpChart(xchart);
  if nchart.Driver=rpchartdriverengine then
@@ -2953,6 +3028,12 @@ begin
  end;
  achart:=TChart.Create(nil);
  try
+  // In delphi 7 there is no need for parent
+{$IFDEF DELPHI2009UP}
+  nform:=TForm.Create(nil);
+  achart.Parent:=nform;
+{$ENDIF}
+
   achart.BevelOuter:=bvNone;
   afontsize:=Round(nchart.FontSize*nchart.Resolution/100);
   achart.View3D:=nchart.View3d;
@@ -2979,13 +3060,24 @@ begin
   achart.Legend.Font.Size:=aFontSize;
   achart.Legend.Font.Style:=CLXIntegerToFontStyle(nchart.FontStyle);
   achart.Legend.Visible:=nchart.ShowLegend;
-  acolor:=0;
   // autorange and other ranges
   achart.LeftAxis.Maximum:=Series.HighValue;
   achart.LeftAxis.Minimum:=Series.LowValue;
   achart.LeftAxis.Automatic:=false;
-  achart.LeftAxis.AutomaticMaximum:=Series.AutoRangeH;
-  achart.LeftAxis.AutomaticMinimum:=Series.AutoRangeL;
+  achart.LeftAxis.AutomaticMaximum:=true;
+  achart.LeftAxis.AutomaticMinimum:=true;
+  if (Series.AutoRange <> rpAutoRangeDefault) then
+  begin
+   case Series.AutoRange of
+     rpAutoRangeUpper:   achart.LeftAxis.AutomaticMinimum:=false;
+     rpAutoRangeLower: achart.LeftAxis.AutomaticMaximum:=false;
+     rpAutoRangeNone:
+      begin
+        achart.LeftAxis.AutomaticMinimum:=false;
+        achart.LeftAxis.AutomaticMaximum:=false;
+      end;
+   end;
+  end;
   achart.LeftAxis.LabelsAngle:=nchart.VertFontRotation mod 360;
   achart.LeftAxis.LabelsFont.Size:=Round(nchart.VertFontSize*nchart.Resolution/100);
   achart.BottomAxis.LabelsAngle:=nchart.HorzFontRotation mod 360;
@@ -2996,6 +3088,7 @@ begin
     achart.LeftAxis.LogarithmicBase:=Round(Series.LogBase);
 {$ENDIF}
   achart.LeftAxis.Inverted:=Series.Inverted;
+  acolor:=0;
   for i:=0 to Series.Count-1 do
   begin
    intserie:=Series.Items[i];
@@ -3053,6 +3146,31 @@ begin
    // Assigns the color for this serie
    for j:=0 to intserie.ValueCount-1 do
    begin
+    if intSerie.ValueXCount>j then
+    begin
+     if series.count<2 then
+     begin
+      if intserie.Colors[j]>=0 then
+       aserie.AddXY(intserie.ValuesX[j],intserie.Values[j],
+        intSerie.ValueCaptions[j],intSerie.Colors[j])
+      else
+       aserie.AddXY(intserie.ValuesX[j],intserie.Values[j],
+        intSerie.ValueCaptions[j],SeriesColors[aColor]);
+      if (nchart.ChartType in [rpchartpie]) or nchart.ShowLegend then
+       acolor:=((acolor+1) mod (MAX_SERIECOLORS));
+     end
+     else
+     begin
+      if intserie.Colors[j]>=0 then
+       aserie.AddXY(intserie.ValuesX[j],intserie.Values[j],
+        intSerie.ValueCaptions[j],intserie.Colors[j])
+      else
+       aserie.AddXY(intserie.ValuesX[j],intserie.Values[j],
+        intSerie.ValueCaptions[j],SeriesColors[aColor]);
+     end;
+    end
+    else
+    begin
     if series.count<2 then
     begin
      if intserie.Colors[j]>=0 then
@@ -3073,6 +3191,8 @@ begin
       aserie.Add(intserie.Values[j],
        intSerie.ValueCaptions[j],SeriesColors[aColor]);
     end;
+	end;
+    //achart.AddSeries(aserie);
    end;
    acolor:=((acolor+1) mod (MAX_SERIECOLORS));
    abitmap:=TBitmap.Create;
@@ -3110,6 +3230,9 @@ begin
    TObject(achart.SeriesList.Items[0]).free;
   end;
   achart.Free;
+{$IFDEF DELPHI2009UP}
+  nform.free;
+{$ENDIF}
  end;
 end;
 {$ENDIF}

@@ -72,6 +72,9 @@ type
    FVertFontSize:Integer;
    FHorzFontRotation:Integer;
    FVertFontRotation:Integer;
+   FAutoRange:TRpAutoRangeAxis;
+   FYMin:double;
+   FYMax:double;
    procedure OnClear(Sender:TObject);
    procedure OnNewValue(Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
    procedure OnNewValueXY(X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
@@ -136,6 +139,9 @@ type
     FColorExpression;
    property SerieColorExpression:widestring read FSerieColorExpression write
     FSerieColorExpression;
+   property AutoRange:TRpAutoRangeAxis read FAutoRange write FAutoRange;
+   property YMin:double read FYMin write FYMin;
+   property YMax:double read FYMax write FYMax;
   published
    property Series:TRpSeries read FSeries write SetSeries;
    property ChangeSerieBool:boolean read FChangeSerieBool write FChangeSerieBool
@@ -199,8 +205,6 @@ begin
  FShowHint:=true;
  FShowLegend:=False;
  FSeries:=TRpSeries.Create(TRpSeriesItem);
- Fseries.AutoRangel:=true;
- Fseries.AutoRangeh:=true;
  Fseries.Logaritmic:=false;
  FChangeSerieBool:=false;
  FClearExpressionBool:=false;
@@ -517,6 +521,9 @@ begin
     FClearValue:=Null;
     FUpdated:=false;
     FSeries.Clear;
+    FSeries.AutoRange:=AutoRange;
+    FSeries.LowValue:=YMin;
+    FSeries.HighValue:=YMax;
    end;
   rpDataChange:
    begin
@@ -621,8 +628,20 @@ end;
 procedure TRpChart.OnBoundsValue(autol,autoh:boolean;lvalue,hvalue:double;
   logaritmic:boolean;logbase:double;inverted:boolean);
 begin
- FSeries.AutorangeL:=autol;
- FSeries.AutorangeH:=autoh;
+ if (autol) then
+ begin
+  if (autoh) then
+    FSeries.AutoRange:=rpAutoRangeLower
+  else
+    FSeries.AutoRange:=rpAutoRangeBoth;
+ end
+ else
+ begin
+  if (autoh) then
+    FSeries.AutoRange:=rpAutoRangeUpper
+  else
+    FSeries.AutoRange:=rpAutoRangeNone;
+ end;
  FSeries.LowValue:=lvalue;
  FSeries.HighValue:=hvalue;
  FSeries.Logaritmic:=logaritmic;

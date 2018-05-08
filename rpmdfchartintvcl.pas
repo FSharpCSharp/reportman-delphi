@@ -333,6 +333,27 @@ begin
  lcat.Add(SRpChartData);
  if Assigned(lvalues) then
   lvalues.Add(TRpChart(printitem).SerieColorExpression);
+ // Auto range
+ lnames.Add(SRpAutoRange);
+ ltypes.Add(SRpSList);
+ lhints.Add('refchart.html');
+ lcat.Add(SRpChartAspect);
+ if Assigned(lvalues) then
+  lvalues.Add(RpAutoRangeAxisToString(TRpChart(printitem).AutoRange));
+ // Auto range Y Min
+ lnames.Add(SRpAutoRangeYMin);
+ ltypes.Add(SRpSCurrency);
+ lhints.Add('refchart.html');
+ lcat.Add(SRpChartAspect);
+ if Assigned(lvalues) then
+  lvalues.Add(FormatCurr('#####0.00',TRpChart(printitem).YMin));
+ // Auto range Y Max
+ lnames.Add(SRpAutoRangeYMax);
+ ltypes.Add(SRpSCurrency);
+ lhints.Add('refchart.html');
+ lcat.Add(SRpChartAspect);
+ if Assigned(lvalues) then
+  lvalues.Add(FormatCurr('#####0.00',TRpChart(printitem).YMax));
 end;
 
 
@@ -504,7 +525,21 @@ begin
   TRpChart(fprintitem).SerieColorExpression:=value;
   exit;
  end;
-
+ if pname=SRpAutoRange then
+ begin
+  TRpChart(fprintitem).AutoRange:=StringToRpAutoRange(Value);
+  exit;
+ end;
+ if pname=SRpAutoRangeYMin then
+ begin
+  TRpChart(fprintitem).YMin:=StrToCurr(value);;
+  exit;
+ end;
+ if pname=SRpAutoRangeYMax then
+ begin
+  TRpChart(fprintitem).YMax:=StrToCurr(value);;
+  exit;
+ end;
  inherited SetProperty(pname,value);
 end;
 
@@ -676,6 +711,22 @@ begin
   Result:=TRpChart(fprintitem).SerieColorExpression;
   exit;
  end;
+ if (pname=SRpAutoRange) then
+ begin
+  Result:=RpAutoRangeAxisToString(TRpChart(printitem).AutoRange);
+  exit;
+ end;
+ if (pname=SRpAutoRangeYMin) then
+ begin
+  Result:=FormatCurr('#####0.00',TRpChart(printitem).YMin);
+  exit;
+ end;
+ if (pname=SRpAutoRangeYMax) then
+ begin
+  Result:=FormatCurr('#####0.00',TRpChart(printitem).YMax);
+  exit;
+ end;
+
  Result:=inherited GetProperty(pname);
 end;
 
@@ -700,6 +751,11 @@ begin
  if pname=SRpMarkType then
  begin
   GetRpMarTypePossibleValues(lpossiblevalues);
+  exit;
+ end;
+ if pname=SRpAutoRange then
+ begin
+  GetRpAutoRangePossibleValues(lpossiblevalues);
   exit;
  end;
  inherited GetPropertyValues(pname,lpossiblevalues);

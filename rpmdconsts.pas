@@ -1361,6 +1361,15 @@ var
   SRpSelectAll:WideString='Select all';
   SRpClearSelection:WideString='Clear selection';
 
+  SRpAutoRange:WideString = 'Y Axis Auto';
+  SRpAutoRangeYMin:WideString = 'Y Axis Min';
+  SRpAutoRangeYMax:WideString = 'Y Axis Max';
+  SRpAutoRangeDefault:WideString = 'Default';
+  SRpAutoRangeAuto:WideString = 'Auto';
+  SRpAutoRangeMaximum:WideString = 'Auto Max';
+  SRpAutoRangeMin:WideString = 'Auto Min';
+  SRpAutoRangeNone:WideString = 'Auto None';
+
 
 
 implementation
@@ -2367,6 +2376,14 @@ begin
   TranslateVar(1447,SRpTheme);
   TranslateVar(1448,SRpFireDacDesc);
 
+  TranslateVar(1449,SRpAutoRange);
+  TranslateVar(1450,SRpAutoRangeYMin);
+  TranslateVar(1451,SRpAutoRangeYMax);
+  TranslateVar(1452,SRpAutoRangeDefault);
+  TranslateVar(1453,SRpAutoRangeAuto);
+  TranslateVar(1454,SRpAutoRangeMaximum);
+  TranslateVar(1455,SRpAutoRangeMin);
+  TranslateVar(1456,SRpAutoRangeNone);
 
  end;
 

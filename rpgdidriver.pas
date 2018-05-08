@@ -8,7 +8,7 @@
 {       it includes printer and bitmap support          }
 {                                                       }
 {       Copyright (c) 1994-2002 Toni Martir             }
-{       toni@pala.com                                   }
+{       toni@reportman.es                               }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }
@@ -82,8 +82,8 @@ type
     LTittle: TLabel;
     BOK: TButton;
     GPrintRange: TGroupBox;
-    EFrom: TEdit;
-    ETo: TEdit;
+    EFrom: TRpMaskEdit;
+    ETo: TRpMaskEdit;
     LTo: TLabel;
     LFrom: TLabel;
     RadioAll: TRadioButton;
@@ -91,8 +91,8 @@ type
     GBitmap: TGroupBox;
     LHorzRes: TLabel;
     LVertRes: TLabel;
-    EHorzRes: TEdit;
-    EVertRes: TEdit;
+    EHorzRes: TRpMaskEdit;
+    EVertRes: TRpMaskEdit;
     CheckMono: TCheckBox;
 
     procedure FormCreate(Sender: TObject);
@@ -3064,8 +3064,20 @@ begin
   achart.LeftAxis.Maximum:=Series.HighValue;
   achart.LeftAxis.Minimum:=Series.LowValue;
   achart.LeftAxis.Automatic:=false;
-  achart.LeftAxis.AutomaticMaximum:=Series.AutoRangeH;
-  achart.LeftAxis.AutomaticMinimum:=Series.AutoRangeL;
+  achart.LeftAxis.AutomaticMaximum:=true;
+  achart.LeftAxis.AutomaticMinimum:=true;
+  if (Series.AutoRange <> rpAutoRangeDefault) then
+  begin
+   case Series.AutoRange of
+     rpAutoRangeUpper:   achart.LeftAxis.AutomaticMinimum:=false;
+     rpAutoRangeLower: achart.LeftAxis.AutomaticMaximum:=false;
+     rpAutoRangeNone:
+      begin
+        achart.LeftAxis.AutomaticMinimum:=false;
+        achart.LeftAxis.AutomaticMaximum:=false;
+      end;
+   end;
+  end;
   achart.LeftAxis.LabelsAngle:=nchart.VertFontRotation mod 360;
   achart.LeftAxis.LabelsFont.Size:=Round(nchart.VertFontSize*nchart.Resolution/100);
   achart.BottomAxis.LabelsAngle:=nchart.HorzFontRotation mod 360;
