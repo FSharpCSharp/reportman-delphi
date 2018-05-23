@@ -250,6 +250,13 @@ type
    property IBTransaction:TIBTransaction read FIBTransaction
     write FIBTransaction;
 {$ENDIF}
+{$IFDEF FIREDAC}
+   property FDConnection:TFDConnection read FFDConnection
+    write FFDConnection;
+   property FDTransaction:TFDTransaction read FFDTransaction
+    write FFDTransaction;
+{$ENDIF}
+
 {$IFDEF USEZEOS}
    property ZConnection:TZConnection read FZConnection
     write FZConnection;
