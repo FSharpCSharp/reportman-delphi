@@ -33,42 +33,42 @@ object FRpSysInfo: TFRpSysInfo
     object Label1: TLabel
       Left = 272
       Top = 20
-      Width = 63
+      Width = 66
       Height = 13
       Caption = 'Printer Status'
     end
     object Label2: TLabel
       Left = 8
       Top = 20
-      Width = 61
+      Width = 62
       Height = 13
       Caption = 'Printer Name'
     end
     object Label3: TLabel
       Left = 8
       Top = 40
-      Width = 34
+      Width = 32
       Height = 13
       Caption = 'Device'
     end
     object Label4: TLabel
       Left = 272
       Top = 44
-      Width = 28
+      Width = 29
       Height = 13
       Caption = 'Driver'
     end
     object Label5: TLabel
       Left = 272
       Top = 68
-      Width = 19
+      Width = 20
       Height = 13
       Caption = 'Port'
     end
     object Label6: TLabel
       Left = 8
       Top = 88
-      Width = 136
+      Width = 141
       Height = 13
       Caption = 'Printer max. hardware copies'
     end
@@ -82,7 +82,7 @@ object FRpSysInfo: TFRpSysInfo
     object Label7: TLabel
       Left = 272
       Top = 88
-      Width = 115
+      Width = 119
       Height = 13
       Caption = 'Printer supports collation'
     end
@@ -96,14 +96,14 @@ object FRpSysInfo: TFRpSysInfo
     object Label8: TLabel
       Left = 8
       Top = 64
-      Width = 69
+      Width = 70
       Height = 13
       Caption = 'Color selection'
     end
     object Label9: TLabel
       Left = 8
       Top = 108
-      Width = 150
+      Width = 158
       Height = 13
       Caption = 'Printer resolution dpi (HorzxVert)'
     end
@@ -124,7 +124,7 @@ object FRpSysInfo: TFRpSysInfo
     object Label15: TLabel
       Left = 8
       Top = 208
-      Width = 56
+      Width = 55
       Height = 13
       Caption = 'Technology'
     end
@@ -138,28 +138,28 @@ object FRpSysInfo: TFRpSysInfo
     object Label16: TLabel
       Left = 272
       Top = 208
-      Width = 75
+      Width = 74
       Height = 13
       Caption = 'Line capabilities'
     end
     object Label17: TLabel
       Left = 8
       Top = 232
-      Width = 86
+      Width = 87
       Height = 13
       Caption = 'Raster capabilities'
     end
     object Label18: TLabel
       Left = 272
       Top = 232
-      Width = 72
+      Width = 71
       Height = 13
       Caption = 'Polygonal caps'
     end
     object Label19: TLabel
       Left = 8
       Top = 256
-      Width = 76
+      Width = 77
       Height = 13
       Caption = 'Text capabilities'
     end
@@ -203,7 +203,7 @@ object FRpSysInfo: TFRpSysInfo
     object LPageSizeL: TLabel
       Left = 8
       Top = 148
-      Width = 46
+      Width = 45
       Height = 13
       Caption = 'Page size'
     end
@@ -224,7 +224,7 @@ object FRpSysInfo: TFRpSysInfo
     object LOrientationL: TLabel
       Left = 272
       Top = 148
-      Width = 77
+      Width = 79
       Height = 13
       Caption = 'Page orientation'
     end
@@ -301,7 +301,6 @@ object FRpSysInfo: TFRpSysInfo
       Height = 21
       Style = csDropDownList
       Color = clInfoBk
-      ItemHeight = 13
       TabOrder = 5
     end
     object CRasterCaps: TComboBox
@@ -311,7 +310,6 @@ object FRpSysInfo: TFRpSysInfo
       Height = 21
       Style = csDropDownList
       Color = clInfoBk
-      ItemHeight = 13
       TabOrder = 6
     end
     object CPolyCaps: TComboBox
@@ -321,7 +319,6 @@ object FRpSysInfo: TFRpSysInfo
       Height = 21
       Style = csDropDownList
       Color = clInfoBk
-      ItemHeight = 13
       TabOrder = 7
     end
     object CTextCaps: TComboBox
@@ -331,7 +328,6 @@ object FRpSysInfo: TFRpSysInfo
       Height = 21
       Style = csDropDownList
       Color = clInfoBk
-      ItemHeight = 13
       TabOrder = 8
     end
     object CCurveCaps: TComboBox
@@ -341,7 +337,6 @@ object FRpSysInfo: TFRpSysInfo
       Height = 21
       Style = csDropDownList
       Color = clInfoBk
-      ItemHeight = 13
       TabOrder = 9
     end
     object ComboSource: TComboBox
@@ -351,7 +346,6 @@ object FRpSysInfo: TFRpSysInfo
       Height = 21
       Style = csDropDownList
       Color = clInfoBk
-      ItemHeight = 13
       TabOrder = 10
     end
   end
@@ -365,14 +359,14 @@ object FRpSysInfo: TFRpSysInfo
     object Label10: TLabel
       Left = 356
       Top = 18
-      Width = 41
+      Width = 40
       Height = 13
       Caption = 'OEM ID:'
     end
     object Label11: TLabel
       Left = 12
       Top = 54
-      Width = 103
+      Width = 105
       Height = 13
       Caption = 'Number of processors'
     end
@@ -400,7 +394,7 @@ object FRpSysInfo: TFRpSysInfo
     object Label13: TLabel
       Left = 12
       Top = 74
-      Width = 107
+      Width = 110
       Height = 13
       Caption = 'Display (WidthxHeight)'
     end
@@ -414,7 +408,7 @@ object FRpSysInfo: TFRpSysInfo
     object Label14: TLabel
       Left = 12
       Top = 19
-      Width = 81
+      Width = 85
       Height = 13
       Caption = 'Operating system'
     end
@@ -435,7 +429,7 @@ object FRpSysInfo: TFRpSysInfo
     object Label21: TLabel
       Left = 12
       Top = 98
-      Width = 51
+      Width = 53
       Height = 13
       Caption = 'Separators'
     end
@@ -446,7 +440,6 @@ object FRpSysInfo: TFRpSysInfo
       Height = 21
       Style = csDropDownList
       Color = clInfoBk
-      ItemHeight = 13
       TabOrder = 0
     end
   end

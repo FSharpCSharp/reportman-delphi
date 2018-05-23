@@ -298,7 +298,7 @@ begin
            LFormName.Caption:=StrPas(pdevmode^.dmFormName);
            pforminfo:=allocmem(sizeof(form_info_1));
            try
-            if Not GetForm(handle,Pchar(LFormName.Caption),1,pforminfo,sizeof(Form_info_1),needed) then
+            if Not GetForm(fprinterhandle,Pchar(LFormName.Caption),1,pforminfo,sizeof(Form_info_1),needed) then
             begin
              laste:=GetLasterror;
              if ((laste<>122) AND (Laste<>123) AND (laste<>1902)) then
@@ -311,7 +311,7 @@ begin
                begin
                 freemem(pforminfo);
                 pforminfo:=AllocMem(needed);
-                if Not GetForm(handle,Pchar(LFormName.Caption),1,pforminfo,needed,needed) then
+                if Not GetForm(fprinterhandle,Pchar(LFormName.Caption),1,pforminfo,needed,needed) then
                  RaiseLastOSError;
                 Pagesize.x:=pforminfo.Size.cy div 100;
                 Pagesize.y:=pforminfo.Size.cx div 100;
