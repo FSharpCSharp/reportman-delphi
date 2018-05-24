@@ -834,7 +834,7 @@ begin
       end;
      end;
    end;
-  varDecimalType:
+  varDecimalType,273:
    begin
     Value:=double(Value);
     if ((Value=0.0) and (Not printnulls)) then
