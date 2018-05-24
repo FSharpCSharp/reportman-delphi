@@ -598,12 +598,12 @@ end;
 function VarIsNumber(avar:Variant):Boolean;
 begin
  Result:=(Vartype(avar) in [varSmallInt,varInteger,varSingle,varDouble,VarCurrency,
-  varShortInt,varByte,varWord,varLongWord,varInt64]);
+  varShortInt,varByte,varWord,varLongWord,varInt64,varUInt64,273]);
 end;
 
 function VarIsInteger(avar:Variant):Boolean;
 begin
- Result:=(Vartype(avar) in [varSmallInt,varInteger,varShortInt,varByte,varWord,varLongWord,varInt64]);
+ Result:=(Vartype(avar) in [varSmallInt,varInteger,varShortInt,varByte,varWord,varLongWord,varInt64,varUInt64]);
 end;
 
 function VarIsBoolean(avar:Variant):Boolean;

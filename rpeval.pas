@@ -92,7 +92,7 @@ type
   function EvaluateExpression:TRpValue;
   // Searching indentifiers
   function Searchwithoutdot(name1:Shortstring):TRpIdentifier;
-  function GetEvalResultString:Ansistring;
+  function GetEvalResultString:String;
   procedure AddIdentifiers;
   procedure Freerprmfunctions;
   procedure InitRpFunctions;
@@ -111,7 +111,7 @@ type
   procedure AddIden(name1:string;objecte:TRpIdentifier);
   function NewVariable(name1:string;ValueIni:TRpValue):TIdenVariable;
   // Searching identifiers
-  function Searchidentifier(name1:shortstring):TRpIdentifier;
+  function Searchidentifier(name1:WideString):TRpIdentifier;
   // The evaluation procedure
   procedure Evaluate;
   // The evaluation procedure without Expression property
@@ -135,7 +135,7 @@ type
   property Error:string read FError;
   property PosError:LongInt read FPosError;
   property LineError:Word read FLineError;
-  property EvalResultString:Ansistring read GetEvalResultString;
+  property EvalResultString:string read GetEvalResultString;
   // Database access component link
 {$IFDEF USEREPORTFUNC}
   property Rpalias:TRpalias read FRpalias write FRpalias;
@@ -1190,7 +1190,7 @@ begin
        Rpparser.TokenString,Rpparser.SourceLine,Rpparser.SourcePos);
 end;
 
-function TRpCustomEvaluator.Searchidentifier(name1:Shortstring):TRpIdentifier;
+function TRpCustomEvaluator.Searchidentifier(name1:WideString):TRpIdentifier;
 var
 pospunt:byte;
 primer,sensepunt:string;
@@ -1199,7 +1199,7 @@ doble:Boolean;
  index:integer;
 {$ENDIF}
 begin
- name1:=AnsiUpperCase(name1);
+ name1:=UpperCase(name1);
  Result:=nil;
  // Have a point ?
  pospunt:=Pos('.',name1);
@@ -1222,14 +1222,14 @@ begin
 {$ENDIF}
   Exit;
  end;
- sensepunt:=copy(name1,pospunt+1,ord(name1[0])-pospunt);
+ sensepunt:=copy(name1,pospunt+1,ord(Length(name1))-pospunt);
 {$IFDEF USEREPORTFUNC}
  if FRpalias<>nil then
   Result:=FRpalias.Searchfield(sensepunt,primer,Doble);
 {$ENDIF}
 end;
 
-function TRpCustomEvaluator.GetEvalResultString:Ansistring;
+function TRpCustomEvaluator.GetEvalResultString:String;
 begin
  Result:=TRpValueToString(EvalResult);
 end;
