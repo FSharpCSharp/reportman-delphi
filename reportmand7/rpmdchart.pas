@@ -271,6 +271,7 @@ var
  newvalue:Variant;
  changeserie:boolean;
  caption:widestring;
+ captionResult:variant;
 begin
  if Length(FValueExpression)<1 then
   exit;
@@ -325,11 +326,20 @@ begin
  if Length(TRim(FCaptionExpression))<1 then
   Caption:=IntToStr(aserie.ValueCount+1)
  else
-  Caption:=EvaluateCaption;
- if (Length(FValueXExpression)>0) then
-  aserie.AddValueXY(FValueX,FValue,Caption)
- else
-   aserie.AddValue(FValue,Caption);
+ begin
+  CaptionResult:=EvaluateCaption;
+  if VarIsNull(CaptionResult) then
+    Caption:=''
+  else
+    Caption:=CaptionResult;
+ end;
+ if (not VarIsNull(FValue)) then
+ begin
+  if (Length(FValueXExpression)>0) then
+   aserie.AddValueXY(FValueX,FValue,Caption)
+  else
+     aserie.AddValue(FValue,Caption);
+ end;
  if Length(Trim(FColorExpression))>0 then
  begin
   try

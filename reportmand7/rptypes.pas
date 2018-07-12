@@ -583,9 +583,12 @@ begin
 end;
 
 function VarIsNumber(avar:Variant):Boolean;
+var
+ vtype:Word;
 begin
- Result:=(Vartype(avar) in [varSmallInt,varInteger,varSingle,varDouble,VarCurrency,
-  varShortInt,varByte,varWord,varLongWord,varInt64]);
+ vtype:=Vartype(avar);
+ Result:=(vtype in [varSmallInt,varInteger,varSingle,varDouble,VarCurrency,
+  varShortInt,varByte,varWord,varLongWord,varInt64,varUInt64]) OR (vtype=273);
 end;
 
 function VarIsInteger(avar:Variant):Boolean;
