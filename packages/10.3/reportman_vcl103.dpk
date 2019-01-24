@@ -25,6 +25,7 @@ package reportman_vcl103;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Report Manager VCL Controls'}
 {$IMPLICITBUILD ON}
 
 requires
