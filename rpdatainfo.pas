@@ -1057,7 +1057,7 @@ begin
  // Then function is defined by the class TCollectionItem
  alias:=AnsiUpperCase(alias);
  if Indexof(alias)>=0 then
-  Raise Exception.Create(SRpAliasExists);
+  Raise Exception.Create(SRpAliasExists+' '+alias);
  Result:=TRpDataInfoItem(inherited Add);
  Result.Alias:=alias;
 end;
