@@ -1,0 +1,113 @@
+package reportman_rtl103;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  dbrtl,
+  DbxCommonDriver,
+  IndySystem,
+  IndyProtocols,
+  IndyCore,
+  dsnap,
+  dbexpress,
+  DBXMySQLDriver,
+  DBXInterBaseDriver,
+  FireDAC,
+  FireDACSqliteDriver,
+  FireDACCommonDriver,
+  FireDACCommon,
+  FireDACPgDriver,
+  FireDACMSAccDriver,
+  FireDACCommonODBC,
+  FireDACIBDriver,
+  FireDACMySQLDriver,
+  FireDACADSDriver,
+  ibxpress,
+  adortl;
+
+contains
+  rptypes in '..\..\rptypes.pas',
+  rpmdshfolder in '..\..\rpmdshfolder.pas',
+  rpmdconsts in '..\..\rpmdconsts.pas',
+  rptranslator in '..\..\rptranslator.pas',
+  rpmzlib in '..\..\rpmzlib.pas',
+  rpzlib77 in '..\..\rpzlib77.pas',
+  rpzlibadler in '..\..\rpzlibadler.pas',
+  rpzlibinfblock in '..\..\rpzlibinfblock.pas',
+  rpzlibinfcodes in '..\..\rpzlibinfcodes.pas',
+  rpzlibinffast in '..\..\rpzlibinffast.pas',
+  rpzlibinftrees in '..\..\rpzlibinftrees.pas',
+  rpzlibinfutil in '..\..\rpzlibinfutil.pas',
+  rpzlibtrees in '..\..\rpzlibtrees.pas',
+  rpzlibzdeflate in '..\..\rpzlibzdeflate.pas',
+  rpzlibzinflate in '..\..\rpzlibzinflate.pas',
+  rpzlibzutil in '..\..\rpzlibzutil.pas',
+  rpzlibzlib in '..\..\rpzlibzlib.pas',
+  rpmetafile in '..\..\rpmetafile.pas',
+  rpcompilerep in '..\..\rpcompilerep.pas',
+  rpmdcharttypes in '..\..\rpmdcharttypes.pas',
+  rpreport in '..\..\rpreport.pas',
+  rpbasereport in '..\..\rpbasereport.pas',
+  rpprintitem in '..\..\rpprintitem.pas',
+  rpsubreport in '..\..\rpsubreport.pas',
+  rpeval in '..\..\rpeval.pas',
+  rpsecutil in '..\..\rpsecutil.pas',
+  rpsection in '..\..\rpsection.pas',
+  rpmunits in '..\..\rpmunits.pas',
+  rptypeval in '..\..\rptypeval.pas',
+  rpparser in '..\..\rpparser.pas',
+  rpalias in '..\..\rpalias.pas',
+  rpdatainfo in '..\..\rpdatainfo.pas',
+  rpparams in '..\..\rpparams.pas',
+  rpdataset in '..\..\rpdataset.pas',
+  rpdatatext in '..\..\rpdatatext.pas',
+  rpevalfunc in '..\..\rpevalfunc.pas',
+  rplabelitem in '..\..\rplabelitem.pas',
+  rpmdbarcode in '..\..\rpmdbarcode.pas',
+  rpbarcodecons in '..\..\rpbarcodecons.pas',
+  rpxmlstream in '..\..\rpxmlstream.pas',
+  rpdrawitem in '..\..\rpdrawitem.pas',
+  rpmdchart in '..\..\rpmdchart.pas',
+  rppdfdriver in '..\..\rppdfdriver.pas',
+  rppdffile in '..\..\rppdffile.pas',
+  rpinfoprovid in '..\..\rpinfoprovid.pas',
+  rpinfoprovgdi in '..\..\rpinfoprovgdi.pas',
+  rpmreg in '..\..\rpmreg.pas',
+  rpcompobase in '..\..\rpcompobase.pas',
+  rphtmldriver in '..\..\rphtmldriver.pas',
+  rpcsvdriver in '..\..\rpcsvdriver.pas',
+  rpsvgdriver in '..\..\rpsvgdriver.pas',
+  rpmdrepclient in '..\..\rpmdrepclient.pas',
+  rpmdprotocol in '..\..\rpmdprotocol.pas',
+  rppdfreport in '..\..\rppdfreport.pas',
+  rptextdriver in '..\..\rptextdriver.pas',
+  rpclientdataset in '..\..\rpclientdataset.pas',
+  rplastsav in '..\..\rplastsav.pas';
+
+end.
