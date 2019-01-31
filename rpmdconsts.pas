@@ -7,8 +7,8 @@
 {       Resource strings for reportmanager engine and   }
 {       designer                                        }
 {                                                       }
-{       Copyright (c) 1994-2007 Toni Martir             }
-{       toni@pala.com                                   }
+{       Copyright (c) 1994-2019 Toni Martir             }
+{       toni@reportman.es                                   }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }
@@ -543,7 +543,7 @@ var
   SRpOperatorDecM:WideString='IIF(condition,action1,action2)';
   SRpOperatorDecP:WideString='Condition is a boolean expresion, if it''s true the '+#10+' first parameter is executed, else the second is executed';
   SRpOperatorSep:WideString='Separator operator';
-  SRpOperatorSepP:WideString='Is used to execute more than one expresión, the last is the result';
+  SRpOperatorSepP:WideString='Is used to execute more than one expresiï¿½n, the last is the result';
   SRpErrorOpenImp:WideString='Error opening the printer ';
   SRpPaperexists:WideString='The paper size already exists';
   SRpPrinting:WideString='The printer is already printing';

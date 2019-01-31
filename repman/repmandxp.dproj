@@ -159,14 +159,15 @@
                 <Platform value="Win32">True</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="repmandxe2.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="bin32\repmandxp.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
+                        <RemoteName>repmandxp.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="repmandxe2.rsm" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="Profiling\AQtimeModule1.aqt" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
-                        <RemoteName>repmandxe2.rsm</RemoteName>
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -732,6 +733,7 @@
         <DCCReference Include="..\rpdatetimepicker.pas"/>
         <DCCReference Include="..\rppreviewcontrol.pas"/>
         <DCCReference Include="..\rppreviewmeta.pas"/>
+        <DCCReference Include="..\rpDelphiZXIngQRCode.pas"/>
         <None Include="Profiling\AQtimeModule1.aqt"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>

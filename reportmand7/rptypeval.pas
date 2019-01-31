@@ -4,8 +4,8 @@
 {       the Rpevaluator                                 }
 {       Report Manager                                  }
 {                                                       }
-{       Copyright (c) 1994-2002 Toni Martir             }
-{       toni@pala.com                                   }
+{       Copyright (c) 1994-2019 Toni Martir             }
+{       toni@reportman.es                                   }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }

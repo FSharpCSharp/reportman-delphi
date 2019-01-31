@@ -3,8 +3,8 @@
 {       RpMaskEditCLX component                            }
 {       A mask edit to enter numbers                    }
 {                                                       }
-{       Copyright (c) 1994-2004 Toni Martir             }
-{       toni@pala.com                                   }
+{       Copyright (c) 1994-2019 Toni Martir             }
+{       toni@reportman.es                                   }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }
@@ -269,7 +269,7 @@ end;
 
 procedure TRpCLXMaskEdit.CheckValidData;
 begin
- // Mirem si es correcte el número
+ // Mirem si es correcte el nï¿½mero
   case FEditType of
    teinteger:
     strtoint(text);

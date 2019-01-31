@@ -5,8 +5,8 @@
 {       TRpInfoProvider  Base class                     }
 {       Provides information about fonts and bitmaps    }
 {                                                       }
-{       Copyright (c) 1994-2002 Toni Martir             }
-{       toni@pala.com                                   }
+{       Copyright (c) 1994-2019 Toni Martir             }
+{       toni@reportman.es                                   }
 {                                                       }
 {                                                       }
 {*******************************************************}

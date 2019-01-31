@@ -591,7 +591,7 @@ object ReportManXAbout: TReportManXAbout
     Top = 248
     Width = 85
     Height = 13
-    Caption = 'toni@pala.com'
+    Caption = 'toni@reportman.es'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11

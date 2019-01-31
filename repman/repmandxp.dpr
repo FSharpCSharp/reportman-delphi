@@ -8,7 +8,7 @@
 {                                                       }
 {                                                       }
 {                                                       }
-{       Copyright (c) 1994-2003 Toni Martir             }
+{       Copyright (c) 1994-2019 Toni Martir             }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }
@@ -129,7 +129,8 @@ uses
   rpdatetimepicker in '..\rpdatetimepicker.pas',
   rppreviewcontrol in '..\rppreviewcontrol.pas',
   rppreviewmeta in '..\rppreviewmeta.pas',
-  Vcl.Styles;
+  Vcl.Styles,
+  rpDelphiZXIngQRCode in '..\rpDelphiZXIngQRCode.pas';
 
 {$R *.res}
 

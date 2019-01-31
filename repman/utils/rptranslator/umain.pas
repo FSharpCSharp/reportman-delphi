@@ -3,7 +3,7 @@
 {       Main form of RPTranslate application            }
 {                                                       }
 {                                                       }
-{       Copyright (c) 1994-2002 Toni Martir             }
+{       Copyright (c) 1994-2019 Toni Martir             }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }

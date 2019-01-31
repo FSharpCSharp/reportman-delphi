@@ -7,8 +7,8 @@
 {       common components of Report manager             }
 {                                                       }
 {                                                       }
-{       Copyright (c) 1994-2003 Toni Martir             }
-{       toni@pala.com                                   }
+{       Copyright (c) 1994-2019 Toni Martir             }
+{       toni@reportman.es                                   }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }
@@ -1856,7 +1856,7 @@ begin
 			end
 			else
 			if (((Num div trillion) < 20) and (Num div trillion > 9)) then
-				Num2Str := Num2Str(Num div trillion) + ' trilijonø'
+				Num2Str := Num2Str(Num div trillion) + ' trilijonï¿½'
 			else
 			if (Num div trillion >= 20) then begin
 				if (((Num div trillion > 110) and (Num div trillion < 120)) or
@@ -1869,11 +1869,11 @@ begin
 				   ((Num div trillion > 810) and (Num div trillion < 820)) or
 				   ((Num div trillion > 910) and (Num div trillion < 920))) then
 				begin
-					Num2Str := Num2Str(Num div trillion) + ' trilijonø';
+					Num2Str := Num2Str(Num div trillion) + ' trilijonï¿½';
 				end
 				else begin
 					case ((Num div trillion) mod 10) of
-						0 : Num2Str := Num2Str(Num div trillion) + ' trilijonø';
+						0 : Num2Str := Num2Str(Num div trillion) + ' trilijonï¿½';
 						1 : Num2Str := Num2Str(Num div trillion) + ' trilijonas';
 						2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div trillion) + ' trilijonai';
 					end;
@@ -1889,7 +1889,7 @@ begin
 			end
 			else
 			if (((Num div trillion) < 20) and (Num div trillion > 9)) then
-				Num2Str := Num2Str(Num div trillion) + ' trilijonø ' + Num2Str(Num mod trillion, gimine, 1)
+				Num2Str := Num2Str(Num div trillion) + ' trilijonï¿½ ' + Num2Str(Num mod trillion, gimine, 1)
 			else
 			if (Num div trillion >= 20) then begin
 				if (((Num div trillion > 110) and (Num div trillion < 120)) or
@@ -1902,11 +1902,11 @@ begin
 				   ((Num div trillion > 810) and (Num div trillion < 820)) or
 				   ((Num div trillion > 910) and (Num div trillion < 920))) then
 				begin
-					Num2Str := Num2Str(Num div trillion) + ' trilijonø ' + Num2Str(Num mod trillion, gimine, 1);
+					Num2Str := Num2Str(Num div trillion) + ' trilijonï¿½ ' + Num2Str(Num mod trillion, gimine, 1);
 				end
 				else begin
 					case ((Num div trillion) mod 10) of
-						0 : Num2Str := Num2Str(Num div trillion) + ' trilijonø ' + Num2Str(Num mod trillion, gimine, 1);
+						0 : Num2Str := Num2Str(Num div trillion) + ' trilijonï¿½ ' + Num2Str(Num mod trillion, gimine, 1);
 						1 : Num2Str := Num2Str(Num div trillion) + ' trilijonas ' + Num2Str(Num mod trillion, gimine, 1);
 						2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div trillion) + ' trilijonai ' + Num2Str(Num mod trillion, gimine, 1);
 					end;
@@ -1925,7 +1925,7 @@ begin
 			end
 			else
 			if (((Num div billion) < 20) and (Num div billion > 9)) then
-				Num2Str := Num2Str(Num div billion) + ' milijardø'
+				Num2Str := Num2Str(Num div billion) + ' milijardï¿½'
 			else
 			if (Num div billion >= 20) then begin
 				if (((Num div billion > 110) and (Num div billion < 120)) or
@@ -1938,11 +1938,11 @@ begin
 				   ((Num div billion > 810) and (Num div billion < 820)) or
 				   ((Num div billion > 910) and (Num div billion < 920))) then
 				begin
-					Num2Str := Num2Str(Num div billion) + ' milijardø';
+					Num2Str := Num2Str(Num div billion) + ' milijardï¿½';
 				end
 				else begin
 					case ((Num div billion) mod 10) of
-						0 : Num2Str := Num2Str(Num div billion) + ' milijardø';
+						0 : Num2Str := Num2Str(Num div billion) + ' milijardï¿½';
 						1 : Num2Str := Num2Str(Num div billion) + ' milijardas';
 						2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div billion) + ' milijardai';
 					end;
@@ -1958,7 +1958,7 @@ begin
 			end
 			else
 			if (((Num div billion) < 20) and (Num div billion > 9)) then
-				Num2Str := Num2Str(Num div billion) + ' milijardø ' + Num2Str(Num mod billion, gimine, 1)
+				Num2Str := Num2Str(Num div billion) + ' milijardï¿½ ' + Num2Str(Num mod billion, gimine, 1)
 			else
 			if (Num div billion >= 20) then begin
 				if (((Num div billion > 110) and (Num div billion < 120)) or
@@ -1971,11 +1971,11 @@ begin
 				   ((Num div billion > 810) and (Num div billion < 820)) or
 				   ((Num div billion > 910) and (Num div billion < 920))) then
 				begin
-					Num2Str := Num2Str(Num div billion) + ' milijardø ' + Num2Str(Num mod billion, gimine, 1);
+					Num2Str := Num2Str(Num div billion) + ' milijardï¿½ ' + Num2Str(Num mod billion, gimine, 1);
 				end
 				else begin
 					case ((Num div billion) mod 10) of
-						0 : Num2Str := Num2Str(Num div billion) + ' milijardø ' + Num2Str(Num mod billion, gimine, 1);
+						0 : Num2Str := Num2Str(Num div billion) + ' milijardï¿½ ' + Num2Str(Num mod billion, gimine, 1);
 						1 : Num2Str := Num2Str(Num div billion) + ' milijardas ' + Num2Str(Num mod billion, gimine, 1);
 						2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div billion) + ' milijardai ' + Num2Str(Num mod billion, gimine, 1);
 					end;
@@ -1994,7 +1994,7 @@ begin
 			end
 			else
 			if (((Num div Million) < 20) and (Num div Million > 9)) then
-				Num2Str := Num2Str(Num div Million) + ' milijonø'
+				Num2Str := Num2Str(Num div Million) + ' milijonï¿½'
 			else
 			if (Num div Million >= 20) then begin
 				if (((Num div Million > 110) and (Num div Million < 120)) or
@@ -2007,11 +2007,11 @@ begin
 				   ((Num div Million > 810) and (Num div Million < 820)) or
 				   ((Num div Million > 910) and (Num div Million < 920))) then
 				begin
-					Num2Str := Num2Str(Num div Million) + ' milijonø';
+					Num2Str := Num2Str(Num div Million) + ' milijonï¿½';
 				end
 				else begin
 					case ((Num div Million) mod 10) of
-						0 : Num2Str := Num2Str(Num div Million) + ' milijonø';
+						0 : Num2Str := Num2Str(Num div Million) + ' milijonï¿½';
 						1 : Num2Str := Num2Str(Num div Million) + ' milijonas';
 						2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div Million) + ' milijonai';
 					end;
@@ -2027,7 +2027,7 @@ begin
 			end
 			else
 			if (((Num div Million) < 20) and (Num div Million > 9)) then
-				Num2Str := Num2Str(Num div Million) + ' milijonø ' + Num2Str(Num mod Million, gimine, 1)
+				Num2Str := Num2Str(Num div Million) + ' milijonï¿½ ' + Num2Str(Num mod Million, gimine, 1)
 			else
 			if (Num div Million >= 20) then begin
 				if (((Num div Million > 110) and (Num div Million < 120)) or
@@ -2040,11 +2040,11 @@ begin
 				   ((Num div Million > 810) and (Num div Million < 820)) or
 				   ((Num div Million > 910) and (Num div Million < 920))) then
 				begin
-					Num2Str := Num2Str(Num div Million) + ' milijonø ' + Num2Str(Num mod Million, gimine, 1);
+					Num2Str := Num2Str(Num div Million) + ' milijonï¿½ ' + Num2Str(Num mod Million, gimine, 1);
 				end
 				else begin
 					case ((Num div Million) mod 10) of
-						0 : Num2Str := Num2Str(Num div Million) + ' milijonø ' + Num2Str(Num mod Million, gimine, 1);
+						0 : Num2Str := Num2Str(Num div Million) + ' milijonï¿½ ' + Num2Str(Num mod Million, gimine, 1);
 						1 : Num2Str := Num2Str(Num div Million) + ' milijonas ' + Num2Str(Num mod Million, gimine, 1);
 						2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div Million) + ' milijonai ' + Num2Str(Num mod Million, gimine, 1);
 					end;
@@ -2057,13 +2057,13 @@ begin
 		if (Num mod Thousand) = 0 then begin // Jei dalinasi is tuksntancio be liekanos
 			if ((Num div Thousand) < 10) then begin
 				case (Num div Thousand) of
-					1 : Num2Str := Num2Str(Num div Thousand) + ' tûkstantis';
-					2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div Thousand) + ' tûkstanèiai';
+					1 : Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstantis';
+					2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstanï¿½iai';
 				end;
 			end
 			else
 			if (((Num div Thousand) < 20) and (Num div Thousand > 9)) then
-				Num2Str := Num2Str(Num div Thousand) + ' tûkstanèiø'
+				Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstanï¿½iï¿½'
 			else
 			if (Num div Thousand >= 20) then begin
 				if (((Num div Thousand > 110) and (Num div Thousand < 120)) or
@@ -2076,27 +2076,27 @@ begin
 				   ((Num div Thousand > 810) and (Num div Thousand < 820)) or
 				   ((Num div Thousand > 910) and (Num div Thousand < 920))) then
 				begin
-					Num2Str := Num2Str(Num div Thousand) + ' tûkstanèiø';
+					Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstanï¿½iï¿½';
 				end
 				else begin
 					case ((Num div Thousand) mod 10) of
-						0 : Num2Str := Num2Str(Num div Thousand) + ' tûkstanèiø';
-						1 : Num2Str := Num2Str(Num div Thousand) + ' tûkstantis';
-						2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div Thousand) + ' tûkstanèiai';
+						0 : Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstanï¿½iï¿½';
+						1 : Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstantis';
+						2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstanï¿½iai';
 					end;
 				end
 			end
 		end
-		else begin // is tûkstanèio dalinasi su liekana
+		else begin // is tï¿½kstanï¿½io dalinasi su liekana
 			if ((Num div Thousand) < 10) then begin
 				case (Num div Thousand) of
-					1 : Num2Str := Num2Str(Num div Thousand) + ' tûkstantis ' + Num2Str(Num mod Thousand, gimine, 1);
-					2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div Thousand) + ' tûkstanèiai ' + Num2Str(Num mod Thousand, gimine, 1);
+					1 : Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstantis ' + Num2Str(Num mod Thousand, gimine, 1);
+					2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstanï¿½iai ' + Num2Str(Num mod Thousand, gimine, 1);
 				end;
 			end
 			else
 			if (((Num div Thousand) < 20) and (Num div Thousand > 9)) then
-				Num2Str := Num2Str(Num div Thousand) + ' tûkstanèiø ' + Num2Str(Num mod Thousand, gimine, 1)
+				Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstanï¿½iï¿½ ' + Num2Str(Num mod Thousand, gimine, 1)
 			else
 			if (Num div Thousand >= 20) then begin
 				if (((Num div Thousand > 110) and (Num div Thousand < 120)) or
@@ -2109,13 +2109,13 @@ begin
 				   ((Num div Thousand > 810) and (Num div Thousand < 820)) or
 				   ((Num div Thousand > 910) and (Num div Thousand < 920))) then
 				begin
-					Num2Str := Num2Str(Num div Thousand) + ' tûkstanèiø ' + Num2Str(Num mod Thousand, gimine, 1);
+					Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstanï¿½iï¿½ ' + Num2Str(Num mod Thousand, gimine, 1);
 				end
 				else begin
 					case ((Num div Thousand) mod 10) of
-						0 : Num2Str := Num2Str(Num div Thousand) + ' tûkstanèiø ' + Num2Str(Num mod Thousand, gimine, 1);
-						1 : Num2Str := Num2Str(Num div Thousand) + ' tûkstantis ' + Num2Str(Num mod Thousand, gimine, 1);
-						2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div Thousand) + ' tûkstanèiai ' + Num2Str(Num mod Thousand, gimine, 1);
+						0 : Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstanï¿½iï¿½ ' + Num2Str(Num mod Thousand, gimine, 1);
+						1 : Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstantis ' + Num2Str(Num mod Thousand, gimine, 1);
+						2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div Thousand) + ' tï¿½kstanï¿½iai ' + Num2Str(Num mod Thousand, gimine, 1);
 					end;
 				end;
 			end;
@@ -2125,51 +2125,51 @@ begin
 	if Num >= hundred then
 		if (Num mod hundred) = 0 then begin // Jei dalinasi is simto be liekanos
 			case (Num div hundred) of
-				1 : Num2Str := Num2Str(Num div hundred) + ' ðimtas';
-				2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div hundred) + ' ðimtai';
+				1 : Num2Str := Num2Str(Num div hundred) + ' ï¿½imtas';
+				2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div hundred) + ' ï¿½imtai';
 			end;
 		end
 		else begin
 			case (Num div hundred) of
-				1 : Num2Str := Num2Str(Num div hundred) + ' ðimtas ' + Num2Str(Num mod hundred, gimine, 1);
-				2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div hundred) + ' ðimtai ' + Num2Str(Num mod hundred, gimine, 1);
+				1 : Num2Str := Num2Str(Num div hundred) + ' ï¿½imtas ' + Num2Str(Num mod hundred, gimine, 1);
+				2,3,4,5,6,7,8,9 : Num2Str := Num2Str(Num div hundred) + ' ï¿½imtai ' + Num2Str(Num mod hundred, gimine, 1);
 			end;
 		end
 	// ---------------------- D E S I M T Y S
 	else begin
 		case (Num div 10) of
 			9: 	if Num = 90 then
-					Num2Str := 'devyniasdeðimt'
+					Num2Str := 'devyniasdeï¿½imt'
 				else
-					Num2Str := 'devyniasdeðimt ' + Num2Str(Num mod 10, gimine, 1);
+					Num2Str := 'devyniasdeï¿½imt ' + Num2Str(Num mod 10, gimine, 1);
 			8: 	if Num = 80 then
-					Num2Str := 'aðtuoniasdeðimt'
+					Num2Str := 'aï¿½tuoniasdeï¿½imt'
 				else
-					Num2Str := 'aðtuoniasdeðimt ' + Num2Str(Num mod 10, gimine, 1);
+					Num2Str := 'aï¿½tuoniasdeï¿½imt ' + Num2Str(Num mod 10, gimine, 1);
 			7: 	if Num = 70 then
-					Num2Str := 'septyniasdeðimt'
+					Num2Str := 'septyniasdeï¿½imt'
 				else
-					Num2Str := 'septyniasdeðimt ' + Num2Str(Num mod 10, gimine, 1);
+					Num2Str := 'septyniasdeï¿½imt ' + Num2Str(Num mod 10, gimine, 1);
 			6: 	if Num = 60 then
-					Num2Str := 'ðeðiasdeðimt'
+					Num2Str := 'ï¿½eï¿½iasdeï¿½imt'
 				else
-					Num2Str := 'ðeðiasdeðimt ' + Num2Str(Num mod 10, gimine, 1);
+					Num2Str := 'ï¿½eï¿½iasdeï¿½imt ' + Num2Str(Num mod 10, gimine, 1);
 			5: 	if Num = 50 then
-					Num2Str := 'penkiasdeðimt'
+					Num2Str := 'penkiasdeï¿½imt'
 				else
-					Num2Str := 'penkiasdeðimt ' + Num2Str(Num mod 10, gimine, 1);
+					Num2Str := 'penkiasdeï¿½imt ' + Num2Str(Num mod 10, gimine, 1);
 			4: 	if Num = 40 then
-					Num2Str := 'keturiasdeðimt'
+					Num2Str := 'keturiasdeï¿½imt'
 				else
-					Num2Str := 'keturiasdeðimt ' + Num2Str(Num mod 10, gimine, 1);
+					Num2Str := 'keturiasdeï¿½imt ' + Num2Str(Num mod 10, gimine, 1);
 			3: 	if Num = 30 then
-					Num2Str := 'trisdeðimt'
+					Num2Str := 'trisdeï¿½imt'
 				else
-					Num2Str := 'trisdeðimt ' + Num2Str(Num mod 10, gimine, 1);
+					Num2Str := 'trisdeï¿½imt ' + Num2Str(Num mod 10, gimine, 1);
 			2: 	if Num = 20 then
-					Num2Str := 'dvideðimt'
+					Num2Str := 'dvideï¿½imt'
 				else
-					Num2Str := 'dvideðimt ' + Num2Str(Num mod 10, gimine, 1);
+					Num2Str := 'dvideï¿½imt ' + Num2Str(Num mod 10, gimine, 1);
 			0,1: if gimine and (flag = 1) then begin // moteriska gimine ir jau pabaiga
 				case Num of
 						0: Num2Str := 'nulis';
@@ -2178,19 +2178,19 @@ begin
 						3: Num2Str := 'trys';
 						4: Num2Str := 'keturios';
 						5: Num2Str := 'penkios';
-						6: Num2Str := 'ðeðios';
+						6: Num2Str := 'ï¿½eï¿½ios';
 						7: Num2Str := 'septynios';
-						8: Num2Str := 'aðtuonios';
+						8: Num2Str := 'aï¿½tuonios';
 						9: Num2Str := 'devynios';
-						10: Num2Str := 'deðimt';
+						10: Num2Str := 'deï¿½imt';
 						11: Num2Str := 'vienuolika';
 						12: Num2Str := 'dvylika';
 						13: Num2Str := 'trylika';
 						14: Num2Str := 'keturiolika';
 						15: Num2Str := 'penkiolika';
-						16: Num2Str := 'ðeðiolika';
+						16: Num2Str := 'ï¿½eï¿½iolika';
 						17: Num2Str := 'septyniolika';
-						18: Num2Str := 'aðtuoniolika';
+						18: Num2Str := 'aï¿½tuoniolika';
 						19: Num2Str := 'devyniolika'
 				end
 			end
@@ -2202,19 +2202,19 @@ begin
 						3: Num2Str := 'trys';
 						4: Num2Str := 'keturi';
 						5: Num2Str := 'penki';
-						6: Num2Str := 'ðeði';
+						6: Num2Str := 'ï¿½eï¿½i';
 						7: Num2Str := 'septyni';
-						8: Num2Str := 'aðtuoni';
+						8: Num2Str := 'aï¿½tuoni';
 						9: Num2Str := 'devyni';
-						10: Num2Str := 'deðimt';
+						10: Num2Str := 'deï¿½imt';
 						11: Num2Str := 'vienuolika';
 						12: Num2Str := 'dvylika';
 						13: Num2Str := 'trylika';
 						14: Num2Str := 'keturiolika';
 						15: Num2Str := 'penkiolika';
-						16: Num2Str := 'ðeðiolika';
+						16: Num2Str := 'ï¿½eï¿½iolika';
 						17: Num2Str := 'septyniolika';
-						18: Num2Str := 'aðtuoniolika';
+						18: Num2Str := 'aï¿½tuoniolika';
 						19: Num2Str := 'devyniolika'
 				end;
 			end;
@@ -2224,8 +2224,8 @@ end {Num2Str};
 //..............................................................................
 begin
 	Result := Num2Str(Trunc(Abs(Amount)), Female);
-	if (copy(Result, 1,1) = 'ð') then begin
-		 Result := 'Ð' + copy(Result, 2, length(Result));
+	if (copy(Result, 1,1) = 'ï¿½') then begin
+		 Result := 'ï¿½' + copy(Result, 2, length(Result));
 	end
 	else begin
 		Result := UpperCase(copy(Result,1,1)) + Copy(Result,2, length(Result));
@@ -2250,13 +2250,13 @@ string;
     end;
 
 
-    { Esta é a função que gera os blocos de extenso que depois serão
+    { Esta ï¿½ a funï¿½ï¿½o que gera os blocos de extenso que depois serï¿½o
 montados }
     function Extenso3em3( Numero : Word ) : string;
       const Valores : array[1..36] of word = ( 1, 2, 3, 4, 5, 6, 7, 8, 9,
               10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30, 40, 50, 60,
               70, 80, 90,100, 200, 300, 400, 500, 600, 700, 800, 900 );
-            Nomes : array[0..36] of string[12] = ( '', 'um', 'dois', 'três',
+            Nomes : array[0..36] of string[12] = ( '', 'um', 'dois', 'trï¿½s',
   'quatro','cinco', 'seis', 'sete', 'oito', 'nove', 'dez',
   'onze','doze', 'treze', 'quatorze', 'quinze','dezesseis',
   'dezessete', 'dezoito', 'dezenove', 'vinte','trinta',
@@ -2286,22 +2286,22 @@ montados }
 
 
     {
-      A função extenso divide os números em grupos de três e chama a função
-      extenso3em3 para o obter extenso de cada parte e armazená-los no vetor
+      A funï¿½ï¿½o extenso divide os nï¿½meros em grupos de trï¿½s e chama a funï¿½ï¿½o
+      extenso3em3 para o obter extenso de cada parte e armazenï¿½-los no vetor
       Resposta.
     }
     function Extenso( Numero : extended ) : string;
-      const NoSingular : array[1..6] of string = ( 'trilhão', 'bilhão',
-'milhão', 'mil', '', '');
+      const NoSingular : array[1..6] of string = ( 'trilhï¿½o', 'bilhï¿½o',
+'milhï¿½o', 'mil', '', '');
                                                   // 'REAL', 'CENTAVO' );
-            NoPlural   : array[1..6] of string = ( 'trilhões', 'bilhões',
-'milhões', 'mil', '', '');
+            NoPlural   : array[1..6] of string = ( 'trilhï¿½es', 'bilhï¿½es',
+'milhï¿½es', 'mil', '', '');
                                                   // 'REAIS', 'CENTAVOS' );
             {
-              Estas constantes facilitam o entendimento do código.
-              Como os valores de singular e plural são armazenados em um
+              Estas constantes facilitam o entendimento do cï¿½digo.
+              Como os valores de singular e plural sï¿½o armazenados em um
 vetor,
-              cada posicao indica a grandeza do número armazenado (leia-se
+              cada posicao indica a grandeza do nï¿½mero armazenado (leia-se
 sempre
               da esquerda para a direita).
             }
@@ -2324,7 +2324,7 @@ boolean;
           TriosUsados   : set of CasaDosTrilhoes..CasaDosCentavos;
           NumTriosInt   : byte;
 
-      { Para os não pascalistas de tradição, observe o uso de uma função
+      { Para os nï¿½o pascalistas de tradiï¿½ï¿½o, observe o uso de uma funï¿½ï¿½o
         encapsulada na outra. }
       function ProximoTrio( i : byte ) : byte;
       begin
@@ -2344,17 +2344,17 @@ boolean;
       end;
 
       {
-        O número é quebrado em partes distintas, agrupadas de três em três
+        O nï¿½mero ï¿½ quebrado em partes distintas, agrupadas de trï¿½s em trï¿½s
 casas:
-        centenas, milhares, milhões, bilhões e trilhões. A última parte (a
+        centenas, milhares, milhï¿½es, bilhï¿½es e trilhï¿½es. A ï¿½ltima parte (a
 sexta)
-        contém apenas os centavos, com duas casas
+        contï¿½m apenas os centavos, com duas casas
       }
       Str( Inteiro : 17 : 0, NumStr );
       TrioAtual    := 1;
       Inteiro      := Int( Inteiro / 100 ); { remove os centavos }
 
-      { Preenche os espaços vazios com zeros para evitar erros de conversão
+      { Preenche os espaï¿½os vazios com zeros para evitar erros de conversï¿½o
 }
       while NumStr[TrioAtual] = ' ' do begin
          NumStr[TrioAtual] := '0';
@@ -2363,10 +2363,10 @@ sexta)
 
       { Inicializa o conjunto como vazio }
       TriosUsados := [];
-      NumTriosInt := 0; { Números de trios da parte inteira (sem os
+      NumTriosInt := 0; { Nï¿½meros de trios da parte inteira (sem os
 centavos) }
 
-      { Este loop gera os extensos de cada parte do número }
+      { Este loop gera os extensos de cada parte do nï¿½mero }
       for TrioAtual := CasaDosTrilhoes to CasaDosCentavos do begin
       Val( Copy( NumStr, 3 * TrioAtual - 2, 3 ), RespostaN[TrioAtual], v );
           if RespostaN[TrioAtual] <> 0 then begin
@@ -2414,7 +2414,7 @@ plural }
       { Este loop vai percorrer apenas os trios preenchidos e saltar os
 vazios. }
       while TrioAtual <= CasaDosCentavos do begin
-         { se for apenas cem, não escrever 'cento' }
+         { se for apenas cem, nï¿½o escrever 'cento' }
          if Resposta[TrioAtual] = 'cento' then
             Resposta[TrioAtual] := 'cem';
 
@@ -2426,29 +2426,29 @@ vazios. }
             else
                NumStr := NumStr + NoSingular[TrioAtual] + ' ';
 
-            { Verifica a necessidade da particula 'e' para os números }
+            { Verifica a necessidade da particula 'e' para os nï¿½meros }
             if ( TrioAtual < CasaDosCentavos ) and ( Resposta[TrioPosterior]
 <> '' )
                and ( Resposta[TrioPosterior] <> ' ' ) then begin
                {
                  Este trecho analisa diversos fatores e decide entre usar
 uma
-                 vírgula ou um "E", em função de uma peculiaridade da
-língua. Veja
+                 vï¿½rgula ou um "E", em funï¿½ï¿½o de uma peculiaridade da
+lï¿½ngua. Veja
                  os exemplos para compreender:
-                 - DOIS MIL, QUINHENTOS E CINQÜENTA REAIS
+                 - DOIS MIL, QUINHENTOS E CINQï¿½ENTA REAIS
                  - DOIS MIL E QUINHENTOS REAIS
                  - DOIS MIL E UM REAIS
-                 - TRÊS MIL E NOVENTA E CINCO REAIS
+                 - TRï¿½S MIL E NOVENTA E CINCO REAIS
                  - QUATRO MIL, CENTO E UM REAIS
-                 - UM MILHÃO E DUZENTOS MIL REAIS
-                 - UM MILHÃO, DUZENTOS MIL E UM REAIS
-                 - UM MILHÃO, OITOCENTOS E NOVENTA REAIS
-                 Obs.: Fiz o máximo esforço pra que o extenso soasse o mais
+                 - UM MILHï¿½O E DUZENTOS MIL REAIS
+                 - UM MILHï¿½O, DUZENTOS MIL E UM REAIS
+                 - UM MILHï¿½O, OITOCENTOS E NOVENTA REAIS
+                 Obs.: Fiz o mï¿½ximo esforï¿½o pra que o extenso soasse o mais
 natural
-                       possível em relação à lingua falada, mas se aparecer
+                       possï¿½vel em relaï¿½ï¿½o ï¿½ lingua falada, mas se aparecer
 alguma
-                       situação em que algo soe esquisito, peço a gentileza
+                       situaï¿½ï¿½o em que algo soe esquisito, peï¿½o a gentileza
 de me
                        avisar.
                }
@@ -2463,13 +2463,13 @@ and
             end;
          end;
 
-         { se for apenas trilhões, bilhões ou milhões, acrescenta o 'de' }
+         { se for apenas trilhï¿½es, bilhï¿½es ou milhï¿½es, acrescenta o 'de' }
          if ( NumTriosInt = 1 ) and ( Inteiro > 0 ) and ( TrioAtual <=
 CasaDosMilhoes ) then begin
             NumStr := NumStr + ' de ';
          end;
 
-         { se tiver centavos, acrescenta a partícula 'e', mas somente se
+         { se tiver centavos, acrescenta a partï¿½cula 'e', mas somente se
 houver
            qualquer valor na parte inteira }
          if ( TrioAtual = CasaDasCentenas ) and ( Resposta[CasaDosCentavos]
@@ -2482,7 +2482,7 @@ houver
          TrioPosterior := ProximoTrio( TrioAtual );
       end;
 
-      { Eliminar algumas situações em que o extenso gera excessos de espaços
+      { Eliminar algumas situaï¿½ï¿½es em que o extenso gera excessos de espaï¿½os
         da resposta. Mero perfeccionismo... }
       NumStr := ReplaceSubstring( '  ', ' ', NumStr );
       NumStr := ReplaceSubstring( ' ,', ',', NumStr );
@@ -2502,14 +2502,14 @@ const
         (* 0  1     2        3        4         5           6
 7         8          9 *)
 (*   1x*)
-('','Bir','iki',   'Üç',    'Dört',   'Be?',      'Alt?',   'Yedi',
+('','Bir','iki',   'ï¿½ï¿½',    'Dï¿½rt',   'Be?',      'Alt?',   'Yedi',
 'Sekiz',   'Dokuz'),
 (*  10x*)
 ('','On', 'Yirmi', 'Otuz',  'K?rk',   'Elli',     'Altm??', 'Yetmi?',
 'Seksen',  'Doksan'),
 (* 100x*)
-('','Yüz','?kiYüz','ÜçYüz', 'DörtYüz','Be?Yüz',   'Alt?Yüz','YediYüz',
-'SekizYüz','DokuzYüz'),
+('','Yï¿½z','?kiYï¿½z','ï¿½ï¿½Yï¿½z', 'Dï¿½rtYï¿½z','Be?Yï¿½z',   'Alt?Yï¿½z','YediYï¿½z',
+'SekizYï¿½z','DokuzYï¿½z'),
 (*1000x*)
 ('','Bin','Milyon','Milyar','Trilyon','Katrilyon','',       '',
 '',        ''));
@@ -2572,7 +2572,7 @@ var s:String;
     fseparador:string;
 
      Function longitud(numero:LongInt):integer;
-     {Esta funciÓn nos da la longitud del número que vamos a
+     {Esta funciï¿½n nos da la longitud del nï¿½mero que vamos a
      deletrear}
      begin
 	  If numero div 10 =0 then
@@ -2612,7 +2612,7 @@ var s:String;
 	  13: Decenas:='trece';
 	  14: Decenas:='catorce';
 	  15: Decenas:='quince';
-	  16: Decenas:='dieciséis';
+	  16: Decenas:='diecisï¿½is';
 	  17: Decenas:='diecisiete';
 	  18: Decenas:='dieciocho';
 	  19: Decenas:='diecinueve';
@@ -2621,10 +2621,10 @@ var s:String;
          if female then
           Decenas:='veintiuna'
          else
-          Decenas:='veintiún';
+          Decenas:='veintiï¿½n';
         end;
-	  22: Decenas:='veintidós';
-	  23: Decenas:='veintitrés';
+	  22: Decenas:='veintidï¿½s';
+	  23: Decenas:='veintitrï¿½s';
 	  24..29: Decenas:='veinti'+Unidades(numero mod 10);
 	  30: Decenas:='treinta';
 	  40: Decenas:='cuarenta';
@@ -2714,7 +2714,7 @@ var s:String;
 	  if numero > 1999999 then
 	  UnidadesDeMillon:=Unidades(Numero div 1000000)+' millones '+CentenasDeMillar(Numero mod 1000000)
 	  else
-	  UnidadesDeMillon:= 'un millón '+CentenasDeMillar(Numero mod 1000000)
+	  UnidadesDeMillon:= 'un millï¿½n '+CentenasDeMillar(Numero mod 1000000)
      end;
 
      Function DecenasDeMillon(Numero:LongInt):String;
@@ -2798,7 +2798,7 @@ var s:String;
     fseparador:string;
 
      Function longitud(numero:LongInt):integer;
-     {Esta funciÓn nos da la longitud del número que vamos a
+     {Esta funciï¿½n nos da la longitud del nï¿½mero que vamos a
      deletrear}
      begin
 	  If numero div 10 =0 then
@@ -2966,7 +2966,7 @@ var s:String;
 	  if numero > 1999999 then
 	  UnidadesDeMillon:=Unidades(Numero div 1000000)+' milions '+CentenasDeMillar(Numero mod 1000000)
 	  else
-	  UnidadesDeMillon:= 'un milió '+CentenasDeMillar(Numero mod 1000000)
+	  UnidadesDeMillon:= 'un miliï¿½ '+CentenasDeMillar(Numero mod 1000000)
      end;
 
      Function DecenasDeMillon(Numero:LongInt):String;
@@ -3049,7 +3049,7 @@ var s:String;
     fseparador:string;
 
      Function longitud(numero:LongInt):integer;
-     {Esta funciÓn nos da la longitud del número que vamos a
+     {Esta funciï¿½n nos da la longitud del nï¿½mero que vamos a
      deletrear}
      begin
 	  If numero div 10 =0 then
@@ -3089,7 +3089,7 @@ var s:String;
 	  13: Decenas:='trece';
 	  14: Decenas:='catorce';
 	  15: Decenas:='quince';
-	  16: Decenas:='dieciséis';
+	  16: Decenas:='diecisï¿½is';
 	  17: Decenas:='diecisiete';
 	  18: Decenas:='dieciocho';
 	  19: Decenas:='diecinueve';
@@ -3098,10 +3098,10 @@ var s:String;
          if female then
           Decenas:='veintiuna'
          else
-          Decenas:='veintiún';
+          Decenas:='veintiï¿½n';
         end;
-	  22: Decenas:='veintidós';
-	  23: Decenas:='veintitrés';
+	  22: Decenas:='veintidï¿½s';
+	  23: Decenas:='veintitrï¿½s';
 	  24..29: Decenas:='veinti'+Unidades(numero mod 10);
 	  30: Decenas:='treinta';
 	  40: Decenas:='cuarenta';
@@ -3191,7 +3191,7 @@ var s:String;
 	  if numero > 1999999 then
 	  UnidadesDeMillon:=Unidades(Numero div 1000000)+' millones '+CentenasDeMillar(Numero mod 1000000)
 	  else
-	  UnidadesDeMillon:= 'un millón '+CentenasDeMillar(Numero mod 1000000)
+	  UnidadesDeMillon:= 'un millï¿½n '+CentenasDeMillar(Numero mod 1000000)
      end;
 
      Function DecenasDeMillon(Numero:LongInt):String;

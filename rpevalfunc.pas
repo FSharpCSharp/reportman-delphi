@@ -4,8 +4,8 @@
 {       Functions for the TRpEvaluator for              }
 {        Manager                                        }
 {                                                       }
-{       Copyright (c) 1994-2002 Toni Martir             }
-{       toni@pala.com                                   }
+{       Copyright (c) 1994-2019 Toni Martir             }
+{       toni@reportman.es                                   }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }
@@ -353,7 +353,7 @@ type
 
 
 //Added by Luciano Enzweiler - 17 Dec, 2003 - Start
-// On Brazilian Portuguese we use a lot á, ç, ú, etc. and it wasn't
+// On Brazilian Portuguese we use a lot ï¿½, ï¿½, ï¿½, etc. and it wasn't
 // printable on matrix printers.
 //This function is very useful to convert the text to printable chars.
  { Function  }
@@ -1740,27 +1740,27 @@ begin
       StrRet := StrRet + 'u';
       Continue;
     end;
-    if (NrChr = 199) then begin  //Ç
+    if (NrChr = 199) then begin  //ï¿½
       StrRet := StrRet + 'C';
       Continue;
     end;
-    if (NrChr = 231) then begin  //Ç
+    if (NrChr = 231) then begin  //ï¿½
       StrRet := StrRet + 'c';
       Continue;
     end;
-    if (NrChr = 209) then begin  //Ñ
+    if (NrChr = 209) then begin  //ï¿½
       StrRet := StrRet + 'N';
       Continue;
     end;
-    if (NrChr = 241) then begin  //ñ
+    if (NrChr = 241) then begin  //ï¿½
       StrRet := StrRet + 'n';
       Continue;
     end;
-    if ((NrChr = 176) or (NrChr = 186)) then begin  //° ou º
+    if ((NrChr = 176) or (NrChr = 186)) then begin  //ï¿½ ou ï¿½
       StrRet := StrRet + 'o';
       Continue;
     end;
-    if (NrChr = 170) then begin  //ª
+    if (NrChr = 170) then begin  //ï¿½
       StrRet := StrRet + 'a';
       Continue;
     end;

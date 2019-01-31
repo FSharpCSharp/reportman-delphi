@@ -7,7 +7,7 @@
 {       Converts a text to report definition format     }
 {                                                       }
 {                                                       }
-{       Copyright (c) 1994-2002 Toni Martir             }
+{       Copyright (c) 1994-2019 Toni Martir             }
 {       toni@reportman.es                               }
 {                                                       }
 {       This file is under the MPL license              }

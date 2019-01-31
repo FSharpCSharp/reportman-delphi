@@ -902,7 +902,7 @@ object FRpAboutBox: TFRpAboutBox
       Top = 96
       Width = 71
       Height = 13
-      Caption = 'toni@pala.com'
+      Caption = 'toni@reportman.es'
     end
     object Label3: TLabel
       Left = 104

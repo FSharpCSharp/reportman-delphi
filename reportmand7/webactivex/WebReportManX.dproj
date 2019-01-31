@@ -41,7 +41,7 @@
 			<VerInfo_MajorVer>2</VerInfo_MajorVer>
 			<VerInfo_MinorVer>6</VerInfo_MinorVer>
 			<VerInfo_DLL>true</VerInfo_DLL>
-			<VerInfo_Keys>CompanyName=Toni Martir (toni@pala.com);FileDescription=Report Manager Active X Control;FileVersion=2.6.0.0;InternalName=WeReportManX.ocx;LegalCopyright=Copyright 2003, Toni Martir (toni@pala.com);LegalTrademarks=;OriginalFilename=;ProductName=Report Manager IE Plugin;ProductVersion=2.4.0.0;Comments=;OleSelfRegister=1</VerInfo_Keys>
+			<VerInfo_Keys>CompanyName=Toni Martir (toni@reportman.es);FileDescription=Report Manager Active X Control;FileVersion=2.6.0.0;InternalName=WeReportManX.ocx;LegalCopyright=Copyright 2003, Toni Martir (toni@reportman.es);LegalTrademarks=;OriginalFilename=;ProductName=Report Manager IE Plugin;ProductVersion=2.4.0.0;Comments=;OleSelfRegister=1</VerInfo_Keys>
 			<VerInfo_Locale>1033</VerInfo_Locale>
 			<OutputExt>ocx</OutputExt>
 			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;System.Win;Vcl;Winapi;$(DCC_Namespace)</DCC_Namespace>
@@ -93,11 +93,11 @@
 						<VersionInfo Name="CodePage">1252</VersionInfo>
 					</VersionInfo>
 					<VersionInfoKeys>
-						<VersionInfoKeys Name="CompanyName">Toni Martir (toni@pala.com)</VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">Toni Martir (toni@reportman.es)</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">Report Manager Active X Control</VersionInfoKeys>
 						<VersionInfoKeys Name="FileVersion">2.6.0.0</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName">WeReportManX.ocx</VersionInfoKeys>
-						<VersionInfoKeys Name="LegalCopyright">Copyright 2003, Toni Martir (toni@pala.com)</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalCopyright">Copyright 2003, Toni Martir (toni@reportman.es)</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalTrademarks"/>
 						<VersionInfoKeys Name="OriginalFilename"/>
 						<VersionInfoKeys Name="ProductName">Report Manager IE Plugin</VersionInfoKeys>

@@ -6,7 +6,7 @@
 {       Exported functions for the Standarc C Libraary  }
 {       Functions dependent on X Server running         }
 {                                                       }
-{       Copyright (c) 1994-2003 Toni Martir             }
+{       Copyright (c) 1994-2019 Toni Martir             }
 {       to7ni@pala.com                                   }
 {                                                       }
 {       This file is under the MPL license              }

@@ -5,7 +5,7 @@
 {       Units that registers the reportmanager engine   }
 {       vcl version Delphi 6 component palette          }
 {                                                       }
-{       Copyright (c) 1994-2003 Toni Martir             }
+{       Copyright (c) 1994-2019 Toni Martir             }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }

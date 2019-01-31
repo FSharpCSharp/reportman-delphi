@@ -7,8 +7,8 @@
 {       allow the use of device dependent fonts         }
 {       in a device independent way                     }
 {                                                       }
-{       Copyright (c) 1994-2002 Toni Martir             }
-{       toni@pala.com                                   }
+{       Copyright (c) 1994-2019 Toni Martir             }
+{       toni@reportman.es                                   }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }
@@ -474,9 +474,9 @@ begin
 { LogFont.lfCharSet:=DEFAULT_CHARSET;
  lOGfONT.lfOutPrecision:=OUT_DEFAULT_PRECIS;
  LogFont.lfClipPrecision:=CLIP_DEFAULT_PRECIS;
- // Poca qualitat, gran semblança
+ // Poca qualitat, gran semblanï¿½a
  // LogFont.lfQuality:=Draft_QUALITY;
- // Gran qualitat, semblança normal
+ // Gran qualitat, semblanï¿½a normal
 // LogFont.lfQuality:=PROOF_QUALITY;
  LogFont.lfQuality:=DEFAULT_QUALITY;
  LogFont.lfPitchAndFamily:=FF_DONTCARE {or FIXED_PITCH};

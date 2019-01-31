@@ -7,7 +7,7 @@
 {       Preoces and exports to pdf a report             }
 {       you can select the pages to print               }
 {                                                       }
-{       Copyright (c) 1994-2003 Toni Martir             }
+{       Copyright (c) 1994-2019 Toni Martir             }
 {       toni@reportman.es                                 }
 {                                                       }
 {       This file is under the MPL license              }

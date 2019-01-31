@@ -1,11 +1,12 @@
-{*******************************************************}{                                                       }
+{*******************************************************}
+{                                                       }
 {       Report Manager Designer                         }
 {                                                       }
 {       rpmdfdatasets                                   }
 {                                                       }
 {       Datasets definition frame                       }
 {                                                       }
-{       Copyright (c) 1994-2003 Toni Martir             }
+{       toni@reportman.es 1994-2019 Toni Martir             }
 {       toni@pala.com                                   }
 {                                                       }
 {       This file is under the MPL license              }
@@ -792,4 +793,5 @@ begin
 end;
 
 end.
-
+
+

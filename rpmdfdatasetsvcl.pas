@@ -7,7 +7,7 @@
 {       Datasets definition frame                       }
 {                                                       }
 {       Copyright (c) 1994-2013 Toni Martir             }
-{       toni@pala.com                                   }
+{       toni@reportman.es                                   }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }

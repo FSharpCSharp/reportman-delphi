@@ -124,11 +124,11 @@ DLL=1
 Locale=1033
 CodePage=1252
 [Version Info Keys]
-CompanyName=Toni Martir (toni@pala.com)
+CompanyName=Toni Martir (toni@reportman.es)
 FileDescription=Report Manager Active X Control
 FileVersion=2.7.0.0
 InternalName=WeReportManX.ocx
-LegalCopyright=Copyright 2003, Toni Martir (toni@pala.com)
+LegalCopyright=Copyright 2003, Toni Martir (toni@reportman.es)
 LegalTrademarks=
 OriginalFilename=
 ProductName=Report Manager IE Plugin

@@ -5,7 +5,7 @@ The license text is at the end of this file.
 The Main Author of this tool is
 
 Toni Martir
-toni@pala.com
+toni@reportman.es
 
 The plain explanation of the license is:
 

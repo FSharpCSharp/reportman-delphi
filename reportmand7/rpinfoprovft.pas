@@ -6,8 +6,8 @@
 {       Provides information about fonts in Linux       }
 {       It uses freetype library version 2              }
 {                                                       }
-{       Copyright (c) 1994-2002 Toni Martir             }
-{       toni@pala.com                                   }
+{       Copyright (c) 1994-2019 Toni Martir             }
+{       toni@reportman.es                                   }
 {                                                       }
 {                                                       }
 {*******************************************************}

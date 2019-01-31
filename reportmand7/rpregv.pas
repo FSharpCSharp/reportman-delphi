@@ -5,7 +5,7 @@
 {       Units that registers the reportmanager engine   }
 {       (visual controls into the component palette)    }
 {                                                       }
-{       Copyright (c) 1994-2003 Toni Martir             }
+{       Copyright (c) 1994-2019 Toni Martir             }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }
