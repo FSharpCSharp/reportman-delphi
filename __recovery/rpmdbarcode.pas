@@ -479,7 +479,7 @@ const tabelle_EAN_B:array['0'..'9', 1..4] of char =
 	('1', '5', '0', '7')     // 9
 	);
 
-// Zuordung der Paraitaetsfolgen für EAN13
+// Zuordung der Paraitaetsfolgen fÃ¼r EAN13
 const tabelle_ParityEAN13:array[0..9, 1..6] of char =
 	(
 	('A', 'A', 'A', 'A', 'A', 'A'),    // 0
@@ -618,12 +618,12 @@ begin
 			else
 				c := '0';
 
-			// Falls i ungerade ist dann mache Lücke zu Strich
+			// Falls i ungerade ist dann mache LÃ¼cke zu Strich
 			if odd(j) then
 				c := chr(ord(c)+5);
 			result := result + c;
 		end;
-		result := result + '0';   // Lücke zwischen den Zeichen
+		result := result + '0';   // LÃ¼cke zwischen den Zeichen
 	end;
 
 	result := result + '70505';   // Stopcode
@@ -816,7 +816,7 @@ const tabelle_128: array[0..102] of TCode128 = (
 	( a:''''; b:''''; c:'12'; data:'112232'; ),
 {$ENDIF}
 {$IFNDEF DOTNETD}
-	( a:'´'; b:'´'; c:'12'; data:'112232'; ),
+	( a:'Â´'; b:'Â´'; c:'12'; data:'112232'; ),
 {$ENDIF}
 	( a:'-'; b:'-'; c:'13'; data:'122132'; ),
 	( a:'.'; b:'.'; c:'14'; data:'122231'; ),
@@ -911,7 +911,7 @@ const tabelle_128: array[0..102] of TCode128 = (
 	( a:'?'; b:'?'; c:'  '; data:'411131'; )
 {$ENDIF}
 {$IFNDEF DOTNETD}
-	( a:'¿'; b:'¿'; c:'  '; data:'411131'; )
+	( a:'Â¿'; b:'Â¿'; c:'  '; data:'411131'; )
 {$ENDIF}
 	);
 
@@ -968,10 +968,10 @@ var
  isalpha:boolean;
  index:integer;
 begin
- if FText[i]='¿' then
+ if FText[i]='Â¿' then
   inc(i);
  acopy:=Copy(ftext,i,Length(FText));
- index:=Pos('¿',acopy);
+ index:=Pos('Â¿',acopy);
  if index>0 then
   acopy:=copy(acopy,1,index-1);
  if (length(acopy) mod 2)<>0 then
@@ -1030,7 +1030,7 @@ begin
    result := result+Convert(startcode);    // Startcode
 //  numint:=0;
   // Look for EAN control
-  if FText[i]='¿' then
+  if FText[i]='Â¿' then
   begin
    result:=Result+Convert('411131');
    Inc(checksum, 102*i);
@@ -1051,7 +1051,7 @@ begin
       Inc(checksum, idx*(i));
       inc(i);
       if Length(FText)>=i then
-       if FText[i]='¿' then
+       if FText[i]='Â¿' then
        begin
         result:=Result+Convert('411131');
         Inc(checksum, 102*i);
@@ -1081,7 +1081,7 @@ begin
       end;
       inc(i);
       if Length(FText)>=i then
-       if FText[i]='¿' then
+       if FText[i]='Â¿' then
        begin
         result:=Result+Convert('411131');
         Inc(checksum, 102*i);

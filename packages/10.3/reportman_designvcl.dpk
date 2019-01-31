@@ -1,0 +1,95 @@
+package reportman_designvcl;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Reportman VCL Designer'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vclimg,
+  vcl,
+  vclx,
+  dbrtl,
+  DbxCommonDriver,
+  IndySystem,
+  IndyProtocols,
+  IndyCore,
+  vcldb,
+  dsnap,
+  dbexpress,
+  DBXMySQLDriver,
+  DBXInterBaseDriver,
+  vclFireDAC,
+  FireDAC,
+  FireDACSqliteDriver,
+  FireDACCommonDriver,
+  FireDACCommon,
+  FireDACPgDriver,
+  FireDACMSAccDriver,
+  FireDACCommonODBC,
+  FireDACIBDriver,
+  FireDACMySQLDriver,
+  FireDACADSDriver,
+  adortl,
+  ibxpress,
+  Tee,
+  reportman_rtl,
+  reportman_vcl;
+
+contains
+  rpmregdesignvcl in '..\..\rpmregdesignvcl.pas',
+  rpmdesignervcl in '..\..\rpmdesignervcl.pas',
+  rprulervcl in '..\..\rprulervcl.pas',
+  rpmdfmainvcl in '..\..\rpmdfmainvcl.pas' {FRpMainFVCL},
+  rpmdfdesignvcl in '..\..\rpmdfdesignvcl.pas' {FRpDesignFrameVCL: TFrame},
+  rpmdfstrucvcl in '..\..\rpmdfstrucvcl.pas' {FRpStructureVCL: TFrame},
+  rpdbbrowservcl in '..\..\rpdbbrowservcl.pas' {FRpBrowserVCL: TFrame},
+  rpmdobjinspvcl in '..\..\rpmdobjinspvcl.pas' {FRpObjInspVCL: TFrame},
+  rpmdobinsintvcl in '..\..\rpmdobinsintvcl.pas',
+  rpmdfextsecvcl in '..\..\rpmdfextsecvcl.pas' {FRpExtSectionVCL},
+  rpmdflabelintvcl in '..\..\rpmdflabelintvcl.pas',
+  rpmdfdrawintvcl in '..\..\rpmdfdrawintvcl.pas',
+  rpmdfbarcodeintvcl in '..\..\rpmdfbarcodeintvcl.pas',
+  rpmdfchartintvcl in '..\..\rpmdfchartintvcl.pas',
+  rpmdfsectionintvcl in '..\..\rpmdfsectionintvcl.pas',
+  rpmdfdinfovcl in '..\..\rpmdfdinfovcl.pas' {FRpDInfoVCL},
+  rpmdfdatasetsvcl in '..\..\rpmdfdatasetsvcl.pas' {FRpDatasetsVCL: TFrame},
+  rpfparamsvcl in '..\..\rpfparamsvcl.pas' {FRpParamsVCL},
+  rpmdfsampledatavcl in '..\..\rpmdfsampledatavcl.pas' {FRpShowSampledataVCL},
+  rpmdfdatatextvcl in '..\..\rpmdfdatatextvcl.pas' {FRpDataTextVCL},
+  rpmdfconnectionvcl in '..\..\rpmdfconnectionvcl.pas' {FRpConnectionVCL: TFrame},
+  rpdbxconfigvcl in '..\..\rpdbxconfigvcl.pas' {FRpDBXConfigVCL},
+  rpmdfgridvcl in '..\..\rpmdfgridvcl.pas' {FRpGridOptionsVCL},
+  rpmdsysinfo in '..\..\rpmdsysinfo.pas' {FRpSysInfo},
+  rpmdfopenlibvcl in '..\..\rpmdfopenlibvcl.pas' {FRpOpenLibVCL},
+  rpmdftreevcl in '..\..\rpmdftreevcl.pas' {FRpDBTreeVCL: TFrame},
+  rpeditconnvcl in '..\..\rpeditconnvcl.pas' {FRpEditConVCL},
+  rpmdfwizardvcl in '..\..\rpmdfwizardvcl.pas' {FRpWizardVCL},
+  rpmdfselectfields in '..\..\rpmdfselectfields.pas' {FRpSelectFields: TFrame},
+  rpcolumnar in '..\..\rpcolumnar.pas';
+
+end.

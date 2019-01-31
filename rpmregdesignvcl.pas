@@ -17,6 +17,8 @@ unit rpmregdesignvcl;
 
 interface
 
+{$I rpconf.inc}
+
 uses Classes,rpmdesignervcl,rprulervcl,rpwebmetaclient;
 
 procedure Register;
@@ -26,7 +28,9 @@ implementation
 procedure Register;
 begin
  RegisterComponents('Reportman', [TRpDesignerVCL]);
- RegisterComponents('Reportman', [TRpWebMetaPrint]);
+{$IFNDEF DELPHI2007UP}
+  RegisterComponents('Reportman', [TRpWebMetaPrint]);
+{$ENDIF}
  RegisterComponents('Reportman', [TRpRulerVCL]);
 end;
 

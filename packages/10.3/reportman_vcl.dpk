@@ -1,4 +1,4 @@
-package reportman_vcl103;
+package reportman_vcl;
 
 {$R *.res}
 {$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
@@ -25,12 +25,12 @@ package reportman_vcl103;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'Report Manager VCL Controls'}
+{$DESCRIPTION 'Reportman VCL'}
 {$IMPLICITBUILD ON}
 
 requires
   rtl,
-  reportman_rtl103,
+  reportman_rtl,
   vclimg,
   vcl,
   vclFireDAC,

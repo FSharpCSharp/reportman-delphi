@@ -1,4 +1,4 @@
-package reportman_rtl103;
+package reportman_rtl;
 
 {$R *.res}
 {$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
@@ -25,7 +25,7 @@ package reportman_rtl103;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'Report Manager RTL Reporting and PDF'}
+{$DESCRIPTION 'Reportman RTL (PDF)'}
 {$IMPLICITBUILD ON}
 
 requires

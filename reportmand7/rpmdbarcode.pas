@@ -44,7 +44,7 @@ uses
 {$IFDEF MSWINDOWS}
  Windows,
 {$ENDIF}
- rpprintitem,rpbarcodecons,math;
+ rpprintitem,rpbarcodecons,math,rpDelphiZXIngQRCode;
 
 const
  MAX_DIGITS_NUM=2000;
@@ -65,7 +65,7 @@ type
 		bcCodeCodabar,
 		bcCodeEAN8,
         	bcCodeEAN13,
-                bcCodePDF417
+                bcCodePDF417,bcCodeQr
 				);
 
  TRpDigit='0'..'9';
@@ -138,6 +138,7 @@ type
                                              CodeLen      : Integer);
    function IsNumericString (const S : AnsiString) : boolean;
    procedure Draw2DBarcode(FLeft,FTop:integer;meta:TRpMetaFileReport);
+   procedure DrawQrBarcode(FLeft,FTop:integer;meta:TRpMetaFileReport);
    procedure DrawStartPattern (RowNumber     : Integer;
                                              WorkBarHeight : Integer);
    procedure DrawStopPattern (RowNumber     : Integer;
@@ -177,6 +178,7 @@ type
    procedure AddCodeword (Value : Word);
   public
    CurrentText: AnsiString;
+   CurrentTextW: WideString;
    function  CalculateBarcode: AnsiString;
    procedure DoLines(data: AnsiString;FLeft,FTop:integer;meta:TRpMetafileReport);
    function GetText:widestring;
@@ -203,12 +205,12 @@ type
            default False;
   end;
 
- const BarcodeTypeStrings:array[bcCode_2_5_interleaved..bcCodePDF417] of string=
+ const BarcodeTypeStrings:array[bcCode_2_5_interleaved..bcCodeQr] of string=
   ('2_5_interleaved','2_5_industrial',
    '2_5_matrix','Code39','Code39Extended',
    '128A','128B','128C','128',
    'Code93','Code93Ex','MSI',
-   'PostNet','Codabar','EAN8','EAN13','PDF417');
+   'PostNet','Codabar','EAN8','EAN13','PDF417','QR');
 
  function StringBarcodeToBarCodeType(value: AnsiString):TRpBarCodeType;
  function StringECCToInteger(value: AnsiString):Integer;
@@ -235,7 +237,7 @@ var
  i:TRpBarCodeType;
 begin
  Result:=bcCodeEAN13;
- for i:=bcCode_2_5_interleaved to bcCodePDF417 do
+ for i:=bcCode_2_5_interleaved to bcCodeQr do
  begin
   if (value=BarcodeTypeStrings[i]) then
   begin
@@ -1552,6 +1554,11 @@ begin
    Draw2DBarcode(FLeft,FTop,meta);
    exit;
   end;
+  if typ=bcCodeQr then
+  begin
+   DrawQrBarcode(FLeft,FTop,meta);
+   exit;
+  end;
 
 	xadd := 0;
 	orgin.x := FLeft;
@@ -1716,6 +1723,7 @@ begin
  	bcCodeCodabar:          data := Code_Codabar;
  	bcCodeEAN8:             data := Code_EAN8;
  	bcCodeEAN13:            data := Code_EAN13;
+ 	bcCodeQr:            data := '';
  else
  	raise Exception.Create(SRpWrongBarcodeType);
  end;
@@ -2660,7 +2668,8 @@ var
  data: AnsiString;
 begin
  inherited DoPrint(adriver,aposx,aposy,newwidth,newheight,metafile,MaxExtent,PartialPrint);
- CurrentText:=GetText;
+ CurrentTextW:=GetText;
+ CurrentText:=CurrentTextW;
  try
   data:=Calculatebarcode;
  except
@@ -3016,5 +3025,64 @@ begin
   alist.Add('Level'+IntToStr(i));
  end;
 end;
+
+procedure TRpBarcode.DrawQrBarcode(FLeft,FTop:integer;meta:TRpMetaFileReport);
+var
+  QRCode: TRpDelphiZXingQRCode;
+  Row, Column: Integer;
+  squareWidth:integer;
+  squareHeight:integer;
+  metaPage:TRpMetafilePage;
+  PenColor:Integer;
+  BrushColor:Integer;
+  PenWidth:Integer;
+  dif:integer;
+begin
+  PenWidth:=0;
+  metaPage:=meta.Pages[meta.CurrentPage];
+  QRCode := TRpDelphiZXingQRCode.Create;
+  try
+    QRCode.Data := CurrentText;
+    QRCode.Encoding := qrAlphanumeric;
+    QRCode.QuietZone := 4;
+    squareWidth:=Width div QRCode.Columns;
+    squareHeight:=Height div QRCode.Rows;
+    // Center barcode in rectangle
+    if (squareWidth>squareHeight) then
+    begin
+      dif:=squareWidth-squareHeight;
+      FLeft:=FLeft+(dif*QRCode.Columns) div 2;
+      squareWidth:=squareHeight;
+    end
+    else
+    begin
+      dif:=squareHeight-squareWidth;
+      FTop:=FTop+(dif*QRCode.Rows) div 2;
+      squareHeight:=squareWidth;
+    end;
+    for Row := 0 to QRCode.Rows - 1 do
+    begin
+      for Column := 0 to QRCode.Columns - 1 do
+      begin
+        if (QRCode.IsBlack[Row, Column]) then
+        begin
+ 				 PenColor := BColor;
+         BrushColor := PenColor;
+        end
+        else
+        begin
+          PenColor := $FFFFFF;
+    			BrushColor := PenColor;
+        end;
+        meta.Pages[meta.CurrentPage].NewDrawObject(
+            FTop+Row*squareHeight,FLeft+Column*squareWidth,squareWidth,squareHeight,
+            integer(rpsRectangle),0,BrushColor,0,PenWidth,PenColor);
+       end;
+    end;
+  finally
+    QRCode.Free;
+  end;
+end;
+
 
 end.

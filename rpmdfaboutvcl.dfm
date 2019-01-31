@@ -27,7 +27,8 @@ object FRpAboutBoxVCL: TFRpAboutBoxVCL
         'zali'
       
         'Barcode codebase: Andreas Schmidth and friends (shmia@bizerba.de' +
-        ')')
+        ')'
+      'QR Code. ZXing delphi')
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 0
@@ -370,21 +371,21 @@ object FRpAboutBoxVCL: TFRpAboutBoxVCL
     object LReport: TLabel
       Left = 110
       Top = 8
-      Width = 76
+      Width = 78
       Height = 13
       Caption = 'Report manager'
     end
     object LAuthor: TLabel
       Left = 110
       Top = 75
-      Width = 31
+      Width = 33
       Height = 13
       Caption = 'Author'
     end
     object LName: TLabel
       Left = 189
       Top = 75
-      Width = 50
+      Width = 51
       Height = 13
       Caption = 'Toni Martir'
     end
@@ -398,7 +399,7 @@ object FRpAboutBoxVCL: TFRpAboutBoxVCL
     object LEmail: TLabel
       Left = 189
       Top = 94
-      Width = 89
+      Width = 93
       Height = 13
       Caption = 'toni@reportman.es'
     end
@@ -412,21 +413,21 @@ object FRpAboutBoxVCL: TFRpAboutBoxVCL
     object LVersion: TLabel
       Left = 110
       Top = 43
-      Width = 29
+      Width = 27
       Height = 13
       Caption = 'VNum'
     end
     object LProject: TLabel
       Left = 8
       Top = 166
-      Width = 63
+      Width = 65
       Height = 13
       Caption = 'Project page:'
     end
     object Label5: TLabel
       Left = 110
       Top = 166
-      Width = 155
+      Width = 164
       Height = 13
       Cursor = crHandPoint
       Caption = 'http://reportman.sourceforge.net'
@@ -435,7 +436,7 @@ object FRpAboutBoxVCL: TFRpAboutBoxVCL
     object LContributors: TLabel
       Left = 8
       Top = 185
-      Width = 56
+      Width = 60
       Height = 13
       Caption = 'Contributors'
     end

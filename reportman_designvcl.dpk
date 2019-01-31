@@ -1,0 +1,76 @@
+package reportman_designvcl;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vclimg,
+  vcl,
+  vclx,
+  dbrtl,
+  DbxCommonDriver,
+  IndySystem,
+  IndyProtocols,
+  IndyCore,
+  vcldb,
+  dsnap,
+  dbexpress,
+  DBXMySQLDriver,
+  DBXInterBaseDriver,
+  vclFireDAC,
+  FireDAC,
+  FireDACSqliteDriver,
+  FireDACCommonDriver,
+  FireDACCommon,
+  FireDACPgDriver,
+  FireDACMSAccDriver,
+  FireDACCommonODBC,
+  FireDACIBDriver,
+  FireDACMySQLDriver,
+  FireDACADSDriver,
+  adortl,
+  ibxpress,
+  Tee,
+  reportman_rtl,
+  reportman_vcl;
+
+contains
+  rpmregdesignvcl in 'C:\rpmregdesignvcl.pas',
+  rpmdesignervcl in 'C:\rpmdesignervcl.pas',
+  rprulervcl in 'C:\rprulervcl.pas',
+  rpmdfmainvcl in 'C:\rpmdfmainvcl.pas' {FRpMainFVCL},
+  rpmdfdesignvcl in 'C:\rpmdfdesignvcl.pas' {FRpDesignFrameVCL: TFrame},
+  rpmdfstrucvcl in 'C:\rpmdfstrucvcl.pas' {FRpStructureVCL: TFrame},
+  rpdbbrowservcl in 'C:\rpdbbrowservcl.pas' {FRpBrowserVCL: TFrame},
+  rpmdobjinspvcl in 'C:\rpmdobjinspvcl.pas' {FRpObjInspVCL: TFrame},
+  rpmdobinsintvcl in 'C:\rpmdobinsintvcl.pas',
+  rpmdfextsecvcl in 'C:\rpmdfextsecvcl.pas' {FRpExtSectionVCL},
+  rpmdflabelintvcl in 'C:\rpmdflabelintvcl.pas',
+  rpmdfdrawintvcl in 'C:\rpmdfdrawintvcl.pas';
+
+end.

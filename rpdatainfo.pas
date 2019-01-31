@@ -54,7 +54,7 @@ Libc,
  //DBExpMYSQL,DbExpMyS,dbExpDB2,dbExpORA,dbExpINT
  {$IFDEF DELPHI2009UP}
  DBXInterbase,DBXMySQL,
-  {$IFDEF DELPHIENTERPRISE}
+  {$IFDEF DELPHIENTERPRISEDBSTATIC}
    DBXOracle,DBXInformix,DBXFirebird,DBXSyBaseASA,
    DBXSyBaseASE,DBXMSSQL,DBXCommon,DBXDb2,
    {$ENDIF}
@@ -85,7 +85,7 @@ Libc,
  FireDAC.Phys.PG,FireDAC.Phys.SQLite,FireDAC.Phys.SQLiteVDataset,
   FireDAC.Phys.Intf,FireDAC.Phys.MSAcc,
   FireDAC.Phys.MySQL,
-{$IFDEF DELPHIENTERPRISE}
+{$IFDEF DELPHIENTERPRISEDBSTATIC}
     FireDAC.Phys.ODBC,FireDAC.Phys.MSSQL,
   FireDAC.Phys.ASA,FireDAC.Phys.DB2,FireDAC.Phys.DS,  FireDAC.Phys.Infx,
   FireDAC.Phys.TData,FireDAC.Phys.TDBX,FireDAC.Phys.TDBXBase,
