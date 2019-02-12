@@ -20,7 +20,7 @@ object FRpExcelProgress: TFRpExcelProgress
   object LProcessing: TLabel
     Left = 8
     Top = 39
-    Width = 52
+    Width = 51
     Height = 13
     Caption = 'Processing'
   end
@@ -34,7 +34,7 @@ object FRpExcelProgress: TFRpExcelProgress
   object LTitle: TLabel
     Left = 8
     Top = 4
-    Width = 23
+    Width = 24
     Height = 13
     Caption = 'Tittle'
     Visible = False
@@ -79,14 +79,14 @@ object FRpExcelProgress: TFRpExcelProgress
     object LTo: TLabel
       Left = 134
       Top = 84
-      Width = 13
+      Width = 12
       Height = 13
       Caption = 'To'
     end
     object LFrom: TLabel
       Left = 14
       Top = 82
-      Width = 23
+      Width = 24
       Height = 13
       Caption = 'From'
     end

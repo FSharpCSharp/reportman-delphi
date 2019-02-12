@@ -23,6 +23,7 @@ package reportman_designvcl;
 {$WRITEABLECONST OFF}
 {$MINENUMSIZE 1}
 {$IMAGEBASE $400000}
+{$DEFINE COMPILINGREPMANPACKAGE}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
 {$DESCRIPTION 'Reportman VCL Designer'}
@@ -90,6 +91,7 @@ contains
   rpeditconnvcl in '..\..\rpeditconnvcl.pas' {FRpEditConVCL},
   rpmdfwizardvcl in '..\..\rpmdfwizardvcl.pas' {FRpWizardVCL},
   rpmdfselectfields in '..\..\rpmdfselectfields.pas' {FRpSelectFields: TFrame},
-  rpcolumnar in '..\..\rpcolumnar.pas';
+  rpcolumnar in '..\..\rpcolumnar.pas',
+  rppanel in '..\..\rppanel.pas';
 
 end.

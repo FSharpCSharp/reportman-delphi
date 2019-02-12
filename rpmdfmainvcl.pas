@@ -414,21 +414,33 @@ constructor TFRpMainFVCL.Create(AOwner:TComponent);
 var
  s:string;
  mitem:TMenuItem;
+ i:integer;
+ parentMenu:TMenuItem;
 begin
  configfile:=Obtainininameuserconfig('','','repmand');
  configfilelib:=Obtainininameuserconfig('','','repmandlib');
  inherited Create(AOwner);
  LoadConfig;
 {$IFDEF DELPHI2009UP}
+ i:=0;
+ parentMenu:=menutheme;
  for s in TStyleManager.StyleNames do
  begin
   mitem := TMenuItem.Create(self);
   mitem.AutoHotkeys:=maManual;
-  menutheme.Add(mitem);
   mitem.Caption:=s;
   if SameText(TStyleManager.ActiveStyle.Name, s) then
     mitem.Checked:=true;
   mitem.OnClick:=menuthemeClick;
+  Inc(i);
+  if (i>10) then
+  begin
+   parentMenu:=TMenuItem.Create(Self);
+   parentMenu.Caption:='...';
+   menutheme.Add(parentMenu);
+   i:=0;
+  end;
+  parentMenu.Add(mitem);
  end;
 {$ELSE}
  menutheme.Visible:=false;

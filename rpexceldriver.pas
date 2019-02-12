@@ -127,10 +127,17 @@ begin
   Result:=true;
 end;
 
+
+
+
 function VarTryStrToFloat(S: string; var Value: Double): Boolean;
 var
  index,i:integer;
 begin
+{$IFDEF DELPHI2009UP}
+  Result:=TryStrToFloat(S,Value);
+  exit;
+{$ENDIF}
  Result:=true;
  S:=Trim(S);
  // Remove thousand separators
@@ -162,12 +169,7 @@ end;
 
 function VarTryStrToDate(S: string; var Value: TDateTime): Boolean;
 begin
- Result:=true;
- try
-  Value:=StrToDate(S);
- except
-  Result:=false;
- end;
+ Result:=TryStrToDate(S,Value);
 end;
 
 
@@ -203,6 +205,7 @@ begin
      sh.Cells.item[arow,acolumn].Value:=number
     else
     begin
+
      isadate:=VarTryStrToDate(aansitext,adate);
      if isadate then
      begin
