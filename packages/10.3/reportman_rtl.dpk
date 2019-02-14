@@ -110,6 +110,7 @@ contains
   rppdfreport in '..\..\rppdfreport.pas',
   rptextdriver in '..\..\rptextdriver.pas',
   rpclientdataset in '..\..\rpclientdataset.pas',
-  rplastsav in '..\..\rplastsav.pas';
+  rplastsav in '..\..\rplastsav.pas',
+  rpDelphiZXIngQRCode in '..\..\rpDelphiZXIngQRCode.pas';
 
 end.

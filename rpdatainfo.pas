@@ -2821,7 +2821,9 @@ begin
    end
    else
 {$ENDIF}*)
-    Raise Exception.Create(Alias+':'+E.Message);
+//    Raise Exception.Create(Alias+':'+E.Message);
+    E.Message:=Alias+':'+E.Message;
+    Raise;
 //    Raise Exception.Create(Alias+':'+E.Message+':'+E.ClassName);
   end;
  end;

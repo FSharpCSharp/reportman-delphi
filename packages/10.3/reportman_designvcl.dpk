@@ -59,7 +59,8 @@ requires
   ibxpress,
   Tee,
   reportman_rtl,
-  reportman_vcl;
+  reportman_vcl,
+  designide;
 
 contains
   rpmregdesignvcl in '..\..\rpmregdesignvcl.pas',

@@ -111,6 +111,7 @@
         <DCCReference Include="Tee.dcp"/>
         <DCCReference Include="reportman_rtl.dcp"/>
         <DCCReference Include="reportman_vcl.dcp"/>
+        <DCCReference Include="designide.dcp"/>
         <DCCReference Include="..\..\rpmregdesignvcl.pas"/>
         <DCCReference Include="..\..\rpmdesignervcl.pas"/>
         <DCCReference Include="..\..\rprulervcl.pas"/>
