@@ -78,7 +78,7 @@ var
  i:integer;
 begin
  Font.Size:=Round(Font.Size*2);
- BComma.Caption:=DecimalSeparator;
+ BComma.Caption:=FormatSettings.DecimalSeparator;
 
  for i:=0 to controlcount-1 do
  begin
@@ -169,9 +169,9 @@ begin
     end;
     if commapressed then
     begin
-     index:=Pos(decimalseparator,atext);
+     index:=Pos(FormatSettings.Decimalseparator,atext);
      if index=0 then
-      atext:=atext+decimalseparator;
+      atext:=atext+FormatSettings.decimalseparator;
     end;
     index:=Pos('E',atext);
     if index>0 then
@@ -181,7 +181,7 @@ begin
     if (Length(dispmask)=0) then
     if atag=0 then
     begin
-     index:=Pos(decimalseparator,atext);
+     index:=Pos(FormatSettings.DecimalSeparator,atext);
      if index>0 then
      begin
        dispmask:='';
