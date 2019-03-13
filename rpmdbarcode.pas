@@ -963,10 +963,10 @@ var
  isalpha:boolean;
  index:integer;
 begin
- if FText[i]='�' then
+ if FText[i]=Chr($BF) then
   inc(i);
  acopy:=Copy(ftext,i,Length(FText));
- index:=Pos('�',acopy);
+ index:=Pos(Chr($BF),acopy);
  if index>0 then
   acopy:=copy(acopy,1,index-1);
  if (length(acopy) mod 2)<>0 then
@@ -1025,7 +1025,7 @@ begin
    result := result+Convert(startcode);    // Startcode
 //  numint:=0;
   // Look for EAN control
-  if FText[i]='�' then
+  if FText[i]=Chr($BF) then
   begin
    result:=Result+Convert('411131');
    Inc(checksum, 102*i);
@@ -1046,7 +1046,7 @@ begin
       Inc(checksum, idx*(i));
       inc(i);
       if Length(FText)>=i then
-       if FText[i]='�' then
+       if FText[i]=chr($BF) then
        begin
         result:=Result+Convert('411131');
         Inc(checksum, 102*i);
@@ -1076,7 +1076,7 @@ begin
       end;
       inc(i);
       if Length(FText)>=i then
-       if FText[i]='�' then
+       if FText[i]=chr($BF) then
        begin
         result:=Result+Convert('411131');
         Inc(checksum, 102*i);
