@@ -10,6 +10,9 @@ object FRpCalcul: TFRpCalcul
   OldCreateOrder = True
   Position = poScreenCenter
   OnCreate = FormCreate
+  DesignSize = (
+    309
+    240)
   PixelsPerInch = 96
   TextHeight = 13
   object EText: TRpMaskEdit
@@ -19,6 +22,7 @@ object FRpCalcul: TFRpCalcul
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
+    Text = ''
     EditType = tecurrency
     DisplayMask = '#,#0.##############'
     ReadOnly = True

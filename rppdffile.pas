@@ -1261,6 +1261,7 @@ var
  lwidths:TStringList;
  arec:TRect;
  aword:WideString;
+ oldPenStyle:integer;
 begin
  FFile.CheckPrinting;
 
@@ -1284,12 +1285,6 @@ begin
   // Calculates text extent and apply alignment
   recsize:=ARect;
   TextExtent(Text,recsize,wordbreak,singleline);
-  if (not Font.Transparent) then
-  begin
-   BrushColor:=Font.BackColor;
-   BrushStyle:=0;
-   Rectangle(arect.Left, arect.Top, arect.Left+recsize.Right, arect.Top+recsize.Bottom);
-  end;
   // Align bottom or center
   PosY:=ARect.Top;
   if (AlignMent AND AlignmentFlags_AlignBottom)>0 then
@@ -1366,6 +1361,16 @@ begin
        end
        else
         currpos:=PosX;
+       if ((not Font.Transparent) AND (lwords.Count>0)) then
+       begin
+        BrushColor:=Font.BackColor;
+        BrushStyle:=0;
+        oldPenStyle:=PenStyle;
+        PenStyle:=5;
+        Rectangle(currpos, PosY+LineInfo[i].TopPos, currpos+LineInfo[i].Width,PosY+LineInfo[i].TopPos+LineInfo[i].height);
+        PenStyle:=oldPenStyle;
+       end;
+
        for index:=0 to lwords.Count-1 do
        begin
         TextOut(currpos,PosY+LineInfo[i].TopPos,lwords.strings[index],LineInfo[i].Width,Rotation,RightToLeft);
@@ -1380,7 +1385,19 @@ begin
     end;
    end
    else
+   begin
+    if (not Font.Transparent) then
+    begin
+     BrushColor:=Font.BackColor;
+     BrushStyle:=0;
+     oldPenStyle:=PenStyle;
+     PenStyle:=5;
+     Rectangle(PosX, PosY+LineInfo[i].TopPos, PosX+LineInfo[i].Width,PosY+LineInfo[i].TopPos+LineInfo[i].height);
+     PenStyle:=oldPenStyle;
+    end;
+
     TextOut(PosX,PosY+LineInfo[i].TopPos,astring,LineInfo[i].Width,Rotation,RightToLeft);
+   end
   end;
  finally
   if (Clipping or (Rotation<>0)) then

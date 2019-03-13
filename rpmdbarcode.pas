@@ -441,6 +441,12 @@ begin
            end
         else
            tmp := string(CurrentText);
+  if Length(tmp)<8 then
+  begin
+    Result:='';
+    Exit;
+  end;
+
 
 	result := '505';   // Startcode
 
@@ -506,6 +512,12 @@ begin
 	end
 	else
 		tmp := string(CurrentText);
+
+  if Length(tmp)<13 then
+  begin
+    Result:='';
+    Exit;
+  end;
 
 	LK := StrToInt(tmp[1]);
 	tmp := copy(tmp,2,12);
