@@ -3079,9 +3079,11 @@ begin
    end;
   end;
   achart.LeftAxis.LabelsAngle:=nchart.VertFontRotation mod 360;
-  achart.LeftAxis.LabelsFont.Size:=Round(nchart.VertFontSize*nchart.Resolution/100);
+  if (nchart.VertFontSize>0) then
+   achart.LeftAxis.LabelsFont.Size:=Round(nchart.VertFontSize*nchart.Resolution/100);
   achart.BottomAxis.LabelsAngle:=nchart.HorzFontRotation mod 360;
-  achart.BottomAxis.LabelsFont.Size:=Round(nchart.HorzFontSize*nchart.Resolution/100);
+  if (nchart.HorzFontSize>0) then
+    achart.BottomAxis.LabelsFont.Size:=Round(nchart.HorzFontSize*nchart.Resolution/100);
 {$IFDEF USEVARIANTS}
   achart.LeftAxis.Logarithmic:=Series.Logaritmic;
   if achart.LeftAxis.Logarithmic then

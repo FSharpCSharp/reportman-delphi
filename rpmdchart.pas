@@ -225,8 +225,8 @@ begin
  FMultiBar:=rpMultiside;
  //
  FMarkStyle:=0;
- FHorzFontSize:=10;
- FVertFontSize:=10;
+ FHorzFontSize:=0;
+ FVertFontSize:=0;
  FHorzFontRotation:=0;
  FVertFontRotation:=0;
 end;
