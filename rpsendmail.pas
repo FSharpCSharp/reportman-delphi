@@ -4,7 +4,7 @@ unit rpsendmail;
 interface
 
 uses SysUtils,Classes,IdBaseComponent, IdComponent, IdTCPConnection,
- IdSMTP,IdMessage,IdTCPClient,IdMessageClient,rpmdconsts;
+ IdSMTP,IdMessage,IdTCPClient,IdMessageClient,rpmdconsts,IdAttachmentFile;
 
 type
  TRpSendProgress=procedure (amessage:WideString;bytecount,bytetotal:Integer;
@@ -50,7 +50,7 @@ var
  amessage:TIDMessage;
  alist:TStringList;
  i:integer;
- idfile:TIdAttachment;
+ idfile:TIdAttachmentFile;
  progress:TRpSendObjProg;
  docancel:Boolean;
 begin
@@ -62,9 +62,9 @@ begin
   asmtp.Host:=smtpserver;
   asmtp.Password:=password;
   if dologin then
-   asmtp.AuthenticationType:=atLogin
+   asmtp.AuthType:=TIdSMTPAuthenticationType.satDefault
   else
-   asmtp.AuthenticationType:=atNone;
+   asmtp.AuthType:=TIdSMTPAuthenticationType.satNone;
   if assigned(onprogress) then
   begin
    onprogress(SRpConnecting,0,0,docancel);
@@ -102,7 +102,7 @@ begin
      begin
       for i:=0 to attatchments.Count-1 do
       begin
-       idfile:=TIdAttachment.Create(amessage.MessageParts);
+       idfile:=TIdAttachmentFile.Create(amessage.MessageParts);
        idfile.FileName:=ExtractFileName(attatchments.Strings[i]);
        idfile.StoredPathName:=attatchments.Strings[i];
       end;
