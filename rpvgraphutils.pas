@@ -285,6 +285,8 @@ begin
         OldPal := SelectPalette(Destination.Handle, hPal, True);
         RealizePalette(Destination.Handle);
       end;
+      SetStretchBltMode(Destination.Handle,HALFTONE);
+      SetBrushOrgEx(Destination.Handle,0,0,nil);
       StretchDiBits(
         Destination.Handle,
         rec.Left,rec.Top,rec.Right-rec.Left+1, rec.Bottom-rec.Top+1,
