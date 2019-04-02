@@ -15,9 +15,9 @@ type
    onprogress:TRpSendProgress;
    maximum:integer;
    procedure OnWork(Sender: TObject; AWorkMode: TWorkMode;
-    const AWorkCount: Integer);
+    AWorkCount: Int64);
    procedure WorkBegin(Sender: TObject; AWorkMode: TWorkMode;
-    const AWorkCountMax: Integer);
+    AWorkCountMax: Int64);
    procedure WorkEnd(Sender: TObject; AWorkMode: TWorkMode);
   end;
 
@@ -141,7 +141,7 @@ begin
 end;
 
 procedure TRpSendObjProg.OnWork(Sender: TObject; AWorkMode: TWorkMode;
-    const AWorkCount: Integer);
+    AWorkCount: Int64);
 var
  docancel:Boolean;
 begin
@@ -152,7 +152,7 @@ begin
 end;
 
 procedure TRpSendObjProg.WorkBegin(Sender: TObject; AWorkMode: TWorkMode;
-    const AWorkCountMax: Integer);
+    AWorkCountMax: Int64);
 var
  docancel:Boolean;
 begin
