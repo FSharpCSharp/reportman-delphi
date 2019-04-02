@@ -1561,7 +1561,26 @@ begin
 
    end;
   end;
-  if dpires<>0 then
+  if (dpires = -1) then
+  begin
+    propx:=(rec.Right-rec.Left)/bitmapwidth;
+    propy:=(rec.Bottom-rec.Top)/bitmapheight;
+    if (propy>propx) then
+    begin
+     H:=Round((rec.Bottom-rec.Top)*propx/propy);
+     rec.Top:=rec.Top+((rec.Bottom-rec.Top)-H) div 2;
+     rec.Bottom:=rec.Top+H;
+    end
+    else
+    begin
+     W:=Round((rec.Right-rec.Left)*propy/propx);
+     rec.Left:=rec.Left+((rec.Right-rec.Left)-W) div 2;
+     rec.Right:=rec.Left+W;
+    end;
+    arect:=rec;
+  end
+  else
+  if dpires>0 then
   begin
    rec.Right:=rec.Left+Round(bitmapwidth/dpires*FResolution);
    rec.Bottom:=rec.Top+Round(bitmapheight/dpires*FResolution);

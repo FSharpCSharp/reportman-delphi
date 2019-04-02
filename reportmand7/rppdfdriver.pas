@@ -379,7 +379,8 @@ begin
        end;
       rpDrawCrop:
         begin
-         FPDFFile.Canvas.DrawImage(rec,stream,CONS_PDFRES,false,true,intimageindex);
+         FPDFFile.Canvas.DrawImage(rec,stream,-1,false,true,intimageindex);
+         //FPDFFile.Canvas.DrawImage(rec,stream,CONS_PDFRES,false,true,intimageindex);
         end;
       rpDrawTile,rpDrawTiledpi:
        begin

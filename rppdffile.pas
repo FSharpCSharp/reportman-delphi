@@ -1655,7 +1655,7 @@ begin
     if (propy>propx) then
     begin
      H:=Round((rec.Bottom-rec.Top)*propx/propy);
-     rec.Top:=rec.Top+((rec.Bottom-rec.Left)-H) div 2;
+     rec.Top:=rec.Top+((rec.Bottom-rec.Top)-H) div 2;
      rec.Bottom:=rec.Top+H;
     end
     else
