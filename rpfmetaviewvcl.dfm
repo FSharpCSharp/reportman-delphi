@@ -1,8 +1,8 @@
 object FRpMetaVCL: TFRpMetaVCL
   Left = 0
   Top = 0
-  Width = 553
-  Height = 372
+  Width = 451
+  Height = 304
   Align = alClient
   ParentShowHint = False
   ShowHint = True
@@ -13,7 +13,7 @@ object FRpMetaVCL: TFRpMetaVCL
     Left = 0
     Top = 25
     Width = 7
-    Height = 326
+    Height = 258
     Beveled = True
     ExplicitTop = 29
     ExplicitHeight = 220
@@ -21,7 +21,7 @@ object FRpMetaVCL: TFRpMetaVCL
   object BToolBar: TToolBar
     Left = 0
     Top = 0
-    Width = 553
+    Width = 451
     Height = 25
     AutoSize = True
     ButtonHeight = 25
@@ -30,6 +30,7 @@ object FRpMetaVCL: TFRpMetaVCL
     Images = ImageList1
     TabOrder = 0
     Wrapable = False
+    ExplicitWidth = 553
     object ToolButton8: TToolButton
       Left = 0
       Top = 0
@@ -204,13 +205,15 @@ object FRpMetaVCL: TFRpMetaVCL
   end
   object BStatus: TStatusBar
     Left = 0
-    Top = 351
-    Width = 553
+    Top = 283
+    Width = 451
     Height = 21
     Panels = <
       item
         Width = 50
       end>
+    ExplicitTop = 351
+    ExplicitWidth = 553
   end
   object ActionList1: TActionList
     Images = ImageList1
@@ -549,7 +552,7 @@ object FRpMetaVCL: TFRpMetaVCL
     Left = 128
     Top = 64
     Bitmap = {
-      494C010111001300080013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111001300040013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000004C0000005F0000000100200000000000D070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

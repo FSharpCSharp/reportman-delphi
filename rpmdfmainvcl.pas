@@ -58,6 +58,9 @@ uses
  Vcl.Styles,
  Vcl.Themes,
 {$ENDIF}
+{$IFDEF XE3UP}
+  System.UITypes,
+{$ENDIF}
   rpmdsysinfo,rppdfdriver,
   rpsection,rpprintitem,rpmdfopenlibvcl,rpeditconnvcl,
   DB,rpmunits,rpgraphutilsvcl,rpmdfwizardvcl, rpalias, System.Actions,
@@ -399,7 +402,7 @@ begin
   Screen.IconFont.Name:=FAppFontName;
   Screen.IconFont.Size:=FAppFontSize;
   Screen.IconFont.Style:=CLXIntegerToFontStyle(FAppFontStyle);
-  Graphics.DefFontData.Name:=Screen.IconFont.Name;
+  Graphics.DefFontData.Name:=TFontDataName(Screen.IconFont.Name);
   Graphics.DefFontData.Height:=Screen.IconFont.Height;
   Graphics.DefFontData.Style:=Screen.IconFont.Style;
   Self.Font.Assign(Screen.IconFont);

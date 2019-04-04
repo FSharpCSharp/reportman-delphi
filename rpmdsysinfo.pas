@@ -207,7 +207,6 @@ begin
  ComboSource.Items.Clear;
  ComboSource.Items.Add(SRpUnknown);
  ComboSource.ItemIndex:=0;
- dc:=0;
  pagesize.x:=0;
  pagesize.y:=0;
  if Printer.Printers.Count>0 then
@@ -217,7 +216,8 @@ begin
   printererror:=false;
   try
    dc:=Printer.Handle;
-   Printer.GetPrinter(Device, Driver, Port, DeviceMode);
+   if (dc <> 0) then
+    Printer.GetPrinter(Device, Driver, Port, DeviceMode);
   except
    on E:Exception do
    begin
@@ -291,8 +291,6 @@ begin
         pagesize.x:=0;
         pagesize.y:=0;
         try
-         if IsWindowsNT then
-         begin
           if (pdevmode^.dmFields AND DM_FORMNAME)>0 then
           begin
            LFormName.Caption:=StrPas(pdevmode^.dmFormName);
@@ -336,7 +334,6 @@ begin
             ' x '+gettextfromtwips(pagesize.y)+
              ' '+rpunitlabels[defaultunit];
           end;
-         end;
         except
          On E:Exception do
          begin

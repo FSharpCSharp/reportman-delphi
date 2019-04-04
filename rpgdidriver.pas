@@ -828,18 +828,7 @@ begin
  arec.Right:=Round(extent.X*dpix/TWIPS_PER_INCHESS);
  // calculates the text extent
  // Win9x does not support drawing WideChars
-{$IFNDEF DOTNETD}
- if IsWindowsNT then
-  DrawTextW(Canvas.Handle,PWideChar(aatext),Length(aatext),arec,aalign or DT_CALCRECT)
- else
-  DrawTextA(Canvas.Handle,PChar(aansitext),Length(aansitext),arec,aalign or DT_CALCRECT);
-{$ENDIF}
-{$IFDEF DOTNETD}
- if IsWindowsNT then
-  DrawTextW(Canvas.Handle,aatext,Length(aatext),arec,aalign or DT_CALCRECT)
- else
-  DrawTextA(Canvas.Handle,aansitext,Length(aansitext),arec,aalign or DT_CALCRECT);
-{$ENDIF}
+  DrawTextW(Canvas.Handle,PWideChar(aatext),Length(aatext),arec,aalign or DT_CALCRECT);
  // Transformates to twips
  extent.X:=Round(arec.Right/dpix*TWIPS_PER_INCHESS);
  extent.Y:=Round(arec.Bottom/dpiy*TWIPS_PER_INCHESS);
@@ -991,18 +980,7 @@ begin
       begin
        // First calculates the text extent
        // Win9x does not support drawing WideChars
-{$IFNDEF DOTNETD}
-       if IsWindowsNT then
-        DrawTextW(Canvas.Handle,PWideChar(atext),Length(atext),arec,aalign or DT_CALCRECT)
-       else
-        DrawTextA(Canvas.Handle,PChar(aansitext),Length(aansitext),arec,aalign or DT_CALCRECT);
-{$ENDIF}
-{$IFDEF DOTNETD}
-       if IsWindowsNT then
-        DrawTextW(Canvas.Handle,atext,Length(atext),arec,aalign or DT_CALCRECT)
-       else
-        DrawTextA(Canvas.Handle,aansitext,Length(aansitext),arec,aalign or DT_CALCRECT);
-{$ENDIF}
+        DrawTextW(Canvas.Handle,PWideChar(atext),Length(atext),arec,aalign or DT_CALCRECT);
        Canvas.Brush.Style:=bsSolid;
        Canvas.Brush.Color:=CLXColorToVCLColor(obj.BackColor);
       end
@@ -1030,18 +1008,8 @@ begin
        Canvas.Brush.Color:=clHighlight;
        Canvas.Font.Color:=clHighlightText;
       end;
-{$IFDEF DOTNETD}
-      if IsWindowsNT then
-       DrawTextW(Canvas.Handle,atext,Length(atext),rec,aalign)
-      else
-       DrawTextA(Canvas.Handle,aansitext,Length(aansitext),rec,aalign)
-     end;
-{$ENDIF}
 {$IFNDEF DOTNETD}
-      if IsWindowsNT then
-       DrawTextW(Canvas.Handle,PWideChar(atext),Length(atext),rec,aalign)
-      else
-       DrawTextA(Canvas.Handle,PChar(aansitext),Length(aansitext),rec,aalign)
+       DrawTextW(Canvas.Handle,PWideChar(atext),Length(atext),rec,aalign);
      end;
 {$ENDIF}
     finally
@@ -1396,16 +1364,8 @@ begin
          aalign:=aalign OR DT_RIGHT
         else
          aalign:=aalign OR DT_LEFT;
-        if IsWindowsNT then
-        begin
-         aatext:=lwords.strings[index];
-         DrawTextW(Canvas.Handle,PWideChar(aatext),Length(aatext),arec2,aalign);
-        end
-        else
-        begin
-         aansitext:=lwords.strings[index];
-         DrawTextA(Canvas.Handle,PChar(aansitext),Length(aansitext),arec2,aalign);
-        end;
+        aatext:=lwords.strings[index];
+        DrawTextW(Canvas.Handle,PWideChar(aatext),Length(aatext),arec2,aalign);
 //        TextOutW(Canvas.Handle,nposx,nposy,PWideChar(lwords.strings[index]),
 //         Length(lwords.strings[index]));
 //        TextOut(currpos,PosY+npdfdriver.pdffile.Canvas.LineInfo[i].TopPos,lwords.strings[index],
@@ -1415,14 +1375,7 @@ begin
         begin
          if lastword then
           aalign:=(aalign AND (NOT DT_RIGHT)) OR DT_LEFT;
-         if IsWindowsNT then
-         begin
-          DrawTextW(Canvas.Handle,PWideChar(aatext),Length(aatext),arec2,aalign or DT_CALCRECT);
-         end
-         else
-         begin
-          DrawTextA(Canvas.Handle,PChar(aansitext),Length(aansitext),arec2,aalign or DT_CALCRECT);
-         end;
+         DrawTextW(Canvas.Handle,PWideChar(aatext),Length(aatext),arec2,aalign or DT_CALCRECT);
          arec2.Top:=nposy;
          arec2.Bottom:=nposy+Round(npdfdriver.pdffile.Canvas.LineInfo[i].Height*aintdpiy/1440);
          if (lastword) then
@@ -1457,17 +1410,9 @@ begin
     arec2.Top:=nposy;
     arec2.Bottom:=arec.Bottom+100;
     arec2.Right:=Round(arect.Right*aintdpix/1440);
-    if IsWindowsNT then
-     DrawTextW(Canvas.Handle,PWideChar(astring),Length(astring),arec2,aalign)
+    DrawTextW(Canvas.Handle,PWideChar(astring),Length(astring),arec2,aalign);
 //     TextOutW(Canvas.Handle,nposx,nposy,PWideChar(astring),
 //       Length(astring))
-    else
-    begin
-     aansitext:=Trim(astring);
-     DrawTextA(Canvas.Handle,PChar(aansitext),Length(aansitext),arec2,aalign);
-//     TextOut(Canvas.Handle,nposx,nposy,PChar(aansitext),
-//       Length(astring))
-    end;
    end;
 //    TextOut(PosX,PosY+npdfdriver.pdffile.Canvas.LineInfo[i].TopPos,astring,npdfdriver.pdffile.Canvas.LineInfo[i].Width,Rotation,RightToLeft);
   end;

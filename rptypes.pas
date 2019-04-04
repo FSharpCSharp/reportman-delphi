@@ -1,4 +1,4 @@
-{*******************************************************}
+﻿{*******************************************************}
 {                                                       }
 {       Report Manager                                  }
 {                                                       }
@@ -373,10 +373,7 @@ function RpCharToOem(source:AnsiString):AnsiString;
 
 
 {$IFDEF MSWINDOWS}
-function IsWindowsNT:Boolean;
- {$IFNDEF DOTNETD}
   function ExeResourceToStream (resId: Integer):TMemoryStream;
- {$ENDIF}
 {$ENDIF}
 
 

@@ -813,18 +813,7 @@ begin
  else
   SetBkMode(Canvas.Handle,OPAQUE);
  aansitext:=aexp.ValueExpression;
-{$IFNDEF DOTNETD}
- if IsWindowsNT then
-  DrawTextW(Canvas.Handle,PWideChar(aexp.ValueExpression),Length(aexp.ValueExpression),rec,aalign)
- else
-  DrawTextA(Canvas.Handle,PChar(aansitext),Length(aansitext),rec,aalign);
-{$ENDIF}
-{$IFDEF DOTNETD}
- if IsWindowsNT then
-  DrawTextW(Canvas.Handle,aexp.ValueExpression,Length(aexp.ValueExpression),rec,aalign)
- else
-  DrawTextA(Canvas.Handle,aansitext,Length(aansitext),rec,aalign);
-{$ENDIF}
+ DrawTextW(Canvas.Handle,PWideChar(aexp.ValueExpression),Length(aexp.ValueExpression),rec,aalign);
  Canvas.Pen.Color:=clBlack;
  Canvas.Pen.Style:=psDashDot;
  Canvas.Brush.Style:=bsClear;

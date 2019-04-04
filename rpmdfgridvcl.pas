@@ -25,6 +25,9 @@ interface
 uses SysUtils, Classes,
   Graphics, Forms,
   Buttons, ExtCtrls, Controls, StdCtrls,Dialogs,
+{$IFDEF XE3UP}
+  System.UITypes,
+{$ENDIF}
   rpmdconsts,rpmunits,rpreport, Mask, rpmaskedit;
 
 type

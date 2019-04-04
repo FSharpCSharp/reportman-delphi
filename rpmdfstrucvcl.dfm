@@ -17,6 +17,10 @@ object FRpStructureVCL: TFRpStructureVCL
     TabOrder = 0
     object TabStructure: TTabSheet
       Caption = 'Structure'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object RView: TTreeView
         Left = 0
         Top = 26
@@ -72,6 +76,10 @@ object FRpStructureVCL: TFRpStructureVCL
     object TabData: TTabSheet
       Caption = 'Data'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   object ImageList1: TImageList
@@ -80,7 +88,7 @@ object FRpStructureVCL: TFRpStructureVCL
     Left = 144
     Top = 128
     Bitmap = {
-      494C010104000900100013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000900040013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000004C000000260000000100200000000000202D
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

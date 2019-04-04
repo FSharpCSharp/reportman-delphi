@@ -30,14 +30,14 @@ object FRpGridOptionsVCL: TFRpGridOptionsVCL
   object Lvertical: TLabel
     Left = 8
     Top = 32
-    Width = 75
+    Width = 74
     Height = 13
     Caption = 'Vertical spacing'
   end
   object LGridColor: TLabel
     Left = 8
     Top = 136
-    Width = 46
+    Width = 47
     Height = 13
     Caption = 'Grid Color'
   end
@@ -81,6 +81,7 @@ object FRpGridOptionsVCL: TFRpGridOptionsVCL
     Width = 81
     Height = 21
     TabOrder = 2
+    Text = ''
     EditType = tecurrency
   end
   object EGridY: TRpMaskEdit
@@ -89,6 +90,7 @@ object FRpGridOptionsVCL: TFRpGridOptionsVCL
     Width = 81
     Height = 21
     TabOrder = 3
+    Text = ''
     EditType = tecurrency
   end
   object CheckEnabled: TCheckBox

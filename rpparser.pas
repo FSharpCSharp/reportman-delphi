@@ -5,7 +5,7 @@
 {       Report Manager                                  }
 {                                                       }
 {       Copyright (c) 1994-2019 Toni Martir             }
-{       toni@reportman.es                                   }
+{       toni@reportman.es                               }
 {                                                       }
 {       This file is under the MPL license              }
 {       If you enhace this file you must provide        }
@@ -28,10 +28,9 @@ type
 
   TRpParser = class(TObject)
   private
-    FNewExpression:AnsiString;
-    FStream: TStream;
+    FNewExpression:string;
     FOrigin: Longint;
-    FBuffer: array of Byte;
+    FBuffer: array of char;
     FBufPtr: Integer;
     FBufEnd: Integer;
     FSourcePtr: Integer;
@@ -39,36 +38,34 @@ type
     FTokenPtr: Integer;
     FStringPtr: Integer;
     FSourceLine: Integer;
-    FSaveChar: Byte;
     FToken: Char;
     FFloatType: Char;
     FWideStr: WideString;
     ParseBufSize :integer;
-    procedure ReadBuffer;
     procedure SkipBlanks;
-    procedure SetExpression(Value:AnsiString);
+    procedure SetExpression(Value:string);
   public
     constructor Create;
     destructor Destroy;override;
     procedure CheckToken(T: Char);
-    procedure CheckTokenSymbol(const S: Ansistring);
+    procedure CheckTokenSymbol(const S: string);
     procedure Error(MessageID:WideString);
-    procedure HexToBinary(Stream: TStream);
+    procedure HexToBinaryStream(Stream: TStream);
     function NextToken: Char;
     function SourcePos: Longint;
-    function TokenComponentIdent: Ansistring;
+    function TokenComponentIdent: string;
     function TokenFloat: Double;
 //    function TokenInt: Int64;
     function TokenInt: Integer;
-    function TokenString: Ansistring;
+    function TokenString: string;
     function TokenWideString: WideString;
-    function TokenSymbolIs(const S: Ansistring): Boolean;
+    function TokenSymbolIs(const S: string): Boolean;
     // Ask for the next token
-    function NextTokenIs(Value:Ansistring):Boolean;
+    function NextTokenIs(Value:string):Boolean;
     property FloatType: Char read FFloatType;
     property SourceLine: Integer read FSourceLine;
     property Token: Char read FToken;
-    property Expression:AnsiString read FNewExpression write SetExpression;
+    property Expression:string read FNewExpression write SetExpression;
   end;
 
 var
@@ -116,11 +113,30 @@ begin
   Result := C;
 end;
 
-function ALineStart(Buffer: array of Byte; BufPos: Integer): Integer;
+function HexToBinChar(const Text: array of char; TextOffset: Integer;
+  Buffer: array of Byte; BufOffset: Integer; Count: Integer): Integer;
+var
+  I, C: Integer;
 begin
-  while (BufPos > 0) and (Buffer[BufPos] <> 10) do
+  C := 0;
+  for I := 0 to Count - 1 do
+  begin
+    if not (Text[TextOffset + I * 2] in ['0'..'f']) or
+       not (Text[TextOffset + 1 + I * 2] in ['0'..'f']) then
+      Break;
+    Buffer[BufOffset + I] :=
+      (H2BConvert[AnsiChar(Text[TextOffset + I * 2])] shl 4) or
+       H2BConvert[AnsiChar(Text[TextOffset + 1 + I * 2])];
+    Inc(C);
+  end;
+  Result := C;
+end;
+
+function ALineStart(Buffer: array of char; BufPos: Integer): Integer;
+begin
+  while (Ord(BufPos) > 0) and (Ord(Buffer[BufPos]) <> 10) do
     Dec(BufPos);
-  if Buffer[BufPos] = 10 then
+  if Ord(Buffer[BufPos]) = 10 then
     Inc(BufPos);
   Result := BufPos;
 end;
@@ -157,14 +173,14 @@ begin
 end;
 
 
-procedure TRpParser.CheckTokenSymbol(const S: Ansistring);
+procedure TRpParser.CheckTokenSymbol(const S: string);
 begin
   if not TokenSymbolIs(S) then
    Raise TRpEvalException.Create(Format(SRpExpected, [S]),'',SourceLine,SourcePos);
 end;
 
 
-procedure TRpParser.HexToBinary(Stream: TStream);
+procedure TRpParser.HexToBinaryStream(Stream: TStream);
 var
   Count: Integer;
   Buffer: array[0..255] of Byte;
@@ -172,7 +188,7 @@ begin
   SkipBlanks;
   while Char(FBuffer[FSourcePtr]) <> '}' do
   begin
-    Count := HexToBin(FBuffer, FSourcePtr, Buffer, 0, SizeOf(Buffer));
+    Count := HexToBinChar(FBuffer, FSourcePtr, Buffer, 0, SizeOf(Buffer));
     if Count = 0 then
       Error(SRpEvalSyntax);
     Stream.Write(Buffer, Count);
@@ -182,19 +198,20 @@ begin
   NextToken;
 end;
 
+
 function TRpParser.NextToken: Char;
 var
   I, J: Integer;
   IsWideStr: Boolean;
   P, S: Integer;
-  achar:AnsiChar;
+  achar:Char;
   operadors:string;
   operador:Char;
 begin
   SkipBlanks;
   P := FSourcePtr;
   FTokenPtr := P;
-  case AnsiChar(FBuffer[P]) of
+  case FBuffer[P] of
     // Identifiers
 {$IFDEF DOTNETD}
     'A'..'Z', 'a'..'z','_':
@@ -206,10 +223,10 @@ begin
       begin
         Inc(P);
 {$IFDEF DOTNETD}
-        while AnsiChar(FBuffer[P]) in ['A'..'Z', 'a'..'z','0'..'9', '_','.'] do
+        while FBuffer[P] in ['A'..'Z', 'a'..'z','0'..'9', '_','.'] do
 {$ENDIF}
 {$IFNDEF DOTNETD}
-        while AnsiChar(FBuffer[P]) in ['A'..'Z', 'a'..'z','á','à','é','è','í','ó','ò','ú', 'Ñ','ñ','0'..'9','_','.',
+        while FBuffer[P] in ['A'..'Z', 'a'..'z','á','à','é','è','í','ó','ò','ú', 'Ñ','ñ','0'..'9','_','.',
          'ä','Ä','ö','Ö','ü','Ü','Á','À','É','È','Í','Ó','Ò','Ú','ß'] do
 {$ENDIF}
           Inc(P);
@@ -219,11 +236,11 @@ begin
     '[':
       begin
         Inc(P);
-        achar:=AnsiChar(FBuffer[P]);
-        while ((achar<>AnsiChar(0)) AND (achar<>']')) do
+        achar:=FBuffer[P];
+        while ((achar<>Char(0)) AND (achar<>']')) do
         begin
          Inc(P);
-         achar:=AnsiChar(FBuffer[P]);
+         achar:=FBuffer[P];
         end;
         // Finish?
         if achar<>']' then
@@ -261,9 +278,9 @@ begin
               begin
                 Inc(P);
                 I := 0;
-                while AnsiChar(FBuffer[P]) in ['0'..'9'] do
+                while FBuffer[P] in ['0'..'9'] do
                 begin
-                  I := I * 10 + (FBuffer[P] - Ord('0'));
+                  I := I * 10 + (Ord(FBuffer[P]) - Ord('0'));
                   Inc(P);
                 end;
                 if (I > 127) then
@@ -275,13 +292,13 @@ begin
                 Inc(P);
                 while True do
                 begin
-                  case AnsiChar(FBuffer[P]) of
+                  case FBuffer[P] of
                     #0, #10, #13:
                       Error(SRpEvalSyntax);
                     '''':
                       begin
                         Inc(P);
-                        if Char(FBuffer[P]) <> '''' then
+                        if FBuffer[P] <> '''' then
                           Break;
                       end;
                   end;
@@ -302,9 +319,9 @@ begin
               begin
                 Inc(P);
                 I := 0;
-                while AnsiChar(FBuffer[P]) in ['0'..'9'] do
+                while FBuffer[P] in ['0'..'9'] do
                 begin
-                  I := I * 10 + (FBuffer[P] - Ord('0'));
+                  I := I * 10 + (Ord(FBuffer[P]) - Ord('0'));
                   Inc(P);
                 end;
                 if IsWideStr then
@@ -314,7 +331,7 @@ begin
                 end
                 else
                 begin
-                  FBuffer[S] := I;
+                  FBuffer[S] := Char(I);
                   Inc(S);
                 end;
               end;
@@ -323,7 +340,7 @@ begin
                 Inc(P);
                 while True do
                 begin
-                  case FBuffer[P] of
+                  case Ord(FBuffer[P]) of
                     0, 10, 13:
                       Error(SRpEvalSyntax);
                     Ord(''''):
@@ -359,7 +376,7 @@ begin
     '$':
       begin
         Inc(P);
-        while AnsiChar(FBuffer[P]) in ['0'..'9', 'A'..'F', 'a'..'f'] do
+        while FBuffer[P] in ['0'..'9', 'A'..'F', 'a'..'f'] do
           Inc(P);
         Result := toInteger;
       end;
@@ -367,23 +384,23 @@ begin
     '0'..'9':
       begin
         Inc(P);
-        while AnsiChar(FBuffer[P]) in ['0'..'9'] do
+        while FBuffer[P] in ['0'..'9'] do
           Inc(P);
         Result := toInteger;
-        while AnsiChar(FBuffer[P]) in ['0'..'9', '.', 'e', 'E'] do
+        while FBuffer[P] in ['0'..'9', '.', 'e', 'E'] do
         begin
-          if AnsiChar(FBuffer[P])='.' then
+          if FBuffer[P]='.' then
           begin
 {$IFDEF DELPHI2009UP}
-           FBuffer[P]:=Byte(FormatSettings.DecimalSeparator);
+           FBuffer[P]:=FormatSettings.DecimalSeparator;
 {$ELSE}
-           FBuffer[P]:=Byte(DecimalSeparator);
+           FBuffer[P]:=DecimalSeparator;
 {$ENDIF}
           end;
           Inc(P);
           Result := toFloat;
         end;
-        if (AnsiChar(FBuffer[P]) in ['c', 'C', 'd', 'D', 's', 'S', 'f', 'F']) then
+        if (FBuffer[P] in ['c', 'C', 'd', 'D', 's', 'S', 'f', 'F']) then
         begin
           Result := toFloat;
           FFloatType := Char(FBuffer[P]);
@@ -415,50 +432,16 @@ begin
   end;
 end;
 
-procedure TRpParser.ReadBuffer;
-var
-  Count: Integer;
-begin
-  Inc(FOrigin, FSourcePtr);
-  FBuffer[FSourceEnd] := FSaveChar;
-  Count := FBufPtr - FSourcePtr;
-  if Count <> 0 then
-  begin
-{$IFDEF DOTNETD}
-    System.Array.Copy(FBuffer, FSourcePtr, FBuffer, 0, Count);
-{$ENDIF}
-{$IFNDEF DOTNETD}
-   Move(FBuffer[FSourcePtr],FBuffer[0],Count);
-{$ENDIF}
-  end;
-  FBufPtr := Count;
-{$IFDEF DOTNETD}
-  Inc(FBufPtr, FStream.Read(FBuffer, FBufPtr, FBufEnd - FBufPtr));
-{$ENDIF}
-{$IFNDEF DOTNETD}
-  Inc(FBufPtr, FStream.Read(FBuffer[FBufPtr], FBufEnd - FBufPtr));
-{$ENDIF}
-  FSourcePtr := 0;
-  FSourceEnd := FBufPtr;
-  if FSourceEnd = FBufEnd then
-  begin
-    FSourceEnd := ALineStart(FBuffer, FSourceEnd - 2);
-    if FSourceEnd = 0 then
-      Error(SRpLineTooLong);
-  end;
-  FSaveChar := FBuffer[FSourceEnd];
-  FBuffer[FSourceEnd] := 0;
-end;
 
 procedure TRpParser.SkipBlanks;
 begin
   while True do
   begin
-    case FBuffer[FSourcePtr] of
+    case Ord(FBuffer[FSourcePtr]) of
       0:
         begin
-          ReadBuffer;
-          if FBuffer[FSourcePtr] = 0 then
+          //ReadBuffer;
+          if FBuffer[FSourcePtr] = Char(0) then
             Exit;
           Continue;
         end;
@@ -490,7 +473,7 @@ begin
   Result := StrToInt64(TokenString);
 end;
 
-function TRpParser.TokenString: Ansistring;
+function TRpParser.TokenString: string;
 var
   L: Integer;
 begin
@@ -498,12 +481,7 @@ begin
     L := FStringPtr - FTokenPtr
   else
     L := FSourcePtr - FTokenPtr;
-{$IFDEF DOTNETD}
-  Result := AnsiEncoding.GetString(FBuffer, FTokenPtr, L);
-{$ENDIF}
-{$IFNDEF DOTNETD}
-  SetString(Result,PAnsichar(@FBuffer[FTokenPtr]),L);
-{$ENDIF}
+  SetString(Result,PChar(@FBuffer[FTokenPtr]),L);
   // Brackets out
   if FToken=toSymbol then
   begin
@@ -524,25 +502,25 @@ begin
     Result := FWideStr;
 end;
 
-function TRpParser.TokenSymbolIs(const S: Ansistring): Boolean;
+function TRpParser.TokenSymbolIs(const S:string): Boolean;
 begin
   Result := (Token = toSymbol) and SameText(S, TokenString);
 end;
 
-function TRpParser.TokenComponentIdent: Ansistring;
+function TRpParser.TokenComponentIdent: string;
 var
   P: Integer;
 begin
   CheckToken(toSymbol);
   P := FSourcePtr;
-  while AnsiChar(FBuffer[P]) = '.' do
+  while FBuffer[P] = '.' do
   begin
     Inc(P);
-    if not (AnsiChar(FBuffer[P]) in ['A'..'Z', 'a'..'z', '_']) then
+    if not (FBuffer[P] in ['A'..'Z', 'a'..'z', '_']) then
       Error(SRpIdentifierexpected);
     repeat
       Inc(P)
-    until not (AnsiChar(FBuffer[P]) in ['A'..'Z', 'a'..'z', '0'..'9', '_']);
+    until not (FBuffer[P] in ['A'..'Z', 'a'..'z', '0'..'9', '_']);
   end;
   FSourcePtr := P;
   Result := TokenString;
@@ -552,7 +530,7 @@ end;
 
 
 
-function TRpParser.NextTokenIs(Value:Ansistring):Boolean;
+function TRpParser.NextTokenIs(Value:string):Boolean;
 var NewParser:TRpParser;
     Apuntador:Integer;
 begin
@@ -570,21 +548,16 @@ begin
   end;
 end;
 
-procedure TRpParser.SetExpression(Value:AnsiString);
+procedure TRpParser.SetExpression(Value:string);
 begin
-  if Assigned(FStream) then
-   FStream.free;
-  FStream := TMemoryStream.Create;
-  if Length(Value)>0 then
-   FStream.Write(Value[1],Length(Value));
-  FStream.Seek(0,soFromBeginning);
   FNewExpression:=Value;
   if (Length(Value)>(ParseBufSize-1)) then
   begin
    ParseBufSize:=Length(Value)*2;
    SetLength(FBuffer, ParseBufSize);
   end;
-  FBuffer[0] := 0;
+  StringToWideChar(FNewExpression,PChar(FBuffer),ParseBufSize);
+  FBuffer[Length(Value)] := Char(0);
   FBufPtr := 0;
   FBufEnd := ParseBufSize;
   FSourcePtr := 0;
@@ -596,8 +569,6 @@ end;
 
 destructor TRpParser.Destroy;
 begin
-  if Assigned(FStream) then
-   FStream.free;
 
  inherited destroy;
 end;

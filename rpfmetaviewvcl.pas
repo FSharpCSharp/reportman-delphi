@@ -34,13 +34,10 @@ uses
 {$IFDEF USEINDY}
   rpmdclitreevcl,
 {$ENDIF}
-{$IFDEF DELPHI2009UP}
- System.Actions,
-{$ENDIF}
   rpexceldriver,rptextdriver,rpsvgdriver,rpcsvdriver,
   ActnList, ImgList,Printers,rpmdconsts,rptypes, Menus,
   rpmdfaboutvcl,rpmdshfolder,rpmdprintconfigvcl,
-  ToolWin, Mask, rpmaskedit,rpvgraphutils;
+  ToolWin, Mask, rpmaskedit,rpvgraphutils, System.ImageList, System.Actions;
 
 type
 
@@ -1009,7 +1006,7 @@ begin
 
  SaveMetafileToPDF(Metafile,afilename,true);
  try
-  rptypes.SendMail('',ExtractFileName(afilename),'',afilename,ExtractFilePath(ChangeFileExt(afilename,'.pdf')));
+  rptypes.SendMail('',AnsiString(ExtractFileName(afilename)),'',AnsiString(afilename),AnsiString(ExtractFilePath(ChangeFileExt(afilename,'.pdf'))));
  finally
   SysUtils.DeleteFile(afilename);
  end;

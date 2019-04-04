@@ -514,9 +514,6 @@ var
  asection,asec:TRpSection;
  asectype:TRpSectionType;
  firstdetail,lastdetail:integer;
- nextnode:TTreeNode;
- currentnode:TTreeNode;
- indexcurrent:integer;
 begin
  // Goes down
  aobject:=FindSelectedObject;
@@ -538,17 +535,6 @@ begin
      arep:=report.SubReports.Items[i].SubReport;
      report.SubReports.Items[i].SubReport:=subrep;
      report.SubReports.Items[changesubrep].SubReport:=arep;
-     // Swicth nodes order
-     //currentnode:=RView.Selected;
-     //nextnode:=RView.Items[currentnode.Index+1];
-     //while (nextnode.Parent <> nil) do
-     //begin
-     //  nextnode:=RView.Items[nextnode.Index+1];
-     //end;
-     //nextnode.MoveTo(currentnode,TNodeAttachMode.naInsert);
-     //RView.Items[RView.Selected.Index+1].MoveTo(RView.Selected,TNodeAttachMode.naInsert);
-
-     //GetNext.MoveTo(RView.Selected,TNodeAttachMode.naInsert);
 
 
      SetReport(FReport);
