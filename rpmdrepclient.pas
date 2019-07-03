@@ -372,7 +372,7 @@ begin
   amod.ClientHandleThread.amod:=amod;
   amod.CLientHandleThread.FEndreport:=amod.FEndReport;
   amod.ClientHandleThread.FreeOnTerminate:=True;
-  amod.ClientHandleThread.Resume;
+  amod.ClientHandleThread.Start;
 
 
   arec:=GenerateUserNameData(user,password);

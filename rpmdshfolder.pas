@@ -90,113 +90,6 @@ implementation
 
 uses rptypes;
 
-function Obtainininameuserconfig(company,product,filename:string):string;
-var
- wcompany:Widestring;
- wproduct:WideString;
- wfilename:WideString;
-{$IFDEF LINUX}
- ap:PCHar;
- szAppdata:array [0..MAX_PATH] of AnsiChar;
-{$ELSE}
-szAppDataA:array [0..MAX_PATH] of AnsiChar;
-szAppDataW:array [0..MAX_PATH] of WideChar;
-{$ENDIF}
- nresult:THandle;
-begin
-
-{$IFDEF LINUX}
-{$IFDEF FPC}
- ap:=Pchar(Sysutils.GetEnvironmentVariable('HOME'));
-{$ELSE}
- ap:=getenv(Pchar('HOME'));
-{$ENDIF}
- if assigned(ap) then
- begin
-  StrPCopy(szAppdata,ap);
-  Result:=StrPas(szAppdata)+'/.'
- end
- else
-  Result:='./.';
- if length(company)>0 then
-  Result:=Result+company+'.';
- if length(product)>0 then
-  Result:=Result+product+'.';
- Result:=Result+filename;
-{$ENDIF}
-{$IFDEF MSWINDOWS}
- if length(filename)<1 then
-  Raise Exception.Create(SRpFileNameRequired);
- if (IsWindowsNT) then
- begin
-  nresult:=SHGetFolderPathW(0, CSIDL_APPDATA or CSIDL_FLAG_CREATE, 0, 0, szAppDataW);
-  wcompany:=company;
-  wproduct:=product;
-  wfilename:=filename;
-  if length(wcompany)>0 then
-  begin
-   if not PathAppendW(szAppdataW,PWidechar(wcompany)) then
-    RaiseLastOSError;
-  end;
-  if Length(wproduct)>0 then
-  begin
-   if not PathAppendW(szAppdataW,PWidechar(wproduct)) then
-    RaiseLastOSError;
-  end;
-
-  Result:=WideCharToString(szAppdataW);
- end
- else
- begin
-  nresult:=SHGetFolderPathA(0, CSIDL_APPDATA or CSIDL_FLAG_CREATE, 0, 0, szAppDataA);
-  if length(company)>0 then
-  begin
-   if not PathAppendA(szAppdataA,PAnsichar(company)) then
-    RaiseLastOSError;
-  end;
-  if Length(product)>0 then
-  begin
-   if not PathAppendA(szAppdataA,PAnsichar(product)) then
-    RaiseLastOSError;
-  end;
-  Result:=StrPas(szAppdataA);
- end;
- if (S_OK <>nresult) then
- begin
-  Result:=Result+'Error in ShGetFolderPath(CSIDL_APPDATA or CSIDL_FLAG_CREATE)';
-  exit;
- end;
-
-
-
- if Not DirectoryExists(Result) then
- begin
-{$IFDEF BUILDER4}
- ForceDirectories(Result);
-{$ENDIF}
-{$IFNDEF BUILDER4}
- try
-  if not ForceDirectories(Result) then
-   Result:='';
- except
-   Result:='';
- end;
-{$ENDIF}
- end;
- if (IsWindowsNT) then
- begin
-  if not PathAppendW(szAppdataW,PWidechar(WideString(filename+'.ini'))) then
-    RaiseLastOSError;
-  Result:=WideCharToString(szAppdataW);
- end
- else
- begin
-  if not PathAppendA(szAppdataA,PAnsichar(filename+'.ini')) then
-    RaiseLastOSError;
-  Result:=StrPas(szAppdataA);
- end;
-{$ENDIF}
-end;
 
 function Obtainininamelocaluserconfig(company,product,filename:string):string;
 var
@@ -235,8 +128,6 @@ begin
 {$IFDEF MSWINDOWS}
  if length(filename)<1 then
   Raise Exception.Create(SRpFileNameRequired);
- if (IsWindowsNT) then
- begin
   nresult:=SHGetFolderPathW(0, CSIDL_LOCAL_APPDATA or CSIDL_FLAG_CREATE, 0, 0, szAppDataW);
   wcompany:=company;
   wproduct:=product;
@@ -253,22 +144,6 @@ begin
   end;
 
   Result:=WideCharToString(szAppdataW);
- end
- else
- begin
-  nresult:=SHGetFolderPathA(0, CSIDL_LOCAL_APPDATA or CSIDL_FLAG_CREATE, 0, 0, szAppDataA);
-  if length(company)>0 then
-  begin
-   if not PathAppendA(szAppdataA,PAnsichar(company)) then
-    RaiseLastOSError;
-  end;
-  if Length(product)>0 then
-  begin
-   if not PathAppendA(szAppdataA,PAnsichar(product)) then
-    RaiseLastOSError;
-  end;
-  Result:=StrPas(szAppdataA);
- end;
  if (S_OK <>nresult) then
  begin
   Result:=Result+'Error in ShGetFolderPath(CSIDL_APPDATA or CSIDL_FLAG_CREATE)';
@@ -291,18 +166,83 @@ begin
  end;
 {$ENDIF}
  end;
- if (IsWindowsNT) then
- begin
   if not PathAppendW(szAppdataW,PWidechar(WideString(filename+'.ini'))) then
     RaiseLastOSError;
   Result:=WideCharToString(szAppdataW);
+{$ENDIF}
+end;
+function Obtainininameuserconfig(company,product,filename:string):string;
+var
+ szAppDataA:array [0..MAX_PATH] of AnsiChar;
+ szAppDataW:array [0..MAX_PATH] of WideChar;
+ wcompany:Widestring;
+ wproduct:WideString;
+ wfilename:WideString;
+{$IFDEF LINUX}
+ ap:PCHar;
+{$ENDIF}
+ nresult:THandle;
+begin
+
+{$IFDEF LINUX}
+ ap:=getenv(Pchar('HOME'));
+ if assigned(ap) then
+ begin
+  StrPCopy(szAppdata,ap);
+  Result:=StrPas(szAppdata)+'/.'
  end
  else
- begin
-  if not PathAppendA(szAppdataA,PAnsichar(filename+'.ini')) then
+  Result:='./.';
+ if length(company)>0 then
+  Result:=Result+company+'.';
+ if length(product)>0 then
+  Result:=Result+product+'.';
+ Result:=Result+filename;
+{$ENDIF}
+{$IFDEF MSWINDOWS}
+ if length(filename)<1 then
+  Raise Exception.Create(SRpFileNameRequired);
+  nresult:=SHGetFolderPathW(0, CSIDL_APPDATA or CSIDL_FLAG_CREATE, 0, 0, szAppDataW);
+  wcompany:=company;
+  wproduct:=product;
+  wfilename:=filename;
+  if length(wcompany)>0 then
+  begin
+   if not PathAppendW(szAppdataW,PWidechar(wcompany)) then
     RaiseLastOSError;
-  Result:=StrPas(szAppdataA);
+  end;
+  if Length(wproduct)>0 then
+  begin
+   if not PathAppendW(szAppdataW,PWidechar(wproduct)) then
+    RaiseLastOSError;
+  end;
+
+  Result:=WideCharToString(szAppdataW);
+ if (S_OK <>nresult) then
+ begin
+  Result:=Result+'Error in ShGetFolderPath(CSIDL_APPDATA or CSIDL_FLAG_CREATE)';
+  exit;
  end;
+
+
+
+ if Not DirectoryExists(Result) then
+ begin
+{$IFDEF BUILDER4}
+ ForceDirectories(Result);
+{$ENDIF}
+{$IFNDEF BUILDER4}
+ try
+  if not ForceDirectories(Result) then
+   Result:='';
+ except
+   Result:='';
+ end;
+{$ENDIF}
+ end;
+  if not PathAppendW(szAppdataW,PWidechar(WideString(filename+'.ini'))) then
+    RaiseLastOSError;
+  Result:=WideCharToString(szAppdataW);
 {$ENDIF}
 end;
 
@@ -348,8 +288,6 @@ begin
  if length(filename)<1 then
   Raise Exception.Create(SRpFileNameRequired);
  Result:='';
- if (IsWindowsNT) then
- begin
   dwflags:=CSIDL_COMMON_APPDATA;
   if (create) then
     dwflags:=dwflags or CSIDL_FLAG_CREATE;
@@ -408,22 +346,6 @@ begin
 //    RaiseLastOSError;
   end;
 //  Result:=WideCharToString(szAppdataW);
- end
- else
- begin
-  nresult:=SHGetFolderPathA(0, CSIDL_COMMON_APPDATA or CSIDL_FLAG_CREATE, 0, 0, szAppDataA);
-  if length(company)>0 then
-  begin
-   if not PathAppendA(szAppdataA,PAnsichar(company)) then
-    RaiseLastOSError;
-  end;
-  if Length(product)>0 then
-  begin
-   if not PathAppendA(szAppdataA,PAnsichar(product)) then
-    RaiseLastOSError;
-  end;
-  Result:=StrPas(szAppdataA);
- end;
  //if (S_OK <>nresult) then
  //begin
   //Result:=Result+'Error in ShGetFolderPath(CSIDL_COMMON_APPDATA or CSIDL_FLAG_CREATE)';
@@ -450,18 +372,9 @@ begin
  end;
 {$ENDIF}
  end;
- if (IsWindowsNT) then
- begin
   if not PathAppendW(szAppdataW,PWidechar(WideString(filename+'.ini'))) then
     RaiseLastOSError;
   Result:=WideCharToString(szAppdataW);
- end
- else
- begin
-  if not PathAppendA(szAppdataA,PAnsichar(filename+'.ini')) then
-    RaiseLastOSError;
-  Result:=StrPas(szAppdataA);
- end;
 {$ENDIF}
 end;
 
@@ -481,8 +394,6 @@ begin
 {$IFDEF MSWINDOWS}
  if length(filename)<1 then
   Raise Exception.Create(SRpFileNameRequired);
- if (IsWindowsNT) then
- begin
   nresult:=SHGetFolderPathW(0, CSIDL_LOCAL_APPDATA or CSIDL_FLAG_CREATE, 0, 0, szAppDataW);
   wcompany:=company;
   wproduct:=product;
@@ -498,22 +409,6 @@ begin
     RaiseLastOSError;
   end;
   Result:=WideCharToString(szAppdataW);
- end
- else
- begin
-  nresult:=SHGetFolderPathA(0, CSIDL_LOCAL_APPDATA or CSIDL_FLAG_CREATE, 0, 0, szAppDataA);
-  if length(company)>0 then
-  begin
-   if not PathAppendA(szAppdataA,PAnsichar(company)) then
-    RaiseLastOSError;
-  end;
-  if Length(product)>0 then
-  begin
-   if not PathAppendA(szAppdataA,PAnsichar(product)) then
-    RaiseLastOSError;
-  end;
-  Result:=StrPas(szAppdataA);
- end;
  if (S_OK <>nresult) then
  begin
   Result:=Result+'Error in ShGetFolderPath(CSIDL_LOCAL_APPDATA or CSIDL_FLAG_CREATE)';
@@ -536,18 +431,9 @@ begin
  end;
 {$ENDIF}
  end;
- if (IsWindowsNT) then
- begin
   if not PathAppendW(szAppdataW,PWidechar(WideString(filename+'.ini'))) then
     RaiseLastOSError;
   Result:=WideCharToString(szAppdataW);
- end
- else
- begin
-  if not PathAppendA(szAppdataA,PAnsichar(filename+'.ini')) then
-    RaiseLastOSError;
-  Result:=StrPas(szAppdataA);
- end;
 {$ENDIF}
 end;
 
@@ -595,35 +481,17 @@ if HandleLib=2 then
 //SHGetFolderPath:=GetProcAddress(HandleLib,PChar('SHGetFolderPathW'));
 //{$ENDIF}
 //{$IFNDEF DELPHI2009UP}
-if (IsWindowsNt) then
-begin
  SHGetFolderPathW:=GetProcAddress(HandleLib,PChar('SHGetFolderPathW'));
  if Not Assigned(SHGetFolderPathW) then
   RaiseLastOSError;
-end
-else
-begin
- SHGetFolderPathA:=GetProcAddress(HandleLib,PChar('SHGetFolderPathA'));
- if Not Assigned(SHGetFolderPathA) then
-  RaiseLastOSError;
-end;
 //{$ENDIF}
 //{$IFDEF DELPHI2009UP}
 //PathAppend:=GetProcAddress(HandleLib2,PChar('PathAppendW'));
 //{$ENDIF}
 //{$IFNDEF DELPHI2009UP}
-if (IsWindowsNt) then
-begin
  PathAppendW:=GetProcAddress(HandleLib2,PChar('PathAppendW'));
  if Not Assigned(PathAppendW) then
   RaiseLastOSError;
-end
-else
-begin
- PathAppendA:=GetProcAddress(HandleLib2,PChar('PathAppendA'));
- if Not Assigned(PathAppendA) then
-  RaiseLastOSError;
-end;
 //{$ENDIF}
 {$ENDIF}
 

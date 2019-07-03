@@ -62,7 +62,6 @@ var
  ddc:THandle;
 begin
  inherited Create;
- isnt:=IsWindowsNt;
  currentname:='';
  currentstyle:=0;
  fonthandle:=0;

@@ -37,6 +37,9 @@ uses
 {$IFDEF EXTENDEDGRAPHICS}
  rpgraphicex,jpeg,
 {$ENDIF}
+{$IFDEF XE3UP}
+  System.UITypes,
+{$ENDIF}
   rpreport,rpsubreport,rpmdflabelintvcl,rplabelitem,
   rpmdfdrawintvcl,rpmdfbarcodeintvcl,rpmdfchartintvcl,
   rpmaskedit,rpmetafile;
@@ -358,26 +361,12 @@ begin
  end;
  // ResourceSaving for Win9x systems
  // Free all panels
- if not IsWindowsNT then
- begin
-  // Free all other panels
-  for i:=0 to FPropPanels.Count-1 do
-  begin
-   if FPropPanels.Objects[i]<>Result then
-    TRpPanelObj(FPropPanels.Objects[i]).Free;
-  end;
-  FPropPanels.Clear;
-  FPropPanels.AddObject(newclassname,Result);
- end
- else
- begin
   // Invisible all other panels
   for i:=0 to FPropPanels.Count-1 do
   begin
    if FPropPanels.Objects[i]<>Result then
     TRpPanelObj(FPropPanels.Objects[i]).Visible:=False;
   end;
- end;
  // Visible this panel
  if Not Result.Visible then
  begin
@@ -1789,7 +1778,7 @@ begin
  // Add Registered file formats
  // Add registered filters
 {$IFDEF EXTENDEDGRAPHICS}
- gfilter:=rpgraphicex.FileFormatList.GetGraphicFilter([],fstExtension,[foIncludeExtension],nil);
+ gfilter:=string(rpgraphicex.FileFormatList.GetGraphicFilter([],fstExtension,[foIncludeExtension],nil));
  TFRpObjInspVCL(Owner).OpenDialog1.Filter:=TFRpObjInspVCL(Owner).OpenDialog1.Filter+gfilter;
 (* TFRpObjInspVCL(Owner).OpenDialog1.Filter:=TFRpObjInspVCL(Owner).OpenDialog1.Filter+
   'PCX '+'|*.pcx|'+

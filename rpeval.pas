@@ -51,7 +51,7 @@ type
   // The parser
   Rpparser:TRpparser;
   // The expresion to evaluate
-  FExpression:Ansistring;
+  FExpression:string;
   // Result of the evaluation
   FEvalResult:TRpValue;
 {$IFDEF USEEVALHASH}
@@ -75,7 +75,7 @@ type
   FOnNewLanguage:TRpNewLanguage;
   FOnGetSQLValue:TRpOnGetSQLValue;
   FOnParamInfo:TRpParamInfoProc;
-  procedure SetExpression(Value:Ansistring);
+  procedure SetExpression(Value:string);
   // Recursive functions to evaluate the expresion
   procedure variables(var Value:TRpValue);
   procedure separator(var Value:TRpValue);
@@ -91,7 +91,7 @@ type
   // Aditional priva procedures
   function EvaluateExpression:TRpValue;
   // Searching indentifiers
-  function Searchwithoutdot(name1:Shortstring):TRpIdentifier;
+  function Searchwithoutdot(name1:string):TRpIdentifier;
   function GetEvalResultString:String;
   procedure AddIdentifiers;
   procedure Freerprmfunctions;
@@ -120,7 +120,7 @@ type
 
   // Checking Syntax
   procedure CheckSyntax;
-  property Expression:Ansistring Read FExpression write SetExpression;
+  property Expression:string Read FExpression write SetExpression;
   property EvalResult:TRpValue Read FEvalResult;
   // The identifiers including functions
 {$IFDEF USEEVALHASH}
@@ -428,7 +428,7 @@ begin
  inherited Destroy;
 end;
 
-procedure TRpCustomEvaluator.SetExpression(Value:Ansistring);
+procedure TRpCustomEvaluator.SetExpression(Value:string);
 begin
  if Evaluating then
   Raise Exception.Create(SRpsetexpression);
@@ -1010,7 +1010,7 @@ begin
 end;
 
 procedure TRpCustomEvaluator.parentesis(var Value:TRpValue);
-var operation:Ansichar;
+var operation:Char;
 begin
  if Rpparser.Token=toOperator then
  begin
@@ -1150,7 +1150,7 @@ begin
 {$ENDIF}
 end;
 
-function TRpCustomEvaluator.Searchwithoutdot(name1:Shortstring):TRpIdentifier;
+function TRpCustomEvaluator.Searchwithoutdot(name1:string):TRpIdentifier;
 var
  Doble:Boolean;
 {$IFNDEF USEEVALHASH}

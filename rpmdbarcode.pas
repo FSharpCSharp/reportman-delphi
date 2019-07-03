@@ -914,12 +914,7 @@ const tabelle_128: array[0..102] of TCode128 = (
 	( a:' '; b:' '; c:'99'; data:'113141'; ),
 	( a:' '; b:' '; c:'  '; data:'114131'; ),
 	( a:' '; b:' '; c:'  '; data:'311141'; ),
-{$IFDEF DOTNETD}
-	( a:'?'; b:'?'; c:'  '; data:'411131'; )
-{$ENDIF}
-{$IFNDEF DOTNETD}
-	( a:'�'; b:'�'; c:'  '; data:'411131'; )
-{$ENDIF}
+	( a:'¿'; b:'¿'; c:'  '; data:'411131'; )
 	);
 
 StartA = '211412';
