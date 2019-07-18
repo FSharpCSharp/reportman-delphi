@@ -37,7 +37,6 @@ type
   fonthandle:THandle;
   currentname:String;
   currentstyle:integer;
-  isnt:Boolean;
   GetCharPlac:TGetCharPlac;
   gdilib:THandle;
   procedure SelectFont(pdffont:TRpPDFFOnt);
@@ -77,15 +76,12 @@ begin
  finally
   critsec.Leave;
  end;
- if isnt then
- begin
   gdilib:=LoadLibrary('gdi32.dll');
   if gdilib=0 then
    RaiseLastOsError;
   GetCharPlac:=GetProcAddress(gdilib,'GetCharacterPlacementW');
   if not Assigned(GetCharPlac) then
    RaiseLastOsError;
- end;
 end;
 
 destructor TRpGDIInfoProvider.destroy;
@@ -376,11 +372,8 @@ begin
  aint:=Ord(charcode);
  if (not (data.isunicode)) then
    data.isunicode:=true;
- if isnt then
- begin
-  if aint>255 then
+ if aint>255 then
    data.isunicode:=true;
- end;
  if data.loaded[aint] then
  begin
   Result:=data.loadedwidths[aint];
@@ -449,11 +442,8 @@ var
 begin
  glyphindex:=0;
  aint:=Ord(charcode);
- if isnt then
- begin
-  if aint>255 then
+ if aint>255 then
    data.isunicode:=true;
- end;
  if data.loaded[aint] then
  begin
   Result:=data.loadedwidths[aint];
@@ -461,8 +451,6 @@ begin
  end;
  SelectFont(pdffont);
  logx:=GetDeviceCaps(adc,LOGPIXELSX);
- if isnt then
- begin
   if not GetCharABCWidthsW(adc,aint,aint,aabc[1]) then
    RaiseLastOSError;
   gcp.lStructSize:=sizeof(gcp);
@@ -486,12 +474,6 @@ begin
 {$ENDIF}
   data.loadedglyphs[aint]:=WideChar(glyphindex);
   data.loadedg[aint]:=true;
- end
- else
- begin
-  if not GetCharABCWidths(adc,Cardinal(chr(aint)),Cardinal(chr(aint)),aabc[1]) then
-    RaiseLastOSError;
- end;
  Result:=Round(
    (Integer(aabc[1].abcA)+Integer(aabc[1].abcB)+Integer(aabc[1].abcC))/logx*72000/TTF_PRECISION
    );
