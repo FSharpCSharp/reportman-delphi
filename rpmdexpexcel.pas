@@ -53,10 +53,10 @@ begin
  savedialog1:=TSaveDialog.Create(Application);
  try
   savedialog1.Title:=SRpSelectDest;
-  savedialog1.filter:=SRpExcelFiles+'|*.xls';
+  savedialog1.filter:=SRpExcelFiles+'|*.xlsx';
   savedialog1.filename:='*.xls';
   savedialog1.FilterIndex:=0;
-  savedialog1.DefaultExt:='XLS';
+  savedialog1.DefaultExt:='XLSX';
   if savedialog1.execute then
    ExportDatasetExcel(data,savedialog1.Filename);
  finally
