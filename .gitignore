@@ -12,3 +12,5 @@ repman/utils/rptranslator/bin32/rptranslate.drc
 __recovery/
 webactivex/bin32/WebReportManX.drc
 repman/repmandxp.res
+repman/bin32/dbxconnections.ini
+repman/bin32/repmandxp_3_4_2.zip
