@@ -44,14 +44,13 @@
     <td> 
       <p>Code 128 family, A and B allow alphanumeric coding, the B allow also 
         lowercase chars. The C allow only numeric values but gerenerates the narrowest 
-        barcode. The bcCode128 generates a B and C mixed barcode, full optimized, 
+        barcode, but the total number of digits must be even. The bcCode128 generates a B and C mixed barcode, full optimized, 
         so a code like 234534AB generates a 128C segment and a 128B segment, so 
         the barcode is 50% smaller than using 128B.</p>
-      <p>To generate EAN128 valid codes you must use the application fields and 
-        separator digits, you can use the 102 code or any char with a ascii code 
-        greater than 102 to represent a separator digit, a EAN128 code always 
-        begins with a separator, a sample:</p>
-      <p>#102+'10896021'+#102+'21456738XABT'</p>
+      <p>Example of an SSCC:</p>
+      <p>Calc.Checsum set to true, Bar Modul set to 0.05</p>
+      <p>Expression: '0000000000'+RIGHT('00000000'+STR(123456)+'0',10)        
+      </p>
     </td>
   </tr>
   <tr> 
