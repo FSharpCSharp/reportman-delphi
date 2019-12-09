@@ -998,7 +998,7 @@ begin
   Result:=bcCode128C;
 end;
 
-var i, idx: integer;
+var i, idx,idxC: integer;
 	startcode: AnsiString;
 	checksum : integer;
         newtyp:TRpBarcodeType;
@@ -1032,11 +1032,13 @@ begin
    result := result+Convert(startcode);    // Startcode
 //  numint:=0;
   // Look for EAN control
+  idxC := 1;
   if FText[i]=Chr($BF) then
   begin
    result:=Result+Convert('411131');
    Inc(checksum, 102*i);
    inc(i);
+   inc(idxC);
    if i>Length(FText) then
     break;
   end;
@@ -1058,7 +1060,7 @@ begin
         result:=Result+Convert('411131');
         Inc(checksum, 102*i);
         inc(i);
-        break;
+        continue;
        end;
      end;
     end;
@@ -1067,29 +1069,33 @@ begin
      cadc:='';
      While i<=Length(FText) do
      begin
+      if Length(FText)>=i then
+       if FText[i]=chr($BF) then
+       begin
+        result:=Result+Convert('411131');
+        Inc(checksum, 102*idxC);
+        inc(i);
+        Inc(idxC);
+        continue;
+       end;
       cadc:=cadc+FText[i];
       if length(cadc)>1 then
       begin
        idx := Find_Code128C(cadc);
        if idx < 0 then
-	idx := Find_Code128C('00');
+	      idx := Find_Code128C('00');
 // Fix by Chris Gradussen
 // first pair of 2 digits multiply by 1 instead of 2
 // second pair of 2 digits multiply by 2 instead of 4...
 //       Inc(checksum, (idx*i)); Original line
-       Inc(checksum,(idx*(i div 2)));
+//       Inc(checksum,(idx*(i div 2)));
+       Inc(checksum,(idx*(idxC)));
+       Inc(idxC);
        result := result + Convert(tabelle_128[idx].data);
        cadc:='';
       end;
       inc(i);
-      if Length(FText)>=i then
-       if FText[i]=chr($BF) then
-       begin
-        result:=Result+Convert('411131');
-        Inc(checksum, 102*i);
-        inc(i);
-        break;
-       end;
+
      end;
     end;
   end;
