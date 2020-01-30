@@ -57,7 +57,7 @@ requires
   FireDACADSDriver,
   adortl,
   ibxpress,
-  Tee,
+  Tee926,
   reportman_rtl,
   reportman_vcl,
   designide;

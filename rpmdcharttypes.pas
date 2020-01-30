@@ -37,7 +37,7 @@ const
 type
  TRpChartType=(rpchartline,rpchartbar,rpchartpoint,
   rpcharthorzbar,rpchartarea,rpchartpie,rpchartarrow,
-  rpchartbubble,rpchartgantt);
+  rpchartbubble,rpchartgantt,rpchartsplines);
  TRpAutoRangeAxis = (rpAutoRangeDefault,rpAutoRangeBoth,rpAutoRangeUpper,
   rpAutoRangeLower,rpAutoRangeNone);
 
@@ -409,6 +409,8 @@ begin
    Result:=SRpChartgantt;
   rpchartbubble:
    Result:=SRpChartBubble;
+  rpchartsplines:
+   Result:=SRpChartSplines;
  end;
 end;
 
@@ -473,6 +475,11 @@ begin
   Result:=rpchartgantt;
   exit;
  end;
+ if Value=SRpChartsplines then
+ begin
+  Result:=rpchartsplines;
+  exit;
+ end;
 end;
 
 procedure GetRpChartTypePossibleValues(alist:TRpWideStrings);
@@ -487,6 +494,7 @@ begin
  alist.Add(SRpChartArrow);
  alist.Add(SRpChartBubble);
  alist.Add(SRpChartGantt);
+ alist.Add(SRpChartSplines);
 
 end;
 

@@ -1,4 +1,4 @@
-{*******************************************************}
+﻿{*******************************************************}
 {                                                       }
 {       Report Manager                                  }
 {                                                       }
@@ -874,6 +874,7 @@ var
   SRpChartPie:WideString='Pie';
   SRpChartArrow:WideString='Arrow';
   SRpChartBubble:WideString='Bubble';
+  SRpChartSplines:WideString='Splines';
   SRpChartGantt:WideString='Gantt';
   SRPSView3D:WideString='View3D';
   SRPSView3DWalls:WideString='3D Walls';

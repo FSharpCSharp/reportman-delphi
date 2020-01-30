@@ -3045,6 +3045,11 @@ begin
      begin
       aserie:=TLineSeries.Create(nil);
      end;
+    rpchartsplines:
+     begin
+      aserie:=TLineSeries.Create(nil);
+      TLineSeries(aserie).Smoothed := true;
+     end;
     rpchartbar:
      begin
       aserie:=TBarSeries.Create(nil);
