@@ -78,6 +78,7 @@ type
    procedure OnClear(Sender:TObject);
    procedure OnNewValue(Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
    procedure OnNewValueXY(X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
+   procedure OnNewFunction(functionName:string;functionParams:string;serieCaption:string);
    procedure OnBoundsValue(autol,autoh:boolean;lvalue,hvalue:double;
     logaritmic:boolean;logbase:double;inverted:boolean);
    procedure OnSerieColor(color:Integer);
@@ -212,6 +213,7 @@ begin
  FIdenChart.OnClear:=OnClear;
  FIdenChart.OnNewValue:=OnNewValue;
  FIdenChart.OnNewValueXY:=OnNewValueXY;
+ FIdenChart.OnNewFunction:=OnNewFunction;
  FIdenChart.OnSerieColor:=OnSerieColor;
  FIdenChart.OnValueColor:=OnValueColor;
  FIdenChart.OnBounds:=OnBoundsValue;
@@ -606,6 +608,18 @@ begin
  end;
  aserie.AddValue(Y,leyen);
 end;
+
+procedure TRpChart.OnNewFunction(functionName:string;functionParams:string;serieCaption:string);
+var
+ aserie:TRpSeriesItem;
+begin
+  aserie:=FSeries.Add;
+  aserie.FunctionName:=functionName;
+  aserie.FunctionParams:=functionParams;
+  aserie.Caption:=serieCaption;
+end;
+
+
 
 procedure TRpChart.OnNewValueXY(X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;newcharttype:TRpChartType);
 var

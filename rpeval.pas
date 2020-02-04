@@ -385,6 +385,8 @@ begin
  Rpfunctions.AddObject('GRAPHICNEW',iden);
  iden:=TIdenGraphicNewXY.Create(nil);
  Rpfunctions.AddObject('GRAPHICNEWXY',iden);
+ iden:=TIdenGraphicFunction.Create(nil);
+ Rpfunctions.AddObject('GRAPHICNEWFUNCTION',iden);
  iden:=TIdenGraphicColor.Create(nil);
  Rpfunctions.AddObject('GRAPHICCOLOR',iden);
  iden:=TIdenGraphicSerieColor.Create(nil);

@@ -824,8 +824,10 @@ var
   SRpSureDeleteReport:WideString='The selected report will be deleted. Are you sure?';
   SRpGraphicClear:WideString='Clears the graphic data';
   SRpGraphicNew:WideString='Adds data to the graphic';
+  SRpGraphicNewFunction:WideString='Add new serie funtion based on previous series data';
   SRpPGraphicClear:WideString='Gr is the graphic identifier';
   SRpPGraphicNew:WideString='Gr is the graphic identifier,V is the value, C indications serie change,etiq is the caption of value and caption the serie';
+  SRpPGraphicNewFunction:WideString='Gr is the graphic identifier,FunctionName and parameters, and caption the serie';
   SRpNoDataAvailableToPrint:WideString='No data available to print';
   SRpPrintOnlyIfDataAvailable:WideString='Print only if data available';
   SRpPasswordConfirmationIncorrect:WideString='Password confirmation incorrect';

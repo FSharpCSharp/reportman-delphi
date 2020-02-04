@@ -251,6 +251,12 @@ type
   public
    constructor Create(AOwner:TComponent);override;
   end;
+ TIdenGraphicFunction=class(TIdenFunction)
+  protected
+   function GetRpValue:TRpValue;override;
+  public
+   constructor Create(AOwner:TComponent);override;
+  end;
  TIdenGraphicColor=class(TIdenFunction)
   protected
    function GetRpValue:TRpValue;override;
@@ -501,6 +507,7 @@ type
   textserie:string;ChartType:TRpChartType) of object;
  TRpNewValueXY=procedure (X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,
   textserie:string;ChartType:TRpChartType) of object;
+ TRpNewFunctionEvent=procedure (functionName:string;functionParams:string;serieCaption:string) of object;
  TRpColorEvent=procedure (Color:Integer) of object;
  TRpBoundsValue=procedure (autol,autoh:boolean;lvalue,hvalue:double;
   logaritmic:boolean;logbase:double;inverted:boolean) of object;
@@ -513,6 +520,7 @@ type
    FOnBounds:TRpBoundsValue;
    FOnSerieColor:TRpColorEvent;
    FOnValueColor:TRpColorEvent;
+   FOnNewFunction:TRpNewFunctionEvent;
    procedure SetRpValue(Value:TRpValue);override;
    function GetRpValue:TRpValue;override;
   public
@@ -520,10 +528,12 @@ type
    constructor Create(AOwner:TComponent);override;
    procedure NewValue(Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
    procedure NewValueXY(X:Double;Y:Double;Cambio:Boolean;leyen,textleyen,textserie:string;charttype:TRpChartType);
+   procedure NewFunction(functionName:string;functionParams:string;serieCaption:string);
    procedure Clear;
    property OnClear:TNotifyEvent read FOnClear write FOnClear;
    property OnNewValue:TRpNewValue read FOnNewValue write FOnNewValue;
    property OnNewValueXY:TRpNewValueXY read FOnNewValueXY write FOnNewValueXY;
+   property OnNewFunction:TRpNewFunctionEvent read FOnNewFunction write FOnNewFunction;
    property OnBounds:TRpBoundsValue read FOnBounds write FOnBounds;
    property OnSerieColor:TRpColorEvent read FOnSerieColor write FOnSerieColor;
    property OnValueColor:TRpColorEvent read FOnValueColor write FOnValueColor;
@@ -1426,7 +1436,6 @@ begin
  aParams:=SRPPgraphicnew;
 end;
 
-
 function TIdenGraphicNew.GeTRpValue:TRpValue;
 var
  iden:TRpIdentifier;
@@ -1459,6 +1468,47 @@ begin
 
  Result:=True;
  (iden As TVariableGrap).NewValue(Double(Params[1]),Boolean(Params[2]),string(Params[3]),'',string(Params[4]),(iden As TVariableGrap).DefaultChartType);
+end;
+
+constructor TIdenGraphicFunction.Create(AOwner:TComponent);
+begin
+ inherited Create(AOwner);
+ FParamcount:=4;
+ IdenName:='GraphicNewFunction';
+ Help:=SRpGraphicNewFunction;
+ model:='function '+'GraphicNewFunction'+'(Gr:string, FunctionName:string,FunctionParams:string,Caption:string):Boolean';
+ aParams:=SRPPgraphicnewFunction;
+end;
+
+function TIdenGraphicFunction.GeTRpValue:TRpValue;
+var
+ iden:TRpIdentifier;
+begin
+ if Not VarIsString(Params[0]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsString(Params[1]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsString(Params[2]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ if Not VarIsString(Params[3]) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName);
+ // Buscamos el identificador
+ iden:=(evaluator As TRpEvaluator).SearchIdentifier(String(Params[0]));
+ if iden=nil then
+ begin
+   Raise TRpNamedException.Create(SRpIdentifierexpected,
+         IdenName+'-'+Params[0]);
+ end;
+ if Not (iden is TVariableGrap) then
+   Raise TRpNamedException.Create(SRpEvalType,
+         IdenName+'-'+Params[0]);
+
+ Result:=True;
+ (iden As TVariableGrap).NewFunction(string(Params[1]),string(Params[2]),string(Params[3]));
 end;
 
 
@@ -2316,6 +2366,15 @@ begin
  if Assigned(FOnNewValueXY) then
   FOnNewValueXY(X,Y,Cambio,leyen,textleyen,textserie,DefaultChartType);
 end;
+
+procedure TVariableGrap.NewFunction(functionName:string;functionParams:string;serieCaption:string);
+begin
+  if Assigned(FOnNewFunction) then
+  begin
+   FOnNewFunction(functionName,functionParams,serieCaption);
+  end;
+end;
+
 
 
 procedure TVariableGrap.Clear;

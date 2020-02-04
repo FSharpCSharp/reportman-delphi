@@ -72,6 +72,8 @@ type
    MaxValue:double;
    Caption:WideString;
    charttype:TRpChartType;
+   FunctionName:WideString;
+   FunctionParams:WideString;
    constructor Create(Collection: TCollection);override;
    property Values[index:integer]:double read GetValue write SetValue;
    property ValuesX[index:integer]:double read GetValueX write SetValueX;
