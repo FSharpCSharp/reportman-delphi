@@ -207,9 +207,7 @@ MEDIAN#39##44##39##39##44##39#Median#39#)
 #44##39#MAVG#39##44##39##39##44##39#Movin
 g Average#39#);#13##10#GraphicNewFunction
 (#39#CHART1#39##44##39#EMAVG#39##44##39##39#
-#44##39#Exp. Moving Average#39#);#13##10#
-GraphicNewFunction(#39#CHART1#39##44##39#
-MACD#39##44##39##39##44##39#MACD#39#);</DOBEFOREPRINT>
+#44##39#Exp. Moving Average#39#);</DOBEFOREPRINT>
 <DOAFTERPRINT type="WideString"></DOAFTERPRINT>
 <SUBREPORT type="String">TRpSubReport0</SUBREPORT>
 <GROUPNAME type="String">FOOTER</GROUPNAME>
