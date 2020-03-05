@@ -25,13 +25,13 @@ interface
 uses
  mmsystem,windows,
  Classes,sysutils,rpmetafile,rpmdconsts,Graphics,Forms,
- rpmunits,Dialogs, Controls,Comobj,
+ rpmunits,Dialogs, Controls,
  StdCtrls,ExtCtrls,rppdffile,rpgraphutilsvcl,
 {$IFDEF VCLNOTATION}
- Vcl.Imaging.jpeg,
+ Vcl.Imaging.jpeg,System.Win.Comobj,
 {$ENDIF}
 {$IFNDEF VCLNOTATION}
- jpeg,
+ jpeg,Comobj,
 {$ENDIF}
 {$IFDEF USEVARIANTS}
  types,Variants,

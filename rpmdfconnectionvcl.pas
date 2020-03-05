@@ -33,15 +33,12 @@ uses
   dbtables,
 {$ENDIF}
 {$IFDEF USEADO}
-  adodb,
-{$ENDIF}
-{$IFDEF DELPHI2009UP}
- System.Actions, System.ImageList,
+  Data.Win.adodb,
 {$ENDIF}
   rpdatainfo,rpmdconsts,rpparams,
 //  DBConnAdmin,
   rpgraphutilsvcl,rpdbxconfigvcl,
-  Menus;
+  Menus, System.Actions, System.ImageList;
 
 type
   TFRpConnectionVCL = class(TFrame)

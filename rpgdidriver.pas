@@ -42,7 +42,7 @@ uses
   rpbasereport, rpreport,
 {$IFDEF USETEECHART}
 {$IFDEF VCLNOTATION}
-  VCLTee.Chart, VCLTee.Series, rpdrawitem,
+  VCLTee.Chart, VCLTee.Series, rpdrawitem,System.Win.registry,
   VCLTee.teEngine, VCLTee.ArrowCha, VCLTee.BubbleCh, VCLTee.GanttCh,
   VCLTee.teeFunci, VCLTee.TeCanvas,
 {$IFDEF TEECHARTPRO}
@@ -53,7 +53,7 @@ uses
 {$IFNDEF VCLNOTATION}
   Chart, Series, rpdrawitem, teeFunci,
   teEngine, ArrowCha, BubbleCh, GanttCh,
-  jpeg,StatChar,
+  jpeg,StatChar,registry,
 {$IFDEF DELPHI2009UP}
   pngimage, VCLTee.TeCanvas, System.UITypes,
 {$ELSE}
@@ -65,7 +65,8 @@ uses
   rpgraphicex,
 {$ENDIF}
 {$ENDIF}
-  rppdfdriver, rptextdriver, Mask, rpmaskedit, registry;
+  rppdfdriver, rptextdriver, Mask, rpmaskedit;
+
 
 const
   METAPRINTPROGRESS_INTERVAL = 20;

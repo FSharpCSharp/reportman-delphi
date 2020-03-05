@@ -38,7 +38,10 @@ uses Classes,SysUtils,
 {$ENDIF}
  {$ENDIF}
 {$IFDEF MSWINDOWS}
- registry,windows,shlobj,ActiveX,
+  {$IFNDEF DELPHI2007UP}
+  registry,
+ {$ENDIF}
+ windows,shlobj,ActiveX,
 {$ENDIF}
 {$IFDEF DELPHI2009UP}
  WinApi.KnownFolders,
@@ -2981,8 +2984,10 @@ end;
 
 function GetRegistryFile(Setting, Default: string; DesignMode: Boolean): string;
 {$IFDEF MSWINDOWS}
+  {$IFNDEF DELPHI2007UP}
 var
   Reg: TRegistry;
+{$ENDIF}
 {$ENDIF}
 //{$IFDEF LINUX}
 //  GlobalFile: string;
