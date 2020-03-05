@@ -37,7 +37,10 @@ const
 type
  TRpChartType=(rpchartline,rpchartbar,rpchartpoint,
   rpcharthorzbar,rpchartarea,rpchartpie,rpchartarrow,
-  rpchartbubble,rpchartgantt,rpchartsplines);
+  rpchartbubble,rpchartgantt,rpchartsplines,
+  rpchartcandlestick, rpchartpyramid, rpchartpolar,rpchartpointfigure,
+  rpchartfunnel,rpchartkagi,rpchartdoughnut, rpchartradar, rpchartrenko,
+  rpcharterrorbar);
  TRpAutoRangeAxis = (rpAutoRangeDefault,rpAutoRangeBoth,rpAutoRangeUpper,
   rpAutoRangeLower,rpAutoRangeNone);
 
@@ -413,6 +416,24 @@ begin
    Result:=SRpChartBubble;
   rpchartsplines:
    Result:=SRpChartSplines;
+  rpchartcandlestick:
+   Result:='CandleStick';
+  rpchartpyramid:
+   Result:='Pyramid';
+  rpchartpolar:
+   Result:='Polar';
+  rpchartpointfigure:
+   Result:='PointFigure';
+  rpchartfunnel:
+   Result:='Funnel';
+  rpchartkagi:
+   Result:='Kagi';
+  rpchartdoughnut:
+   Result:='Doughnut';
+  rpchartrenko:
+   Result:='Renko';
+  rpcharterrorbar:
+   Result:='ErrorBar';
  end;
 end;
 
@@ -435,6 +456,9 @@ end;
 
 
 function StringToRpChartType(Value:String):TRpChartType;
+var
+ alist:TRpWideStrings;
+ index:integer;
 begin
  Result:=rpchartline;
  if Value=SRpChartBar then
@@ -482,6 +506,19 @@ begin
   Result:=rpchartsplines;
   exit;
  end;
+ alist:=TRpWideStrings.Create;
+ try
+  GetRpChartTypePossibleValues(alist);
+  index:=alist.IndexOf(Value);
+  if (index>=0) then
+  begin
+   Result:=TRpChartType(index);
+  end;
+ finally
+  alist.Free;
+ end;
+
+
 end;
 
 procedure GetRpChartTypePossibleValues(alist:TRpWideStrings);
@@ -497,7 +534,16 @@ begin
  alist.Add(SRpChartBubble);
  alist.Add(SRpChartGantt);
  alist.Add(SRpChartSplines);
-
+ alist.Add('CandleStick');
+ alist.Add('Pyramid');
+ alist.Add('Polar');
+ alist.Add('PointFigure');
+ alist.Add('Funnel');
+ alist.Add('Kagi');
+ alist.Add('Doughnut');
+ alist.Add('Radar');
+ alist.Add('Renko');
+ alist.Add('ErrorBar');
 end;
 
 

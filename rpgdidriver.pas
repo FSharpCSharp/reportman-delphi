@@ -47,13 +47,20 @@ uses
   VCLTee.teeFunci, VCLTee.TeCanvas,
 {$IFDEF TEECHARTPRO}
   VCLTee.statChar,
+  VCLTee.CandleCh,VCLTee.TeePyramid,VCLTee.OHLChart,VCLTee.TeeFunnel,
+  VCLTee.TeeKagiSeries,  VCLTee.TeeDonut,VCLTee.TeePolar,VCLTee.TeeRenkoSeries,
+  VCLTee.ErrorBar,
 {$ENDIF}
 
 {$ENDIF}
 {$IFNDEF VCLNOTATION}
   Chart, Series, rpdrawitem, teeFunci,
   teEngine, ArrowCha, BubbleCh, GanttCh,
-  jpeg,StatChar,registry,
+  jpeg,registry,ErrorBar,
+{$IFDEF TEECHARTPRO}
+ StatChar,CandleCh,TeePyramid,TeePolar,OHLChart,TeeFunnel,TeeKagiSeries,
+ TeeDonut,TeeRenkoSeries,
+{$ENDIF}
 {$IFDEF DELPHI2009UP}
   pngimage, VCLTee.TeCanvas, System.UITypes,
 {$ELSE}
@@ -3274,6 +3281,31 @@ begin
             aserie := TBubbleSeries.Create(nil);
           rpchartgantt:
             aserie := TGanttSeries.Create(nil);
+{$IFDEF TEECHARTPRO}
+          rpchartcandlestick:
+            aserie := TCandleSeries.Create(nil);
+          rpchartpyramid:
+            aserie:= TPyramidSeries.Create(nil);
+          rpchartpolar:
+            aserie:= TPolarSeries.Create(nil);
+          rpchartpointfigure:
+            aserie:= TPointFigureSeries.Create(nil);
+          rpchartfunnel:
+            aserie:= TFunnelSeries.Create(nil);
+          rpchartkagi:
+            aserie:= TKagiSeries.Create(nil);
+          rpchartdoughnut:
+            aserie:= TDonutSeries.Create(nil);
+          rpchartradar:
+            aserie:= TRadarSeries.Create(nil);
+          rpchartrenko:
+            aserie:= TRenkoSeries.Create(nil);
+          rpcharterrorbar:
+            aserie:= TErrorBarSeries.Create(nil);
+{$ENDIF}
+          else
+            raise Exception.Create('Tee Chart Pro Required for thischart Type');
+
         end;
       end;
       if not assigned(aserie) then
@@ -3308,7 +3340,7 @@ begin
               else
                 aserie.AddXY(intserie.ValuesX[j], intserie.Values[j],
                   intserie.ValueCaptions[j], SeriesColors[acolor]);
-              if (nchart.ChartType in [rpchartpie]) or nchart.ShowLegend then
+              if (nchart.ChartType in [rpchartpie,rpchartdoughnut]) or nchart.ShowLegend then
                 acolor := ((acolor + 1) mod (MAX_SERIECOLORS));
             end
             else
@@ -3331,7 +3363,7 @@ begin
               else
                 aserie.Add(intserie.Values[j], intserie.ValueCaptions[j],
                   SeriesColors[acolor]);
-              if (nchart.ChartType in [rpchartpie]) or nchart.ShowLegend then
+              if (nchart.ChartType in [rpchartpie,rpchartdoughnut]) or nchart.ShowLegend then
                 acolor := ((acolor + 1) mod (MAX_SERIECOLORS));
             end
             else

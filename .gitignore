@@ -16,3 +16,5 @@ repman/bin32/dbxconnections.ini
 repman/bin32/repmandxp_3_4_2.zip
 repman/repmandxe2.rsm
 repman/repmandxp.rsm
+repman/bin64/repmandxp.drc
+repman/bin64/repmandxp.rsm
