@@ -1,9 +1,9 @@
 object FRpDBXConfigVCL: TFRpDBXConfigVCL
   Left = 245
   Top = 108
-  Width = 682
-  Height = 504
   Caption = 'Dialog'
+  ClientHeight = 465
+  ClientWidth = 666
   Color = clBtnFace
   ParentFont = True
   OldCreateOrder = True
@@ -27,14 +27,14 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
     object LDriversFile: TLabel
       Left = 8
       Top = 8
-      Width = 51
+      Width = 53
       Height = 13
       Caption = 'Driver'#39's file'
     end
     object LConnsFile: TLabel
       Left = 8
       Top = 31
-      Width = 71
+      Width = 72
       Height = 13
       Caption = 'Conection'#39's file'
     end
@@ -65,7 +65,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
     Left = 0
     Top = 52
     Width = 666
-    Height = 414
+    Height = 413
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
@@ -73,15 +73,15 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
       Left = 0
       Top = 0
       Width = 198
-      Height = 414
+      Height = 413
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 0
       object LConnections: TListBox
         Left = 0
-        Top = 78
+        Top = 76
         Width = 198
-        Height = 336
+        Height = 337
         Align = alClient
         ItemHeight = 13
         TabOrder = 0
@@ -91,7 +91,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
         Left = 0
         Top = 0
         Width = 198
-        Height = 31
+        Height = 29
         AutoSize = True
         ButtonHeight = 25
         ButtonWidth = 26
@@ -101,7 +101,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
         TabOrder = 1
         object BAdd: TToolButton
           Left = 0
-          Top = 2
+          Top = 0
           Hint = 'Adds a connection to the selected driver'
           Caption = 'BAdd'
           ImageIndex = 0
@@ -109,7 +109,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
         end
         object BDelete: TToolButton
           Left = 26
-          Top = 2
+          Top = 0
           Hint = 'Drops the selected connection'
           Caption = 'BDelete'
           ImageIndex = 1
@@ -117,7 +117,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
         end
         object ToolButton1: TToolButton
           Left = 52
-          Top = 2
+          Top = 0
           Width = 6
           Caption = 'ToolButton1'
           ImageIndex = 2
@@ -125,7 +125,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
         end
         object BShowProps: TToolButton
           Left = 58
-          Top = 2
+          Top = 0
           Hint = 'Shows properties of the selected driver'
           Caption = 'BShowProps'
           ImageIndex = 2
@@ -133,7 +133,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
         end
         object ToolButton2: TToolButton
           Left = 84
-          Top = 2
+          Top = 0
           Width = 6
           Caption = 'ToolButton2'
           ImageIndex = 3
@@ -141,7 +141,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
         end
         object BConnect: TToolButton
           Left = 90
-          Top = 2
+          Top = 0
           Hint = 'Activates the selected connection'
           Caption = 'BConnect'
           ImageIndex = 3
@@ -149,7 +149,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
         end
         object ToolButton3: TToolButton
           Left = 116
-          Top = 2
+          Top = 0
           Width = 11
           Caption = 'ToolButton3'
           ImageIndex = 3
@@ -157,7 +157,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
         end
         object BClose: TToolButton
           Left = 127
-          Top = 2
+          Top = 0
           Hint = 'Closes this configuration window'
           Caption = 'BClose'
           ImageIndex = 4
@@ -166,7 +166,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
       end
       object Panel2: TPanel
         Left = 0
-        Top = 31
+        Top = 29
         Width = 198
         Height = 47
         Align = alTop
@@ -185,7 +185,6 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Width = 186
           Height = 21
           Style = csDropDownList
-          ItemHeight = 13
           TabOrder = 0
           OnClick = ComboDriversClick
         end
@@ -195,7 +194,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
       Left = 198
       Top = 0
       Width = 468
-      Height = 414
+      Height = 413
       Align = alClient
       TabOrder = 1
       Visible = False
@@ -207,7 +206,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
     Left = 228
     Top = 224
     Bitmap = {
-      494C010105000900240013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900040013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000004C000000260000000100200000000000202D
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

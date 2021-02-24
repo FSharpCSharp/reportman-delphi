@@ -27,9 +27,6 @@ uses SysUtils, Classes,
   Graphics, Forms,ComCtrls, ImgList,
   Buttons, ExtCtrls, Controls, StdCtrls,Dialogs,
   rpgraphutilsvcl,rpdatainfo,
-{$IFDEF DELPHI2009UP}
- System.ImageList,
-{$ENDIF}
 {$IFDEF USESQLEXPRESS}
   SQLExpr,
 {$IFNDEF DELPHI2009UP}
@@ -50,7 +47,7 @@ uses SysUtils, Classes,
  IBDatabase,
 {$ENDIF}
 {$ENDIF}
-  DB,rpmdconsts, ToolWin;
+  DB,rpmdconsts, ToolWin, System.ImageList;
 
 const
  CONTROL_DISTANCEY=5;
@@ -375,6 +372,8 @@ var
 {$IFDEF USEIBX}
   FIBDatabase:TIBDatabase;
 {$ENDIF}
+ databasename:string;
+ indexDriver:integer;
 begin
 {$IFDEF USESQLEXPRESS}
  if Not Assigned(ConAdmin) then
@@ -446,12 +445,21 @@ begin
  else
 {$ENDIF}
   begin
-   funcname:=ConAdmin.Drivers.ReadString(drivername,'GetDriverFunc','');
-   ConAdmin.GetDriverLibNames(drivername,LibraryName,VendorLib);
-   SQLConnection1.DriverName:=drivername;
-   SQLConnection1.VendorLib:=vendorlib;
-   SQLConnection1.LibraryName:=libraryname;
-   SQLConnection1.GetDriverFunc:=funcname;
+
+  //funcname:=ConAdmin.Drivers.ReadString(drivername,'GetDriverFunc','');
+  //ConAdmin.GetDriverLibNames(drivername,LibraryName,VendorLib);
+  if UpperCase(drivername)='SQLITE' then
+  begin
+    drivername:='Sqlite';
+    indexDriver:=SQlConnection1.Params.IndexOfName('DriverName');
+    if (indexDriver>=0) then
+      SQlConnection1.Params.Delete(indexDriver);
+    SQLConnection1.LoginPrompt := false;
+  end;
+  SQLConnection1.DriverName:=drivername;
+  //SQLConnection1.VendorLib:=vendorlib;
+  //SQLConnection1.LibraryName:=libraryname;
+  //SQLConnection1.GetDriverFunc:=funcname;
    SQLConnection1.Connected:=true;
    RpShowMessage(SRpConnectionOk);
    SQLConnection1.Connected:=false;
