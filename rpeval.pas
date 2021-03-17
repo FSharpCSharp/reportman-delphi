@@ -1326,6 +1326,7 @@ var
  Header: TGraphicHeader;
  astring:String;
  p:Pointer;
+ vType:Word;
 {$IFDEF DOTNETD}
  Temp:TBytes;
 {$ENDIF}
@@ -1339,7 +1340,8 @@ begin
    begin
     // Looks for a string (path to file)
     aValue:=EvaluateText(atext);
-    if (not ((VarType(aValue)=varString) or (VarType(aValue)=varOleStr))) then
+    vType := VarType(avalue);
+    if (not ((vType=varString) or (vType=varOleStr) or (vType=258))) then
     begin
      // Check for a varvinary variant type
      i:=VarType(aValue);
