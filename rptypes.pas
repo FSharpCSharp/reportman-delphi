@@ -4521,6 +4521,42 @@ begin
  end;
 end;
 
+var
+  MAPIModule: HModule = 0;
+  MAPIChecked: Boolean = False;
+  SendMailInt: TFNMapiSendMail = nil;
+
+procedure InitMapiInt;
+var
+  OSVersionInfo: TOSVersionInfo;
+  hkWMS: HKEY;
+  MAPIValueSize: Longint;
+  MAPIValueBuf: array[0..8] of Char;
+  rType: Longint;
+begin
+  if not MAPIChecked then
+  begin
+    MAPIChecked := True;
+    MAPIModule := 0;
+    MAPIModule := LoadLibrary(PChar(MAPIDLL));
+    if (MAPIModule = 0) then
+      RaiseLastOSError;
+  end
+  else
+    raise Exception.Create('MAPI Not initialized');
+
+end;
+
+function MapiSendMailInt(lhSession: LHANDLE; ulUIParam: ULONG_PTR;
+  var lpMessage: TMapiMessage; flFlags: FLAGS; ulReserved: ULONG): ULONG;
+begin
+  InitMapiInt;
+  if @SendMailInt = nil then
+    @SendMailInt := GetProcAddress(MAPIModule, 'MAPISendMail');
+  if @SendMailInt <> nil then
+    Result := SendMailInt(lhSession, ulUIParam, lpMessage, flFlags, ulReserved)
+  else Result := 1;
+end;
 
 
 procedure SendMail(destination,subject,content:AnsiString;files,orignalfilenames:TStrings);overload;
@@ -4588,9 +4624,10 @@ var
  npfile:PAnsiChar;
  npfile2:PAnsiChar;
  PtrMapiFileDescs : PMapiFileDescs;
+ how:Cardinal;
 begin
  PtrMapiFileDescs:=nil;
- CheckMAPI(MapiLogOn(0,nil,nil,MAPI_LOGON_UI,0,@Sessionh));
+ //CheckMAPI(MapiLogOn(0,nil,nil,MAPI_LOGON_UI,0,@Sessionh));
  try
   amessage.ulReserved:=0;
   amessage.lpszSubject:=nil;
@@ -4616,19 +4653,13 @@ begin
    amessage.lpRecips.ulEIDSize:=0;
    amessage.lpRecips.lpEntryID:=nil;
   end;
-
   amessage.flFlags:=MAPI_RECEIPT_REQUESTED;
+  amessage.flFlags:=0;
   amessage.lpOriginator:=nil;
-{  amessage.lpOriginator:=AllocMem(sizeof(MAPIRecipDesc));
-  amessage.lpOriginator.ulReserved:=0;
-  amessage.lpOriginator.lpszName:=PChar('');
-  amessage.lpOriginator.lpszAddress:=PChar('');
-  amessage.lpOriginator.ulEIDSize:=0;
-  amessage.lpOriginator.ulRecipClass:=0;
-  amessage.lpOriginator.lpEntryID:=nil;
-}
+
+
   amessage.nFileCount:=0;
-  //amessage.lpFiles:=nil;
+  amessage.lpFiles:=nil;
   if (files<>nil) then
   begin
    if (files.Count>0) then
@@ -4645,24 +4676,15 @@ begin
       PtrMapiFileDescs^[i].nPosition := $FFFFFFFF;
       PtrMapiFileDescs^[i].lpszPathName:=PAnsiChar(AnsiString(files[i]));;
       PtrMapiFileDescs^[i].lpszFileName:=PAnsiChar(AnsiString(orignalfilenames[i]));;
-//      PtrMapiFileDescs^[i].lpszFileName:=StrNew(PAnsiChar(orignalfilenames[i]));
-
-//     afiles[i].lpszPathName:=PAnsiChar(files[i]);
-//     afiles[i].lpszFileName:=PAnsiChar(files[i]);
-     //afiles[i].lpszFileName:=PAnsiChar(orignalfilenames[i]);
-//   amessage.lpFiles.lpszPathName:=Pchar(LongFileName(filename));
-//     PtrMapiFileDescs^[i].nPosition:=0;
-//     PtrMapiFileDescs^[i].lpFileType:=nil;
     end;
    end;
   end;
-  CheckMAPI(MapiSendMail(sessionh,0,amessage,MAPI_DIALOG,0));
+  how:=MAPI_LOGON_UI or MAPI_DIALOG;
+  CheckMAPI(MapiSendMail(0,0,amessage,MAPI_LOGON_UI or MAPI_DIALOG,0));
  finally
   if (PtrMapiFileDescs<>nil) then
     FreeMem(PtrMapiFileDescs);
-  CheckMAPI(MapiLogOff(sessionh,0,0,0));
  end;
-//  ShellExecute(0,PChar('start'),PChar('mailto:'+destination+'?Subject='+subject),nil,nil,SW_SHOWNORMAL);
 end;
 {$ENDIF}
 {$ENDIF}
