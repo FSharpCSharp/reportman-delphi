@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{70A229EC-7FE1-4605-870B-B8A557A0038A}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="reportman_rtl.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="reportman_designvcl.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="reportman_vcl.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="reportman_rtl">
+        <MSBuild Projects="reportman_rtl.dproj"/>
+    </Target>
+    <Target Name="reportman_rtl:Clean">
+        <MSBuild Projects="reportman_rtl.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="reportman_rtl:Make">
+        <MSBuild Projects="reportman_rtl.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="reportman_designvcl">
+        <MSBuild Projects="reportman_designvcl.dproj"/>
+    </Target>
+    <Target Name="reportman_designvcl:Clean">
+        <MSBuild Projects="reportman_designvcl.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="reportman_designvcl:Make">
+        <MSBuild Projects="reportman_designvcl.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="reportman_vcl">
+        <MSBuild Projects="reportman_vcl.dproj"/>
+    </Target>
+    <Target Name="reportman_vcl:Clean">
+        <MSBuild Projects="reportman_vcl.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="reportman_vcl:Make">
+        <MSBuild Projects="reportman_vcl.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="reportman_rtl;reportman_designvcl;reportman_vcl"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="reportman_rtl:Clean;reportman_designvcl:Clean;reportman_vcl:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="reportman_rtl:Make;reportman_designvcl:Make;reportman_vcl:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
