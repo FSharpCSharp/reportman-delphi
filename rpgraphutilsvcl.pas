@@ -83,6 +83,7 @@ function CLXColorToVCLColor (CLXColor:integer):integer;
 procedure RpShowMessage(const Text: WideString);
 procedure ScaleToolBar(ntoolbar:TToolBar);
 function  ScaleDpi(value:integer):integer;
+function  UnScaleDpi(value:integer):integer;
 
 implementation
 
@@ -112,6 +113,8 @@ procedure ScaleToolBar(ntoolbar:TToolBar);
 var
  newdpi:integer;
  newscale:double;
+ button: TToolButton;
+ i:integer;
 begin
  newdpi:=Screen.PixelsPerInch;
  if (newdpi <> DEFAULT_DPI) then
@@ -119,6 +122,13 @@ begin
   newscale:= newdpi/DEFAULT_DPI;
   ntoolbar.ButtonWidth := Round(ntoolbar.ButtonWidth*newscale);
   ntoolbar.ButtonHeight := Round(ntoolbar.ButtonHeight*newscale);
+  for i:=0 to ntoolbar.ButtonCount-1 do
+  begin
+   button:=ntoolbar.Buttons[i];
+   button.Height:=ntoolbar.ButtonHeight;
+   button.Width:=ntoolbar.ButtonWidth;
+  end;
+
  end;
 end;
 
@@ -134,6 +144,22 @@ begin
   newscale:= newdpi/DEFAULT_DPI;
   Result := Round(value*newscale);
  end;
+
+end;
+
+function  UnScaleDpi(value:integer):integer;
+var
+ newdpi:integer;
+ newscale:double;
+begin
+ newdpi:=Screen.PixelsPerInch;
+ Result:=value;
+ if (newdpi <> DEFAULT_DPI) then
+ begin
+  newscale:= newdpi/DEFAULT_DPI;
+  Result := Round(value/newscale);
+ end;
+
 end;
 
 procedure RpShowMessage(const Text: WideString);

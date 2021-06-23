@@ -97,7 +97,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
         ButtonWidth = 26
         Caption = 'ToolBar1'
         EdgeBorders = [ebLeft, ebTop, ebRight, ebBottom]
-        Images = ImageList1
+        Images = VirtualImageList1
         TabOrder = 1
         object BAdd: TToolButton
           Left = 0
@@ -105,6 +105,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Hint = 'Adds a connection to the selected driver'
           Caption = 'BAdd'
           ImageIndex = 0
+          ImageName = 'Item1'
           OnClick = BAddClick
         end
         object BDelete: TToolButton
@@ -113,6 +114,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Hint = 'Drops the selected connection'
           Caption = 'BDelete'
           ImageIndex = 1
+          ImageName = 'Item2'
           OnClick = BDeleteClick
         end
         object ToolButton1: TToolButton
@@ -121,6 +123,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Width = 6
           Caption = 'ToolButton1'
           ImageIndex = 2
+          ImageName = 'Item3'
           Style = tbsSeparator
         end
         object BShowProps: TToolButton
@@ -129,6 +132,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Hint = 'Shows properties of the selected driver'
           Caption = 'BShowProps'
           ImageIndex = 2
+          ImageName = 'Item3'
           OnClick = BShowPropsClick
         end
         object ToolButton2: TToolButton
@@ -137,6 +141,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Width = 6
           Caption = 'ToolButton2'
           ImageIndex = 3
+          ImageName = 'Item4'
           Style = tbsSeparator
         end
         object BConnect: TToolButton
@@ -145,6 +150,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Hint = 'Activates the selected connection'
           Caption = 'BConnect'
           ImageIndex = 3
+          ImageName = 'Item4'
           OnClick = BConnectClick
         end
         object ToolButton3: TToolButton
@@ -153,6 +159,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Width = 11
           Caption = 'ToolButton3'
           ImageIndex = 3
+          ImageName = 'Item4'
           Style = tbsSeparator
         end
         object BClose: TToolButton
@@ -161,6 +168,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Hint = 'Closes this configuration window'
           Caption = 'BClose'
           ImageIndex = 4
+          ImageName = 'Item5'
           OnClick = BCloseClick
         end
       end
@@ -587,5 +595,116 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
       1FF001FC60000000FFF1FC7F8FF003F820000000FFF1FFFFFFF007FC60000000
       FFFFFFFFFFF00FFFB0100000FFFFFFFFFFFFFFFFFFF000000000000000000000
       0000000000000000000000000000}
+  end
+  object ImageCollection1: TImageCollection
+    Images = <
+      item
+        Name = 'Item1'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000804944415478DACD91410EC0200804D977EB91BE9B5AAB561B424D30
+              A99C362A93412024B4AAF02B0C574BA9D40B3F4C72D800D68F56E6CBB0F148D0
+              60208B6ADF56CB0196126A5B9F150D8F996269FD5935732D809925C480674C48
+              D356F27B349799F55659806D76E749D83233E6636A9F3106FA844D91DAE71BB0
+              15B52FEC04077973EEF44332900000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item2'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000734944415478DAD594E10AC0200884F3FD1FFA5641309A775A1B83FC
+              67E897DE518682F255D819306B690D003D918D4EAD0B1BC1A0ECD2C79A11504D
+              4F35BB4347633B53124803E629233D4337BD0969ED2F9331CD14D085A9D596DC
+              CC68C45CDD8231205D33F3A4D206A49AA74B0FF982DEC605CC3079EE93AD1430
+              0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item3'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC0000008D4944415478DADD93510E00110C44CDFD0F6DD54652743A59F1B5FD
+              20D1789E2AD452CBAD0083C15249B47DF8046B11E7801028CC981C8A1D64500F
+              3C361B390F94B071A57E2D0788EAB7C17CE199D966E9613BA0ADE014D6074C20
+              1653AD964758606F050CC8E6D5589AF98D3F34F3AFA98C646BD822FBE051C386
+              6661FF24DF29356330491A860A761257610FC8A6BAEEA88D9D1B000000004945
+              4E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item4'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000C54944415478DAADD341128520080660B956CBAE854BB95A1D8B27CD
+              6898903E273735CA7CFE6600070E5F0D18629C4B80415E29915B8C11C1C60490
+              9D3291D72B8488790EBAF2E3E0B06DD02793295653056C317E60C1C634E827FB
+              0393636A6819BB5229E4891151B7F7BEE34B326314EC3CEDF5061B5D7B49EDD5
+              C8692E4CA018A35994520AB2264F398E376AB21B6303A38A791BD6EF3D8B5997
+              F23DA6DA6D0D33DAADC1DEE26BCC6BB7061BDDD474B2B2A38775DFCB68B7A564
+              5EBB1917E08F995FE3072C30D6F66AC687000000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item5'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC0000007B4944415478DAE594D10980300C0593715CA31D47C7719DCEE138F1
+              05E29F9AD446107C50520A398E40CA424259E103C67A0D063DECC256D4458CC9
+              4C7282C7730CD6502B080D1D550D46606A36E16C6A380A6B065260AAD92CD628
+              0F61AF997D77663F312B179BDA6D566E56BECBAC387F471846C1B8B08CA4C276
+              58688CEE01196BED0000000049454E44AE426082}
+          end>
+      end>
+    Left = 318
+    Top = 228
+  end
+  object VirtualImageList1: TVirtualImageList
+    DisabledGrayscale = False
+    DisabledSuffix = '_Disabled'
+    Images = <
+      item
+        CollectionIndex = 0
+        CollectionName = 'Item1'
+        Disabled = False
+        Name = 'Item1'
+      end
+      item
+        CollectionIndex = 1
+        CollectionName = 'Item2'
+        Disabled = False
+        Name = 'Item2'
+      end
+      item
+        CollectionIndex = 2
+        CollectionName = 'Item3'
+        Disabled = False
+        Name = 'Item3'
+      end
+      item
+        CollectionIndex = 3
+        CollectionName = 'Item4'
+        Disabled = False
+        Name = 'Item4'
+      end
+      item
+        CollectionIndex = 4
+        CollectionName = 'Item5'
+        Disabled = False
+        Name = 'Item5'
+      end>
+    ImageCollection = ImageCollection1
+    Left = 398
+    Top = 220
   end
 end

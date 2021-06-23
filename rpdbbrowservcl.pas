@@ -29,7 +29,8 @@ uses
   rphashtable,
   rpstringhash,
 {$ENDIF}
-  Dialogs, ComCtrls, ImgList, Menus;
+  Dialogs, ComCtrls, ImgList, Menus, System.ImageList, Vcl.VirtualImageList,
+  Vcl.BaseImageCollection, Vcl.ImageCollection;
 
 type
   TFRpBrowserVCL = class(TFrame)
@@ -37,6 +38,8 @@ type
     ImageList1: TImageList;
     PopupMenu1: TPopupMenu;
     MRefresh: TMenuItem;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure ATreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
     procedure ATreeMouseDown(Sender: TObject; Button: TMouseButton;

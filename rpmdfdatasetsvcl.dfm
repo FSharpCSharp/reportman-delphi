@@ -21,12 +21,13 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
       ButtonHeight = 25
       ButtonWidth = 26
       Caption = 'ToolBar1'
-      Images = ImageList1
+      Images = VirtualImageList1
       TabOrder = 0
       object ToolButton1: TToolButton
         Left = 0
         Top = 0
         Action = ANew
+        ImageName = 'Item3'
       end
       object ToolButton2: TToolButton
         Left = 26
@@ -34,12 +35,14 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         Width = 23
         Caption = 'ToolButton2'
         ImageIndex = 3
+        ImageName = 'Item4'
         Style = tbsSeparator
       end
       object ToolButton3: TToolButton
         Left = 49
         Top = 0
         Action = ADelete
+        ImageName = 'Item4'
       end
       object ToolButton5: TToolButton
         Left = 75
@@ -53,6 +56,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         Left = 83
         Top = 0
         Action = ARename
+        ImageName = 'Item5'
       end
       object ToolButton4: TToolButton
         Left = 109
@@ -60,6 +64,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         Width = 8
         Caption = 'ToolButton4'
         ImageIndex = 4
+        ImageName = 'Item5'
         Style = tbsSeparator
       end
       object BParams: TButton
@@ -94,6 +99,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         Width = 185
         Height = 101
         Align = alLeft
+        ItemHeight = 13
         TabOrder = 0
         OnClick = LDatasetsClick
       end
@@ -126,7 +132,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 120
           Top = 34
           Width = 532
-          Height = 24
+          Height = 21
           Style = csDropDownList
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 1
@@ -136,7 +142,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 120
           Top = 3
           Width = 532
-          Height = 24
+          Height = 21
           Style = csDropDownList
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
@@ -182,15 +188,11 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
       TabOrder = 0
       object TabSQL: TTabSheet
         Caption = 'SQL'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Splitter2: TSplitter
           Left = 189
           Top = 0
           Width = 8
-          Height = 334
+          Height = 337
           Beveled = True
           ExplicitHeight = 293
         end
@@ -198,7 +200,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 197
           Top = 0
           Width = 647
-          Height = 334
+          Height = 337
           Align = alClient
           ScrollBars = ssBoth
           TabOrder = 0
@@ -209,7 +211,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 0
           Top = 0
           Width = 189
-          Height = 334
+          Height = 337
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 1
@@ -227,10 +229,6 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
       object TabBDEType: TTabSheet
         Caption = 'BDE Type'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object RBDEType: TRadioGroup
           Left = 0
           Top = 0
@@ -248,7 +246,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 0
           Top = 37
           Width = 844
-          Height = 297
+          Height = 300
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
@@ -267,7 +265,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
             Left = 0
             Top = 17
             Width = 844
-            Height = 280
+            Height = 283
             Align = alClient
             ScrollBars = ssBoth
             TabOrder = 1
@@ -279,10 +277,6 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
       object TabBDETable: TTabSheet
         Caption = 'Table and order'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         DesignSize = (
           844
           337)
@@ -391,7 +385,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 115
           Top = 99
           Width = 188
-          Height = 24
+          Height = 21
           TabOrder = 3
           Text = 'EBDEMasterFields'
           OnChange = MSQLChange
@@ -419,10 +413,6 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
       object TabMyBase: TTabSheet
         Caption = 'MyBase'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         DesignSize = (
           844
           337)
@@ -458,7 +448,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 144
           Top = 3
           Width = 698
-          Height = 24
+          Height = 21
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
           OnChange = MSQLChange
@@ -467,7 +457,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 144
           Top = 57
           Width = 698
-          Height = 24
+          Height = 21
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 5
           OnChange = MSQLChange
@@ -514,7 +504,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
             Left = 4
             Top = 36
             Width = 197
-            Height = 24
+            Height = 21
             Style = csDropDownList
             TabOrder = 0
           end
@@ -551,6 +541,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
             Width = 574
             Height = 192
             Anchors = [akLeft, akTop, akRight, akBottom]
+            ItemHeight = 13
             TabOrder = 5
           end
           object CheckParallelUnion: TCheckBox
@@ -567,7 +558,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 144
           Top = 31
           Width = 497
-          Height = 24
+          Height = 21
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 2
           OnChange = MSQLChange
@@ -586,7 +577,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 144
           Top = 84
           Width = 698
-          Height = 24
+          Height = 21
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 7
           OnChange = MSQLChange
@@ -600,7 +591,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
     Left = 256
     Top = 144
     Bitmap = {
-      494C0101050009003C0013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900040013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000004C000000260000000100200000000000202D
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -991,7 +982,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
     Top = 88
   end
   object ActionList1: TActionList
-    Images = ImageList1
+    Images = VirtualImageList1
     Left = 288
     Top = 225
     object ANew: TAction
@@ -1009,5 +1000,113 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
       ImageIndex = 4
       OnExecute = ARenameExecute
     end
+  end
+  object ImageCollection1: TImageCollection
+    Images = <
+      item
+        Name = 'Item1'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000574944415478DAE5D2590A00200805C0E7FD0F6D45480B46461641FE
+              B8204390C4607805CD308A2B7187DEC23294326001EF6002957E0E9EC77AC80A
+              9EC546900554B1BA97DF6C67464C7BE55B77F61926F536B61AAE58009FBA62EE
+              C9B3E8970000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item2'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000574944415478DAEDD24B0A0020080450E7FE87B6EFA2A8B428AC45B3
+              11421E868289E954A061082D39BE17DB18C7FA3133ACDC20452461F55B0B0F31
+              695EAC6012287DD706EB81DA12ECB0127CE3CEFAA00CDDC16673147394E762EE
+              854EEABF0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item3'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000804944415478DACD91410EC0200804D977EB91BE9B5AAB561B424D30
+              A99C362A93412024B4AAF02B0C574BA9D40B3F4C72D800D68F56E6CBB0F148D0
+              60208B6ADF56CB0196126A5B9F150D8F996269FD5935732D809925C480674C48
+              D356F27B349799F55659806D76E749D83233E6636A9F3106FA844D91DAE71BB0
+              15B52FEC04077973EEF44332900000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item4'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000734944415478DAD594E10AC0200884F3FD1FFA5641309A775A1B83FC
+              67E897DE518682F255D819306B690D003D918D4EAD0B1BC1A0ECD2C79A11504D
+              4F35BB4347633B53124803E629233D4337BD0969ED2F9331CD14D085A9D596DC
+              CC68C45CDD8231205D33F3A4D206A49AA74B0FF982DEC605CC3079EE93AD1430
+              0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item5'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000A94944415478DAADD34112802008055039B72EEDDCA44E91C5FFE434
+              B16A925E82289A34FD15C23051810BEDB52C63866CE48B7C477BFEF53C610362
+              0841477EA94DC96298835A828B5A301C62C7A2EB49DA14A233B60285AD70985C
+              65318CF6F459E66A58A98FF884853FB2324944438AB14AA6BD28EF1DE831C518
+              6418387DBEB38C4B44C3FD8E1DA00B0279ECBC42ECDA240EDDB179BB7D96827B
+              3837DD61B0C9C170F283F97168773CEB94EEB32F37DA0000000049454E44AE42
+              6082}
+          end>
+      end>
+    Left = 388
+    Top = 246
+  end
+  object VirtualImageList1: TVirtualImageList
+    DisabledGrayscale = False
+    DisabledSuffix = '_Disabled'
+    Images = <
+      item
+        CollectionIndex = 0
+        CollectionName = 'Item1'
+        Disabled = False
+        Name = 'Item1'
+      end
+      item
+        CollectionIndex = 1
+        CollectionName = 'Item2'
+        Disabled = False
+        Name = 'Item2'
+      end
+      item
+        CollectionIndex = 2
+        CollectionName = 'Item3'
+        Disabled = False
+        Name = 'Item3'
+      end
+      item
+        CollectionIndex = 3
+        CollectionName = 'Item4'
+        Disabled = False
+        Name = 'Item4'
+      end
+      item
+        CollectionIndex = 4
+        CollectionName = 'Item5'
+        Disabled = False
+        Name = 'Item5'
+      end>
+    ImageCollection = ImageCollection1
+    Left = 460
+    Top = 246
   end
 end

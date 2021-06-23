@@ -892,6 +892,7 @@ var
   drawbackground: boolean;
   oldhandle: THandle;
   format: string;
+  newrec: TRect;
 {$IFDEF DELPHI2009UP}
   npng: TPngImage;
 {$ENDIF}
@@ -1085,7 +1086,18 @@ begin
         end;
         case TRpShapeType(obj.DrawStyle) of
           rpsRectangle, rpsSquare:
-            Canvas.rectangle(X + posx, Y + posy, X + posx + W, Y + posy + H);
+            if (Canvas.Pen.Width = 0) then
+            begin
+              newrec.Left := X + posx;
+              newrec.Top := Y + posy;
+              newrec.Right := X + posx + W;
+              newrec.Bottom := Y + posy + H;
+              Canvas.FillRect(newrec);
+            end
+            else
+            begin
+              Canvas.rectangle(X + posx, Y + posy, X + posx + W, Y + posy + H);
+            end;
           rpsRoundRect, rpsRoundSquare:
             Canvas.RoundRect(X + posx, Y + posy, X + posx + W, Y + posy + H,
               S div 4, S div 4);

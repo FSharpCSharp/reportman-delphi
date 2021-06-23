@@ -1544,116 +1544,169 @@ data[] :
 	'C'   black           150%*Ratio          2/5  (used for PostNet)
 	'D'   black           200%*Ratio          2/5  (used for PostNet)
 }
-procedure TRpBarcode.DoLines(data: AnsiString; FLeft,FTop:integer;meta:TRpMetaFileReport);
+procedure TRpBarcode.DoLines(data: AnsiString; FLeft, FTop: integer;
+  meta: TRpMetafileReport);
 
 type
-	TLineType = (white, black, black_half);
-	// black_half means a black line with 2/5 height (used for PostNet)
+  TLineType = (white, black, black_half);
+  // black_half means a black line with 2/5 height (used for PostNet)
 
-var i:integer;
-	lt : TLineType;
-	xadd:integer;   //
-	awidth, aheight:integer;
-	a,b,c,d,     // Edges of a line (we need 4 Point because the line
-					 // is a recangle
-	orgin : TPoint;
-	alpha:double;
-        PenWidth:integer;
-        PenColor:integer;
-        BrushColor:integer;
+var
+  i: integer;
+  lt: TLineType;
+  xadd: integer; //
+  awidth, aheight: integer;
+  A, b, c, d, // Edges of a line (we need 4 Point because the line
+  // is a recangle
+  orgin: TPoint;
+  alpha: double;
+  PenWidth: integer;
+  PenColor: integer;
+  BrushColor: integer;
+  drawline: boolean;
 begin
-  if typ=bcCodePDF417 then
+  if Typ = bcCodePDF417 then
   begin
-   Draw2DBarcode(FLeft,FTop,meta);
-   exit;
+    Draw2DBarcode(FLeft, FTop, meta);
+    Exit;
   end;
-  if typ=bcCodeQr then
+  if Typ = bcCodeQr then
   begin
-   DrawQrBarcode(FLeft,FTop,meta);
-   exit;
+    DrawQrBarcode(FLeft, FTop, meta);
+    Exit;
   end;
 
-	xadd := 0;
-	orgin.x := FLeft;
-	orgin.y := FTop;
-	alpha := Rotation/10*pi / 180.0;
+  xadd := 0;
+  orgin.x := FLeft;
+  orgin.y := FTop;
+  alpha := Rotation / 10 * pi / 180.0;
 
-        PenWidth := 0;
-        for i:=1 to Length(data) do  // examine the pattern string
-	begin
-		case data[i] of
-			'0': begin awidth := modules[0]; lt := white; end;
-			'1': begin awidth := modules[1]; lt := white; end;
-			'2': begin awidth := modules[2]; lt := white; end;
-			'3': begin awidth := modules[3]; lt := white; end;
+  PenWidth := 0;
+  for i := 1 to Length(data) do // examine the pattern string
+  begin
+    drawline := true;
+    case data[i] of
+      '0':
+        begin
+          awidth := modules[0];
+          lt := white;
+        end;
+      '1':
+        begin
+          awidth := modules[1];
+          lt := white;
+        end;
+      '2':
+        begin
+          awidth := modules[2];
+          lt := white;
+        end;
+      '3':
+        begin
+          awidth := modules[3];
+          lt := white;
+        end;
 
-			'5': begin awidth := modules[0]; lt := black; end;
-			'6': begin awidth := modules[1]; lt := black; end;
-			'7': begin awidth := modules[2]; lt := black; end;
-			'8': begin awidth := modules[3]; lt := black; end;
-			'A': begin awidth := modules[0]; lt := black_half; end;
-        		'B': begin awidth := modules[1]; lt := black_half; end;
-			'C': begin awidth := modules[2]; lt := black_half; end;
-			'D': begin awidth := modules[3]; lt := black_half; end;
-               		else
-			begin
-	        		// something went wrong
-				// mistyped pattern table
-				raise Exception.Create(SRpWrongBarcodeType+':'+data);
-				end;
-			end;
-			if (lt = black) or (lt = black_half) then
-			begin
-				PenColor := BColor;
-			end
-			else
-			begin
-				PenColor := $FFFFFF;
-			end;
-			BrushColor := PenColor;
+      '5':
+        begin
+          awidth := modules[0];
+          lt := black;
+        end;
+      '6':
+        begin
+          awidth := modules[1];
+          lt := black;
+        end;
+      '7':
+        begin
+          awidth := modules[2];
+          lt := black;
+        end;
+      '8':
+        begin
+          awidth := modules[3];
+          lt := black;
+        end;
+      'A':
+        begin
+          awidth := modules[0];
+          lt := black_half;
+        end;
+      'B':
+        begin
+          awidth := modules[1];
+          lt := black_half;
+        end;
+      'C':
+        begin
+          awidth := modules[2];
+          lt := black_half;
+        end;
+      'D':
+        begin
+          awidth := modules[3];
+          lt := black_half;
+        end;
+    else
+      begin
+        // something went wrong
+        // mistyped pattern table
+        raise Exception.Create(SRpWrongBarcodeType + ':' + data);
+      end;
+    end;
+    if (lt = black) or (lt = black_half) then
+    begin
+      PenColor := BColor;
+    end
+    else
+    begin
+      if (Transparent) then
+      begin
+       drawline := false;
+      end
+      else
+      begin
+        PenColor := BackColor;
+      end;
+    end;
+    if (drawline) then
+    begin
+      BrushColor := PenColor;
 
-			if lt = black_half then
-				aheight := PrintHeight * 2 div 5
-			else
-				aheight := PrintHeight;
+      if lt = black_half then
+        aheight := PrintHeight * 2 div 5
+      else
+        aheight := PrintHeight;
 
+      A.x := xadd;
+      A.y := 0;
 
+      b.x := xadd;
+      b.y := aheight;
 
+      c.x := xadd + awidth;
+      c.y := aheight;
 
+      d.x := xadd + awidth;
+      d.y := 0;
 
-			a.x := xadd;
-			a.y := 0;
+      // a,b,c,d builds the rectangle we want to draw
 
-			b.x := xadd;
-			b.y := aheight;
+      // rotate the rectangle
+      A := Translate2D(Rotate2D(A, alpha), orgin);
+      b := Translate2D(Rotate2D(b, alpha), orgin);
+      c := Translate2D(Rotate2D(c, alpha), orgin);
+      d := Translate2D(Rotate2D(d, alpha), orgin);
 
-			c.x := xadd+awidth;
-			c.y := aheight;
+      // draw the rectangle
+      meta.Pages[meta.CurrentPage].NewDrawObject(A.y, A.x, c.x - A.x, c.y - A.y,
+        integer(rpsRectangle), 0, BrushColor, 0, PenWidth, PenColor);
+    end;
+    // Polygon([a,b,c,d]);
 
-			d.x := xadd+awidth;
-			d.y := 0;
-
-			// a,b,c,d builds the rectangle we want to draw
-
-
-			// rotate the rectangle
-			a := Translate2D(Rotate2D(a, alpha), orgin);
-			b := Translate2D(Rotate2D(b, alpha), orgin);
-			c := Translate2D(Rotate2D(c, alpha), orgin);
-			d := Translate2D(Rotate2D(d, alpha), orgin);
-
-			// draw the rectangle
-  meta.Pages[meta.CurrentPage].NewDrawObject(a.y,a.x,c.x-a.x,c.y-a.y,
-  integer(rpsRectangle),0,BrushColor,0,PenWidth,PenColor);
-//			Polygon([a,b,c,d]);
-
-
-			xadd := xadd + awidth;
-  	end;
+    xadd := xadd + awidth;
+  end;
 end;
-
-
-
 
 procedure TRpBarcode.Evaluate;
 var
@@ -1898,7 +1951,7 @@ var
   NumErrorCodewords : Integer;
   ErrorLevel        : Integer;
   j                 : Integer;
-                                            
+
 begin
   { Set the error correction level automatically if needed }
   ErrorLevel := GetRealErrorLevel;
@@ -1987,7 +2040,7 @@ begin
       temp := (929 - temp) mod 929;
       BaseReg[j] := (BaseReg[j - 1] + temp) mod 929;
     end;
-    temp := (CoeffReg[ECClen - 1] * wrap) mod 929;      
+    temp := (CoeffReg[ECClen - 1] * wrap) mod 929;
     temp := (929 - temp) mod 929;
     BaseReg[0]:= temp;
   end;
@@ -2482,7 +2535,7 @@ var
   Digits     : array [0..MAX_DIGITS_NUM] of Integer;
                              // 15 base 900 digits = 45 base 10 digits
   SP         : Integer;
-  
+
 begin
   {Assert: S must be non-empty
            it must contain just the ASCII characters '0' to '9' (so no
@@ -2591,7 +2644,7 @@ begin
 
   if Position <= CodeLen then begin
     if (FCode[Position] = '\') and
-       (Position < CodeLen) then begin 
+       (Position < CodeLen) then begin
       case FCode[Position + 1] of
         '0'..'9' : begin
           try
@@ -2648,7 +2701,7 @@ begin
           NewChar := Byte (FCode[Position]);
           Inc (Position);
         end;
-      end;   
+      end;
     end else begin
       NewChar := Byte (FCode[Position]);
       Inc (Position);
@@ -2743,7 +2796,7 @@ procedure TRpBarcode.DrawRightRowIndicator (RowNumber     : Integer;
 var
   Codeword   : Integer;
   ErrorLevel : Integer;
-  
+
 begin
   ErrorLevel := GetRealErrorLevel;
   CodeWord := 0;
@@ -3050,6 +3103,7 @@ var
   BrushColor:Integer;
   PenWidth:Integer;
   dif:integer;
+  isBlack:boolean;
 begin
   PenWidth:=0;
   metaPage:=meta.Pages[meta.CurrentPage];
@@ -3078,19 +3132,23 @@ begin
     begin
       for Column := 0 to QRCode.Columns - 1 do
       begin
-        if (QRCode.IsBlack[Row, Column]) then
+        isBlack := QRCode.IsBlack[Row, Column];
+        if (isBlack) then
         begin
  				 PenColor := BColor;
          BrushColor := PenColor;
         end
         else
         begin
-          PenColor := $FFFFFF;
-    			BrushColor := PenColor;
+         PenColor := BackColor;
+         BrushColor := PenColor;
         end;
-        meta.Pages[meta.CurrentPage].NewDrawObject(
-            FTop+Row*squareHeight,FLeft+Column*squareWidth,squareWidth,squareHeight,
-            integer(rpsRectangle),0,BrushColor,0,PenWidth,PenColor);
+        if (isBlack OR (Not Transparent)) then
+        begin
+          meta.Pages[meta.CurrentPage].NewDrawObject(
+              FTop+Row*squareHeight,FLeft+Column*squareWidth,squareWidth,squareHeight,
+              integer(rpsRectangle),0,BrushColor,0,PenWidth,PenColor);
+        end;
        end;
     end;
   finally

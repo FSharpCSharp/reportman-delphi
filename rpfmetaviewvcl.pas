@@ -37,7 +37,8 @@ uses
   rpexceldriver,rptextdriver,rpsvgdriver,rpcsvdriver,
   ActnList, ImgList,Printers,rpmdconsts,rptypes, Menus,
   rpmdfaboutvcl,rpmdshfolder,rpmdprintconfigvcl,
-  ToolWin, Mask, rpmaskedit,rpvgraphutils, System.ImageList, System.Actions;
+  ToolWin, Mask, rpmaskedit,rpvgraphutils, System.ImageList, System.Actions,
+  Vcl.VirtualImageList, Vcl.BaseImageCollection, Vcl.ImageCollection;
 
 type
 
@@ -176,6 +177,8 @@ type
     Splitter1: TSplitter;
     AFind: TAction;
     ESearch: TRpMaskEdit;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure AFirstExecute(Sender: TObject);
     procedure ANextExecute(Sender: TObject);
     procedure APreviousExecute(Sender: TObject);
@@ -298,7 +301,7 @@ var
 {$ENDIF}
 begin
  inherited Create(AOwner);
- ScaleToolBar(Self.BToolBar);
+ // ScaleToolBar(Self.BToolBar);
  inif:=TIniFile.Create(ChangeFileExt(Application.ExeName,'.ini'));
  try
   MDoc.Visible:=inif.ReadBool('CONFIG','ShowAboutBox',true);

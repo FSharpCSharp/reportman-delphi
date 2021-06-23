@@ -26,14 +26,10 @@ uses SysUtils, Classes,
   Graphics, Forms,Dialogs, ActnList, ImgList, ComCtrls,
   Buttons, ExtCtrls, Controls, StdCtrls,Mask,
   rpdatainfo,rpreport,
-{$IFDEF USEVARIANTS}
   Variants,
-{$ENDIF}
-{$IFDEF DELPHI2009UP}
- Actions,System.ImageList,
-{$ENDIF}
   DB,rpmdconsts,rpparams,
-  rpgraphutilsvcl, ToolWin,rptypes, rpmaskedit, CheckLst;
+  rpgraphutilsvcl, ToolWin,rptypes, rpmaskedit, CheckLst, Vcl.VirtualImageList,
+  Vcl.BaseImageCollection, Vcl.ImageCollection, System.Actions, System.ImageList;
 
 type
   TFRpParamsVCL = class(TForm)
@@ -95,6 +91,8 @@ type
     EErrorMessage: TEdit;
     LErrorMessage: TLabel;
     LValidation: TLabel;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure FormCreate(Sender: TObject);
     procedure BOKClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -150,7 +148,7 @@ end;
 
 procedure TFRpParamsVCL.FormCreate(Sender: TObject);
 begin
- ScaleToolBar(toolbar1);
+ //ScaleToolBar(toolbar1);
  params:=TRpParamList.Create(Self);
 
  BOK.Caption:=TranslateStr(93,BOK.Caption);

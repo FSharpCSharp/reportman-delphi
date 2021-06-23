@@ -21,8 +21,6 @@ object FRpParamsVCL: TFRpParamsVCL
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 122
-    ExplicitWidth = 633
     DesignSize = (
       665
       395)
@@ -34,7 +32,6 @@ object FRpParamsVCL: TFRpParamsVCL
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
       Visible = False
-      ExplicitWidth = 598
       DesignSize = (
         630
         383)
@@ -105,7 +102,6 @@ object FRpParamsVCL: TFRpParamsVCL
         ItemHeight = 13
         TabOrder = 17
         Visible = False
-        ExplicitWidth = 304
       end
       object GValues: TGroupBox
         Left = 12
@@ -116,7 +112,6 @@ object FRpParamsVCL: TFRpParamsVCL
         Caption = 'Strings to show (left) and strings to assign (right) '
         TabOrder = 12
         Visible = False
-        ExplicitWidth = 576
         DesignSize = (
           608
           103)
@@ -135,8 +130,6 @@ object FRpParamsVCL: TFRpParamsVCL
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitTop = 13
-          ExplicitWidth = 572
           object MItems: TMemo
             Left = 0
             Top = 0
@@ -156,7 +149,6 @@ object FRpParamsVCL: TFRpParamsVCL
             TabOrder = 1
             WordWrap = False
             OnChange = EDescriptionChange
-            ExplicitWidth = 380
           end
         end
         object ComboLookup: TComboBox
@@ -169,7 +161,6 @@ object FRpParamsVCL: TFRpParamsVCL
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 1
           OnChange = EDescriptionChange
-          ExplicitWidth = 320
         end
       end
       object EDescription: TEdit
@@ -182,7 +173,6 @@ object FRpParamsVCL: TFRpParamsVCL
         TabOrder = 7
         Text = 'EDescription'
         OnChange = EDescriptionChange
-        ExplicitWidth = 466
       end
       object ComboDataType: TComboBox
         Left = 86
@@ -214,7 +204,6 @@ object FRpParamsVCL: TFRpParamsVCL
         TabOrder = 1
         OnExit = EValueExit
         Text = 'EValue'
-        ExplicitWidth = 300
       end
       object CheckVisible: TCheckBox
         Left = 12
@@ -271,7 +260,6 @@ object FRpParamsVCL: TFRpParamsVCL
         Anchors = [akLeft, akTop, akRight]
         ItemHeight = 13
         TabOrder = 16
-        ExplicitWidth = 352
       end
       object ESearch: TEdit
         Left = 114
@@ -282,7 +270,6 @@ object FRpParamsVCL: TFRpParamsVCL
         TabOrder = 11
         Visible = False
         OnChange = EDescriptionChange
-        ExplicitWidth = 466
       end
       object CheckAllowNulls: TCheckBox
         Left = 280
@@ -304,7 +291,6 @@ object FRpParamsVCL: TFRpParamsVCL
         TabOrder = 8
         Text = 'EDescription'
         OnChange = EDescriptionChange
-        ExplicitWidth = 466
       end
       object CheckNeverVisible: TCheckBox
         Left = 12
@@ -335,7 +321,6 @@ object FRpParamsVCL: TFRpParamsVCL
         Caption = 'Search value'
         TabOrder = 18
         Visible = False
-        ExplicitWidth = 580
         DesignSize = (
           612
           72)
@@ -362,7 +347,6 @@ object FRpParamsVCL: TFRpParamsVCL
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
           OnChange = EDescriptionChange
-          ExplicitWidth = 324
         end
         object ComboSearchParam: TComboBox
           Left = 130
@@ -374,7 +358,6 @@ object FRpParamsVCL: TFRpParamsVCL
           TabOrder = 1
           OnChange = EDescriptionChange
           OnDropDown = ComboSearchParamDropDown
-          ExplicitWidth = 324
         end
       end
       object EValidation: TEdit
@@ -389,7 +372,6 @@ object FRpParamsVCL: TFRpParamsVCL
         TabOrder = 9
         Text = 'EDescription'
         OnChange = EDescriptionChange
-        ExplicitWidth = 466
       end
       object EErrorMessage: TEdit
         Left = 114
@@ -401,7 +383,6 @@ object FRpParamsVCL: TFRpParamsVCL
         TabOrder = 10
         Text = 'EDescription'
         OnChange = EDescriptionChange
-        ExplicitWidth = 466
       end
     end
   end
@@ -413,8 +394,6 @@ object FRpParamsVCL: TFRpParamsVCL
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 633
-    ExplicitHeight = 122
     object LParams: TListBox
       Left = 0
       Top = 25
@@ -424,9 +403,6 @@ object FRpParamsVCL: TFRpParamsVCL
       ItemHeight = 13
       TabOrder = 0
       OnClick = LParamsClick
-      ExplicitTop = 21
-      ExplicitWidth = 518
-      ExplicitHeight = 101
     end
     object ToolBar1: TToolBar
       Left = 0
@@ -441,9 +417,8 @@ object FRpParamsVCL: TFRpParamsVCL
       ButtonHeight = 25
       ButtonWidth = 26
       Caption = 'ToolBar1'
-      Images = ImageList1
+      Images = VirtualImageList1
       TabOrder = 1
-      ExplicitWidth = 633
       object ToolButton1: TToolButton
         Left = 0
         Top = 0
@@ -452,6 +427,7 @@ object FRpParamsVCL: TFRpParamsVCL
         Margins.Right = 2
         Margins.Bottom = 2
         Action = ANewParam
+        ImageName = 'Item3'
       end
       object ToolButton2: TToolButton
         Left = 26
@@ -461,6 +437,7 @@ object FRpParamsVCL: TFRpParamsVCL
         Margins.Right = 2
         Margins.Bottom = 2
         Action = ADown
+        ImageName = 'Item2'
       end
       object ToolButton3: TToolButton
         Left = 52
@@ -470,6 +447,7 @@ object FRpParamsVCL: TFRpParamsVCL
         Margins.Right = 2
         Margins.Bottom = 2
         Action = AUp
+        ImageName = 'Item1'
       end
       object ToolButton5: TToolButton
         Left = 78
@@ -481,6 +459,7 @@ object FRpParamsVCL: TFRpParamsVCL
         Margins.Bottom = 2
         Caption = 'ToolButton5'
         ImageIndex = 4
+        ImageName = 'Item5'
         Style = tbsSeparator
       end
       object ToolButton4: TToolButton
@@ -491,6 +470,7 @@ object FRpParamsVCL: TFRpParamsVCL
         Margins.Right = 2
         Margins.Bottom = 2
         Action = ADelete
+        ImageName = 'Item4'
       end
       object ToolButton6: TToolButton
         Left = 133
@@ -502,6 +482,7 @@ object FRpParamsVCL: TFRpParamsVCL
         Margins.Bottom = 2
         Caption = 'ToolButton6'
         ImageIndex = 4
+        ImageName = 'Item5'
         Style = tbsSeparator
       end
       object ToolButton7: TToolButton
@@ -512,6 +493,7 @@ object FRpParamsVCL: TFRpParamsVCL
         Margins.Right = 2
         Margins.Bottom = 2
         Action = ARename
+        ImageName = 'Item5'
       end
     end
     object Panel3: TPanel
@@ -522,8 +504,6 @@ object FRpParamsVCL: TFRpParamsVCL
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = 518
-      ExplicitHeight = 97
       DesignSize = (
         115
         148)
@@ -537,7 +517,6 @@ object FRpParamsVCL: TFRpParamsVCL
         Caption = 'Cancel'
         ModalResult = 2
         TabOrder = 0
-        ExplicitTop = 61
       end
       object BOK: TButton
         Left = 6
@@ -558,7 +537,7 @@ object FRpParamsVCL: TFRpParamsVCL
     Left = 172
     Top = 200
     Bitmap = {
-      494C010105000900280013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900040013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000004C000000260000000100200000000000202D
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -941,7 +920,7 @@ object FRpParamsVCL: TFRpParamsVCL
       0000000000000000000000000000}
   end
   object ActionList1: TActionList
-    Images = ImageList1
+    Images = VirtualImageList1
     Left = 248
     Top = 124
     object ANewParam: TAction
@@ -974,5 +953,113 @@ object FRpParamsVCL: TFRpParamsVCL
       ImageIndex = 4
       OnExecute = BRenameClick
     end
+  end
+  object ImageCollection1: TImageCollection
+    Images = <
+      item
+        Name = 'Item1'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000574944415478DAE5D2590A00200805C0E7FD0F6D45480B46461641FE
+              B8204390C4607805CD308A2B7187DEC23294326001EF6002957E0E9EC77AC80A
+              9EC546900554B1BA97DF6C67464C7BE55B77F61926F536B61AAE58009FBA62EE
+              C9B3E8970000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item2'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000574944415478DAEDD24B0A0020080450E7FE87B6EFA2A8B428AC45B3
+              11421E868289E954A061082D39BE17DB18C7FA3133ACDC20452461F55B0B0F31
+              695EAC6012287DD706EB81DA12ECB0127CE3CEFAA00CDDC16673147394E762EE
+              854EEABF0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item3'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000804944415478DACD91410EC0200804D977EB91BE9B5AAB561B424D30
+              A99C362A93412024B4AAF02B0C574BA9D40B3F4C72D800D68F56E6CBB0F148D0
+              60208B6ADF56CB0196126A5B9F150D8F996269FD5935732D809925C480674C48
+              D356F27B349799F55659806D76E749D83233E6636A9F3106FA844D91DAE71BB0
+              15B52FEC04077973EEF44332900000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item4'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000734944415478DAD594E10AC0200884F3FD1FFA5641309A775A1B83FC
+              67E897DE518682F255D819306B690D003D918D4EAD0B1BC1A0ECD2C79A11504D
+              4F35BB4347633B53124803E629233D4337BD0969ED2F9331CD14D085A9D596DC
+              CC68C45CDD8231205D33F3A4D206A49AA74B0FF982DEC605CC3079EE93AD1430
+              0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item5'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000A94944415478DAADD34112802008055039B72EEDDCA44E91C5FFE434
+              B16A925E82289A34FD15C23051810BEDB52C63866CE48B7C477BFEF53C610362
+              0841477EA94DC96298835A828B5A301C62C7A2EB49DA14A233B60285AD70985C
+              65318CF6F459E66A58A98FF884853FB2324944438AB14AA6BD28EF1DE831C518
+              6418387DBEB38C4B44C3FD8E1DA00B0279ECBC42ECDA240EDDB179BB7D96827B
+              3837DD61B0C9C170F283F97168773CEB94EEB32F37DA0000000049454E44AE42
+              6082}
+          end>
+      end>
+    Left = 362
+    Top = 313
+  end
+  object VirtualImageList1: TVirtualImageList
+    DisabledGrayscale = False
+    DisabledSuffix = '_Disabled'
+    Images = <
+      item
+        CollectionIndex = 0
+        CollectionName = 'Item1'
+        Disabled = False
+        Name = 'Item1'
+      end
+      item
+        CollectionIndex = 1
+        CollectionName = 'Item2'
+        Disabled = False
+        Name = 'Item2'
+      end
+      item
+        CollectionIndex = 2
+        CollectionName = 'Item3'
+        Disabled = False
+        Name = 'Item3'
+      end
+      item
+        CollectionIndex = 3
+        CollectionName = 'Item4'
+        Disabled = False
+        Name = 'Item4'
+      end
+      item
+        CollectionIndex = 4
+        CollectionName = 'Item5'
+        Disabled = False
+        Name = 'Item5'
+      end>
+    ImageCollection = ImageCollection1
+    Left = 314
+    Top = 313
   end
 end

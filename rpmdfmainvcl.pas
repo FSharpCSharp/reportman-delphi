@@ -64,7 +64,8 @@ uses
   rpmdsysinfo,rppdfdriver,
   rpsection,rpprintitem,rpmdfopenlibvcl,rpeditconnvcl,
   DB,rpmunits,rpgraphutilsvcl,rpmdfwizardvcl, rpalias, System.Actions,
-  System.ImageList;
+  System.ImageList, Vcl.BaseImageCollection, Vcl.ImageCollection,
+  Vcl.VirtualImageList;
 
 const
   // File name in menu width
@@ -248,6 +249,8 @@ type
     APrintDialog1: TMenuItem;
     ComboScale: TComboBox;
     menutheme: TMenuItem;
+    VirtualImageList1: TVirtualImageList;
+    ImageCollection1: TImageCollection;
     procedure ANewExecute(Sender: TObject);
     procedure AExitExecute(Sender: TObject);
     procedure AOpenExecute(Sender: TObject);
@@ -671,6 +674,7 @@ begin
  freportstructure.browser.showdatatypes:=MTypeInfo.Checked;
  freportstructure.Align:=alTop;
  freportstructure.Parent:=leftPanel;
+ //  freportstructure.ScaleForPPI(self.CurrentPPI);
  fdesignframe:=TFRpDesignFrameVCL.Create(Self);
 
  fdesignframe.Scale:=GetScale;
@@ -750,7 +754,7 @@ end;
 
 procedure TFRpMainFVCL.FormCreate(Sender: TObject);
 begin
- ScaleToolBar(ToolBar1);
+ // ScaleToolBar(ToolBar1);
  ComboScale.ItemIndex:=ComboScale.Items.IndexOf('100%');
  Application.UpdateFormatSettings:=false;
  // Inits Bools Arrays

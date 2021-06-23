@@ -28,11 +28,9 @@ uses SysUtils, Classes, Graphics, Forms,
 {$IFDEF USEVARIANTS}
  Variants,Types,
 {$ENDIF}
-{$IFDEF DELPHI2009UP}
- System.Actions, System.ImageList,
-{$ENDIF}
   rpparams,rpfparamsvcl, db,ComCtrls,rpgraphutilsvcl, DBClient, Grids,
-  DBGrids, ToolWin, ImgList, ActnList;
+  DBGrids, ToolWin, ImgList, ActnList, System.ImageList, System.Actions,
+  Vcl.VirtualImageList, Vcl.BaseImageCollection, Vcl.ImageCollection;
 
 type
   TFRpDataTextVCL = class(TForm)
@@ -98,6 +96,8 @@ type
     DFieldsSECPOS: TIntegerField;
     DFieldsSECSIZE: TIntegerField;
     DFieldsPOSBEGIN: TIntegerField;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BOkClick(Sender: TObject);
@@ -154,7 +154,7 @@ end;
 
 procedure TFRpDataTextVCL.FormCreate(Sender: TObject);
 begin
- ScaleToolBar(toolbar1);
+ //ScaleToolBar(toolbar1);
  Caption:=TranslateStr(1088,Caption);
  BOK.Caption:=SRpOk;
 

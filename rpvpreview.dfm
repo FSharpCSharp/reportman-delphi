@@ -23,30 +23,31 @@ object FRpVPreview: TFRpVPreview
     Left = 0
     Top = 0
     Width = 758
-    Height = 25
+    Height = 22
     AutoSize = True
-    ButtonHeight = 25
     ButtonWidth = 26
     Caption = 'BToolBar'
     Color = clBtnFace
-    Images = ImageList1
+    Images = VirtualImageList1
     ParentColor = False
     TabOrder = 0
     object ToolButton1: TToolButton
       Left = 0
       Top = 0
       Action = AFirst
+      ImageName = 'Item1'
     end
     object ToolButton2: TToolButton
       Left = 26
       Top = 0
       Action = APrevious
+      ImageName = 'Item2'
     end
     object EPageNum: TRpMaskEdit
       Left = 52
       Top = 0
       Width = 45
-      Height = 25
+      Height = 22
       TabOrder = 1
       OnKeyDown = EPageNumKeyDown
       Text = '0'
@@ -57,11 +58,13 @@ object FRpVPreview: TFRpVPreview
       Left = 97
       Top = 0
       Action = ANext
+      ImageName = 'Item3'
     end
     object ToolButton4: TToolButton
       Left = 123
       Top = 0
       Action = ALast
+      ImageName = 'Item4'
     end
     object ToolButton5: TToolButton
       Left = 149
@@ -69,22 +72,26 @@ object FRpVPreview: TFRpVPreview
       Width = 6
       Caption = 'ToolButton5'
       ImageIndex = 7
+      ImageName = 'Item8'
       Style = tbsSeparator
     end
     object ToolButton6: TToolButton
       Left = 155
       Top = 0
       Action = APrint
+      ImageName = 'Item5'
     end
     object ToolButton7: TToolButton
       Left = 181
       Top = 0
       Action = ASave
+      ImageName = 'Item6'
     end
     object ToolButton8: TToolButton
       Left = 207
       Top = 0
       Action = AMailTo
+      ImageName = 'Item14'
     end
     object ToolButton16: TToolButton
       Left = 233
@@ -92,17 +99,20 @@ object FRpVPreview: TFRpVPreview
       Width = 6
       Caption = 'ToolButton16'
       ImageIndex = 7
+      ImageName = 'Item8'
       Style = tbsSeparator
     end
     object ToolButton10: TToolButton
       Left = 239
       Top = 0
       Action = APageSetup
+      ImageName = 'Item15'
     end
     object ToolButton9: TToolButton
       Left = 265
       Top = 0
       Action = AParams
+      ImageName = 'Item8'
     end
     object ToolButton18: TToolButton
       Left = 291
@@ -110,33 +120,39 @@ object FRpVPreview: TFRpVPreview
       Width = 6
       Caption = 'ToolButton18'
       ImageIndex = 7
+      ImageName = 'Item8'
       Style = tbsSeparator
     end
     object ToolButton11: TToolButton
       Left = 297
       Top = 0
       Action = AScale100
+      ImageName = 'Item9'
     end
     object ToolButton12: TToolButton
       Left = 323
       Top = 0
       Action = AScaleWide
+      ImageName = 'Item10'
     end
     object ToolButton13: TToolButton
       Left = 349
       Top = 0
       Action = AScaleFull
+      ImageName = 'Item11'
       PopupMenu = MEntireMenu
     end
     object ToolButton14: TToolButton
       Left = 375
       Top = 0
       Action = AScaleLess
+      ImageName = 'Item12'
     end
     object ToolButton15: TToolButton
       Left = 401
       Top = 0
       Action = AScaleMore
+      ImageName = 'Item13'
     end
     object ToolButton19: TToolButton
       Left = 427
@@ -144,22 +160,25 @@ object FRpVPreview: TFRpVPreview
       Width = 6
       Caption = 'ToolButton19'
       ImageIndex = 7
+      ImageName = 'Item8'
       Style = tbsSeparator
     end
     object ESearch: TRpMaskEdit
       Left = 433
       Top = 0
       Width = 80
-      Height = 25
+      Height = 22
       TabOrder = 2
       OnChange = ESearchChange
       OnKeyDown = ESearchKeyDown
+      Text = ''
       DisplayMask = '###,######0'
     end
     object ToolButton20: TToolButton
       Left = 513
       Top = 0
       Action = AFind
+      ImageName = 'Item16'
     end
     object ToolButton17: TToolButton
       Left = 539
@@ -167,18 +186,20 @@ object FRpVPreview: TFRpVPreview
       Width = 7
       Caption = 'ToolButton17'
       ImageIndex = 7
+      ImageName = 'Item8'
       Style = tbsSeparator
     end
     object BExit: TToolButton
       Left = 546
       Top = 0
       Action = AExit
+      ImageName = 'Item7'
     end
     object BCancel: TButton
       Left = 572
       Top = 0
       Width = 112
-      Height = 25
+      Height = 22
       Action = ACancel
       TabOrder = 0
       Visible = False
@@ -190,7 +211,7 @@ object FRpVPreview: TFRpVPreview
     Left = 128
     Top = 64
     Bitmap = {
-      494C010110001300180013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010110001300040013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000004C0000005F0000000100200000000000D070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1136,7 +1157,7 @@ object FRpVPreview: TFRpVPreview
       00000000000000000000}
   end
   object ActionList1: TActionList
-    Images = ImageList1
+    Images = VirtualImageList1
     Left = 200
     Top = 68
     object AFirst: TAction
@@ -1355,5 +1376,333 @@ object FRpVPreview: TFRpVPreview
       Caption = '->'
       OnClick = MLeftRightClick
     end
+  end
+  object ImageCollection1: TImageCollection
+    Images = <
+      item
+        Name = 'Item1'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC0000004E4944415478DAEDD1A10E0020084551DE774BC4EF460C146611751A
+              BCD18D33075052DA153EF618067B12112A5C301AA85295996D4A91C61CF15258
+              4452586F84DCFFD9919DC5A6AEB9D2C72E630D8FE767EEADC96C740000000049
+              454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item2'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000424944415478DA63FCCFF09F815A8071D4B02166586B4BEBFF9A9A1A
+              A0AEFF8C641B06330406C8320CDD10B20CC365C8C0BB8C266186CB50AA18860F
+              8C1A36C086010074454FEEEFC8B4190000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item3'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000404944415478DA63FCCFF09F815A8071D4B04168182350B8A5A585A1
+              BAA69A912A86C1D8A4184AD030520C25DA30620CA5AFCBA81266548B4D72C1A8
+              61036C1800460B41EE76FCF5B90000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item4'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC0000004E4944415478DAEDD1B10A0020080450EFBB73D4EF361B82068730A1
+              866E12C187288C8CAA828F3D88C1DB22428D1BA221153566F649C31636EB084D
+              63117A8CADE8C8FDCD4A6E56F6CD6C3E7619EBEFBA67EE8FF994AE0000000049
+              454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item5'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC0000008B4944415478DACD93D10E80200845BDDF6D8FF9DDA62D0D03155C6B
+              F1E226723CC84474D1BD15F80C869C9E44AAC714964129C626800D960B98CDB5
+              4F415DD88AD51436B292DE8DC12C56E759BA5298667AC58482EA5E8195A406C6
+              8C9E665A2BF1AD2458CF2CECA15EE437DF02489DAECD48AC71DB74A7B9DAA668
+              661982D42283590D553F6035FE0B3B008CF495EE1D8291EE0000000049454E44
+              AE426082}
+          end>
+      end
+      item
+        Name = 'Item6'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000C94944415478DACD92BD11C2300C85A58E32EEF00AE9921158833219
+              813118212DEBB8CC0AA6734A3A211D8823774EEC8470A0E645FE79FAEEC54840
+              B055E157CC503E5714DFC7A8197956CB073CAFED78F10651458340811E9A6336
+              84010A530004DE3430EAB1C48DC9F46C965984487B531AA05E087F4196CACC33
+              99CD214B3E07FFBC9C22BBF2E43D9328D15C9FCC4C27E6D025C9746277EEA0B6
+              3538EF5EDA1C9B65992999BBB891916875A896FD4DC9C4CE9065BD33351415A3
+              F6D44EE6F5BE3F69F669FDAFD91D1A0FE0EEA6C533DD0000000049454E44AE42
+              6082}
+          end>
+      end
+      item
+        Name = 'Item7'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC0000007B4944415478DAE594D10980300C0593715CA31D47C7719DCEE138F1
+              05E29F9AD446107C50520A398E40CA424259E103C67A0D063DECC256D4458CC9
+              4C7282C7730CD6502B080D1D550D46606A36E16C6A380A6B065260AAD92CD628
+              0F61AF997D77663F312B179BDA6D566E56BECBAC387F471846C1B8B08CA4C276
+              58688CEE01196BED0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item8'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000A94944415478DAADD34112802008055039B72EEDDCA44E91C5FFE434
+              B16A925E82289A34FD15C23051810BEDB52C63866CE48B7C477BFEF53C610362
+              0841477EA94DC96298835A828B5A301C62C7A2EB49DA14A233B60285AD70985C
+              65318CF6F459E66A58A98FF884853FB2324944438AB14AA6BD28EF1DE831C518
+              6418387DBEB38C4B44C3FD8E1DA00B0279ECBC42ECDA240EDDB179BB7D96827B
+              3837DD61B0C9C170F283F97168773CEB94EEB32F37DA0000000049454E44AE42
+              6082}
+          end>
+      end
+      item
+        Name = 'Item9'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC0000006A4944415478DAEDD24112C0100C85E1BC6BE56CD9BA96651C4B59B4
+              D33151A1EDCEBFC3F8980199327D157EC350878ECA1EB8B0927D2A40AA4A3146
+              1211139CC2CEB51082092E613D701A4B295D73CCBC8E8D1EC38DB5D51B2EDF6C
+              631B6B7EF95343CCA5DCEA626F3B00F11CB2EE93D411830000000049454E44AE
+              426082}
+          end>
+      end
+      item
+        Name = 'Item10'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000A84944415478DADD94311284200C454307C7714BCEC3B528390BDD72
+              1CE858E28C4E888A88549BE6CF84E1F1504064C830ABC47498C0785185212AD8
+              D6786C43E656B01E43BE681356EAB87A19C1BEB5168C31157018965202E75C05
+              EC82E14429E59A4A29A07D0ABC855110269AC5182184B0DB6AADFB606766573F
+              E3085B3E3987EFA5194FEF7DC38CC1B8194FDC6EF736DF99DD7CB33F35A3E7E9
+              AC10D8848DBC18FCF24F7D1C7F87605CFD352A487A0000000049454E44AE4260
+              82}
+          end>
+      end
+      item
+        Name = 'Item11'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000964944415478DAE5D4B10D80201005D0BB0E56621ED6A264164AC681
+              0E3DA309100C1C60E56F30441E1FA3628204BB829F6048970B391D2C309A986A
+              74AF6D62BD96F5A65DEC4CB93B22D09C3106B4D605388DC518C15A5B8043182D
+              14425CA394124208E0BDBFEE574AF130CA0352B3B767C76E968FCEB9B566F948
+              4765633F69F6BC067508656123DFE410C64D139B81F2965B7F8E07F44121FD68
+              41311B0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item12'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000B14944415478DAB5D34B12C0100C00D0E4582C5D8B25D7B2E4582A9D
+              D26AEB37DA6C6A304FA48101027C1558C390962E11F7E1349610E75C31CF39EF
+              A2054690D61AA49479CE7B9FC7D65A504A55C10716E381DC33EC6204D1D51863
+              55A807FE8BA56047C173ED2E6BD3D852662320950011C7FF26B58610E21532C6
+              ECADB1B78F92EDCC1248DFA27E193AF70518C0EEE8193A1E2062BD6C15C49987
+              8E60420B9CC27AE034F6062E61095CBE66F3802FB10DED1C97EEA08FC14C0000
+              000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item13'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000B84944415478DAB5D34D16C4100C00E0E4582C5D8B25D7B2E45846FA
+              86D67F4D3BD9B48FBC4FA2290608F056E00843DABA44CCC36D2C21CEB9629D73
+              BE440B8C20AD354829F39AF73EBF5B6B412935041B2C4683D4152E3182A835C6
+              5886D8B735DF69B907FE17BB227524740B4BF173653DB0C6E80A10F1FED7A4D1
+              104234890419638ED138C647C9796509A467516186CEBC0037B01A3D43C70344
+              BC2F3B0471E747473061066E612B701BEB818FB0043E6E737AC09BD807869AA3
+              EE8287BE8F0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item14'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000B04944415478DAAD935B1284200C04C9C9E066C19BC1C9B20E255B20
+              E1A1323F0A9A4E57501223665768063BFC51BDC09EE9150C2066AE0B88CE0AA1
+              47300D3403AAB0110889311AE75C034CB0FB5CB478EF8D882490B55605FE612B
+              2600AA4D2EE010D6585C662184F41C7BA5DDD40CC5B91010C0710008D6535869
+              A499E5BDDC646AA615E599E15E3B840AA6197D32D340E5CCEE796DD64B032BE7
+              D033EBFD93CD473BEAFC0846B82C6409B62B5B613F3B70FEEEA0D78BC3000000
+              0049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item15'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000A94944415478DAAD92DB1680200804DDFFFF68134C435AD12E3C6449
+              8E7300E494D35F0106836C2FA29CC336ACC4DC00A04085351349CEAC2C5C60F2
+              ADAB0156983E600E41D17695740336587F3F8103CC83006E089798C0D2CD2832
+              FC6CE66B18C0F6CD5813A8596454ADEAA57E4486D160DDF426D7DE051C607E60
+              23137AD90CD680F721E5F50CCD3CCCCE14036E9B79235BABDEA8ACA867667406
+              CF7F96B0B40A53D310F6367E851DC42AD1EE1875CDB00000000049454E44AE42
+              6082}
+          end>
+      end
+      item
+        Name = 'Item16'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000714944415478DAE591510EC0200843E9CD383A37732E198922AE59A2
+              FEAC9FC53E0450A4C82A613B0CB7FDA8D6C17C0AAB1200032CF3CFFCAC0DB4C1
+              994F613E4A8465FE14967567EAD6E03007C5EE6626AA2A592D02CFC2BAD057D8
+              6C2FAC3EC0D8B5D8BB7DB0B7B3B7303AE60AFD0476010AA497EE4011A9820000
+              000049454E44AE426082}
+          end>
+      end>
+    Left = 456
+    Top = 208
+  end
+  object VirtualImageList1: TVirtualImageList
+    DisabledGrayscale = False
+    DisabledSuffix = '_Disabled'
+    Images = <
+      item
+        CollectionIndex = 0
+        CollectionName = 'Item1'
+        Disabled = False
+        Name = 'Item1'
+      end
+      item
+        CollectionIndex = 1
+        CollectionName = 'Item2'
+        Disabled = False
+        Name = 'Item2'
+      end
+      item
+        CollectionIndex = 2
+        CollectionName = 'Item3'
+        Disabled = False
+        Name = 'Item3'
+      end
+      item
+        CollectionIndex = 3
+        CollectionName = 'Item4'
+        Disabled = False
+        Name = 'Item4'
+      end
+      item
+        CollectionIndex = 4
+        CollectionName = 'Item5'
+        Disabled = False
+        Name = 'Item5'
+      end
+      item
+        CollectionIndex = 5
+        CollectionName = 'Item6'
+        Disabled = False
+        Name = 'Item6'
+      end
+      item
+        CollectionIndex = 6
+        CollectionName = 'Item7'
+        Disabled = False
+        Name = 'Item7'
+      end
+      item
+        CollectionIndex = 7
+        CollectionName = 'Item8'
+        Disabled = False
+        Name = 'Item8'
+      end
+      item
+        CollectionIndex = 8
+        CollectionName = 'Item9'
+        Disabled = False
+        Name = 'Item9'
+      end
+      item
+        CollectionIndex = 9
+        CollectionName = 'Item10'
+        Disabled = False
+        Name = 'Item10'
+      end
+      item
+        CollectionIndex = 10
+        CollectionName = 'Item11'
+        Disabled = False
+        Name = 'Item11'
+      end
+      item
+        CollectionIndex = 11
+        CollectionName = 'Item12'
+        Disabled = False
+        Name = 'Item12'
+      end
+      item
+        CollectionIndex = 12
+        CollectionName = 'Item13'
+        Disabled = False
+        Name = 'Item13'
+      end
+      item
+        CollectionIndex = 13
+        CollectionName = 'Item14'
+        Disabled = False
+        Name = 'Item14'
+      end
+      item
+        CollectionIndex = 14
+        CollectionName = 'Item15'
+        Disabled = False
+        Name = 'Item15'
+      end
+      item
+        CollectionIndex = 15
+        CollectionName = 'Item16'
+        Disabled = False
+        Name = 'Item16'
+      end>
+    ImageCollection = ImageCollection1
+    Left = 456
+    Top = 264
   end
 end

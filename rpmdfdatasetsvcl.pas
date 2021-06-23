@@ -25,15 +25,14 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, ComCtrls, ToolWin, ImgList,rpmdconsts,rpgraphutilsvcl,
-{$IFDEF DELPHI2009UP}
- System.Actions, System.ImageList,
-{$ENDIF}
+
 {$IFDEF USEBDE}
   DBTables,
 {$ENDIF}
 
   rptypes,rpdatainfo,rpreport,rpfparamsvcl,rpmdfsampledatavcl, ActnList,
-  rpdbbrowservcl,rpparams;
+  rpdbbrowservcl,rpparams, System.Actions, System.ImageList,
+  Vcl.VirtualImageList, Vcl.BaseImageCollection, Vcl.ImageCollection;
 
 type
   TFRpDatasetsVCL = class(TFrame)
@@ -109,6 +108,8 @@ type
     LMasterfi: TLabel;
     CheckOpen: TCheckBox;
     CheckParallelUnion: TCheckBox;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure BParamsClick(Sender: TObject);
     procedure LDatasetsClick(Sender: TObject);
     procedure MSQLChange(Sender: TObject);
@@ -170,7 +171,7 @@ constructor TFRpDatasetsVCL.Create(AOwner:TComponent);
 begin
  inherited Create(AOwner);
 
- ScaleToolBar(toolbar1);
+ //ScaleToolBar(toolbar1);
   //Align := AlClient;
  Report:=TRpReport.Create(Self);
  report.CreateNew;

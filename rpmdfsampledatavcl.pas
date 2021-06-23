@@ -25,7 +25,7 @@ uses SysUtils, Classes, Graphics, Forms,
 {$IFDEF DELPHI2009UP}
  System.ImageList,
 {$ENDIF}
-  ComCtrls, ImgList,rpmdconsts, ToolWin,rpgraphutilsvcl;
+  ComCtrls, ImgList,rpmdconsts, ToolWin,rpgraphutilsvcl, System.ImageList;
 
 const
  DCONTROL_DISTANCEY=5;
@@ -130,7 +130,7 @@ end;
 
 procedure TFRpShowSampledataVCL.FormCreate(Sender: TObject);
 begin
-  ScaleToolBar(toolbar1);
+  //ScaleToolBar(toolbar1);
   Caption:=TranslateStr(735,Caption);
  BExit.Hint:=TranslateStr(212,BExit.Caption);
  DBNavigator1.Hints.Clear;

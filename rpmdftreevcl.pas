@@ -39,7 +39,8 @@ uses
   Dialogs,rpmdconsts, ActnList, ImgList, ComCtrls,rpvgraphutils, DB,
   DBClient, StdCtrls,Printers,rpdatainfo,rpgraphutilsvcl,
   rptypes,rpvclreport, rpreport,ToolWin, ExtCtrls, Menus, System.Actions,
-  System.ImageList;
+  System.ImageList, Vcl.VirtualImageList, Vcl.BaseImageCollection,
+  Vcl.ImageCollection;
 
 const PROGRESS_INTERVAL=500;
 
@@ -91,6 +92,8 @@ type
     timerexpand: TTimer;
     timerinvalidate: TTimer;
     EFind: TEdit;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure ADeleteExecute(Sender: TObject);
     procedure APreviewExecute(Sender: TObject);
     procedure AUserParamsExecute(Sender: TObject);
@@ -159,7 +162,7 @@ var
 begin
  inherited Create(AOwner);
 
-  ScaleToolBar(self.BToolBar);
+  // ScaleToolBar(self.BToolBar);
  ncontrolstyle:=ATree.ControlStyle;
  include(ncontrolstyle,csCaptureMouse);
  ATree.ControlStyle:=ncontrolstyle;

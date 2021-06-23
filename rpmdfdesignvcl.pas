@@ -35,9 +35,6 @@ uses
   rpmdfsectionintvcl,rpmdobjinspvcl,rprulervcl,
   rpsubreport,rpsection,rpreport,rpmunits;
 
-const
- CONS_RULER_LEFT=20;
- CONS_RIGHTPWIDTH=6;
 type
   TRpPaintEventPanel=class;
 
@@ -55,6 +52,8 @@ type
     toptitles:Tlist;
     righttitles:Tlist;
     FScale:double;
+    CONS_RULER_LEFT: integer;
+    CONS_RIGHTPWIDTH: integer;
     procedure SetReport(Value:TRpReport);
     procedure SecPosChange(Sender:TObject);
     procedure SetScale(nvalue:double);
@@ -222,12 +221,15 @@ begin
  FScale:=1.0;
  TopRuler:=TRpRulerVCL.Create(Self);
  TopRuler.Rtype:=rHorizontal;
- TopRuler.Left:=20;
- TopRuler.Width:=389;
- TopRuler.Height:=20;
+ CONS_RIGHTPWIDTH:=ScaleDPI(5);
+ CONS_RULER_LEFT:=ScaleDpi(20);
+ TopRuler.Left:=CONS_RULER_LEFT;
+ TopRuler.Width:=ScaleDpi(389);
+ TopRuler.Height:=ScaleDpi(20);
  TopRuler.Parent:=PTop;
 
- panelheight:=Round(1.3*Font.Size/72*Screen.PixelsPerInch);
+// panelheight:=Round(1.3*Font.Size/72*Screen.PixelsPerInch);
+ panelheight:=Round(1.3*Font.Size*96/72);
  SectionScrollBox:=TRpScrollBox.Create(Self);
  SectionScrollBox.BorderStyle:=bsNone;
  SectionScrollBox.Color:=clAppWorkSpace;

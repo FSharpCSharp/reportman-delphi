@@ -35,7 +35,8 @@ uses
   ComCtrls,Menus, ActnList, ImgList, Buttons, ExtCtrls,
   rpreport,rpsubreport,rpmdconsts,rpdbbrowservcl,rpgraphutilsvcl,
   rpsection,rpmdobjinspvcl,rpprintitem, ToolWin, System.Actions,
-  System.ImageList;
+  System.ImageList, Vcl.VirtualImageList, Vcl.BaseImageCollection,
+  Vcl.ImageCollection;
 
 type
   TFRpStructureVCL = class(TFrame)
@@ -59,6 +60,8 @@ type
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     TabData: TTabSheet;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure Expand1Click(Sender: TObject);
     procedure RViewClick(Sender: TObject);
     procedure AUpExecute(Sender: TObject);
@@ -67,6 +70,7 @@ type
     procedure BNewClick(Sender: TObject);
     procedure MPHeaderClick(Sender: TObject);
     procedure RViewChange(Sender: TObject; Node: TTreeNode);
+    procedure TabStructureResize(Sender: TObject);
   private
     { Private declarations }
     oldappidle:TIdleEvent;
@@ -107,7 +111,7 @@ constructor TFRpStructureVCL.Create(AOwner:TComponent);
 begin
  inherited Create(AOwner);
 
- ScaleToolBar(Panel1);
+ // ScaleToolBar(Panel1);
 
  MPHeader.Caption:=TranslateStr(119,MPHeader.Caption);
  MPHeader.Hint:=TranslateStr(120,MPHeader.Hint);
@@ -133,6 +137,8 @@ begin
  browser.ShowDatabases:=false;
  browser.Parent:=TabData;
  PControl.ActivePageIndex:=0;
+
+ RView.Align := alClient;
 end;
 
 destructor TFRpStructureVCL.Destroy;
@@ -155,6 +161,12 @@ begin
  begin
   TFRpDesignFrameVCL(designframe).UpdateSelection(true);
  end;
+end;
+
+procedure TFRpStructureVCL.TabStructureResize(Sender: TObject);
+begin
+ panel1.ButtonWidth:=ScaleDpi(26);
+ panel1.ButtonHeight:=ScaleDpi(26);
 end;
 
 procedure TFRpStructureVCL.ActionIdle(Sender:TObject;var done:boolean);

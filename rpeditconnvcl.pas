@@ -34,10 +34,8 @@ uses
 {$IFDEF USEADO}
   adodb,
 {$ENDIF}
-{$IFDEF DELPHI2009UP}
- System.Actions, System.ImageList,
-{$ENDIF}
-  ImgList, StdCtrls;
+  ImgList, StdCtrls, Vcl.VirtualImageList, Vcl.BaseImageCollection,
+  Vcl.ImageCollection, System.Actions, System.ImageList;
 
 type
   TFRpEditConVCL = class(TForm)
@@ -79,6 +77,8 @@ type
     CheckLoginPrompt: TCheckBox;
     CheckLoadDriverParams: TCheckBox;
     CheckLoadParams: TCheckBox;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure FormCreate(Sender: TObject);
     procedure ANewConnExecute(Sender: TObject);
     procedure LAliasesClick(Sender: TObject);
@@ -293,7 +293,7 @@ end;
 
 procedure TFRpEditConVCL.FormCreate(Sender: TObject);
 begin
- ScaleToolBar(toolbar1);
+ // ScaleToolBar(toolbar1);
  rpalias1:=TRpAlias.Create(Self);
 {$IFDEF BUILDER4}
  BConfig.Visible:=False;

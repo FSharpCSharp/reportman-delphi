@@ -38,7 +38,8 @@ uses
   rpdatainfo,rpmdconsts,rpparams,
 //  DBConnAdmin,
   rpgraphutilsvcl,rpdbxconfigvcl,
-  Menus, System.Actions, System.ImageList;
+  Menus, System.Actions, System.ImageList, Vcl.VirtualImageList,
+  Vcl.BaseImageCollection, Vcl.ImageCollection;
 
 type
   TFRpConnectionVCL = class(TFrame)
@@ -77,6 +78,8 @@ type
     BTest: TButton;
     ComboNetDriver: TComboBox;
     LDotNetDriver: TLabel;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure GDriverClick(Sender: TObject);
     procedure LConnectionsClick(Sender: TObject);
     procedure BNewClick(Sender: TObject);
@@ -117,7 +120,7 @@ implementation
 constructor TFRpConnectionVCL.Create(AOwner:TComponent);
 begin
  inherited Create(AOwner);
- ScaleToolBar(toolbar1);
+ // ScaleToolBar(toolbar1);
  //Align := alClient;
 
  LDotNetDriver.Caption:=SRpDriverDotNet;

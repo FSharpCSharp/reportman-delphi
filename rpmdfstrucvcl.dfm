@@ -17,35 +17,17 @@ object FRpStructureVCL: TFRpStructureVCL
     TabOrder = 0
     object TabStructure: TTabSheet
       Caption = 'Structure'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
-      object RView: TTreeView
-        Left = 0
-        Top = 26
-        Width = 310
-        Height = 153
-        Align = alClient
-        HideSelection = False
-        Indent = 19
-        ReadOnly = True
-        TabOrder = 0
-        OnChange = RViewChange
-        OnClick = RViewClick
-        ExplicitLeft = -3
-        ExplicitTop = 32
-      end
+      OnResize = TabStructureResize
       object Panel1: TToolBar
         Left = 0
         Top = 0
         Width = 310
-        Height = 26
+        Height = 27
         AutoSize = True
-        ButtonHeight = 26
-        ButtonWidth = 26
-        Images = ImageList1
-        TabOrder = 1
+        ButtonHeight = 27
+        ButtonWidth = 27
+        Images = VirtualImageList1
+        TabOrder = 0
         object BNew: TToolButton
           Left = 0
           Top = 0
@@ -53,40 +35,53 @@ object FRpStructureVCL: TFRpStructureVCL
           Caption = 'ANewSection'
           DropdownMenu = PopupMenu1
           ImageIndex = 2
+          ImageName = 'Item3'
           Style = tbsDropDown
           OnClick = BNewClick
         end
         object ToolButton2: TToolButton
-          Left = 41
+          Left = 42
           Top = 0
           Action = ADelete
+          ImageName = 'Item4'
         end
         object ToolButton3: TToolButton
-          Left = 67
+          Left = 69
           Top = 0
           Action = AUp
+          ImageName = 'Item1'
         end
         object ToolButton4: TToolButton
-          Left = 93
+          Left = 96
           Top = 0
           Action = ADown
+          AutoSize = True
+          ImageName = 'Item2'
         end
+      end
+      object RView: TTreeView
+        Left = 16
+        Top = 45
+        Width = 265
+        Height = 131
+        HideSelection = False
+        Indent = 19
+        ReadOnly = True
+        TabOrder = 1
+        OnChange = RViewChange
+        OnClick = RViewClick
       end
     end
     object TabData: TTabSheet
       Caption = 'Data'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
   object ImageList1: TImageList
     Height = 19
     Width = 19
-    Left = 144
-    Top = 128
+    Left = 192
+    Top = 120
     Bitmap = {
       494C010104000900040013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000004C000000260000000100200000000000202D
@@ -471,7 +466,7 @@ object FRpStructureVCL: TFRpStructureVCL
       0000000000000000000000000000}
   end
   object ActionList1: TActionList
-    Images = ImageList1
+    Images = VirtualImageList1
     Left = 100
     Top = 116
     object AUp: TAction
@@ -521,5 +516,92 @@ object FRpStructureVCL: TFRpStructureVCL
       Hint = 'Inserts a detail section in the selected subreport'
       OnClick = MPHeaderClick
     end
+  end
+  object ImageCollection1: TImageCollection
+    Images = <
+      item
+        Name = 'Item1'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000574944415478DAE5D2590A00200805C0E7FD0F6D45480B46461641FE
+              B8204390C4607805CD308A2B7187DEC23294326001EF6002957E0E9EC77AC80A
+              9EC546900554B1BA97DF6C67464C7BE55B77F61926F536B61AAE58009FBA62EE
+              C9B3E8970000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item2'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000574944415478DAEDD24B0A0020080450E7FE87B6EFA2A8B428AC45B3
+              11421E868289E954A061082D39BE17DB18C7FA3133ACDC20452461F55B0B0F31
+              695EAC6012287DD706EB81DA12ECB0127CE3CEFAA00CDDC16673147394E762EE
+              854EEABF0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item3'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000804944415478DACD91410EC0200804D977EB91BE9B5AAB561B424D30
+              A99C362A93412024B4AAF02B0C574BA9D40B3F4C72D800D68F56E6CBB0F148D0
+              60208B6ADF56CB0196126A5B9F150D8F996269FD5935732D809925C480674C48
+              D356F27B349799F55659806D76E749D83233E6636A9F3106FA844D91DAE71BB0
+              15B52FEC04077973EEF44332900000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'Item4'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000734944415478DAD594E10AC0200884F3FD1FFA5641309A775A1B83FC
+              67E897DE518682F255D819306B690D003D918D4EAD0B1BC1A0ECD2C79A11504D
+              4F35BB4347633B53124803E629233D4337BD0969ED2F9331CD14D085A9D596DC
+              CC68C45CDD8231205D33F3A4D206A49AA74B0FF982DEC605CC3079EE93AD1430
+              0000000049454E44AE426082}
+          end>
+      end>
+    Left = 188
+    Top = 72
+  end
+  object VirtualImageList1: TVirtualImageList
+    DisabledGrayscale = False
+    DisabledSuffix = '_Disabled'
+    Images = <
+      item
+        CollectionIndex = 0
+        CollectionName = 'Item1'
+        Disabled = False
+        Name = 'Item1'
+      end
+      item
+        CollectionIndex = 1
+        CollectionName = 'Item2'
+        Disabled = False
+        Name = 'Item2'
+      end
+      item
+        CollectionIndex = 2
+        CollectionName = 'Item3'
+        Disabled = False
+        Name = 'Item3'
+      end
+      item
+        CollectionIndex = 3
+        CollectionName = 'Item4'
+        Disabled = False
+        Name = 'Item4'
+      end>
+    ImageCollection = ImageCollection1
+    Left = 244
+    Top = 80
   end
 end

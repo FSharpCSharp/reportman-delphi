@@ -47,7 +47,8 @@ uses SysUtils, Classes,
  IBDatabase,
 {$ENDIF}
 {$ENDIF}
-  DB,rpmdconsts, ToolWin, System.ImageList;
+  DB,rpmdconsts, ToolWin, System.ImageList, Vcl.VirtualImageList,
+  Vcl.BaseImageCollection, Vcl.ImageCollection;
 
 const
  CONTROL_DISTANCEY=5;
@@ -79,6 +80,8 @@ type
     ComboDrivers: TComboBox;
     LShowDriver: TLabel;
     ScrollParams: TScrollBox;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure FormCreate(Sender: TObject);
     procedure ComboDriversClick(Sender: TObject);
     procedure LConnectionsClick(Sender: TObject);
@@ -132,7 +135,7 @@ end;
 
 procedure TFRpDBXConfigVCL.FormCreate(Sender: TObject);
 begin
- ScaleToolBar(toolbar1);
+ //ScaleToolBar(toolbar1);
  ConAdmin:=TRpConnAdmin.Create;
 {$IFDEF USESQLEXPRESS}
  SQLConnection1:=TSQLConnection.Create(Self);

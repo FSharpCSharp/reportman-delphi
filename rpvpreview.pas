@@ -27,18 +27,13 @@ interface
 uses
   SysUtils,
   windows,
-{$IFDEF USEVARIANTS}
-  Types,
-{$ENDIF}
-{$IFDEF DELPHI2009UP}
- System.Actions, System.ImageList,
-{$ELSE}
-{$ENDIF}
   Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls,rpmetafile, ComCtrls,rphtmldriver,rppreviewcontrol,
   rpgdidriver, ExtCtrls,Menus,rptypes,rpexceldriver,rptextdriver,rpsvgdriver,
   rpcsvdriver,rpgraphutilsvcl,rppreviewmeta,rpbasereport,rpreport,rppagesetupvcl,
-  ActnList, ImgList,Printers,rpmdconsts, ToolWin, Mask, rpmaskedit,rpmunits;
+  ActnList, ImgList,Printers,rpmdconsts, ToolWin, Mask, rpmaskedit,rpmunits,
+  Vcl.VirtualImageList, Vcl.BaseImageCollection, Vcl.ImageCollection,
+  System.Actions, System.ImageList;
 
 type
   TFRpVPreview = class(TForm)
@@ -105,6 +100,8 @@ type
     ToolButton20: TToolButton;
     ESearch: TRpMaskEdit;
     AFind: TAction;
+    ImageCollection1: TImageCollection;
+    VirtualImageList1: TVirtualImageList;
     procedure FormCreate(Sender: TObject);
     procedure AFirstExecute(Sender: TObject);
     procedure ANextExecute(Sender: TObject);
@@ -265,7 +262,7 @@ end;
 
 procedure TFRpVPreview.FormCreate(Sender: TObject);
 begin
- ScaleToolBar(BToolBar);
+  //ScaleToolBar(BToolBar);
   SaveDialog1.Filter:=SRpRepMetafile+'|*.rpmf|'+
    SRpPDFFile+'|*.pdf|'+
    SRpPDFFileUn+'|*.pdf|'+

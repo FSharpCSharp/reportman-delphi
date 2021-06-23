@@ -28,7 +28,7 @@ uses
 {$ENDIF}
   Classes,SysUtils,
   Windows,Graphics, Controls,
-  Forms,rpmunits,
+  Forms,rpmunits,rpgraphutilsvcl,
  rpmdconsts;
 
 
@@ -186,8 +186,8 @@ begin
  if scale=0 then
   scale:=1.0;
  Bitmap:=nil;
- bwidth:=2500;
- bheight:=2500;
+ bwidth:=ScaleDpi(2500);
+ bheight:=ScaleDpi(2500);
  if Metrics=rCms then
  begin
   if RType=rHorizontal then
@@ -289,11 +289,11 @@ begin
  if RType=RHorizontal then
  begin
   Bitmap.Width:=bwidth;
-  Bitmap.Height:=20;
+  Bitmap.Height:=ScaleDpi(20);
  end
  else
  begin
-  Bitmap.Width:=20;
+  Bitmap.Width:=ScaleDpi(20);
   Bitmap.Height:=bheight;
  end;
  Bitmap.Canvas.Brush.Color:=Color;
