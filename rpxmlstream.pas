@@ -489,6 +489,8 @@ begin
   WritePropertyW('DISPLAYFORMAT',compb.DisplayFormat,Stream);
   WritePropertyI('ROTATION',compb.Rotation,Stream);
   WritePropertyI('BCOLOR',compb.BColor,Stream);
+  WritePropertyI('BACKCOLOR',compb.BackColor,Stream);
+  WritePropertyBool('TRANSPARENT',compb.Transparent,Stream);
   WritePropertyI('NUMCOLUMNS',compb.NumCOlumns,Stream);
   WritePropertyI('NUMROWS',compb.NumRows,Stream);
   WritePropertyI('ECCLEVEL',compb.ECCLevel,Stream);
@@ -1772,6 +1774,12 @@ begin
   else
   if propname='BCOLOR' then
    compb.BColor:=StrToInt(propvalue)
+  else
+  if propname='BACKCOLOR' then
+   compb.BackColor:=StrToInt(propvalue)
+  else
+  if propname='TRANSPARENT' then
+   compb.Transparent:=RpStrToBool(propvalue)
   else
   if propname='NUMCOLUMNS' then
    compb.NumColumns:=StrToInt(propvalue)

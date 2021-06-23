@@ -1,17 +1,14 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{3670A41F-293C-40F6-A072-91DBB47A927E}</ProjectGuid>
-        <MainSource>repmandxe2.dpr</MainSource>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-        <DCC_DependencyCheckOutputName>repmandxp.exe</DCC_DependencyCheckOutputName>
+        <ProjectGuid>{FF924D11-231E-40EF-96B8-704755D895CB}</ProjectGuid>
+        <MainSource>reportman_designvcl.dpk</MainSource>
         <ProjectVersion>19.2</ProjectVersion>
-        <Config Condition="'$(Config)'==''">Debug</Config>
-        <Base>True</Base>
-        <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
-        <TargetedPlatforms>3</TargetedPlatforms>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Package</AppType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -26,7 +23,7 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
         <Cfg_1>true</Cfg_1>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
@@ -37,163 +34,224 @@
         <Cfg_1>true</Cfg_1>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
-        <Cfg_1_Win64>true</Cfg_1_Win64>
-        <CfgParent>Cfg_1</CfgParent>
-        <Cfg_1>true</Cfg_1>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
         <Cfg_2>true</Cfg_2>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
-        <Cfg_2_Win32>true</Cfg_2_Win32>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
-        <Cfg_2_Win64>true</Cfg_2_Win64>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <Manifest_File>None</Manifest_File>
-        <Icon_MainIcon>repmandxp2009_Icon2.ico</Icon_MainIcon>
-        <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
-        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_MajorVer>2</VerInfo_MajorVer>
-        <VerInfo_MinorVer>8</VerInfo_MinorVer>
-        <VerInfo_Keys>CompanyName=Toni Martir;FileDescription=Report Manager Designer;FileVersion=2.8.0.117;InternalName=repmandxp;LegalCopyright=MPL/GPL License;LegalTrademarks=;OriginalFilename=repmandxp;ProductName=Report Manager Designer;ProductVersion=2.4.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Build>117</VerInfo_Build>
-        <DCC_Define>UNICODE;REPMANRELEASE;$(DCC_Define)</DCC_Define>
-        <DCC_UsePackage>adortl;bdertl;CustomIPTransport;dbexpress;DBXCLientDriver;DBXInterBaseDriver;DBXMySQLDriver;dsnap;ibxpress;IndyCore;IndyProtocols;IndySystem;rtl;tee;vcldb;vclimg;VclSmp;vclx;xmlrtl;ZCore;ZComponent;ZDbc;ZParseSql;ZPlain;vcl;dbrtl;reportmanxe2;reportmanvclxe2;reportmanvcldesxe2;DbxCommonDriver;Tee;vclx;$(DCC_UsePackage)</DCC_UsePackage>
-        <DCC_OutputDRCFile>true</DCC_OutputDRCFile>
-        <DCC_DependencyCheckOutputName>repmandxp2009.exe</DCC_DependencyCheckOutputName>
-        <SanitizedProjectName>repmandxe2</SanitizedProjectName>
+        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_E>false</DCC_E>
+        <DCC_N>false</DCC_N>
+        <DCC_S>false</DCC_S>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+        <GenDll>true</GenDll>
+        <GenPackage>true</GenPackage>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
+        <SanitizedProjectName>reportman_designvcl</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <BT_BuildType>Debug</BT_BuildType>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_UsePackage>vclimg;vcl;rtl;vclx;dbrtl;DbxCommonDriver;IndySystem;IndyProtocols;IndyCore;vcldb;dsnap;dbexpress;DBXMySQLDriver;DBXInterBaseDriver;vclFireDAC;FireDAC;FireDACSqliteDriver;FireDACCommonDriver;FireDACCommon;FireDACPgDriver;FireDACMSAccDriver;FireDACCommonODBC;FireDACIBDriver;FireDACMySQLDriver;FireDACADSDriver;adortl;ibxpress;Tee;reportman_rtl;reportman_vcl;vclactnband;bindcomp;AbbreviaVCLD;AsyncProDR;Tee926;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <Icon_MainIcon>repmandxp2009_Icon2.ico</Icon_MainIcon>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <BT_BuildType>Debug</BT_BuildType>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
-        <Version>7.0</Version>
-        <DCC_DebugInformation>0</DCC_DebugInformation>
-        <DCC_IOChecking>False</DCC_IOChecking>
-        <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
-        <DCC_Optimize>False</DCC_Optimize>
-        <DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
-        <DCC_RangeChecking>True</DCC_RangeChecking>
-        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
-        <DCC_Define>RELEASE;MIDASOUT;$(DCC_Define)</DCC_Define>
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-        <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <DCC_RemoteDebug>false</DCC_RemoteDebug>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_Description>Reportman VCL Designer</DCC_Description>
+        <DCC_Define>COMPILINGREPMANPACKAGE;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
-        <Version>7.0</Version>
-        <DCC_IOChecking>False</DCC_IOChecking>
-        <DCC_Optimize>False</DCC_Optimize>
-        <DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
-        <DCC_RangeChecking>True</DCC_RangeChecking>
-        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
-        <DCC_OutputDRCFile>True</DCC_OutputDRCFile>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <Icon_MainIcon>repmandxe2_Icon.ico</Icon_MainIcon>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <VerInfo_Keys>CompanyName=;FileVersion=2.8.0.117;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
-        <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
-        <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
-        <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <BT_BuildType>Debug</BT_BuildType>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <VerInfo_MinorVer>0</VerInfo_MinorVer>
-        <VerInfo_MajorVer>1</VerInfo_MajorVer>
-        <Icon_MainIcon>repmandxe2_Icon.ico</Icon_MainIcon>
-        <VerInfo_Build>0</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <BT_BuildType>Debug</BT_BuildType>
-    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="vclimg.dcp"/>
+        <DCCReference Include="vcl.dcp"/>
+        <DCCReference Include="vclx.dcp"/>
+        <DCCReference Include="dbrtl.dcp"/>
+        <DCCReference Include="DbxCommonDriver.dcp"/>
+        <DCCReference Include="IndySystem.dcp"/>
+        <DCCReference Include="IndyProtocols.dcp"/>
+        <DCCReference Include="IndyCore.dcp"/>
+        <DCCReference Include="vcldb.dcp"/>
+        <DCCReference Include="dsnap.dcp"/>
+        <DCCReference Include="dbexpress.dcp"/>
+        <DCCReference Include="DBXMySQLDriver.dcp"/>
+        <DCCReference Include="DBXInterBaseDriver.dcp"/>
+        <DCCReference Include="vclFireDAC.dcp"/>
+        <DCCReference Include="FireDAC.dcp"/>
+        <DCCReference Include="FireDACSqliteDriver.dcp"/>
+        <DCCReference Include="FireDACCommonDriver.dcp"/>
+        <DCCReference Include="FireDACCommon.dcp"/>
+        <DCCReference Include="FireDACPgDriver.dcp"/>
+        <DCCReference Include="FireDACMSAccDriver.dcp"/>
+        <DCCReference Include="FireDACCommonODBC.dcp"/>
+        <DCCReference Include="FireDACIBDriver.dcp"/>
+        <DCCReference Include="FireDACMySQLDriver.dcp"/>
+        <DCCReference Include="FireDACADSDriver.dcp"/>
+        <DCCReference Include="adortl.dcp"/>
+        <DCCReference Include="ibxpress.dcp"/>
+        <DCCReference Include="reportman_rtl.dcp"/>
+        <DCCReference Include="reportman_vcl.dcp"/>
+        <DCCReference Include="designide.dcp"/>
+        <DCCReference Include="..\..\rpmregdesignvcl.pas"/>
+        <DCCReference Include="..\..\rpmdesignervcl.pas"/>
+        <DCCReference Include="..\..\rprulervcl.pas"/>
+        <DCCReference Include="..\..\rpmdfmainvcl.pas">
+            <Form>FRpMainFVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdfdesignvcl.pas">
+            <Form>FRpDesignFrameVCL</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdfstrucvcl.pas">
+            <Form>FRpStructureVCL</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\rpdbbrowservcl.pas">
+            <Form>FRpBrowserVCL</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdobjinspvcl.pas">
+            <Form>FRpObjInspVCL</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdobinsintvcl.pas"/>
+        <DCCReference Include="..\..\rpmdfextsecvcl.pas">
+            <Form>FRpExtSectionVCL</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdflabelintvcl.pas"/>
+        <DCCReference Include="..\..\rpmdfdrawintvcl.pas"/>
+        <DCCReference Include="..\..\rpmdfbarcodeintvcl.pas"/>
+        <DCCReference Include="..\..\rpmdfchartintvcl.pas"/>
+        <DCCReference Include="..\..\rpmdfsectionintvcl.pas"/>
+        <DCCReference Include="..\..\rpmdfdinfovcl.pas">
+            <Form>FRpDInfoVCL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdfdatasetsvcl.pas">
+            <Form>FRpDatasetsVCL</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\rpfparamsvcl.pas">
+            <Form>FRpParamsVCL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdfsampledatavcl.pas">
+            <Form>FRpShowSampledataVCL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdfdatatextvcl.pas">
+            <Form>FRpDataTextVCL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdfconnectionvcl.pas">
+            <Form>FRpConnectionVCL</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\rpdbxconfigvcl.pas">
+            <Form>FRpDBXConfigVCL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdfgridvcl.pas">
+            <Form>FRpGridOptionsVCL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdsysinfo.pas">
+            <Form>FRpSysInfo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdfopenlibvcl.pas">
+            <Form>FRpOpenLibVCL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdftreevcl.pas">
+            <Form>FRpDBTreeVCL</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\rpeditconnvcl.pas">
+            <Form>FRpEditConVCL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdfwizardvcl.pas">
+            <Form>FRpWizardVCL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\rpmdfselectfields.pas">
+            <Form>FRpSelectFields</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\rpcolumnar.pas"/>
+        <DCCReference Include="..\..\rppanel.pas"/>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Delphi.Personality.12</Borland.Personality>
-        <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+        <Borland.ProjectType>Package</Borland.ProjectType>
         <BorlandProject>
             <Delphi.Personality>
-                <Parameters/>
-                <VersionInfo>
-                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
-                    <VersionInfo Name="AutoIncBuild">True</VersionInfo>
-                    <VersionInfo Name="MajorVer">2</VersionInfo>
-                    <VersionInfo Name="MinorVer">8</VersionInfo>
-                    <VersionInfo Name="Release">0</VersionInfo>
-                    <VersionInfo Name="Build">165</VersionInfo>
-                    <VersionInfo Name="Debug">False</VersionInfo>
-                    <VersionInfo Name="PreRelease">False</VersionInfo>
-                    <VersionInfo Name="Special">False</VersionInfo>
-                    <VersionInfo Name="Private">False</VersionInfo>
-                    <VersionInfo Name="DLL">False</VersionInfo>
-                    <VersionInfo Name="Locale">1033</VersionInfo>
-                    <VersionInfo Name="CodePage">1252</VersionInfo>
-                </VersionInfo>
-                <VersionInfoKeys>
-                    <VersionInfoKeys Name="CompanyName">Toni Martir</VersionInfoKeys>
-                    <VersionInfoKeys Name="FileDescription">Report Manager Designer</VersionInfoKeys>
-                    <VersionInfoKeys Name="FileVersion">2.8.0.165</VersionInfoKeys>
-                    <VersionInfoKeys Name="InternalName">repmandxp</VersionInfoKeys>
-                    <VersionInfoKeys Name="LegalCopyright">MPL/GPL License</VersionInfoKeys>
-                    <VersionInfoKeys Name="LegalTrademarks"/>
-                    <VersionInfoKeys Name="OriginalFilename">repmandxp</VersionInfoKeys>
-                    <VersionInfoKeys Name="ProductName">Report Manager Designer</VersionInfoKeys>
-                    <VersionInfoKeys Name="ProductVersion">2.4.0.0</VersionInfoKeys>
-                    <VersionInfoKeys Name="Comments"/>
-                </VersionInfoKeys>
                 <Source>
-                    <Source Name="MainSource">repmandxe2.dpr</Source>
+                    <Source Name="MainSource">reportman_designvcl.dpk</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k180.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp180.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k180.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp180.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bdertl260.bpl">Embarcadero BDE Database Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\DclTeePro926.bpl">TeeChart Pro 2019 VCL Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\reportman_designvcl.bpl">Reportman VCL Designer</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\reportman_vcl.bpl">Reportman VCL</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
-            <Platforms>
-                <Platform value="Win32">True</Platform>
-                <Platform value="Win64">True</Platform>
-            </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="repmandxe2.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName="repmandxe2.rsm" Configuration="Debug" Class="DebugSymbols"/>
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\reportman_designvcl.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>reportman_designvcl.bpl</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="OSX32">
                         <Operation>1</Operation>
@@ -596,7 +654,29 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
+                <DeployClass Name="iPad_Launch1024">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
                 <DeployClass Name="iPad_Launch1024x768">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch1536">
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
@@ -630,6 +710,17 @@
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="iPad_Launch1668x2388">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch2048">
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
@@ -702,6 +793,17 @@
                     </Platform>
                     <Platform Name="iOSSimulator">
                         <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch768">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -1141,198 +1243,25 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android64" Name="$(PROJECTNAME)"/>
             </Deployment>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
-    <ItemGroup>
-        <DelphiCompile Include="$(MainSource)">
-            <MainSource>MainSource</MainSource>
-        </DelphiCompile>
-        <DCCReference Include="..\rpmdfmainvcl.pas">
-            <Form>FRpMainFVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfdesignvcl.pas">
-            <Form>FRpDesignFrameVCL</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfaboutvcl.pas">
-            <Form>FRpAboutBoxVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfstrucvcl.pas">
-            <Form>FRpStructureVCL</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\rpmdobjinspvcl.pas">
-            <Form>FRpObjInspVCL</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\rppagesetupvcl.pas">
-            <Form>FRpPageSetupVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpfparamsvcl.pas">
-            <Form>FRpParamsVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpgraphutilsvcl.pas">
-            <Form>FRpMessageDlgVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpexpredlgvcl.pas">
-            <Form>FRpExpredialogVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rprfvparams.pas">
-            <Form>FRpRTParams</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfsearchvcl.pas">
-            <Form>TFRpSearchParamVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfsectionintvcl.pas"/>
-        <DCCReference Include="..\rptextdriver.pas"/>
-        <DCCReference Include="..\rpxmlstream.pas"/>
-        <DCCReference Include="..\rpcolumnar.pas"/>
-        <DCCReference Include="..\rpstringhash.pas"/>
-        <DCCReference Include="..\rpcomparable.pas"/>
-        <DCCReference Include="..\rphashtable.pas"/>
-        <DCCReference Include="..\rpactivexreport.pas"/>
-        <DCCReference Include="..\rpalias.pas"/>
-        <DCCReference Include="..\rpdatatext.pas"/>
-        <DCCReference Include="..\rpcompobase.pas"/>
-        <DCCReference Include="..\rpdatainfo.pas"/>
-        <DCCReference Include="..\rpdataset.pas"/>
-        <DCCReference Include="..\rpdbxconfigvcl.pas">
-            <Form>FRpDBXConfigVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpdbbrowservcl.pas">
-            <Form>FRpBrowserVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpdrawitem.pas"/>
-        <DCCReference Include="..\rpeval.pas"/>
-        <DCCReference Include="..\rpevalfunc.pas"/>
-        <DCCReference Include="..\rpgdidriver.pas">
-            <Form>FRpVCLProgress</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpexceldriver.pas">
-            <Form>FRpExcelProgress</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpcsvdriver.pas"/>
-        <DCCReference Include="..\rpgdifonts.pas"/>
-        <DCCReference Include="..\rplabelitem.pas"/>
-        <DCCReference Include="..\rplastsav.pas"/>
-        <DCCReference Include="..\rpmaskedit.pas"/>
-        <DCCReference Include="..\rpmdbarcode.pas"/>
-        <DCCReference Include="..\rpbarcodecons.pas"/>
-        <DCCReference Include="..\rpmdchart.pas"/>
-        <DCCReference Include="..\rpmdcharttypes.pas"/>
-        <DCCReference Include="..\rpmdconsts.pas"/>
-        <DCCReference Include="..\rpcompilerep.pas"/>
-        <DCCReference Include="..\rpmdfbarcodeintvcl.pas"/>
-        <DCCReference Include="..\rpmdfchartintvcl.pas"/>
-        <DCCReference Include="..\rpmdfdatatextvcl.pas">
-            <Form>FRpDataTextVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfdinfovcl.pas">
-            <Form>FRpDInfoVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfdrawintvcl.pas"/>
-        <DCCReference Include="..\rpmdfgridvcl.pas">
-            <Form>FRpGridOptionsVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdflabelintvcl.pas"/>
-        <DCCReference Include="..\rpmdfsampledatavcl.pas">
-            <Form>FRpShowSampledataVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdobinsintvcl.pas"/>
-        <DCCReference Include="..\rpmdprintconfigvcl.pas">
-            <Form>FRpPrinterConfigVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdshfolder.pas"/>
-        <DCCReference Include="..\rpmetafile.pas"/>
-        <DCCReference Include="..\rpmunits.pas"/>
-        <DCCReference Include="..\rpparams.pas"/>
-        <DCCReference Include="..\rpparser.pas"/>
-        <DCCReference Include="..\rppdfdriver.pas"/>
-        <DCCReference Include="..\rppdffile.pas"/>
-        <DCCReference Include="..\rppdfreport.pas"/>
-        <DCCReference Include="..\rpprintitem.pas"/>
-        <DCCReference Include="..\rpregvcl.pas"/>
-        <DCCReference Include="..\rpreport.pas"/>
-        <DCCReference Include="..\rpbasereport.pas"/>
-        <DCCReference Include="..\rprulervcl.pas"/>
-        <DCCReference Include="..\rpsection.pas"/>
-        <DCCReference Include="..\rpsecutil.pas"/>
-        <DCCReference Include="..\rpsubreport.pas"/>
-        <DCCReference Include="..\rptranslator.pas"/>
-        <DCCReference Include="..\rptypes.pas"/>
-        <DCCReference Include="..\rptypeval.pas"/>
-        <DCCReference Include="..\rpvclreport.pas"/>
-        <DCCReference Include="..\rpvgraphutils.pas"/>
-        <DCCReference Include="..\rpvpreview.pas">
-            <Form>FRpVPreview</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpwriter.pas"/>
-        <DCCReference Include="..\rphtmldriver.pas"/>
-        <DCCReference Include="..\rpmdfconnectionvcl.pas">
-            <Form>FRpConnectionVCL</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfwizardvcl.pas">
-            <Form>FRpWizardVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfextsecvcl.pas">
-            <Form>FRpExtSectionVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfdatasetsvcl.pas">
-            <Form>FRpDatasetsVCL</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\rpfmetaviewvcl.pas">
-            <Form>FRpMetaVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpfmainmetaviewvcl.pas">
-            <Form>FRpMainMetaVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdsysinfo.pas">
-            <Form>FRpSysInfo</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpeditconnvcl.pas">
-            <Form>FRpEditConVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpmdftreevcl.pas">
-            <Form>FRpDBTreeVCL</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\rpmdfopenlibvcl.pas">
-            <Form>FRpOpenLibVCL</Form>
-        </DCCReference>
-        <DCCReference Include="..\rpsvgdriver.pas"/>
-        <DCCReference Include="..\rpinfoprovgdi.pas"/>
-        <DCCReference Include="..\rpinfoprovid.pas"/>
-        <DCCReference Include="..\rpdatetimepicker.pas"/>
-        <DCCReference Include="..\rppreviewcontrol.pas"/>
-        <DCCReference Include="..\rppreviewmeta.pas"/>
-        <None Include="Profiling\AQtimeModule1.aqt"/>
-        <BuildConfiguration Include="Debug">
-            <Key>Cfg_2</Key>
-            <CfgParent>Base</CfgParent>
-        </BuildConfiguration>
-        <BuildConfiguration Include="Base">
-            <Key>Base</Key>
-        </BuildConfiguration>
-        <BuildConfiguration Include="Release">
-            <Key>Cfg_1</Key>
-            <CfgParent>Base</CfgParent>
-        </BuildConfiguration>
-    </ItemGroup>
-    <Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
-    <Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
-    <Import Condition="Exists('$(MSBuildProjectName).deployproj')" Project="$(MSBuildProjectName).deployproj"/>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+    <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
 </Project>

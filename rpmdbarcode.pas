@@ -87,6 +87,8 @@ type
    FUpdated:boolean;
    FRotation:SmallInt;
    FBColor:integer;
+   FBackColor:integer;
+   FTransparent:boolean;
    FECCLevel,FNumRows,FNumColumns:Integer;
    FTruncated:Boolean;
    FCodewords:TSPDF417CodewordList;
@@ -197,7 +199,9 @@ type
    property DisplayFormat:Widestring read FDisplayformat write FDisplayFormat;
    property Rotation:smallint read FRotation write FRotation default 0;
    property BColor:integer read FBColor write FBColor default $0;
-   // PDF417
+   property BackColor:integer read FBackColor write FBackColor default $FFFFFF;
+   property Transparent : Boolean read FTransparent write FTransparent default false;
+     // PDF417
    property NumColumns:Integer read FNumColumns write FNumColumns default 0;
    property NumRows:Integer read FNumRows write FNumRows default 0;
    property ECCLevel : Integer read FECCLevel write SetECCLevel default -1;
@@ -330,6 +334,7 @@ begin
   FNumRows:=0;
   FNumColumns:=0;
   FTruncated:=false;
+  FBackColor := $FFFFFF;
 end;
 
 

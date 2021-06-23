@@ -130,6 +130,20 @@ begin
  lcat.Add(SRpBarcode);
  if Assigned(lvalues) then
   lvalues.Add(IntToStr(TRpBarcode(printitem).BColor));
+ // Back Color
+ lnames.Add(SrpSBackColor);
+ ltypes.Add(SRpSColor);
+ lhints.Add('refbarcode.html');
+ lcat.Add(SRpBarcode);
+ if Assigned(lvalues) then
+  lvalues.Add(IntToStr(TRpBarcode(printitem).BackColor));
+ // Transparent
+ lnames.Add(SrpSTransparent);
+ ltypes.Add(SRpSBool);
+ lhints.Add('refbarcode.html');
+ lcat.Add(SRpBarcode);
+ if Assigned(lvalues) then
+  lvalues.Add(BoolToStr(TRpBarcode(printitem).Transparent,True));
 
  // ECC Check
  lnames.Add(SRpECCLevel);
@@ -177,6 +191,12 @@ begin
   invalidate;
   exit;
  end;
+ if pname=SrpSTransparent then
+ begin
+  TRpBarcode(fprintitem).Transparent:=StrToBool(value);
+  invalidate;
+  exit;
+ end;
  if pname=SRpSModul then
  begin
   TRpBarcode(fprintitem).Modul:=gettwipsfromtext(value);
@@ -210,6 +230,12 @@ begin
  if pname=SRpSColor then
  begin
   TRpBarcode(fprintitem).BColor:=StrToInt(Value);
+  invalidate;
+  exit;
+ end;
+ if pname=SRpSBackColor then
+ begin
+  TRpBarcode(fprintitem).BackColor:=StrToInt(Value);
   invalidate;
   exit;
  end;
@@ -254,6 +280,11 @@ begin
   Result:=BoolToStr(TRpBarcode(printitem).CheckSum,true);
   exit;
  end;
+ if pname=SrpSTransparent then
+ begin
+  Result:=BoolToStr(TRpBarcode(printitem).Transparent,true);
+  exit;
+ end;
  if pname=SrpSModul then
  begin
   Result:=gettextfromtwips(TRpBarcode(printitem).Modul);
@@ -282,6 +313,11 @@ begin
  if pname=SrpSColor then
  begin
   Result:=IntToStr(TRpBarcode(printitem).BColor);
+  exit;
+ end;
+ if pname=SrpSBackColor then
+ begin
+  Result:=IntToStr(TRpBarcode(printitem).BackColor);
   exit;
  end;
  if pname=SRpTruncatedPDF417 then
