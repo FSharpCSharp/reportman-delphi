@@ -4679,8 +4679,9 @@ begin
     end;
    end;
   end;
-  how:=MAPI_LOGON_UI or MAPI_DIALOG;
-  CheckMAPI(MapiSendMail(0,0,amessage,MAPI_LOGON_UI or MAPI_DIALOG,0));
+  // 4 = MAPI_DIALOG_MODELESS
+  how:=MAPI_LOGON_UI or MAPI_DIALOG or 4;
+  CheckMAPI(MapiSendMail(0,0,amessage,how,0));
  finally
   if (PtrMapiFileDescs<>nil) then
     FreeMem(PtrMapiFileDescs);

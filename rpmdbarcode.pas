@@ -3050,9 +3050,10 @@ begin
   metaPage:=meta.Pages[meta.CurrentPage];
   QRCode := TRpDelphiZXingQRCode.Create;
   try
-    QRCode.Data := CurrentText;
     QRCode.Encoding := qrAlphanumeric;
+    // QRCode.ECCBits:= Self.ECCLevel;
     QRCode.QuietZone := 4;
+    QRCode.Data := CurrentText;
     squareWidth:=Width div QRCode.Columns;
     squareHeight:=Height div QRCode.Rows;
     // Center barcode in rectangle
