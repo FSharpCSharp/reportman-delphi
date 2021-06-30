@@ -10,8 +10,8 @@
         <Base>True</Base>
         <AppType>Console</AppType>
         <FrameworkType>None</FrameworkType>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <TargetedPlatforms>1</TargetedPlatforms>
+        <Platform Condition="'$(Platform)'==''">Linux64</Platform>
+        <TargetedPlatforms>131</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -204,9 +204,9 @@
                 <Platform value="Android64">False</Platform>
                 <Platform value="iOSDevice64">False</Platform>
                 <Platform value="iOSSimulator">False</Platform>
-                <Platform value="Linux64">False</Platform>
+                <Platform value="Linux64">True</Platform>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
+                <Platform value="Win64">True</Platform>
             </Platforms>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
@@ -216,6 +216,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="..\..\..\rpreport.pas"/>
+        <DCCReference Include="..\..\..\rpreport.pas"/>
         <DCCReference Include="..\..\..\rpparams.pas"/>
         <DCCReference Include="..\..\..\rpmdconsts.pas"/>
         <DCCReference Include="..\..\..\rptypes.pas"/>
@@ -224,11 +225,9 @@
         <DCCReference Include="..\..\..\rpsection.pas"/>
         <DCCReference Include="..\..\..\rpsecutil.pas"/>
         <DCCReference Include="..\..\..\rphtmldriver.pas"/>
-        <DCCReference Include="..\..\..\rpexceldriver.pas"/>
-        <DCCReference Include="..\..\..\rpsvgdriver.pas"/>
-        <DCCReference Include="..\..\..\rpgdidriver.pas"/>
-        <DCCReference Include="..\..\..\rpcsvdriver.pas"/>
         <DCCReference Include="..\..\..\rppdffile.pas"/>
+        <DCCReference Include="..\..\..\rpsvgdriver.pas"/>
+        <DCCReference Include="..\..\..\rpcsvdriver.pas"/>
         <DCCReference Include="..\..\..\rppdfdriver.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>

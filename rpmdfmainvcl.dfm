@@ -44,13 +44,11 @@ object FRpMainFVCL: TFRpMainFVCL
       Left = 0
       Top = 0
       Action = ANew
-      ImageName = 'Item1'
     end
     object ToolButton2: TToolButton
       Left = 26
       Top = 0
       Action = AOpen
-      ImageName = 'Item2'
     end
     object ToolButton3: TToolButton
       Left = 52
@@ -65,13 +63,11 @@ object FRpMainFVCL: TFRpMainFVCL
       Left = 58
       Top = 0
       Action = ASave
-      ImageName = 'Item4'
     end
     object ToolButton4: TToolButton
       Left = 84
       Top = 0
       Action = ADataConfig
-      ImageName = 'Item5'
     end
     object ToolButton5: TToolButton
       Left = 110
@@ -86,13 +82,11 @@ object FRpMainFVCL: TFRpMainFVCL
       Left = 116
       Top = 0
       Action = APrint
-      ImageName = 'Item6'
     end
     object ToolButton8: TToolButton
       Left = 142
       Top = 0
       Action = APreview
-      ImageName = 'Item7'
     end
     object ToolButton9: TToolButton
       Left = 168
@@ -216,25 +210,21 @@ object FRpMainFVCL: TFRpMainFVCL
       Left = 62
       Top = 38
       Action = ADelete
-      ImageName = 'Item21'
     end
     object ToolButton11: TToolButton
       Left = 88
       Top = 38
       Action = ACut
-      ImageName = 'Item15'
     end
     object ToolButton12: TToolButton
       Left = 114
       Top = 38
       Action = ACopy
-      ImageName = 'Item16'
     end
     object ToolButton13: TToolButton
       Left = 140
       Top = 38
       Action = APaste
-      ImageName = 'Item17'
     end
     object ToolButton14: TToolButton
       Left = 166
@@ -249,25 +239,21 @@ object FRpMainFVCL: TFRpMainFVCL
       Left = 177
       Top = 38
       Action = ALeft
-      ImageName = 'Item22'
     end
     object ToolButton16: TToolButton
       Left = 203
       Top = 38
       Action = ARight
-      ImageName = 'Item23'
     end
     object ToolButton17: TToolButton
       Left = 229
       Top = 38
       Action = AUp
-      ImageName = 'Item24'
     end
     object ToolButton18: TToolButton
       Left = 255
       Top = 38
       Action = ADown
-      ImageName = 'Item25'
     end
     object ToolButton19: TToolButton
       Left = 281
@@ -282,37 +268,31 @@ object FRpMainFVCL: TFRpMainFVCL
       Left = 295
       Top = 38
       Action = AAlignLeft
-      ImageName = 'Item26'
     end
     object ToolButton21: TToolButton
       Left = 321
       Top = 38
       Action = AAlignRight
-      ImageName = 'Item27'
     end
     object ToolButton22: TToolButton
       Left = 347
       Top = 38
       Action = AAlignUp
-      ImageName = 'Item28'
     end
     object ToolButton23: TToolButton
       Left = 373
       Top = 38
       Action = AAlignDown
-      ImageName = 'Item29'
     end
     object ToolButton24: TToolButton
       Left = 399
       Top = 38
       Action = AAlignHorz
-      ImageName = 'Item30'
     end
     object ToolButton25: TToolButton
       Left = 425
       Top = 38
       Action = AAlignVert
-      ImageName = 'Item31'
     end
   end
   object mainscrollbox: TPanel
@@ -2064,6 +2044,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Caption = 'New'
       Hint = 'Creates a new report'
       ImageIndex = 0
+      ImageName = 'Item1'
       OnExecute = ANewExecute
     end
     object AOpen: TAction
@@ -2071,6 +2052,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Caption = 'Open'
       Hint = 'Opens an existing report'
       ImageIndex = 1
+      ImageName = 'Item2'
       OnExecute = AOpenExecute
     end
     object AExit: TAction
@@ -2078,6 +2060,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Caption = 'Exit'
       Hint = 'Closes de application'
       ImageIndex = 2
+      ImageName = 'Item3'
       OnExecute = AExitExecute
     end
     object ASave: TAction
@@ -2086,6 +2069,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Saves the current report'
       ImageIndex = 3
+      ImageName = 'Item4'
       OnExecute = ASaveExecute
     end
     object ASaveas: TAction
@@ -2094,6 +2078,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Saves the report to a new file'
       ImageIndex = 7
+      ImageName = 'Item8'
       OnExecute = ASaveasExecute
     end
     object APageSetup: TAction
@@ -2102,6 +2087,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Configures the page for the report'
       ImageIndex = 32
+      ImageName = 'Item33'
       OnExecute = APageSetupExecute
     end
     object ANewPageHeader: TAction
@@ -2138,6 +2124,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Deletes the selected subreport or section'
       ImageIndex = 20
+      ImageName = 'Item21'
       OnExecute = ADeleteSelectionExecute
     end
     object ANewDetail: TAction
@@ -2153,6 +2140,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Modifies data access information'
       ImageIndex = 4
+      ImageName = 'Item5'
       OnExecute = ADataConfigExecute
     end
     object AParams: TAction
@@ -2168,6 +2156,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Print the report, you can select pages to print'
       ImageIndex = 5
+      ImageName = 'Item6'
       OnExecute = APrintExecute
     end
     object APreview: TAction
@@ -2176,6 +2165,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Preview the report in the screen'
       ImageIndex = 6
+      ImageName = 'Item7'
       OnExecute = APreviewExecute
     end
     object AGridOptions: TAction
@@ -2191,6 +2181,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Cut selected object'
       ImageIndex = 14
+      ImageName = 'Item15'
       OnExecute = ACutExecute
     end
     object ACopy: TAction
@@ -2199,6 +2190,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Copy selected object to clipboard'
       ImageIndex = 15
+      ImageName = 'Item16'
       OnExecute = ACopyExecute
     end
     object APaste: TAction
@@ -2207,6 +2199,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Paste from clipboard'
       ImageIndex = 16
+      ImageName = 'Item17'
       OnExecute = APasteExecute
     end
     object AAbout: TAction
@@ -2226,6 +2219,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Caption = 'Printer setup...'
       Hint = 'Displays printer setup dialog'
       ImageIndex = 17
+      ImageName = 'Item18'
       OnExecute = APrintSetupExecute
     end
     object AUnitCms: TAction
@@ -2245,6 +2239,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Caption = 'Parameter values'
       Hint = 'Shows user parameter window'
       ImageIndex = 18
+      ImageName = 'Item19'
       OnExecute = AUserParamsExecute
     end
     object ADriverQT: TAction
@@ -2304,6 +2299,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Moves the selection to the left'
       ImageIndex = 21
+      ImageName = 'Item22'
       OnExecute = ALeftExecute
     end
     object ARight: TAction
@@ -2312,6 +2308,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Moves the selection to the left'
       ImageIndex = 22
+      ImageName = 'Item23'
       OnExecute = ARightExecute
     end
     object AUp: TAction
@@ -2320,6 +2317,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Moves the selection up'
       ImageIndex = 23
+      ImageName = 'Item24'
       OnExecute = AUpExecute
     end
     object ADown: TAction
@@ -2328,6 +2326,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Moves the selection down'
       ImageIndex = 24
+      ImageName = 'Item25'
       OnExecute = ADownExecute
     end
     object AAlignLeft: TAction
@@ -2336,6 +2335,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Aligns selection to the left'
       ImageIndex = 25
+      ImageName = 'Item26'
       OnExecute = AAlignLeftExecute
     end
     object AAlignRight: TAction
@@ -2344,6 +2344,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Aligns selection to the right'
       ImageIndex = 26
+      ImageName = 'Item27'
       OnExecute = AAlignRightExecute
     end
     object AAlignUp: TAction
@@ -2352,6 +2353,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Aligns selection up'
       ImageIndex = 27
+      ImageName = 'Item28'
       OnExecute = AAlignUpExecute
     end
     object AAlignDown: TAction
@@ -2360,6 +2362,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Aligns selection down'
       ImageIndex = 28
+      ImageName = 'Item29'
       OnExecute = AAlignDownExecute
     end
     object AAlignHorz: TAction
@@ -2368,6 +2371,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Aligns selection distributing horzontal space'
       ImageIndex = 29
+      ImageName = 'Item30'
       OnExecute = AAlignHorzExecute
     end
     object AAlignVert: TAction
@@ -2376,6 +2380,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Aligns selection distributing vertical space'
       ImageIndex = 30
+      ImageName = 'Item31'
       OnExecute = AAlignVertExecute
     end
     object AStatusBar: TAction
@@ -2417,6 +2422,7 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       Hint = 'Delete the selected object'
       ImageIndex = 20
+      ImageName = 'Item21'
       OnExecute = ADeleteExecute
     end
     object AOpenFrom: TAction
@@ -2451,11 +2457,9 @@ object FRpMainFVCL: TFRpMainFVCL
       Caption = 'File'
       object New1: TMenuItem
         Action = ANew
-        ImageName = 'Item1'
       end
       object Open1: TMenuItem
         Action = AOpen
-        ImageName = 'Item2'
       end
       object N6: TMenuItem
         Caption = '-'
@@ -2479,37 +2483,30 @@ object FRpMainFVCL: TFRpMainFVCL
       end
       object Save1: TMenuItem
         Action = ASave
-        ImageName = 'Item4'
       end
       object Saveas1: TMenuItem
         Action = ASaveas
-        ImageName = 'Item8'
       end
       object N2: TMenuItem
         Caption = '-'
       end
       object Pagesetup1: TMenuItem
         Action = APageSetup
-        ImageName = 'Item33'
       end
       object PrintPreview1: TMenuItem
         Action = APreview
-        ImageName = 'Item7'
       end
       object Print1: TMenuItem
         Action = APrint
-        ImageName = 'Item6'
       end
       object Printersetup1: TMenuItem
         Action = APrintSetup
-        ImageName = 'Item18'
       end
       object N3: TMenuItem
         Caption = '-'
       end
       object Exit1: TMenuItem
         Action = AExit
-        ImageName = 'Item3'
       end
     end
     object MReport: TMenuItem
@@ -2537,18 +2534,15 @@ object FRpMainFVCL: TFRpMainFVCL
       end
       object Dataaccessconfiguration1: TMenuItem
         Action = ADataConfig
-        ImageName = 'Item5'
       end
       object Parameters1: TMenuItem
         Action = AParams
       end
       object Userparameters1: TMenuItem
         Action = AUserParams
-        ImageName = 'Item19'
       end
       object ADeleteSelection1: TMenuItem
         Action = ADeleteSelection
-        ImageName = 'Item21'
       end
     end
     object MEdit: TMenuItem
@@ -2556,19 +2550,15 @@ object FRpMainFVCL: TFRpMainFVCL
       Enabled = False
       object Delete1: TMenuItem
         Action = ADelete
-        ImageName = 'Item21'
       end
       object Cut1: TMenuItem
         Action = ACut
-        ImageName = 'Item15'
       end
       object Copy1: TMenuItem
         Action = ACopy
-        ImageName = 'Item16'
       end
       object APaste1: TMenuItem
         Action = APaste
-        ImageName = 'Item17'
       end
       object N4: TMenuItem
         Caption = '-'
@@ -2586,46 +2576,36 @@ object FRpMainFVCL: TFRpMainFVCL
         Caption = 'Move'
         object Left1: TMenuItem
           Action = ALeft
-          ImageName = 'Item22'
         end
         object Right1: TMenuItem
           Action = ARight
-          ImageName = 'Item23'
         end
         object Up1: TMenuItem
           Action = AUp
-          ImageName = 'Item24'
         end
         object Down1: TMenuItem
           Action = ADown
-          ImageName = 'Item25'
         end
       end
       object MAlign: TMenuItem
         Caption = 'Align'
         object Left2: TMenuItem
           Action = AAlignLeft
-          ImageName = 'Item26'
         end
         object Right2: TMenuItem
           Action = AAlignRight
-          ImageName = 'Item27'
         end
         object Up2: TMenuItem
           Action = AAlignUp
-          ImageName = 'Item28'
         end
         object Down2: TMenuItem
           Action = AAlignDown
-          ImageName = 'Item29'
         end
         object Horizontalspace1: TMenuItem
           Action = AAlignHorz
-          ImageName = 'Item30'
         end
         object Verticalspace1: TMenuItem
           Action = AAlignVert
-          ImageName = 'Item31'
         end
       end
       object N5: TMenuItem

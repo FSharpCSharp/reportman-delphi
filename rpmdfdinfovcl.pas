@@ -78,7 +78,7 @@ begin
   PControl.ActivePage:=TabDatasets
  else
   PControl.ActivePage:=TabConnections;
- fconnections.Align := alClient;
+ //fconnections.Align := alClient;
  fdatasets.Align := alClient;
 end;
 

@@ -1455,8 +1455,8 @@ begin
 
  if Assigned(FInterface) then
  begin
-  FInterface.SetBounds(Left,Top,Width,Height);
   FInterface.Parent:=Parent;
+  FInterface.SetBounds(Left,Top,Width,Height);
  end;
 end;
 

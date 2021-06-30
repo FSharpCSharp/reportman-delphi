@@ -4,58 +4,18 @@ object FRpConnectionVCL: TFRpConnectionVCL
   Width = 817
   Height = 531
   TabOrder = 0
-  object ToolBar1: TToolBar
-    Left = 0
-    Top = 0
-    Width = 817
-    Height = 25
-    AutoSize = True
-    ButtonHeight = 25
-    ButtonWidth = 26
-    Caption = 'ToolBar1'
-    Images = VirtualImageList1
-    TabOrder = 0
-    object BNew: TToolButton
-      Left = 0
-      Top = 0
-      Action = ANewConnection
-      DropdownMenu = PopAdd
-      ImageName = 'Item3'
-      Style = tbsDropDown
-    end
-    object ToolButton5: TToolButton
-      Left = 41
-      Top = 0
-      Width = 36
-      Caption = 'ToolButton5'
-      ImageIndex = 4
-      ImageName = 'Item5'
-      Style = tbsSeparator
-    end
-    object ToolButton4: TToolButton
-      Left = 77
-      Top = 0
-      Action = ADelete
-      ImageName = 'Item4'
-    end
-    object ToolButton6: TToolButton
-      Left = 103
-      Top = 0
-      Width = 40
-      Caption = 'ToolButton6'
-      ImageIndex = 4
-      ImageName = 'Item5'
-      Style = tbsSeparator
-    end
-  end
+  OnResize = FrameResize
   object PParent: TPanel
     Left = 0
-    Top = 25
+    Top = 27
     Width = 817
-    Height = 506
+    Height = 504
     Align = alClient
     BevelOuter = bvNone
-    TabOrder = 1
+    TabOrder = 0
+    ExplicitTop = 80
+    ExplicitWidth = 769
+    ExplicitHeight = 451
     object PTop: TPanel
       Left = 0
       Top = 0
@@ -116,39 +76,43 @@ object FRpConnectionVCL: TFRpConnectionVCL
       Left = 0
       Top = 162
       Width = 817
-      Height = 344
+      Height = 342
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitHeight = 344
       object GAvailable: TGroupBox
         Left = 0
         Top = 0
         Width = 817
-        Height = 344
+        Height = 342
         Align = alClient
         Caption = 'Available connections'
         TabOrder = 0
+        ExplicitHeight = 344
         object LConnections: TListBox
           Left = 2
           Top = 15
           Width = 226
-          Height = 327
+          Height = 325
           Align = alLeft
           ItemHeight = 13
           TabOrder = 0
           OnClick = LConnectionsClick
+          ExplicitHeight = 327
         end
         object PConProps: TPanel
           Left = 228
           Top = 15
           Width = 587
-          Height = 327
+          Height = 325
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
+          ExplicitHeight = 327
           DesignSize = (
             587
-            327)
+            325)
           object LConnectionString: TLabel
             Left = 4
             Top = 117
@@ -273,6 +237,51 @@ object FRpConnectionVCL: TFRpConnectionVCL
           end
         end
       end
+    end
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Top = 0
+    Width = 817
+    Height = 27
+    AutoSize = True
+    ButtonHeight = 27
+    ButtonWidth = 26
+    Caption = 'ToolBar1'
+    Images = VirtualImageList1
+    TabOrder = 1
+    ExplicitLeft = -3
+    ExplicitTop = 32
+    ExplicitWidth = 143
+    object BNew: TToolButton
+      Left = 0
+      Top = 0
+      Action = ANewConnection
+      DropdownMenu = PopAdd
+      Style = tbsDropDown
+    end
+    object ToolButton5: TToolButton
+      Left = 41
+      Top = 0
+      Width = 36
+      Caption = 'ToolButton5'
+      ImageIndex = 4
+      ImageName = 'Item5'
+      Style = tbsSeparator
+    end
+    object ToolButton4: TToolButton
+      Left = 77
+      Top = 0
+      Action = ADelete
+    end
+    object ToolButton6: TToolButton
+      Left = 103
+      Top = 0
+      Width = 40
+      Caption = 'ToolButton6'
+      ImageIndex = 4
+      ImageName = 'Item5'
+      Style = tbsSeparator
     end
   end
   object ImageList1: TImageList
@@ -671,12 +680,14 @@ object FRpConnectionVCL: TFRpConnectionVCL
       Caption = 'New connection'
       Hint = 'Adds a new connection'
       ImageIndex = 2
+      ImageName = 'Item3'
       OnExecute = ANewConnectionExecute
     end
     object ADelete: TAction
       Caption = 'Delete connection'
       Hint = 'Deletes the selected connection'
       ImageIndex = 3
+      ImageName = 'Item4'
       OnExecute = ADeleteExecute
     end
   end

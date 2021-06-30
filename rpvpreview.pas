@@ -220,7 +220,9 @@ begin
   previewcontrol.OnWorkProgress:=dia.RepProgress;
   Application.OnIdle:=dia.AppIdle;
   dia.TouchEnabled := previewcontrol.metafile.TouchEnabled;
-  dia.ShowModal;
+  dia.Height := ScaleDpi(dia.Height);
+  dia.Width := ScaleDpi(dia.Width);
+  dia.ShowModal();
   Result:=dia.printed;
  finally
     Application.OnIdle := OldIdleHandler;

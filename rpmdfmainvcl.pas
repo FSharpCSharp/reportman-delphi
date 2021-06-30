@@ -664,12 +664,12 @@ begin
  end;
  // Create the report structure frame
  fobjinsp:=TFRpObjInspVCL.Create(Self);
+ fobjinsp.Parent:=leftpanel;
  fobjinsp.Font.Style:=CLXIntegerToFontStyle(FObjFontStyle);
  fobjinsp.Font.Name:=FObjFontName;
  fobjinsp.Font.Size:=FObjFontSize;
  fobjinsp.Font.Color:=FObjFontColor;
  fobjinsp.Align:=alclient;
- fobjinsp.Parent:=leftpanel;
  freportstructure:=TFRpStructureVCL.Create(Self);
  freportstructure.browser.showdatatypes:=MTypeInfo.Checked;
  freportstructure.Align:=alTop;

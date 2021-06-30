@@ -207,7 +207,7 @@ begin
  inherited Create(AOwner);
  fprintitem:=pritem;
  FScale:=1.0;
- UpdatePos;
+ // UpdatePos;
 end;
 
 procedure TRpSizeInterface.GetPropertyValues(pname:string;lpossiblevalues:TStrings);
@@ -621,14 +621,14 @@ begin
  begin
   Exit;
  end;
- FBlacks[0].Left:=FControl.Left-CONS_MODIWIDTH div 2;
- FBlacks[0].Top:=FControl.Top-CONS_MODIWIDTH div 2;
- FBlacks[1].Left:=FControl.Left+FControl.Width-CONS_MODIWIDTH div 2;
- FBlacks[1].Top:=FControl.Top-CONS_MODIWIDTH div 2;
- FBlacks[2].Left:=FControl.Left-CONS_MODIWIDTH div 2;
- FBlacks[2].Top:=FControl.Top+FControl.Height-CONS_MODIWIDTH div 2;
- FBlacks[3].Left:=FControl.Left+FControl.Width-CONS_MODIWIDTH div 2;
- FBlacks[3].Top:=FControl.Top+FControl.Height-CONS_MODIWIDTH div 2;
+ FBlacks[0].Left:=FControl.Left-ScaleDpi(CONS_MODIWIDTH) div 2;
+ FBlacks[0].Top:=FControl.Top-ScaleDpi(CONS_MODIWIDTH) div 2;
+ FBlacks[1].Left:=FControl.Left+FControl.Width-ScaleDpi(CONS_MODIWIDTH) div 2;
+ FBlacks[1].Top:=FControl.Top-ScaleDpi(CONS_MODIWIDTH) div 2;
+ FBlacks[2].Left:=FControl.Left-ScaleDpi(CONS_MODIWIDTH) div 2;
+ FBlacks[2].Top:=FControl.Top+FControl.Height-ScaleDpi(CONS_MODIWIDTH) div 2;
+ FBlacks[3].Left:=FControl.Left+FControl.Width-ScaleDpi(CONS_MODIWIDTH) div 2;
+ FBlacks[3].Top:=FControl.Top+FControl.Height-ScaleDpi(CONS_MODIWIDTH) div 2;
  if FOnlySize then
   FBlacks[3].Visible:=true
  else
@@ -689,16 +689,17 @@ begin
   FRectangle2:=TRpRectangle.Create(Self);
   FRectangle3:=TRpRectangle.Create(Self);
   FRectangle4:=TRpRectangle.Create(Self);
+  FRectangle.Parent:=Parent;
+  FRectangle2.Parent:=Parent;
+  FRectangle3.Parent:=Parent;
+  FRectangle4.Parent:=Parent;
 
   FRectangle.SetBounds(Left,Top,Width,1);
   FRectangle2.SetBounds(Left,Top+Height,Width,1);
   FRectangle3.SetBounds(Left,Top,1,Height);
   FRectangle4.SetBounds(Left+Width,Top,1,Height);
 
-  FRectangle.Parent:=Parent;
-  FRectangle2.Parent:=Parent;
-  FRectangle3.Parent:=Parent;
-  FRectangle4.Parent:=Parent;
+
   // It seems a Bug forces me to invalidate section after
   // a aselection
 {  if assigned(parent) then
@@ -914,16 +915,17 @@ begin
   FRectangle2:=TRpRectangle.Create(Self);
   FRectangle3:=TRpRectangle.Create(Self);
   FRectangle4:=TRpRectangle.Create(Self);
+  FRectangle.Parent:=Parent;
+  FRectangle2.Parent:=Parent;
+  FRectangle3.Parent:=Parent;
+  FRectangle4.Parent:=Parent;
 
   FRectangle.SetBounds(Left,Top,Width,1);
   FRectangle2.SetBounds(Left,Top+Height,Width,1);
   FRectangle3.SetBounds(Left,Top,1,Height);
   FRectangle4.SetBounds(Left+Width,Top,1,Height);
 
-  FRectangle.Parent:=Parent;
-  FRectangle2.Parent:=Parent;
-  FRectangle3.Parent:=Parent;
-  FRectangle4.Parent:=Parent;
+
  end;
 
 

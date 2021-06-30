@@ -223,11 +223,12 @@ var
  Psplit:TSplitter;
 begin
  AScrollBox:=TScrollBox.Create(Self);
+ AScrollBox.Parent:=Self;
  AScrollBox.Align:=alClient;
  AScrollBox.HorzScrollBar.Tracking:=True;
  AScrollBox.VertScrollBar.Tracking:=True;
  AScrollBox.BorderStyle:=bsNone;
- AScrollBox.Parent:=Self;
+
 
  PParent:=TPanel.Create(Self);
  PParent.Left:=0;
@@ -258,58 +259,57 @@ begin
  PSplit.Parent:=PParent;
 
  PRight:=TPanel.Create(Self);
- PRight.Width:=CONS_CONTROLPOS+7;
+ PRight.Parent:=PParent;
+ PRight.Width:=ScaleDpi(CONS_CONTROLPOS+7);
  PRight.BorderStyle:=bsNone;
  PRight.BevelInner:=bvNone;
  PRight.BevelOuter:=bvNone;
  PRight.Align:=AlClient;
- PRight.Parent:=PParent;
 
  totalwidth:=PRight.Width;
 
  posy:=0;
  ALabel:=TLabel.Create(Self);
+ ALabel.parent:=PLeft;
  LLabels.Add(ALabel);
  ALabel.Caption:=SRpMainDataset;
  ALabel.Hint:='refsubreport.html';
- ALabel.Left:=CONS_LEFTGAP;
- ALabel.Top:=posy+CONS_LABELTOPGAP;
+ ALabel.Left:=ScaleDpi(CONS_LEFTGAP);
+ ALabel.Top:=posy+ScaleDpi(CONS_LABELTOPGAP);
  ALabel.Cursor:=crHelp;
  ALabel.OnMouseDown:=LabelMouseDown;
- ALabel.parent:=PLeft;
 
  ComboAlias:=TComboBox.Create(Self);
  ComboAlias.Style:=csDropDownList;
- ComboAlias.Top:=Posy;
- ComboAlias.Left:=CONS_LEFTGAP;
- ComboAlias.Width:=TotalWidth-ComboAlias.Left-CONS_RIGHTBARGAP;
  ComboAlias.parent:=PRight;
+ ComboAlias.Top:=Posy;
+ ComboAlias.Left:=ScaleDpi(CONS_LEFTGAP);
+ ComboAlias.Width:=TotalWidth-ComboAlias.Left-ScaleDpi(CONS_RIGHTBARGAP);
  ComboAlias.Anchors:=[akleft,aktop,akright];
-
  //posy:=posy+ComboAlias.Height;
  posy:=posy+ScaleDpi(ComboAlias.Height);
 
  ALabel:=TLabel.Create(Self);
+ ALabel.parent:=PLeft;
  LLabels.Add(ALabel);
  ALabel.Caption:=SRpSPOnlyData;
  ALabel.Hint:='refsubreport.html';
  ALabel.Cursor:=crHelp;
  ALabel.OnMouseDown:=LabelMouseDown;
- ALabel.Left:=CONS_LEFTGAP;
- ALabel.Top:=posy+CONS_LABELTOPGAP;
- ALabel.parent:=PLeft;
+ ALabel.Left:=ScaleDpi(CONS_LEFTGAP);
+ ALabel.Top:=posy+ScaleDpi(CONS_LABELTOPGAP);
  ComboPrintOnly:=TComboBox.Create(Self);
+ ComboPrintOnly.parent:=PRight;
  ComboPrintOnly.Style:=csDropDownList;
  ComboPrintOnly.Top:=Posy;
- ComboPrintOnly.Left:=CONS_LEFTGAP;
- ComboPrintOnly.parent:=PRight;
+ ComboPrintOnly.Left:=ScaleDpi(CONS_LEFTGAP);
  ComboPrintOnly.Items.Add(FalseBoolStrs[0]);
  ComboPrintOnly.Items.Add(TrueBoolStrs[0]);
- ComboPrintOnly.Width:=TotalWidth-ComboPrintOnly.Left-CONS_RIGHTBARGAP;
+ ComboPrintOnly.Width:=TotalWidth-ComboPrintOnly.Left-ScaleDpi(CONS_RIGHTBARGAP);
  ComboPrintOnly.Anchors:=[akleft,aktop,akright];
 
  //posy:=posy+ComboAlias.Height;
- posy:=posy+ScaleDPi(ComboPrintOnly.Height);
+ posy:=posy+ScaleDpi(ComboPrintOnly.Height);
  PParent.Height:=posy;
 
  LControls.AddObject(SRpMainDataset,ComboAlias);
@@ -1261,8 +1261,8 @@ begin
  apage:=nil;
 
  totalwidth:=WIdth;
- if totalwidth<CONS_MINWIDTH then
-  totalwidth:=CONS_MINWIDTH;
+ if totalwidth<ScaleDpi(CONS_MINWIDTH) then
+  totalwidth:=ScaleDpi(CONS_MINWIDTH);
 
  // Creates the labels and controls
  posy:=0;
@@ -1274,12 +1274,12 @@ begin
  APanelTop.Parent:=Self;
 
  Combo:=TComboBox.Create(Self);
- Combo.Width:=TotalWidth-CONS_RIGHTBARGAP;
+ Combo.Parent:=APanelTop;
+ Combo.Width:=TotalWidth-ScaleDpi(CONS_RIGHTBARGAP);
  Combo.Style:=csDropDownList;
  Combo.Name:='TopCombobox'+FCompItem.classname;
  combo.OnChange:=ComboObjectChange;
  APanelTop.Height:=ScaleDpi(Combo.height);
- Combo.Parent:=APanelTop;
  Combo.Anchors:=[akleft,akright,aktop];
 
  APControl:=TPageCOntrol.Create(self);
@@ -1421,6 +1421,7 @@ begin
 
   ALabel:=TLabel.Create(Self);
   LLabels.Add(ALabel);
+  ALabel.parent:=PLeft;
   ALabel.Caption:=LNames.Strings[i];
   if LHints.Count>i then
    if Length(LHints.Strings[i])>0 then
@@ -1431,11 +1432,11 @@ begin
     ALabel.Cursor:=crHelp;
     ALabel.OnMouseDown:=LabelMouseDown;
    end;
-  ALabel.Left:=CONS_LEFTGAP;
-  ALabel.Top:=posy+CONS_LABELTOPGAP;
-  ALabel.parent:=PLeft;
+  ALabel.Left:=ScaleDpi(CONS_LEFTGAP);
+  ALabel.Top:=posy+ScaleDpi(CONS_LABELTOPGAP);
 
   ALabel:=TLabel.Create(Self);
+  ALabel.parent:=apage.PLeft;
   LLabels.Add(ALabel);
   ALabel.Caption:=LNames.Strings[i];
   if LHints.Count>i then
@@ -1447,25 +1448,24 @@ begin
     ALabel.Cursor:=crHelp;
     ALabel.OnMouseDown:=LabelMouseDown;
    end;
-  ALabel.Left:=CONS_LEFTGAP;
-  ALabel.Top:=apage.posy+CONS_LABELTOPGAP;
-  ALabel.parent:=apage.PLeft;
+  ALabel.Left:=ScaleDpi(CONS_LEFTGAP);
+  ALabel.Top:=apage.posy+ScaleDpi(CONS_LABELTOPGAP);
 
   typename:=LTypes.Strings[i];
   if LTypes.Strings[i]=SRpSBool then
   begin
    Control:=TComboBox.Create(Self);
    TComboBox(Control).Style:=csDropDownList;
-   Control.Visible:=false;
    Control.Parent:=PRight;
+   Control.Visible:=false;
    TComboBox(Control).Items.Add(FalseBoolStrs[0]);
    TComboBox(Control).Items.Add(TrueBoolStrs[0]);
    TCOmboBox(Control).OnChange:=EditChange;
 
    NControl:=TComboBox.Create(Self);
    TComboBox(NControl).Style:=csDropDownList;
-   NControl.Visible:=false;
    NControl.Parent:=apage.PRight;
+   NControl.Visible:=false;
    TComboBox(NControl).Items.Add(FalseBoolStrs[0]);
    TComboBox(NControl).Items.Add(TrueBoolStrs[0]);
    TCOmboBox(NControl).OnChange:=EditChange;
@@ -1475,15 +1475,15 @@ begin
   begin
    Control:=TComboBox.Create(Self);
    TComboBox(Control).Style:=csDropDownList;
-   Control.Visible:=false;
    Control.Parent:=PRight;
+   Control.Visible:=false;
    FCompItem.GetPropertyValues(LNames.Strings[i],TComboBox(Control).Items);
    TCOmboBox(Control).OnChange:=EditChange;
 
    NControl:=TComboBox.Create(Self);
    TComboBox(NControl).Style:=csDropDownList;
-   NControl.Visible:=false;
    NControl.Parent:=apage.PRight;
+   NControl.Visible:=false;
    FCompItem.GetPropertyValues(LNames.Strings[i],TComboBox(NControl).Items);
    TCOmboBox(NControl).OnChange:=EditChange;
   end
@@ -1491,11 +1491,13 @@ begin
   if LTypes.Strings[i]=SRpSColor then
   begin
    Control:=TShape.Create(Self);
+   Control.Parent:=PRight;
    Control.Height:=aheight;
    TShape(Control).Shape:=stRectangle;
    TShape(Control).OnMouseUp:=ShapeMouseUp;
 
    NControl:=TShape.Create(Self);
+   NControl.Parent:=apage.PRight;
    NControl.Height:=aheight;
    TShape(NControl).Shape:=stRectangle;
    TShape(NControl).OnMouseUp:=ShapeMouseUp;
@@ -1504,12 +1506,15 @@ begin
   if LTypes.Strings[i]=SRpSImage then
   begin
    Control:=TRpMaskEdit.Create(Self);
+   Control.Parent:=PRight;
+
    TRpMaskEdit(Control).ReadOnly:=True;
    TRpMaskEdit(Control).Color:=clInfoBk;
    TRpMaskEdit(Control).OnClick:=ImageClick;
    TRpMaskEdit(Control).OnKeyDown:=ImageKeyDown;
 
    NControl:=TRpMaskEdit.Create(Self);
+   NControl.Parent:=apage.PRight;
    TRpMaskEdit(NControl).ReadOnly:=True;
    TRpMaskEdit(NControl).Color:=clInfoBk;
    TRpMaskEdit(NControl).OnClick:=ImageClick;
@@ -1520,8 +1525,8 @@ begin
   begin
    Control:=TComboBox.Create(Self);
    TComboBox(Control).Style:=csDropDownList;
-   Control.Visible:=false;
    Control.Parent:=PRight;
+   Control.Visible:=false;
    subrep:=FRpMainf.freportstructure.FindSelectedSubreport;
    subrep.GetGroupNames(TComboBox(Control).Items);
    TComboBox(Control).Items.Insert(0,' ');
@@ -1529,8 +1534,8 @@ begin
 
    NControl:=TComboBox.Create(Self);
    TComboBox(NControl).Style:=csDropDownList;
-   NControl.Visible:=false;
    NControl.Parent:=apage.PRight;
+   NControl.Visible:=false;
    subrep:=FRpMainf.freportstructure.FindSelectedSubreport;
    subrep.GetGroupNames(TComboBox(NControl).Items);
    TComboBox(NControl).Items.Insert(0,' ');
@@ -1540,11 +1545,15 @@ begin
   if LTypes.Strings[i]=SRpSFontStyle then
   begin
    Control:=TRpMaskEdit.Create(Self);
+   Control.Parent:=PRight;
+
    TRpMaskEdit(Control).ReadOnly:=True;
    TRpMaskEdit(Control).Color:=clInfoBk;
    TRpMaskEdit(Control).OnClick:=FontClick;
 
    NControl:=TRpMaskEdit.Create(Self);
+   NControl.Parent:=apage.PRight;
+
    TRpMaskEdit(NControl).ReadOnly:=True;
    TRpMaskEdit(NControl).Color:=clInfoBk;
    TRpMaskEdit(NControl).OnClick:=FontClick;
@@ -1553,18 +1562,14 @@ begin
   if LTypes.Strings[i]=SRpSExternalData then
   begin
    Control:=TRpMaskEdit.Create(Self);
-{$IFDEF DOTNETDBUGS}
    Control.Parent:=PRight;
-{$ENDIF}
    TRpMaskEdit(Control).ReadOnly:=True;
    TRpMaskEdit(Control).Color:=clInfoBk;
    TRpMaskEdit(Control).OnClick:=ExtClick;
    TRpMaskEdit(Control).PopupMenu:=TFRpObjInspVCL(Owner).PopUpSection;
 
    NControl:=TRpMaskEdit.Create(Self);
-{$IFDEF DOTNETDBUGS}
-   Control.Parent:=apage.PRight;
-{$ENDIF}
+   NControl.Parent:=apage.PRight;
    TRpMaskEdit(NControl).ReadOnly:=True;
    TRpMaskEdit(NControl).Color:=clInfoBk;
    TRpMaskEdit(NControl).OnClick:=ExtClick;
@@ -1574,17 +1579,13 @@ begin
   if LTypes.Strings[i]=SRpSCurrency then
   begin
    Control:=TRpMaskEdit.Create(Self);
-{$IFDEF DOTNETDBUGS}
    Control.Parent:=PRight;
-{$ENDIF}
    TRpMaskEdit(Control).OnChange:=EditChange;
    TRpMaskEdit(Control).EditType:=tecurrency;
    TRpMaskEdit(Control).DisplayMask:='##,##0.###';
 
    NControl:=TRpMaskEdit.Create(Self);
-{$IFDEF DOTNETDBUGS}
    NControl.Parent:=apage.PRight;
-{$ENDIF}
    TRpMaskEdit(NControl).OnChange:=EditChange;
    TRpMaskEdit(NControl).EditType:=tecurrency;
    TRpMaskEdit(NControl).DisplayMask:='##,##0.###';
@@ -1593,49 +1594,40 @@ begin
   if ((LTypes.Strings[i]=SRpSInteger) or (LTypes.Strings[i]=SRpSFontSize)) then
   begin
    Control:=TRpMaskEdit.Create(Self);
+   Control.Parent:=PRight;
    TRpMaskEdit(Control).OnChange:=EditChange;
    TRpMaskEdit(Control).EditType:=teinteger;
    TRpMaskEdit(Control).DisplayMask:='##,##0';
 
    NControl:=TRpMaskEdit.Create(Self);
+   NControl.Parent:=apage.PRight;
    TRpMaskEdit(NControl).OnChange:=EditChange;
    TRpMaskEdit(NControl).EditType:=teinteger;
    TRpMaskEdit(NControl).DisplayMask:='##,##0';
   end
   else
   begin
-{$IFNDEF USETNTUNICODE}
    Control:=TRpMaskEdit.Create(Self);
+   Control.Parent:=PRight;
    TRpMaskEdit(Control).OnChange:=EditChange;
    if LTypes.Strings[i]=SRpSExternalpath then
     TRpMaskEdit(Control).PopupMenu:=TFRpObjInspVCL(Owner).PopUpSection;
 
    NControl:=TRpMaskEdit.Create(Self);
+   NControl.Parent:=apage.PRight;
    TRpMaskEdit(NControl).OnChange:=EditChange;
    if LTypes.Strings[i]=SRpSExternalpath then
     TRpMaskEdit(NControl).PopupMenu:=TFRpObjInspVCL(Owner).PopUpSection;
-{$ENDIF}
-{$IFDEF USETNTUNICODE}
-   Control:=TTntEdit.Create(Self);
-   TTntEdit(Control).OnChange:=EditChange;
-   if LTypes.Strings[i]=SRpSExternalpath then
-    TTntEdit(Control).PopupMenu:=TFRpObjInspVCL(Owner).PopUpSection;
-
-   NControl:=TTntEdit.Create(Self);
-   TTntEdit(NControl).OnChange:=EditChange;
-   if LTypes.Strings[i]=SRpSExternalpath then
-    TTntEdit(NControl).PopupMenu:=TFRpObjInspVCL(Owner).PopUpSection;
-{$ENDIF}
   end;
   Control.Top:=Posy;
-  Control.Left:=CONS_LEFTGAP;
-  Control.Width:=TotalWidth-CONS_LEFTGAP-CONS_RIGHTBARGAP;
+  Control.Left:=scaleDpi(CONS_LEFTGAP);
+  Control.Width:=TotalWidth-scaleDpi(CONS_LEFTGAP)-scaleDpi(CONS_RIGHTBARGAP);
   control.parent:=PRight;
   Control.Visible:=true;
 
   NControl.Top:=apage.Posy;
-  NControl.Left:=CONS_LEFTGAP;
-  NControl.Width:=TotalWidth-CONS_LEFTGAP-CONS_RIGHTBARGAP;
+  NControl.Left:=scaleDpi(CONS_LEFTGAP);
+  NControl.Width:=TotalWidth-ScaleDpi(CONS_LEFTGAP)-ScaleDpi(CONS_RIGHTBARGAP);
 
   Ncontrol.parent:=apage.PRight;
   NControl.Visible:=true;
@@ -1670,52 +1662,52 @@ begin
   begin
    Control2:=TButton.Create(Self);
    Control2.Width:=CONS_BUTTONWIDTH;
+   Control2.Parent:=PRight;
    Control2.Top:=Control.Top;
-   Control2.Left:=Control.Left+Control.Width-CONS_BUTTONWIDTH;
+   Control2.Left:=Control.Left+Control.Width-ScaleDpi(CONS_BUTTONWIDTH);
    Control2.Height:=COntrol.Height;
    Control2.Tag:=i;
-   Control.Width:=Control.Width-CONS_BUTTONWIDTH;
+   Control.Width:=Control.Width-ScaleDpi(CONS_BUTTONWIDTH);
    TButton(Control2).OnClick:=FontClick;
    TButton(Control2).Caption:='...';
-   Control2.Parent:=PRight;
    Control2.Anchors:=[aktop,akright];
 
    Control2:=TButton.Create(Self);
-   Control2.Width:=CONS_BUTTONWIDTH;
+   Control2.Parent:=apage.PRight;
+   Control2.Width:=ScaleDpi(CONS_BUTTONWIDTH);
    Control2.Top:=NControl.Top;
-   Control2.Left:=NControl.Left+NControl.Width-CONS_BUTTONWIDTH;
+   Control2.Left:=NControl.Left+NControl.Width-ScaleDpi(CONS_BUTTONWIDTH);
    Control2.Height:=COntrol.Height;
    Control2.Tag:=i;
-   NControl.Width:=NControl.Width-CONS_BUTTONWIDTH;
+   NControl.Width:=NControl.Width-ScaleDpi(CONS_BUTTONWIDTH);
    TButton(Control2).OnClick:=FontClick;
    TButton(Control2).Caption:='...';
-   Control2.Parent:=apage.PRight;
    Control2.Anchors:=[aktop,akright];
   end;
   if (LTypes.Strings[i]=SRpSExpression) then
   begin
    Control2:=TButton.Create(Self);
-   Control2.Width:=CONS_BUTTONWIDTH;
+   Control2.Parent:=PRight;
+   Control2.Width:=ScaleDpi(CONS_BUTTONWIDTH);
    Control2.Top:=Control.Top;
-   Control2.Left:=Control.Left+Control.Width-CONS_BUTTONWIDTH;
+   Control2.Left:=Control.Left+Control.Width-ScaleDpi(CONS_BUTTONWIDTH);
    Control2.Height:=COntrol.Height;
-   Control.Width:=Control.Width-CONS_BUTTONWIDTH;
+   Control.Width:=Control.Width-ScaleDpi(CONS_BUTTONWIDTH);
    Control2.Tag:=i;
    TButton(Control2).OnClick:=ExpressionClick;
    TButton(Control2).Caption:='...';
-   Control2.Parent:=PRight;
    Control2.Anchors:=[aktop,akright];
 
    Control2:=TButton.Create(Self);
-   Control2.Width:=CONS_BUTTONWIDTH;
+   Control2.Parent:=apage.PRight;
+   Control2.Width:=ScaleDpi(CONS_BUTTONWIDTH);
    Control2.Top:=NControl.Top;
-   Control2.Left:=NControl.Left+NControl.Width-CONS_BUTTONWIDTH;
+   Control2.Left:=NControl.Left+NControl.Width-ScaleDpi(CONS_BUTTONWIDTH);
    Control2.Height:=NCOntrol.Height;
-   NControl.Width:=NControl.Width-CONS_BUTTONWIDTH;
+   NControl.Width:=NControl.Width-ScaleDpi(CONS_BUTTONWIDTH);
    Control2.Tag:=i;
    TButton(Control2).OnClick:=ExpressionClick;
    TButton(Control2).Caption:='...';
-   Control2.Parent:=apage.PRight;
    Control2.Anchors:=[aktop,akright];
   end;
   Control.Anchors:=[akleft,aktop,akright];
@@ -1735,25 +1727,25 @@ begin
  if (FCompItem is TRpSizePosInterface) then
  begin
   APanelBottom:=TPanel.Create(Self);
+  APanelBottom.Parent:=Self;
   APanelBottom.BevelInner:=bvNone;
   APanelBottom.BevelOuter:=bvNone;
   APanelBottom.Align:=alBottom;
-  APanelBottom.Parent:=Self;
   Control:=TButton.Create(Self);
+  Control.parent:=APanelBottom;
   Control.Left:=0;
   Control.Top:=0;
   Control.Height:=aheight;
-  Control.Width:=70;
+  Control.Width:=ScaleDpi(70);
   TBUtton(Control).Caption:=SRpSendToBack;
   TButton(Control).OnClick:=SendToBackClick;
-  Control.parent:=APanelBottom;
   Control2:=TButton.Create(Self);
+  Control2.parent:=APanelBottom;
   Control2.Left:=Control.Width;
   Control2.Top:=0;
   Control2.Height:=aheight;
   APanelBottom.Height:=aheight;
-  Control2.Width:=Control.Parent.Width-70;
-  Control2.parent:=APanelBottom;
+  Control2.Width:=Control.Parent.Width-ScaleDpi(70);
   Control2.Anchors:=[akleft,aktop,akright];
   TButton(Control2).OnClick:=BringToFrontClick;
   TBUtton(Control2).Caption:=SRpBringToFront;
