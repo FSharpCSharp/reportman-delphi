@@ -1,9 +1,9 @@
 object FRpDInfoVCL: TFRpDInfoVCL
   Left = 183
   Top = 112
-  Width = 923
-  Height = 670
   Caption = 'Database connections and datasets'
+  ClientHeight = 631
+  ClientWidth = 907
   Color = clBtnFace
   ParentFont = True
   OldCreateOrder = True
@@ -14,7 +14,7 @@ object FRpDInfoVCL: TFRpDInfoVCL
   TextHeight = 13
   object PBottom: TPanel
     Left = 0
-    Top = 593
+    Top = 592
     Width = 907
     Height = 39
     Align = alBottom
@@ -42,7 +42,7 @@ object FRpDInfoVCL: TFRpDInfoVCL
     Left = 0
     Top = 0
     Width = 907
-    Height = 593
+    Height = 592
     ActivePage = TabConnections
     Align = alClient
     TabOrder = 1

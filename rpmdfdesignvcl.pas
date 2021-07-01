@@ -229,7 +229,7 @@ begin
  TopRuler.Parent:=PTop;
 
 // panelheight:=Round(1.3*Font.Size/72*Screen.PixelsPerInch);
- panelheight:=Round(1.3*Font.Size*96/72);
+ panelheight:=scaledpi(Round(1.3*Font.Size*96/72));
  SectionScrollBox:=TRpScrollBox.Create(Self);
  SectionScrollBox.BorderStyle:=bsNone;
  SectionScrollBox.Color:=clAppWorkSpace;
@@ -434,6 +434,7 @@ begin
   for i:=0 to fsubreport.Sections.Count-1 do
   begin
    apanel:=TRpPaintEventPanel.Create(self);
+   apanel.parent:=PSection;
    apanel.FFrame:=Self;
    if i=0 then
     apanel.Cursor:=crArrow
@@ -451,28 +452,27 @@ begin
    apanel.section:=FSubReport.Sections.Items[i].Section;
    oldsection:=apanel.section;
    posx:=posx+apanel.Height;
-   apanel.parent:=PSection;
    toptitles.Add(apanel);
 
 
 
    asecint:=TRpSectionInterface.Create(Self,fsubreport.Sections.Items[i].Section);
+   asecint.Parent:=PSection;
    asecint.Scale:=Scale;
-   asecint.OnPosChange:=SecPosChange;
-   asecint.fobjinsp:=FObjInsp;
-   asecint.freportstructure:=freportstructure;
    asecint.Left:=0;
    asecint.Top:=posx;
-   asecint.UpdatePos;
-   asecint.Parent:=PSection;
    asecint.CreateChilds;
    asecint.UpdatePos;
+   asecint.freportstructure:=freportstructure;
+   asecint.fobjinsp:=FObjInsp;
+   asecint.OnPosChange:=SecPosChange;
    secinterfaces.Add(asecint);
 
    apanel.Width:=asecint.Width;
 
 
    rpanel:=TRpPanelRight.Create(self);
+   rpanel.parent:=PSection;
    rpanel.FFrame:=Self;
    rpanel.Height:=asecint.Height;
    rpanel.Left:=asecint.Width;
@@ -480,16 +480,15 @@ begin
    rpanel.Top:=posx;
    rpanel.Width:=CONS_RIGHTPWIDTH;
    rpanel.section:=oldsection;
-   rpanel.parent:=PSection;
    righttitles.Add(rpanel);
 
 
    aruler:=TRpRulerVCL.Create(Self);
    aruler.RType:=rVertical;
-   aruler.Width:=20;
+   aruler.parent:=PLeft;
+   aruler.Width:=ScaleDpi(20);
    aruler.Left:=0;
    aruler.Scale:=Scale;
-   aruler.parent:=PLeft;
    leftrulers.Add(aruler);
    aruler.Top:=posx;
    aruler.Height:=asecint.Height;
@@ -505,6 +504,7 @@ begin
   end;
   // Last panel for resizing only
   apanel:=TRpPaintEventPanel.Create(self);
+  apanel.parent:=PSection;
   apanel.allowselect:=false;
   apanel.FFrame:=Self;
   apanel.Cursor:=crSizeNS;
@@ -520,7 +520,6 @@ begin
   apanel.width:=oldsection.width;
   apanel.section:=oldsection;
   posx:=posx+apanel.Height;
-  apanel.parent:=PSection;
   toptitles.Add(apanel);
 
 
@@ -674,6 +673,8 @@ begin
   FRectangle2.Parent:=Parent;
   FRectangle3.Parent:=Parent;
   FRectangle4.Parent:=Parent;
+
+
  end;
 
 

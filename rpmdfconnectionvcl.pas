@@ -93,6 +93,7 @@ type
     procedure BTestClick(Sender: TObject);
     procedure CheckLoginPromptClick(Sender: TObject);
     procedure EConnectionStringChange(Sender: TObject);
+    procedure FrameResize(Sender: TObject);
   private
     { Private declarations }
     conadmin:TRpCOnnAdmin;
@@ -584,6 +585,12 @@ begin
  Result:=FDatabaseInfo.Items[index];
 end;
 
+procedure TFRpConnectionVCL.FrameResize(Sender: TObject);
+begin
+ toolbar1.ButtonWidth:=ScaleDpi(26);
+ toolbar1.ButtonHeight:=ScaleDpi(26);
+end;
+
 procedure TFRpConnectionVCL.BTestClick(Sender: TObject);
 var
  dbinfo:TRpDatabaseInfoItem;
@@ -642,6 +649,7 @@ begin
    dbinfo.DisConnect;
   end;
  end;
+ PParent.Align := alClient;
 end;
 
 

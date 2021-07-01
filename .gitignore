@@ -18,3 +18,5 @@ repman/repmandxe2.rsm
 repman/repmandxp.rsm
 repman/bin64/repmandxp.drc
 repman/bin64/repmandxp.rsm
+activex/reportman.rsm
+repman/utils/printreptopdf/printreptopdf.rsm

@@ -125,6 +125,7 @@ type
     procedure EBDEIndexFieldsDropDown(Sender: TObject);
     procedure BModifyClick(Sender: TObject);
     procedure LRangeClick(Sender: TObject);
+    procedure FrameResize(Sender: TObject);
   private
     { Private declarations }
     Report:TRpReport;
@@ -371,6 +372,12 @@ begin
 end;
 
 
+
+procedure TFRpDatasetsVCL.FrameResize(Sender: TObject);
+begin
+ toolbar1.ButtonWidth:=ScaleDpi(26);
+ toolbar1.ButtonHeight:=ScaleDpi(26);
+end;
 
 procedure TFRpDatasetsVCL.MSQLChange(Sender: TObject);
 var

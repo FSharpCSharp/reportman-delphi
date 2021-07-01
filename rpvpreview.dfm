@@ -35,13 +35,11 @@ object FRpVPreview: TFRpVPreview
       Left = 0
       Top = 0
       Action = AFirst
-      ImageName = 'Item1'
     end
     object ToolButton2: TToolButton
       Left = 26
       Top = 0
       Action = APrevious
-      ImageName = 'Item2'
     end
     object EPageNum: TRpMaskEdit
       Left = 52
@@ -58,13 +56,11 @@ object FRpVPreview: TFRpVPreview
       Left = 97
       Top = 0
       Action = ANext
-      ImageName = 'Item3'
     end
     object ToolButton4: TToolButton
       Left = 123
       Top = 0
       Action = ALast
-      ImageName = 'Item4'
     end
     object ToolButton5: TToolButton
       Left = 149
@@ -79,19 +75,16 @@ object FRpVPreview: TFRpVPreview
       Left = 155
       Top = 0
       Action = APrint
-      ImageName = 'Item5'
     end
     object ToolButton7: TToolButton
       Left = 181
       Top = 0
       Action = ASave
-      ImageName = 'Item6'
     end
     object ToolButton8: TToolButton
       Left = 207
       Top = 0
       Action = AMailTo
-      ImageName = 'Item14'
     end
     object ToolButton16: TToolButton
       Left = 233
@@ -106,13 +99,11 @@ object FRpVPreview: TFRpVPreview
       Left = 239
       Top = 0
       Action = APageSetup
-      ImageName = 'Item15'
     end
     object ToolButton9: TToolButton
       Left = 265
       Top = 0
       Action = AParams
-      ImageName = 'Item8'
     end
     object ToolButton18: TToolButton
       Left = 291
@@ -127,32 +118,27 @@ object FRpVPreview: TFRpVPreview
       Left = 297
       Top = 0
       Action = AScale100
-      ImageName = 'Item9'
     end
     object ToolButton12: TToolButton
       Left = 323
       Top = 0
       Action = AScaleWide
-      ImageName = 'Item10'
     end
     object ToolButton13: TToolButton
       Left = 349
       Top = 0
       Action = AScaleFull
-      ImageName = 'Item11'
       PopupMenu = MEntireMenu
     end
     object ToolButton14: TToolButton
       Left = 375
       Top = 0
       Action = AScaleLess
-      ImageName = 'Item12'
     end
     object ToolButton15: TToolButton
       Left = 401
       Top = 0
       Action = AScaleMore
-      ImageName = 'Item13'
     end
     object ToolButton19: TToolButton
       Left = 427
@@ -178,7 +164,6 @@ object FRpVPreview: TFRpVPreview
       Left = 513
       Top = 0
       Action = AFind
-      ImageName = 'Item16'
     end
     object ToolButton17: TToolButton
       Left = 539
@@ -193,7 +178,6 @@ object FRpVPreview: TFRpVPreview
       Left = 546
       Top = 0
       Action = AExit
-      ImageName = 'Item7'
     end
     object BCancel: TButton
       Left = 572
@@ -1165,6 +1149,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'First page'
       Hint = 'Goes to the first page of the report'
       ImageIndex = 0
+      ImageName = 'Item1'
       OnExecute = AFirstExecute
     end
     object APrevious: TAction
@@ -1172,6 +1157,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Previous page'
       Hint = 'Shows the previous page'
       ImageIndex = 1
+      ImageName = 'Item2'
       OnExecute = APreviousExecute
     end
     object ANext: TAction
@@ -1179,6 +1165,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Next page'
       Hint = 'Shows the next page'
       ImageIndex = 2
+      ImageName = 'Item3'
       OnExecute = ANextExecute
     end
     object ALast: TAction
@@ -1186,6 +1173,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Last page'
       Hint = 'Goes to the last page of the report'
       ImageIndex = 3
+      ImageName = 'Item4'
       OnExecute = ALastExecute
     end
     object APrint: TAction
@@ -1193,6 +1181,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Print'
       Hint = 'Print the report, you can select pages to print'
       ImageIndex = 4
+      ImageName = 'Item5'
       OnExecute = APrintExecute
     end
     object ASave: TAction
@@ -1200,6 +1189,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Save...'
       Hint = 'Save the report as a metafile report'
       ImageIndex = 5
+      ImageName = 'Item6'
       OnExecute = ASaveExecute
     end
     object ACancel: TAction
@@ -1213,6 +1203,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'AExit'
       Hint = 'Closes the preview window'
       ImageIndex = 6
+      ImageName = 'Item7'
       OnExecute = AExitExecute
     end
     object AParams: TAction
@@ -1220,6 +1211,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Parameters'
       Hint = 'Show report parameters'
       ImageIndex = 7
+      ImageName = 'Item8'
       OnExecute = AParamsExecute
     end
     object AScale100: TAction
@@ -1227,6 +1219,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Normal Scale'
       Hint = 'Shows the report in real size'
       ImageIndex = 8
+      ImageName = 'Item9'
       OnExecute = AScale100Execute
     end
     object AScaleWide: TAction
@@ -1234,6 +1227,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Scale to window'
       Hint = 'Scale adjusting the paper to the window width'
       ImageIndex = 9
+      ImageName = 'Item10'
       OnExecute = AScaleWideExecute
     end
     object AScaleFull: TAction
@@ -1241,6 +1235,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Scale to full page'
       Hint = 'Scale to view full page'
       ImageIndex = 10
+      ImageName = 'Item11'
       OnExecute = AScaleFullExecute
     end
     object AScaleLess: TAction
@@ -1248,6 +1243,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Zoom-'
       Hint = 'Zooms out the view'
       ImageIndex = 11
+      ImageName = 'Item12'
       OnExecute = AScaleLessExecute
     end
     object AScaleMore: TAction
@@ -1255,6 +1251,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Zoom+'
       Hint = 'Zooms in the view'
       ImageIndex = 12
+      ImageName = 'Item13'
       OnExecute = AScaleMoreExecute
     end
     object AMailTo: TAction
@@ -1262,6 +1259,7 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Mail to'
       Hint = 'Sends the reports to a e-mail destination'
       ImageIndex = 13
+      ImageName = 'Item14'
       OnExecute = AMailToExecute
     end
     object APageSetup: TAction
@@ -1269,12 +1267,14 @@ object FRpVPreview: TFRpVPreview
       Caption = 'Page Setup'
       Hint = 'Show report page setup'
       ImageIndex = 14
+      ImageName = 'Item15'
       OnExecute = APageSetupExecute
     end
     object AFind: TAction
       Caption = 'Find'
       Hint = 'Find text'
       ImageIndex = 15
+      ImageName = 'Item16'
       OnExecute = AFindExecute
     end
   end

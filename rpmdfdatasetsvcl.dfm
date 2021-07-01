@@ -4,6 +4,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
   Width = 852
   Height = 491
   TabOrder = 0
+  OnResize = FrameResize
   object PTop: TPanel
     Left = 0
     Top = 0
@@ -27,7 +28,6 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         Left = 0
         Top = 0
         Action = ANew
-        ImageName = 'Item3'
       end
       object ToolButton2: TToolButton
         Left = 26
@@ -42,7 +42,6 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         Left = 49
         Top = 0
         Action = ADelete
-        ImageName = 'Item4'
       end
       object ToolButton5: TToolButton
         Left = 75
@@ -56,7 +55,6 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         Left = 83
         Top = 0
         Action = ARename
-        ImageName = 'Item5'
       end
       object ToolButton4: TToolButton
         Left = 109
@@ -988,16 +986,19 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
     object ANew: TAction
       Caption = 'New dataset'
       ImageIndex = 2
+      ImageName = 'Item3'
       OnExecute = ANewExecute
     end
     object ADelete: TAction
       Caption = 'Delete dataset'
       ImageIndex = 3
+      ImageName = 'Item4'
       OnExecute = ADeleteExecute
     end
     object ARename: TAction
       Caption = 'Rename dataset'
       ImageIndex = 4
+      ImageName = 'Item5'
       OnExecute = ARenameExecute
     end
   end
