@@ -191,6 +191,7 @@ var
  newsize:integer;
  klist:TStringList;
 {$ENDIF}
+ table: Cardinal;
 begin
    // See if data can be embedded
    embeddable:=false;
@@ -342,12 +343,20 @@ begin
 
    if embeddable then
    begin
-    asize:=GetFontData(adc,0,0,nil,0);
+    data.FontData.SetSize(4);
+    table:=$66637474;
+    // Detect font collection
+    asize:=GetFontData(adc,table,0,data.FontData.Memory,4);
+    if (asize <> 4) then
+    begin
+     table:=0;
+    end;
+    asize:=GetFontData(adc,table,0,nil,0);
     if asize>0 then
     begin
      // Gets the raw data of the font
      data.FontData.SetSize(asize);
-     if GDI_ERROR=GetFontData(adc,0,0,data.FontData.Memory,asize) then
+     if GDI_ERROR=GetFontData(adc,table,0,data.FontData.Memory,asize) then
       RaiseLastOSError;
      data.FontData.Seek(0,soFromBeginning);
     end;
