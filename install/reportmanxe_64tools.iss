@@ -8,7 +8,7 @@
 
 [Setup]
 AppName=Report Manager Server and Tools(x64)
-AppVersion=3.0pre3
+AppVersion=3.4.5
 DefaultDirName={pf}\Report Manager
 DefaultGroupName=Report Manager
 UninstallDisplayIcon={app}\repmandxp.exe
@@ -25,8 +25,8 @@ ArchitecturesInstallIn64BitMode=x64
 AppPublisher=Toni Martir
 AppPublisherURL=http://reportman.sourceforge.net
 VersionInfoProductName=Report Manager Tools
-VersionInfoProductVersion=3.1.1
-OutputBaseFilename=reportman_server_3_1_1tools_x64
+VersionInfoProductVersion=3.4.5
+OutputBaseFilename=reportman_server_3_4_5tools_x64
 
 [Files]
 Source: "C:\Users\toni\Documents\prog\toni\reportman\server\app\bin64\reportserverappxp.exe"; DestDir: "{app}"
