@@ -153,8 +153,16 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           ImageName = 'Item4'
           OnClick = BConnectClick
         end
-        object ToolButton3: TToolButton
+        object ToolButton4: TToolButton
           Left = 116
+          Top = 0
+          Caption = 'ToolButton4'
+          Enabled = False
+          ImageIndex = 5
+          OnClick = ToolButton4Click
+        end
+        object ToolButton3: TToolButton
+          Left = 142
           Top = 0
           Width = 11
           Caption = 'ToolButton3'
@@ -163,7 +171,7 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Style = tbsSeparator
         end
         object BClose: TToolButton
-          Left = 127
+          Left = 153
           Top = 0
           Hint = 'Closes this configuration window'
           Caption = 'BClose'
@@ -188,8 +196,8 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Caption = 'Show driver connections'
         end
         object ComboDrivers: TComboBox
-          Left = 4
-          Top = 18
+          Left = 6
+          Top = 20
           Width = 186
           Height = 21
           Style = csDropDownList
