@@ -33,7 +33,7 @@ uses
   rpcsvdriver,rpgraphutilsvcl,rppreviewmeta,rpbasereport,rpreport,rppagesetupvcl,
   ActnList, ImgList,Printers,rpmdconsts, ToolWin, Mask, rpmaskedit,rpmunits,
   Vcl.VirtualImageList, Vcl.BaseImageCollection, Vcl.ImageCollection,
-  System.Actions, System.ImageList;
+  System.Actions, System.ImageList, ComObj;
 
 type
   TFRpVPreview = class(TForm)
@@ -102,6 +102,10 @@ type
     AFind: TAction;
     ImageCollection1: TImageCollection;
     VirtualImageList1: TVirtualImageList;
+    PopupMail: TPopupMenu;
+    Mailto1: TMenuItem;
+    AMailToOutlook: TAction;
+    MailToOutlook1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure AFirstExecute(Sender: TObject);
     procedure ANextExecute(Sender: TObject);
@@ -137,6 +141,7 @@ type
       Shift: TShiftState);
     procedure AFindExecute(Sender: TObject);
     procedure ESearchChange(Sender: TObject);
+    procedure AMailToOutlookExecute(Sender: TObject);
   private
     { Private declarations }
     printed:boolean;
@@ -312,6 +317,8 @@ begin
  ASave.Hint:=TranslateStr(217,ASave.Hint);
  AMailTo.Caption:=TranslateStr(1230,AMailTo.Caption);
  AMailTo.Hint:=TranslateStr(1231,AMailTo.Hint);
+ AMailToOutlook.Caption:=TranslateStr(1230,AMailTo.Caption) + '(Outlook)';
+ AMailToOutlook.Hint:=TranslateStr(1231,AMailTo.Hint) + '(Outlook)';
  AExit.Caption:=TranslateStr(44,AExit.Caption);
  AExit.Hint:=TranslateStr(219,AExit.Hint);
  AParams.Caption:=TranslateStr(135,Aparams.Caption);
@@ -945,6 +952,71 @@ begin
   if Length(subject)<1 then
    subject:=ExtractFileName(ChangeFileExt(afilename,'.pdf'));
   rptypes.SendMail(destination,subject,body,afilename,ExtractFileName(ChangeFileExt(afilename,'.pdf')));
+ finally
+  sysutils.DeleteFile(afilename);
+ end;
+end;
+
+procedure TFRpVPreview.AMailToOutlookExecute(Sender: TObject);const
+  olMailItem = 0;
+var
+ afilename:String;
+ destination,subject,body:string;
+ report:TRpBasereport;
+
+  Outlook: OLEVariant;
+  vmailitem: variant;
+  savetofol: string;
+  filenameTitle: string;
+begin
+ destination:='';
+ body:='';
+ subject:='';
+ afilename:='';
+ if (fpreviewcontrol is TRpPreviewControl) then
+ begin
+  report:=TRpPreviewControl(fpreviewcontrol).Report;
+  if report.Params.IndexOf('MAIL_DESTINATION')>=0 then
+   destination:=report.Params.ParamByName('MAIL_DESTINATION').AsString;
+  if report.Params.IndexOf('MAIL_SUBJECT')>=0 then
+   subject:=report.Params.ParamByName('MAIL_SUBJECT').AsString;
+  if report.Params.IndexOf('MAIL_BODY')>=0 then
+   body:=report.Params.ParamByName('MAIL_BODY').AsString;
+  if report.Params.IndexOf('MAIL_FILE')>=0 then
+   afilename:=ExtractFilePath(afilename)+report.Params.ParamByName('MAIL_FILE').AsString;
+ end;
+ if Length(afilename)<1 then
+ begin
+  afilename:=RpTempFileName;
+  afilename:=ChangeFileExt(afilename,'.pdf');
+ end;
+ filenameTitle:=ExtractFileName(ChangeFileExt(afilename,'.pdf'));
+
+ SaveMetafileToPDF(fpreviewcontrol.Metafile,afilename,true);
+ try
+  if Length(subject)<1 then
+   subject:=ExtractFileName(ChangeFileExt(afilename,'.pdf'));
+
+ try
+    Outlook := GetActiveOleObject('Outlook.Application');
+  except
+    Outlook := CreateOleObject('Outlook.Application');
+  end;
+  vmailitem := Outlook.CreateItem(olMailItem);
+  if (Length(destination)>0) then
+    vmailitem.Recipients.Add(destination);
+  vmailitem.Subject := subject;
+  vmailitem.HTMLbody := body;
+  // vmailitem.ReadReceiptRequested := true;
+  //  vmailitem.importance := 2;
+    vmailitem.Attachments.Add(afilename, 1, 1, filenameTitle);
+    //savetofol := extractfilepath(afilename) + copy(extractfilename(afilename), 0, length(extractfilename(afilename)) - 8);
+    //vmailitem.saveas(savetofol + '_eml.doc', 4); // ^ +'.doc'
+  // vmailitem.clear;
+   vmailitem.Display;
+  // Outlook := Unassigned;
+
+  //  rptypes.SendMail(destination,subject,body,afilename,ExtractFileName(ChangeFileExt(afilename,'.pdf')));
  finally
   sysutils.DeleteFile(afilename);
  end;

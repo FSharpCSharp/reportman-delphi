@@ -346,7 +346,10 @@ begin
     data.FontData.SetSize(4);
     table:=$66637474;
     // Detect font collection
-    asize:=GetFontData(adc,table,0,data.FontData.Memory,4);
+{$R-} // disable range checking
+// do non-range-checked operations here
+   asize:=GetFontData(adc,table,0,data.FontData.Memory,4);
+{$R+} // turn range checking back on
     if (asize <> 4) then
     begin
      table:=0;
