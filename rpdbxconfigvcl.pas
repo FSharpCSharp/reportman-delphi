@@ -48,6 +48,9 @@ uses SysUtils, Classes,
 {$ENDIF}
 {$ENDIF}
   DB,rpmdconsts, ToolWin, System.ImageList, Vcl.VirtualImageList,
+{$IFDEF FIREDAC}
+  FireDAC.VCLUI.ConnEdit,FireDAC.Comp.Client,
+{$ENDIF}
   Vcl.BaseImageCollection, Vcl.ImageCollection;
 
 const
@@ -82,6 +85,7 @@ type
     ScrollParams: TScrollBox;
     ImageCollection1: TImageCollection;
     VirtualImageList1: TVirtualImageList;
+    ToolButton4: TToolButton;
     procedure FormCreate(Sender: TObject);
     procedure ComboDriversClick(Sender: TObject);
     procedure LConnectionsClick(Sender: TObject);
@@ -219,15 +223,16 @@ begin
   for i:=0 to params.Count-1 do
   begin
    label1:=TLabel.Create(Self);
-   label1.Caption:=params.Names[i];
-   label1.Top:=Top+LABEL_INCY;
-   label1.Left:=CONTROL_DISTANCEX;
    label1.Parent:=ScrollParams;
+   label1.Caption:=params.Names[i];
+   label1.Top:=Top+ScaleDPi(LABEL_INCY);
+   label1.Left:=ScaleDPi(CONTROL_DISTANCEX);
    // It can be a combo with different options
    index:=alist.indexof(params.Names[i]);
    if index<0 then
    begin
     Edit1:=TEdit.Create(Self);
+    Edit1.Parent:=ScrollParams;
     TEdit(Edit1).Text:=params.Values[params.Names[i]];
     if AnsiUpperCase(params.Names[i])='DRIVERNAME' then
     begin
@@ -242,6 +247,7 @@ begin
    else
    begin
     Edit1:=TComboBox.Create(Self);
+    Edit1.Parent:=ScrollParams;
     TComboBox(Edit1).Style:=csDropDownList;
     TComboBox(Edit1).Visible:=False;
     TComboBox(Edit1).Parent:=ScrollParams;
@@ -253,15 +259,14 @@ begin
 
    Edit1.Tag:=i;
    Edit1.Top:=Top;
-   Edit1.Left:=CONTROL_DISTANCEX2;
+   Edit1.Left:=ScaleDPi(CONTROL_DISTANCEX2);
    //Edit1.Width:=CONTROL_WIDTHX;
-   Edit1.Width := ScrollParams.Width-30;
+   Edit1.Width := ScrollParams.Width-ScaleDPI(30)-ScaleDPi(CONTROL_DISTANCEX2);
    Edit1.Anchors := [akLeft,akTop,akRight];
 
-   Edit1.Parent:=ScrollParams;
    Edit1.Visible:=True;
 
-   top:=top+Edit1.Height+CONTROL_DISTANCEY;
+   top:=top+Edit1.Height+ScaleDPi(CONTROL_DISTANCEY);
   end;
  finally
   alist.free;
@@ -280,6 +285,7 @@ begin
  FreeParamsControls;
  CreateParamsControls;
 end;
+
 
 
 procedure TFRpDBXConfigVCL.FormDestroy(Sender: TObject);
@@ -352,13 +358,32 @@ end;
 procedure TFRpDBXConfigVCL.BShowPropsClick(Sender: TObject);
 var
  VendorLib,LibraryName:string;
+ {$IFDEF FIREDAC}
+ FDConnEditor : TfrmFDGUIxFormsConnEdit;
+ FDConnection1: TFDConnection;
+{$ENDIF}
 begin
  if Not Assigned(ConAdmin) then
   exit;
  if ComboDrivers.ItemIndex=0 then
   Raise Exception.Create(SRpSelectDriver);
- ConAdmin.GetDriverLibNames(ComboDrivers.Text,LibraryName,VendorLib);
- RpShowMessage(SRpVendorLib+':'+VendorLib+#10+SRpLibraryName+':'+LibraryName);
+ if (ComboDrivers.Text = 'FireDac') then
+ begin
+ {$IFDEF FIREDAC}
+  FDConnection1:= TFDConnection.Create(nil);
+  FDConnEditor := TfrmFDGUIxFormsConnEdit.Create(Self);
+  try
+    FDConnEditor.Execute(FDConnection1,SRpSParamList);
+  finally
+    FDConnEditor.Free;
+  end;
+{$ENDIF}
+ end
+ else
+ begin
+  ConAdmin.GetDriverLibNames(ComboDrivers.Text,LibraryName,VendorLib);
+  RpShowMessage(SRpVendorLib+':'+VendorLib+#10+SRpLibraryName+':'+LibraryName);
+ end;
 end;
 
 procedure TFRpDBXConfigVCL.BConnectClick(Sender: TObject);
@@ -374,6 +399,9 @@ var
 {$ENDIF}
 {$IFDEF USEIBX}
   FIBDatabase:TIBDatabase;
+{$ENDIF}
+{$IFDEF FIREDAC}
+ FDConnection:TFDConnection;
 {$ENDIF}
  databasename:string;
  indexDriver:integer;
@@ -394,6 +422,22 @@ begin
   alist.free;
  end;
  drivername:=SQLConnection1.params.Values['DriverName'];
+{$IFDEF FIREDAC}
+ if (drivername='FireDac') then
+ begin
+   FDConnection:=TFDConnection.Create(nil);
+   try
+    FDConnection.Params.Assign(SQLConnection1.Params);
+    ConvertParamsFromDBXToFDac(FDConnection);
+    FDConnection.Connected:=True;
+    RpShowMessage(SRpConnectionOk);
+    FDConnection.Connected:=False;
+   finally
+    FIBDatabase.Free;
+   end;
+ end
+ else
+{$ENDIF}
 {$IFDEF USEZEOS}
  if drivername='ZeosLib' then
  begin

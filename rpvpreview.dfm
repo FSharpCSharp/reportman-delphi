@@ -84,10 +84,16 @@ object FRpVPreview: TFRpVPreview
     object ToolButton8: TToolButton
       Left = 207
       Top = 0
-      Action = AMailTo
+      Hint = 'Sends the reports to a e-mail destination'
+      Caption = 'Mail to'
+      DropdownMenu = PopupMail
+      ImageIndex = 13
+      ImageName = 'Item14'
+      Style = tbsDropDown
+      OnClick = AMailToExecute
     end
     object ToolButton16: TToolButton
-      Left = 233
+      Left = 248
       Top = 0
       Width = 6
       Caption = 'ToolButton16'
@@ -96,17 +102,17 @@ object FRpVPreview: TFRpVPreview
       Style = tbsSeparator
     end
     object ToolButton10: TToolButton
-      Left = 239
+      Left = 254
       Top = 0
       Action = APageSetup
     end
     object ToolButton9: TToolButton
-      Left = 265
+      Left = 280
       Top = 0
       Action = AParams
     end
     object ToolButton18: TToolButton
-      Left = 291
+      Left = 306
       Top = 0
       Width = 6
       Caption = 'ToolButton18'
@@ -115,33 +121,33 @@ object FRpVPreview: TFRpVPreview
       Style = tbsSeparator
     end
     object ToolButton11: TToolButton
-      Left = 297
+      Left = 312
       Top = 0
       Action = AScale100
     end
     object ToolButton12: TToolButton
-      Left = 323
+      Left = 338
       Top = 0
       Action = AScaleWide
     end
     object ToolButton13: TToolButton
-      Left = 349
+      Left = 364
       Top = 0
       Action = AScaleFull
       PopupMenu = MEntireMenu
     end
     object ToolButton14: TToolButton
-      Left = 375
+      Left = 390
       Top = 0
       Action = AScaleLess
     end
     object ToolButton15: TToolButton
-      Left = 401
+      Left = 416
       Top = 0
       Action = AScaleMore
     end
     object ToolButton19: TToolButton
-      Left = 427
+      Left = 442
       Top = 0
       Width = 6
       Caption = 'ToolButton19'
@@ -150,7 +156,7 @@ object FRpVPreview: TFRpVPreview
       Style = tbsSeparator
     end
     object ESearch: TRpMaskEdit
-      Left = 433
+      Left = 448
       Top = 0
       Width = 80
       Height = 22
@@ -161,12 +167,12 @@ object FRpVPreview: TFRpVPreview
       DisplayMask = '###,######0'
     end
     object ToolButton20: TToolButton
-      Left = 513
+      Left = 528
       Top = 0
       Action = AFind
     end
     object ToolButton17: TToolButton
-      Left = 539
+      Left = 554
       Top = 0
       Width = 7
       Caption = 'ToolButton17'
@@ -175,12 +181,12 @@ object FRpVPreview: TFRpVPreview
       Style = tbsSeparator
     end
     object BExit: TToolButton
-      Left = 546
+      Left = 561
       Top = 0
       Action = AExit
     end
     object BCancel: TButton
-      Left = 572
+      Left = 587
       Top = 0
       Width = 112
       Height = 22
@@ -1277,6 +1283,13 @@ object FRpVPreview: TFRpVPreview
       ImageName = 'Item16'
       OnExecute = AFindExecute
     end
+    object AMailToOutlook: TAction
+      Category = 'File'
+      Caption = 'Mail To (Outlook)'
+      ImageIndex = 16
+      ImageName = 'mailOutlook48'
+      OnExecute = AMailToOutlookExecute
+    end
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = 'rpmf'
@@ -1597,6 +1610,48 @@ object FRpVPreview: TFRpVPreview
               6C2FAC3EC0D8B5D8BB7DB0B7B3B7303AE60AFD0476010AA497EE4011A9820000
               000049454E44AE426082}
           end>
+      end
+      item
+        Name = 'mailOutlook48'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D494844520000003000000030080300000060DC09
+              B5000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              01C5504C544500000097BBDF71A7D84B93D1217DC8056EC33888CD93BAE04592
+              D0177BC70974C6016FC4006DC3006CC28CB7DF6FA9D93D90D10675C70072C500
+              71C50070C50070C4006FC4006EC46DA9D93790D12185CD0A7ACA0075C80074C8
+              0074C70073C70072C60077C90076C90076C82A82CA87B4DD88B4DD0372C64F99
+              D5FFFFFFDCECF7E9F3FA1A80CB0374C86CAEDFA3CCEA509DD7C3DEF164A9DC7E
+              B8E3FEFEFF2986CD85BBE40574C6BCDAF0DFEDF863AADDF4F9FD0E77C7FCFEFE
+              3F94D4157DCAE5F1F90476C9FBFDFEC5DFF282BAE37FB6E14E98D5F1F7FC127A
+              C92786CE2B8BD1016DC393C3E7BFDBF00273C676B3E0FEFFFF84BCE4EDF5FBBC
+              D9F03C8ED14A9AD68EC0E50172C5CBE3F4B9D9F0AED3ED75B1DF2F8BD02183CD
+              F2F8FCFAFCFE4699D5147CCAE3EFF9BCDBF1B4D6EF77B3E0FCFDFE66AADC0976
+              C71F82CCF6FAFD88BFE5F8FBFDC1DDF1C1DCF195C4E72D8DD20978C90272C6F5
+              F9FDE2EFF8FBFCFEE2EFF90877C7BDDAF0509CD756A3DAD9EAF65BA5DBD7E8F5
+              0A75C72386CE3E94D40573C62B82CB8BB6DE8CB6DE68A7D93C92D22085CD0778
+              C98DB7DE74ABDA378DD00B77C78AB5DE4692D1167AC80972C5026EC36CA4D746
+              91D0207DC83D8BCE00000020670C4D0000009774524E53FFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFF00F19F9813000000097048597300000EC30000
+              0EC301C76FA8640000017F49444154484BEDD4D5530251140670B103AC554C58
+              14158E8A89A2626161B76260777777772B7FAFDCBD18EB5E60F7C17174FC1E36
+              E67CBF973B67D7C522307F18885CDDDC3D3C6D2FAC708197B78FAF9F582C9648
+              9C02FF80C0A0602A24542A0D730AC22322A3A265729A56F00431B14AE56F0071
+              F1AC24304D47404CB1A3424D47400DAC2452A8C91F242593802625358D0CD255
+              1904908946DA2C02C8D6E5E472411E1EEAF3BF8282C2A262E0024309942AA832
+              80720C2A6C7530565659AF5C500DA051509411F418D4D4E27E5D7D4323113441
+              333AA516000C5A756DA8DF6EEA403702E8842E04BADF805A6BEEE9EDEB1F1864
+              FA043004C3088CBC03181D1B9F304FE23E014CC13402331F0060760EB7ADE182
+              79800505B5B804CB1FE053B8C0B002AB6BA675800D9E40B689275BE4E52300F9
+              363AEF9D5DFE80A6F7F60FECAD3719D85FEFEF00823FD1C323568E99A623F0B3
+              3F32CBC9E9D9B920C0E4E2F2EA5A10C0B9B9BDBB7F100298881E9F9E5F6CCFAC
+              D80376F30F9CC7627905B52B6AF80527D1500000000049454E44AE426082}
+          end>
       end>
     Left = 456
     Top = 208
@@ -1700,9 +1755,26 @@ object FRpVPreview: TFRpVPreview
         CollectionName = 'Item16'
         Disabled = False
         Name = 'Item16'
+      end
+      item
+        CollectionIndex = 16
+        CollectionName = 'mailOutlook48'
+        Disabled = False
+        Name = 'mailOutlook48'
       end>
     ImageCollection = ImageCollection1
     Left = 456
     Top = 264
+  end
+  object PopupMail: TPopupMenu
+    Images = VirtualImageList1
+    Left = 152
+    Top = 32
+    object Mailto1: TMenuItem
+      Action = AMailTo
+    end
+    object MailToOutlook1: TMenuItem
+      Action = AMailToOutlook
+    end
   end
 end

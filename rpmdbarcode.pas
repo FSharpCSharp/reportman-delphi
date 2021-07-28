@@ -3109,7 +3109,7 @@ begin
   metaPage:=meta.Pages[meta.CurrentPage];
   QRCode := TRpDelphiZXingQRCode.Create;
   try
-    QRCode.Encoding := qrAlphanumeric;
+    QRCode.Encoding := qrAuto;
     // QRCode.ECCBits:= Self.ECCLevel;
     QRCode.QuietZone := 4;
     QRCode.Data := CurrentText;

@@ -461,10 +461,10 @@ begin
    asecint.Scale:=Scale;
    asecint.Left:=0;
    asecint.Top:=posx;
+   asecint.fobjinsp:=FObjInsp;
    asecint.CreateChilds;
    asecint.UpdatePos;
    asecint.freportstructure:=freportstructure;
-   asecint.fobjinsp:=FObjInsp;
    asecint.OnPosChange:=SecPosChange;
    secinterfaces.Add(asecint);
 

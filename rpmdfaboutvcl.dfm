@@ -405,10 +405,10 @@ object FRpAboutBoxVCL: TFRpAboutBoxVCL
     end
     object Label3: TLabel
       Left = 110
-      Top = 114
-      Width = 87
+      Top = 113
+      Width = 68
       Height = 13
-      Caption = 'Palafrugell, SPAIN'
+      Caption = 'Girona, SPAIN'
     end
     object LVersion: TLabel
       Left = 110
