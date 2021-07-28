@@ -317,6 +317,7 @@
 // By default is not defined becuase Borland don't provide
 // it in default installation
 {$IFDEF LINUX}
+ {$UNDEF USESQLEXPRESS}
  {$UNDEF USEIBX}
  {$UNDEF USEADO}
  {$UNDEF USEBDE}

@@ -1442,7 +1442,7 @@ begin
      begin
       FMStream:=TMemoryStream.Create;
       try
-       FMStream.SetSize(Length(astring));
+       FMStream.SetSize(Int64(Length(astring)));
        FMStream.Write(astring[1],FMStream.Size);
        FMStream.Seek(0,soFromBeginning);
        Result:=FMStream;

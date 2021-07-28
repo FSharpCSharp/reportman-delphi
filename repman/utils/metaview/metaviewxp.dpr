@@ -1,7 +1,6 @@
 // JCL_DEBUG_EXPERT_INSERTJDBG OFF
 program metaviewxp;
 
-{%File '..\..\..\rpconf.inc'}
 
 uses
   Graphics,

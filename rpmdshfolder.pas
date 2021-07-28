@@ -30,7 +30,7 @@ uses
   SysUtils, Classes,
 {$IFDEF LINUX}
   {$IFNDEF FPC}
-  Libc,
+//   Libc,
   {$ENDIF}
 {$ENDIF}
 {$IFDEF MSWINDOWS}
@@ -110,7 +110,7 @@ begin
 {$IFDEF FPC}
  ap:=PChar(Sysutils.GetEnvironmentVariable('HOME'));
 {$ELSE}
- ap:=getenv(Pchar('HOME'));
+ ap:=Pchar(System.SysUtils.GetEnvironmentVariable('HOME'));
 {$ENDIF}
  if assigned(ap) then
  begin
@@ -185,11 +185,11 @@ var
 begin
 
 {$IFDEF LINUX}
- ap:=getenv(Pchar('HOME'));
+ ap:=PChar(System.SysUtils.GetEnvironmentVariable('HOME'));
  if assigned(ap) then
  begin
-  StrPCopy(szAppdata,ap);
-  Result:=StrPas(szAppdata)+'/.'
+  StrPCopy(szAppdataA,ap);
+  Result:=StrPas(szAppdataA)+'/.'
  end
  else
   Result:='./.';

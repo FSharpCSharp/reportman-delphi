@@ -44,11 +44,11 @@ uses Classes,SysUtils,
  windows,shlobj,ActiveX,
 {$ENDIF}
 {$IFDEF DELPHI2009UP}
- WinApi.KnownFolders,
+//  WinApi.KnownFolders,
 {$ENDIF}
 {$IFDEF LINUX}
  {$IFNDEF FPC}
-Libc,
+ // Libc,
  {$ENDIF}
 {$ENDIF}
 {$IFDEF USESQLEXPRESS}
@@ -56,7 +56,8 @@ Libc,
   SqlExpr,SqlConst,
  //DBExpMYSQL,DbExpMyS,dbExpDB2,dbExpORA,dbExpINT
  {$IFDEF DELPHI2009UP}
- DBXInterbase,DBXMySQL,
+  DBXInterbase,
+  DBXMySQL,
   {$IFDEF DELPHIENTERPRISEDBSTATIC}
    DBXOracle,DBXInformix,DBXFirebird,DBXSyBaseASA,
    DBXSyBaseASE,DBXMSSQL,DBXCommon,DBXDb2,
@@ -86,8 +87,12 @@ Libc,
   FireDAC.Phys.ADS,  FireDAC.Phys.ODBCBase,FireDAC.Phys.ODBCWrapper,
   FireDAC.Phys.FB,FireDAC.Phys.IB,FireDAC.Phys.IBBase,
  FireDAC.Phys.PG,FireDAC.Phys.SQLite,FireDAC.Phys.SQLiteVDataset,
-  FireDAC.Phys.Intf,FireDAC.Phys.MSAcc,
+  FireDAC.Phys.Intf,
+{$IFNDEF LINUX}
+  FireDAC.Phys.MSAcc,
+{$ENDIF}
   FireDAC.Phys.MySQL,
+
 {$IFDEF DELPHIENTERPRISEDBSTATIC}
     FireDAC.Phys.ODBC,FireDAC.Phys.MSSQL,
   FireDAC.Phys.ASA,FireDAC.Phys.DB2,FireDAC.Phys.DS,  FireDAC.Phys.Infx,
@@ -498,9 +503,7 @@ var
 {$ENDIF}
 
 
-{$IFNDEF DELPHI2009UP}
 const FOLDERID_Public: TGUID = '{DFDF76A2-C82A-4D63-906A-5644AC457385}';
-{$ENDIF}
 
 
 {$IFDEF MSWINDOWS}
@@ -3327,7 +3330,8 @@ begin
      report.StreamFormat:=rpStreamXML;
      report.SaveToFile(astring);
 {$IFDEF LINUX}
-     aparams:=TStringList.Create;
+    raise Exception.Create('Not implemented');
+(*     aparams:=TStringList.Create;
      try
         aparams.Add('mono');
         aparams.Add(ExtractFilePath(ParamStr(0))+'printreport.exe');
@@ -3339,7 +3343,7 @@ begin
         ExecuteSystemApp(aparams,true);
      finally
         aparams.free;
-     end;
+     end;*)
 {$ENDIF}
 {$IFDEF MSWINDOWS}
      linecount:='';
@@ -3395,6 +3399,8 @@ begin
      report.StreamFormat:=rpStreamXML;
      report.SaveToFile(astring);
 {$IFDEF LINUX}
+     raise Exception.Create('Not Implemented');
+     (*
      aparams:=TStringList.Create;
      try
         aparams.Add('mono');
@@ -3407,7 +3413,7 @@ begin
         ExecuteSystemApp(aparams,true);
      finally
         aparams.free;
-     end;
+     end;*)
 {$ENDIF}
 {$IFDEF MSWINDOWS}
      linecount:='';
@@ -5059,6 +5065,8 @@ begin
  tmpfile:=RpTempFileName;
  try
 {$IFDEF LINUX}
+     raise Exception.Create('Not Implemented');
+(*
   aparams:=TStringList.Create;
   try
      aparams.Add('mono');
@@ -5068,7 +5076,7 @@ begin
      ExecuteSystemApp(aparams,true);
   finally
      aparams.free;
-  end;
+  end;*)
 {$ENDIF}
 {$IFDEF MSWINDOWS}
      linecount:='';

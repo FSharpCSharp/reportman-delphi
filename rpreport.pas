@@ -45,7 +45,7 @@ uses Classes,rpbasereport,sysutils,rptypes,rpsubreport,rpsection,rpmdconsts,
  rpdataset,
 {$ENDIF}
 {$IFDEF LINUX}
-  Libc,
+ //   Libc,
 {$ENDIF}
 {$IFDEF MSWINDOWS}
   mmsystem,windows,

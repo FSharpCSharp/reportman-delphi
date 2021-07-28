@@ -20,3 +20,13 @@ repman/bin64/repmandxp.drc
 repman/bin64/repmandxp.rsm
 activex/reportman.rsm
 repman/utils/printreptopdf/printreptopdf.rsm
+*.o
+*.rsm
+repman/utils/compilerep/compilerep.res
+repman/utils/metaprint/metaprintxp.res
+repman/utils/printrep/printrepxp.res
+*.drc
+repman/utils/txttorep/txttorep.res
+repman/utils/reptotxt/reptotxt.res
+repman/utils/printreptopdf/printreptopdf
+server/web/repwebserver.dll

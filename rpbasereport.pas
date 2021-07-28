@@ -46,7 +46,7 @@ uses Classes,sysutils,rptypes,rpsubreport,rpsection,rpmdconsts,
 {$ENDIF}
 {$IFDEF LINUX}
  {$IFNDEF FPC}
-  Libc,
+  // Libc,
  {$ENDIF}
 {$ENDIF}
 {$IFDEF MSWINDOWS}

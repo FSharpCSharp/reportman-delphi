@@ -25,48 +25,61 @@ program printreptopdf;
 {$I rpconf.inc}
 
 uses
-  SysUtils,Classes,
-{$IFDEF MSWINDOWS}
-  ActiveX,mmsystem,Windows,
-{$IFDEF USEVARIANTS}
- {$IFNDEF MIDASOUT}
+  SysUtils,
+  Classes,
+  {$IFDEF MSWINDOWS}
+  ActiveX,
+  {$IFDEF USEVARIANTS}
+  {$IFNDEF MIDASOUT}
   midaslib,
- {$ENDIF}
+  {$ENDIF }
   types,
-{$ENDIF}
+  {$ENDIF }
+  {$ENDIF }
+  DateUtils,
   rpreport in '..\..\..\rpreport.pas',
   rpparams in '..\..\..\rpparams.pas',
   rpmdconsts in '..\..\..\rpmdconsts.pas',
   rptypes in '..\..\..\rptypes.pas',
-  rptextdriver in '..\..\..\rptextdriver.pas',
   rpsubreport in '..\..\..\rpsubreport.pas',
   rpsection in '..\..\..\rpsection.pas',
   rpsecutil in '..\..\..\rpsecutil.pas',
-  rphtmldriver in '..\..\..\rphtmldriver.pas',
-  rpexceldriver in '..\..\..\rpexceldriver.pas',
-  rpsvgdriver in '..\..\..\rpsvgdriver.pas',
-  rpgdidriver in '..\..\..\rpgdidriver.pas',
-  rpcsvdriver in '..\..\..\rpcsvdriver.pas',
   rppdffile in '..\..\..\rppdffile.pas',
-  rppdfdriver in '..\..\..\rppdfdriver.pas';
-{$ENDIF}
-
-{$IFDEF LINUX}
-  DateUtils,
-  rpreport in '../../../rpreport.pas',
-  rpparams in '../../../rpparams.pas',
-  rpmdconsts in '../../../rpmdconsts.pas',
-  rptypes in '../../../rptypes.pas',
-  rptextdriver in '../../../rptextdriver.pas',
-  rpsubreport in '../../../rpsubreport.pas',
-  rpsection in '../../../rpsection.pas',
-  rpsecutil in '../../../rpsecutil.pas',
-  rphtmldriver in '../../../rphtmldriver.pas',
-  rppdffile in '../../../rppdffile.pas',
-  rpsvgdriver in '../../../rpsvgdriver.pas',
-  rpcsvdriver in '../../../rpcsvdriver.pas',
-  rppdfdriver in '../../../rppdfdriver.pas';
-{$ENDIF}
+  rpsvgdriver in '..\..\..\rpsvgdriver.pas',
+  rpcsvdriver in '..\..\..\rpcsvdriver.pas',
+  rppdfdriver in '..\..\..\rppdfdriver.pas',
+  rpbasereport in '..\..\..\rpbasereport.pas',
+  rpmdshfolder in '..\..\..\rpmdshfolder.pas',
+  rptranslator in '..\..\..\rptranslator.pas',
+  rpmunits in '..\..\..\rpmunits.pas',
+  rpprintitem in '..\..\..\rpprintitem.pas',
+  rpeval in '..\..\..\rpeval.pas',
+  rpevalfunc in '..\..\..\rpevalfunc.pas',
+  rptypeval in '..\..\..\rptypeval.pas',
+  rpparser in '..\..\..\rpparser.pas',
+  rpstringhash in '..\..\..\rpstringhash.pas',
+  rphashtable in '..\..\..\rphashtable.pas',
+  rpcomparable in '..\..\..\rpcomparable.pas',
+  rpalias in '..\..\..\rpalias.pas',
+  rpdatainfo in '..\..\..\rpdatainfo.pas',
+  rpdataset in '..\..\..\rpdataset.pas',
+  rpdatatext in '..\..\..\rpdatatext.pas',
+  rpmdcharttypes in '..\..\..\rpmdcharttypes.pas',
+  rpmetafile in '..\..\..\rpmetafile.pas',
+  rplabelitem in '..\..\..\rplabelitem.pas',
+  rpmdbarcode in '..\..\..\rpmdbarcode.pas',
+  rpbarcodecons in '..\..\..\rpbarcodecons.pas',
+  rpDelphiZXIngQRCode in '..\..\..\rpDelphiZXIngQRCode.pas',
+  rpxmlstream in '..\..\..\rpxmlstream.pas',
+  rpdrawitem in '..\..\..\rpdrawitem.pas',
+  rpmdchart in '..\..\..\rpmdchart.pas',
+  rpinfoprovid in '..\..\..\rpinfoprovid.pas',
+  rpinfoprovft in '..\..\..\rpinfoprovft.pas',
+  rpfreetype2 in '..\..\..\rpfreetype2.pas',
+  rptextdriver in '..\..\..\rptextdriver.pas',
+  rphtmldriver in '..\..\..\rphtmldriver.pas',
+  rpexceldriver in '..\..\..\rpexceldriver.pas' {FRpExcelProgress},
+  rpgdidriver in '..\..\..\rpgdidriver.pas' {FRpVCLProgress};
 
 var
  separator:string;
@@ -99,12 +112,7 @@ var
  singlefile:boolean;
  seconds,minutes,hours:integer;
  difmilis:int64;
-{$IFDEF MSWINDOWS}
-   mmfirst,mmlast:DWORD;
-{$ENDIF}
-{$IFDEF LINUX}
-   milifirst,mililast:TDatetime;
-{$ENDIF}
+ milifirst,mililast:TDatetime;
 
 procedure PrintHelp;
 var
@@ -154,15 +162,7 @@ begin
 {$IFDEF USEADO}
   CoInitialize(nil);
 {$ENDIF}
-{$IFDEF MSWINDOWS}
-  toexcel:=false;
-{$ENDIF}
-{$IFDEF MSWINDOWS}
-  mmfirst:=TimeGetTime;
-{$ENDIF}
-{$IFDEF LINUX}
-  milifirst:=0;
-{$ENDIF}
+ milifirst:=0;
   separator:=',';
   errorfile:='';
   dotime:=false;
@@ -349,12 +349,7 @@ begin
    begin
     if dotime then
     begin
-{$IFDEF MSWINDOWS}
-     mmfirst:=TimeGetTime;
-{$ENDIF}
-{$IFDEF LINUX}
      milifirst:=now;
-{$ENDIF}
     end;
     report:=TRpReport.Create(nil);
     try
@@ -472,14 +467,8 @@ begin
   end;
   if dotime then
   begin
-{$IFDEF MSWINDOWS}
-   mmlast:=TimeGetTime;
-   difmilis:=(mmlast-mmfirst);
-{$ENDIF}
-{$IFDEF LINUX}
    mililast:=now;
    difmilis:=MillisecondsBetween(mililast,milifirst);
-{$ENDIF}
    seconds:=difmilis div 1000;
    minutes:=seconds div 60;
    hours:=minutes div 60;
@@ -503,7 +492,7 @@ begin
    end
    else
    begin
-    WriteToStdError(E.Message+LINE_FEED);
+    WriteToStdError(E.Message+LINE_FEED+E.StackTrace+LINE_FEED);
    end;
    ExitCode:=1;
   end;

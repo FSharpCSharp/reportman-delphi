@@ -28,7 +28,7 @@ uses
  SysUtils,rpmdconsts,rpmdshfolder,
 {$IFDEF LINUX}
 {$IFNDEF FPC}
- Libc,
+ // Libc,
 {$ENDIF}
 {$ENDIF}
 {$IFDEF DOTNETD}
@@ -275,7 +275,7 @@ begin
 {$IFDEF FPC}
  LangCode := PChar(Sysutils.GetEnvironmentVariable('LANG'));
 {$ELSE}
-LangCode := getenv('LANG');
+  LangCode := PChar(System.SysUtils.GetEnvironmentVariable('LANG'));
 {$ENDIF}
  if (LangCode = nil) or (LangCode^ = #0) then
   Exit;

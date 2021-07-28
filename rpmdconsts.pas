@@ -2403,30 +2403,30 @@ begin
   exit;
  avalue:=GetEnvironmentVariable('KYLIX_DECIMAL_SEPARATOR');
  if Length(avalue)>0 then
-  DecimalSeparator:=avalue[1]
+  FormatSettings.DecimalSeparator:=avalue[1]
  else
-  DecimalSeparator:=chr(0);
+  FormatSettings.DecimalSeparator:=chr(0);
  avalue:=GetEnvironmentVariable('KYLIX_THOUSAND_SEPARATOR');
  if Length(avalue)>0 then
-  ThousandSeparator:=avalue[1]
+  FormatSettings.ThousandSeparator:=avalue[1]
  else
-  ThousandSeparator:=chr(0);
+  FormatSettings.ThousandSeparator:=chr(0);
  avalue:=GetEnvironmentVariable('KYLIX_DATE_SEPARATOR');
  if Length(avalue)>0 then
-  DateSeparator:=avalue[1]
+  FormatSettings.DateSeparator:=avalue[1]
  else
-  DateSeparator:=chr(0);
+  FormatSettings.DateSeparator:=chr(0);
  avalue:=GetEnvironmentVariable('KYLIX_TIME_SEPARATOR');
  if Length(avalue)>0 then
-  TimeSeparator:=avalue[1]
+  FormatSettings.TimeSeparator:=avalue[1]
  else
-  TimeSeparator:=chr(0);
+  FormatSettings.TimeSeparator:=chr(0);
  avalue:=GetEnvironmentVariable('KYLIX_DATE_FORMAT');
  if Length(avalue)>0 then
-  ShortDateFormat:=avalue;
+  FormatSettings.ShortDateFormat:=avalue;
  avalue:=GetEnvironmentVariable('KYLIX_TIME_FORMAT');
  if Length(avalue)>0 then
-  ShortTimeFormat:=avalue;
+  FormatSettings.ShortTimeFormat:=avalue;
 end;
 {$ENDIF}
 

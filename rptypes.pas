@@ -33,10 +33,12 @@ uses
 {$ENDIF}
 {$IFDEF LINUX}
 {$IFNDEF FPC}
- Libc,
+ System.IOUtils,
+//  Libc,
 {$ENDIF}
 {$ENDIF}
- Sysutils,IniFiles,rpmdshfolder,Classes,
+ Sysutils,IniFiles,
+ rpmdshfolder,Classes,
 {$IFDEF USEVARIANTS}
  Variants,Types,
  {$IFNDEF FPC}
@@ -270,8 +272,10 @@ procedure GetDrawStyleDescriptions(alist:TRpWideStrings);
 function StrToBackStyle(value:string):TrpBackStyle;
 function BackStyleToStr(value:TrpBackStyle):string;
 {$IFNDEF FPC}
+{$IFNDEF LINUX}
 procedure SendMail(destination,subject,content,filename,originalfile:AnsiString);overload;
 procedure SendMail(destination,subject,content:AnsiString;files,orignalfilenames:TStrings);overload;
+{$ENDIF}
 {$ENDIF}
 function StrToAlign(value:string):TRpPosAlign;
 function AlignToStr(value:TRpPosAlign):string;
@@ -338,12 +342,12 @@ function CompareMem(const Mem1: array of Byte; const Mem2: array of Byte;
 function PrinterRawOpEnabled(printerindex:TRpPrinterSelect;rawop:TPrinterRawOp):Boolean;
 
 {$IFDEF LINUX}
-procedure ExecuteSystemApp(aparams:TStrings;waitend:Boolean);
+//procedure ExecuteSystemApp(aparams:TStrings;waitend:Boolean);
 {$IFNDEF FPC}
-procedure  ObtainPrinters(alist:TStrings);
-procedure SendTextToPrinter(S:String;printerindex:TRpPrinterSelect;Title,forceprintername:String);
-procedure ReadFileLines(filename:String;dest:TStrings);
-procedure ExecuteSystemCommand(params:TStrings);
+//procedure  ObtainPrinters(alist:TStrings);
+//procedure SendTextToPrinter(S:String;printerindex:TRpPrinterSelect;Title,forceprintername:String);
+//procedure ReadFileLines(filename:String;dest:TStrings);
+//procedure ExecuteSystemCommand(params:TStrings);
 {$ENDIF}
 {$ENDIF}
 
@@ -3664,7 +3668,7 @@ begin
 end;
 
 {$ELSE}
-procedure ExecuteSystemApp(aparams:TStrings;waitend:Boolean);
+(*procedure ExecuteSystemApp(aparams:TStrings;waitend:Boolean);
 var
  child:__pid_t;
  i:integer;
@@ -3672,7 +3676,7 @@ var
 begin
  if aparams.count>90 then
   Raise exception.create(SRpTooManyParams);
- // Creates a fork, 
+ // Creates a fork,
  for i:=0 to aparams.count-1 do
  begin
   theparams[i]:=Pchar(aparams[i]);
@@ -3778,7 +3782,7 @@ var
  afilename:String;
  files:TFilestream;
  oemconvert:Boolean;
-{$IFDEF ALTLINUXTEXTPRINT}     //   
+{$IFDEF ALTLINUXTEXTPRINT}     //
  cmdtext:String;               // Need to use a temporary string
 {$ENDIF}                       //
 begin
@@ -3802,7 +3806,7 @@ begin
    ExecuteRecode(afilename,'..850/');
   end;
 {$IFDEF ALTLINUXTEXTPRINT}                           // Here I add my workaround
-  cmdtext := 'lpr ';                                 // 
+  cmdtext := 'lpr ';                                 //
   if Length(printername) > 0 then                    // Building the lpr command and
     cmdtext := cmdtext + '-P ' + printername + ' ';  // parameters into the temporary
   cmdtext := cmdtext + '-r -l ';                     // string exactly as yours code.
@@ -3848,7 +3852,7 @@ begin
   params.Free;
  end;
 end;
-
+*)
 (*procedure SendTextToPrinter(S:String;printerindex:TRpPrinterSelect;Title,forceprintername:String);
 var
  printername:String;
@@ -3952,9 +3956,10 @@ begin
         if readed=0 then
          finish:=true;
 {$ELSE}
-   readed:=__read(0,pbuf^,1);
-   if readed=0 then
-    finish:=true;
+         raise Exception.Create('Read from handle not implemented');
+  // readed:=__read(0,pbuf^,1);
+  // if readed=0 then
+  //  finish:=true;
 {$ENDIF}
 {$ENDIF}
 {$IFDEF MSWINDOWS}
@@ -4040,8 +4045,8 @@ begin
 {$IFDEF FPC}
  SysUtils.FileWrite(handle,MemStream.Memory^,MemStream.Size);
 {$ELSE}
-
-  __write(handle,MemStream.Memory^,MemStream.Size);
+  raise Exception.Create('Not implemented');
+  //__write(handle,MemStream.Memory^,MemStream.Size);
 //  writed:=__write(1,MemStream.Memory^,MemStream.Size);
 {$ENDIF}
 {$ENDIF}
@@ -4120,19 +4125,9 @@ end;
 
 function RpTempPath:String;
 {$IFDEF LINUX}
-{$IFDEF FPC}
 begin
- Result:=Sysutils.GetTempDir;
+ Result:=System.IOUtils.TPath.GetTempPath;
 end;
-
-{$ELSE}
-var
- abuffer:array [0..L_tmpnam] of char;
-begin
- tmpnam(abuffer);
- Result:=StrPas(abuffer);
-end;
-{$ENDIF}
 {$ENDIF}
 {$IFDEF MSWINDOWS}
 var
@@ -4157,18 +4152,9 @@ end;
 {$IFNDEF DOTNETD}
 function RpTempFileName:String;
 {$IFDEF LINUX}
-{$IFDEF FPC}
 begin
- Result:=Sysutils.GetTempFileName;
+ Result:=System.IOUtils.TPath.GetTempFileName();
 end;
-{$ELSE}
-var
- abuffer:array [0..L_tmpnam] of char;
-begin
- tmpnam(abuffer);
- Result:=StrPas(abuffer);
-end;
-{$ENDIF}
 {$ENDIF}
 {$IFDEF MSWINDOWS}
 var
@@ -4441,13 +4427,11 @@ end;
 
 
 {$IFDEF LINUX}
-procedure SendMail(destination,subject,content,filename,originalfile:String);
+(*procedure SendMail(destination,subject,content,filename,originalfile:String);
 var
  aparams:TStringList;
 begin
-{$IFDEF FPC}
  Raise Exception.Create('Operation not implemented SendMail');
-{$ELSE}
  aparams:=TStringList.Create;
  try
   aparams.Add('kmail');
@@ -4463,8 +4447,7 @@ begin
  finally
   aparams.free;
  end;
-{$ENDIF}
-end;
+end; *)
 {$ENDIF LINUX}
 
 
@@ -4812,7 +4795,7 @@ var
 begin
 {$IFDEF USEZLIB}
  astream.Seek(0,sofromBeginning);
- deststream.SetSize(0);
+ deststream.SetSize(Int64(0));
  zStream:=TDeCompressionStream.Create(aStream);
  try
   setLength(abuf,131072);
@@ -4841,7 +4824,7 @@ var
 {$ENDIF}
 begin
 {$IFDEF USEZLIB}
- deststream.SetSize(0);
+ deststream.SetSize(Int64(0));
  astream.Seek(0,sofromBeginning);
  zStream:=TCompressionStream.Create(clDefault,destStream) ;
  try
@@ -5344,7 +5327,7 @@ begin
      alist:=TStringList.Create;
      try
       alist.LoadFromStream(memstream);
-      memstream.SetSize(0);
+      memstream.SetSize(Int64(0));
       for i:=1 to alist.Count-2 do
       begin
        astring:=decoder.DecodeString(alist.Strings[i]);
@@ -5352,7 +5335,7 @@ begin
         memstream.Write(astring[1],Length(astring))
       end;
       memstream.Seek(0,soFromBeginning);
-      amemstream.SetSize(0);
+      amemstream.SetSize(Int64(0));
       amemstream.Write(memstream.memory^,memstream.size);
       amemstream.Seek(0,soFromBeginning);
      finally
@@ -5458,7 +5441,7 @@ begin
    end;
    // Copy the decoded to the result
    memstream.Seek(0,soFromBeginning);
-   amemstream.SetSize(0);
+   amemstream.SetSize(Int64(0));
    amemstream.Write(memstream.memory^,memstream.size);
    amemstream.Seek(0,soFromBeginning);
  finally

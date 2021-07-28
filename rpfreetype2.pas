@@ -17,7 +17,7 @@ uses
 {$IFDEF FPC}
  dynlibs,
 {$ELSE}
- Libc,
+ // Libc,
 {$ENDIF}
 {$ENDIF}
 {$IFDEF MSWINDOWS}
@@ -27,7 +27,7 @@ uses
 
 const
 {$IFDEF LINUX}
- C_FREETYPE='libfreetype.so';
+ C_FREETYPE='libfreetype.so.6';
 {$ENDIF}
 {$IFDEF MSWINDOWS}
  C_FREETYPE='freetype6.dll';
@@ -80,16 +80,12 @@ type
   PFT_Byte = ^Byte;
   FT_String = char;
   PFT_String = PChar;
-{$IFDEF FPC}
-{$IFDEF CPU64}
+{$IFDEF CPUX64}
   FT_Long = Int64;
-  FT_Pos=Int64;
+  FT_Pos=Int32;
 {$ELSE}
  FT_Long = longint;
  FT_Pos=integer;
-{$ENDIF}
-{$ELSE}
-  FT_Long = longint;
 {$ENDIF}
   FT_Pointer = Pointer;
   FT_ULong = Cardinal;
@@ -371,11 +367,11 @@ var
  FreeTypeLib:HINST;
 {$ENDIF}
 {$IFDEF LINUX}
-{$IFDEF FPC}
-FreeTypeLib:TLibHandle;
-{$ELSE}
- FreeTypeLib:Pointer;
-{$ENDIF}
+ {$IFDEF FPC}
+  FreeTypeLib:TLibHandle;
+ {$ELSE}
+  FreeTypeLib:NativeUInt;
+ {$ENDIF}
 {$ENDIF}
 
 implementation
@@ -383,13 +379,8 @@ implementation
 procedure CheckFreeTypeLoaded;
 begin
 {$IFDEF LINUX}
-{$IFDEF FPC}
  if (FreeTypeLib<>0) then
   exit;
-{$ELSE}
-if Assigned(FreeTypeLib) then
- exit;
-{$ENDIF}
 {$ENDIF}
 {$IFDEF MSWINDOWS}
  if FreeTypeLib>HINSTANCE_ERROR then
@@ -416,9 +407,10 @@ procedure LoadFreeType;
     raise Exception.Create(Format('Error loading %s,Error Code %s',[ProcName,dynlibs.GetLoadErrorStr]));
 
  {$ELSE}
-  Result:=dlsym(FreeTypeLib,ProcName);
+//  Result:=dlsym(FreeTypeLib,ProcName);
+  Result:=System.SysUtils.GetProcAddress(FreeTypeLib,ProcName);
    if not Assigned(Result) then
-    raise Exception.Create(Format('Error loading %s,Error Code %s',[ProcName,dlerror]));
+      RaiseLastOSError;
  {$ENDIF}
  end;
 {$ENDIF}
@@ -429,8 +421,8 @@ begin
  if FreeTypeLib=0 then
   Raise Exception.Create('Error opening:'+C_FREETYPE);
 {$ELSE}
-FreeTypeLib:=dlopen(Pchar(C_FREETYPE),RTLD_GLOBAL);
-if FreeTypeLib=nil then
+FreeTypeLib:=System.Sysutils.SafeLoadLibrary(C_FREETYPE);
+if FreeTypeLib=0 then
  Raise Exception.Create('Error opening:'+C_FREETYPE);
 {$ENDIF}
 {$ENDIF}
@@ -485,7 +477,7 @@ initialization
 {$IFDEF FPC}
  FreeTypeLib:=0;
 {$ELSE}
-FreeTypeLib:=nil;
+FreeTypeLib:=0;
 {$ENDIF}
 {$ENDIF}
 finalization

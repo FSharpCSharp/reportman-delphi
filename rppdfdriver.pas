@@ -38,7 +38,7 @@ uses Classes,Sysutils,
 {$IFDEF LINUX}
 {$IFDEF FPC}
 {$ELSE}
- Libc,
+//  Libc,
 {$ENDIF}
 {$ENDIF}
  rpmunits,rpmdconsts,rpmdcharttypes;
@@ -909,6 +909,8 @@ var
  destfilename:string;
  alist:TStringList;
 begin
+ raise Exception.Create('Not Implemented KPrinter');
+ (*
  // use a temp file
  alist:=TStringList.Create;
  try
@@ -935,7 +937,7 @@ begin
   end;
  finally
   alist.free;
- end;
+ end;*)
 end;
 {$ENDIF}
 

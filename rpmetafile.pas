@@ -44,7 +44,7 @@ interface
 uses Classes,SyncObjs,
 {$IFDEF LINUX}
 {$IFNDEF FPC}
-  Libc,
+//  Libc,
 {$ENDIF}
   DateUtils,
 {$ENDIF}
@@ -86,7 +86,7 @@ type
  TRequestPageEvent=function (pageindex:integer):boolean of object;
  ERpBadFileFormat=class(Exception)
   private
-   FPosition:integer;
+   FPosition:LongInt;
   public
    constructor CreatePos(Msg:String;APosition,Pos2:LongInt);
    property position:LongInt read FPosition;
@@ -851,7 +851,7 @@ begin
 
 
  FCurrentPage:=-1;
- FMemStream.SetSize(0);
+ FMemStream.SetSize(Int64(0));
 end;
 
 destructor TRpMetafileReport.Destroy;
@@ -1904,7 +1904,7 @@ var
 begin
  if Assigned(FOnRequestData) then
   FOnRequestData(Self,BUFFER_FLEX_SIZE);
- FBuffer.SetSize(0);
+ FBuffer.SetSize(Int64(0));
  FLastReadCount:=0;
  while (FLastReadCount<BUFFER_FLEX_SIZE) do
  begin

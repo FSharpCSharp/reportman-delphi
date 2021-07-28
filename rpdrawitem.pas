@@ -346,8 +346,8 @@ begin
  if newstate=rpReportStart then
  begin
   cachedpos:=-1;
-  FDecompStream.SetSize(0);
-  FOldStream.SetSize(0);
+  FDecompStream.SetSize(Int64(0));
+  FOldStream.SetSize(Int64(0));
  end;
 end;
 

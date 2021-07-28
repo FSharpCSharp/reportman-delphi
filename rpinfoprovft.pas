@@ -145,7 +145,9 @@ begin
  exit;
 {$ENDIF}
 {$IFDEF LINUX}
- diderror:=false;
+ alist.Add('/usr/share/fonts/truetype');
+ alist.Add('/usr/local/share/fonts');
+(* diderror:=false;
  alist.clear;
  afile:=TStringList.create;
  try
@@ -174,7 +176,7 @@ begin
    astring:=Copy(astring,index+6,Length(astring));
   end;
   index:=Pos('<dir>',astring);
- end;
+ end;*)
 {$ENDIF}
 end;
 
@@ -187,6 +189,8 @@ var
  afilename:string;
  errorface:FT_Error;
  aface:FT_Face;
+ fontpaths1:TStrings;
+ direc:string;
 begin
  if Assigned(fontlist) then
   exit;
@@ -196,9 +200,64 @@ begin
  fontfiles:=TStringList.Create;
  fontfiles.Sorted:=true;
  fontpaths:=TStringList.Create;
+ fontpaths1:=TStringList.Create;
 
  GetFontsDirectories(fontpaths);
  fontfiles.Clear;
+  i:=0;
+ while i<fontpaths.Count do
+ begin
+  direc:=fontpaths.strings[i]+C_DIRSEPARATOR+'*';
+  retvalue:=SysUtils.FindFirst(direc,faAnyFile,F);
+  if 0=retvalue then
+  begin
+   try
+    while retvalue=0 do
+    begin
+     if ((F.Name<>'.') AND (F.Name<>'..')) then
+     begin
+      if (f.Attr AND faDirectory)<>0 then
+      begin
+        direc:=fontpaths.strings[i]+C_DIRSEPARATOR+F.Name;
+        fontpaths.Add(direc);
+        fontpaths1.Add(direc);
+      end;
+     end;
+     retvalue:=SysUtils.FindNext(F);
+    end;
+   finally
+    SysUtils.FindClose(F);
+   end;
+  end;
+  Inc(i);
+ end;
+  i:=0;
+ while i<fontpaths1.Count do
+ begin
+  direc:=fontpaths1.strings[i]+C_DIRSEPARATOR+'*';
+  retvalue:=SysUtils.FindFirst(direc,faAnyFile,F);
+  if 0=retvalue then
+  begin
+   try
+    while retvalue=0 do
+    begin
+     if ((F.Name<>'.') AND (F.Name<>'..')) then
+     begin
+      if (f.Attr AND faDirectory)<>0 then
+      begin
+        direc:=fontpaths1.strings[i]+C_DIRSEPARATOR+F.Name;
+        fontpaths.Add(direc);
+      end;
+     end;
+     retvalue:=SysUtils.FindNext(F);
+    end;
+   finally
+    SysUtils.FindClose(F);
+   end;
+  end;
+  Inc(i);
+ end;
+
  for i:=0 to fontpaths.Count-1 do
  begin
   retvalue:=SysUtils.FindFirst(fontpaths.strings[i]+C_DIRSEPARATOR+'*.pf*',faAnyFile,F);
@@ -236,7 +295,8 @@ begin
    end;
   end;
 {$IFDEF LINUX}
-  retvalue:=SysUtils.FindFirst(fontpaths.strings[i]+C_DIRSEPARATOR+'*.TTF',faAnyFile,F);
+  direc:=fontpaths.strings[i]+C_DIRSEPARATOR+'*.TTF';
+  retvalue:=SysUtils.FindFirst(direc,faAnyFile,F);
   if 0=retvalue then
   begin
    try
@@ -245,7 +305,10 @@ begin
      if ((F.Name<>'.') AND (F.Name<>'..')) then
      begin
       if (f.Attr AND faDirectory)=0 then
-       fontfiles.Add(fontpaths.strings[i]+C_DIRSEPARATOR+F.Name);
+      begin
+       direc:=fontpaths.strings[i]+C_DIRSEPARATOR+F.Name;
+       fontfiles.Add(direc);
+      end;
      end;
      retvalue:=SysUtils.FindNext(F);
     end;

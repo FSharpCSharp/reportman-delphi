@@ -324,7 +324,7 @@ begin
    try
     report.TwoPass:=true;
     report.PrintAll(apdfdriver);
-    astream.SetSize(0);
+    astream.SetSize(Int64(0));
     ExportMetafileToCSVStream(report.metafile,astream,progress,true,1,999,separator);
     astream.Seek(0,soFromBeginning);
     stream.CopyFrom(astream,astream.size);

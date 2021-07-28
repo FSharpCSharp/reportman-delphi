@@ -2502,7 +2502,7 @@ begin
  begin
   // read the values
   FMemBits.Clear;
-  FMemBits.SetSize(imagesize);
+  FMemBits.SetSize(Int64(imagesize));
   if bitcount=32 then
   begin
    SetLength(qvalues,imagesize);
@@ -2574,7 +2574,7 @@ begin
   end
   else*)
   begin
-   FMemBits.SetSize(width*height*3);
+   FMemBits.SetSize(Int64(width*height*3));
    linewidth:=width*3;
    SetLength(buffer,scanwidth);
 	 SetLength(bufdest,linewidth);
@@ -2660,7 +2660,7 @@ begin
   scanwidth:=scanwidth+1;
  SetLength(buffer,scanwidth);
  FMemBits.Clear;
- FMemBits.SetSize(height*origwidth);
+ FMemBits.SetSize(Int64(height*origwidth));
 { if numcolors=2 then
  begin
   amask:=$80;
