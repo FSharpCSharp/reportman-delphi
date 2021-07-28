@@ -96,7 +96,6 @@ type
     procedure BConnectClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BCloseClick(Sender: TObject);
-    procedure ToolButton4Click(Sender: TObject);
   private
     { Private declarations }
     DriversFile:string;
@@ -401,6 +400,9 @@ var
 {$IFDEF USEIBX}
   FIBDatabase:TIBDatabase;
 {$ENDIF}
+{$IFDEF FIREDAC}
+ FDConnection:TFDConnection;
+{$ENDIF}
  databasename:string;
  indexDriver:integer;
 begin
@@ -420,6 +422,22 @@ begin
   alist.free;
  end;
  drivername:=SQLConnection1.params.Values['DriverName'];
+{$IFDEF FIREDAC}
+ if (drivername='FireDac') then
+ begin
+   FDConnection:=TFDConnection.Create(nil);
+   try
+    FDConnection.Params.Assign(SQLConnection1.Params);
+    ConvertParamsFromDBXToFDac(FDConnection);
+    FDConnection.Connected:=True;
+    RpShowMessage(SRpConnectionOk);
+    FDConnection.Connected:=False;
+   finally
+    FIBDatabase.Free;
+   end;
+ end
+ else
+{$ENDIF}
 {$IFDEF USEZEOS}
  if drivername='ZeosLib' then
  begin

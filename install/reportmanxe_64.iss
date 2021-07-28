@@ -8,7 +8,7 @@
 
 [Setup]
 AppName=Report Manager Designer (x64)
-AppVersion=3.4.5
+AppVersion=3.4.6
 DefaultDirName={commonpf}\Report Manager
 DefaultGroupName=Report Manager
 UninstallDisplayIcon={app}\repmandxp.exe
@@ -25,8 +25,8 @@ ArchitecturesInstallIn64BitMode=x64
 AppPublisher=Toni Martir
 AppPublisherURL=http://reportman.sourceforge.net
 VersionInfoProductName=Report Manager
-VersionInfoProductVersion=3.4.5
-OutputBaseFilename=reportman_designer_3_4_5_x64
+VersionInfoProductVersion=3.4.6
+OutputBaseFilename=reportman_designer_3_4_6_x64
 
 [Files]
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\bin64\repmandxp.exe"; DestDir: "{app}"
@@ -35,8 +35,8 @@ Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\biolife.cds"; DestDi
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\bin64\net2\*.*"; DestDir: "{app}\net2"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\bin64\net2\Win32\*.*"; DestDir: "{app}\net2\Win32"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\bin64\net2\Win64\*.*"; DestDir: "{app}\net2\Win64"
-Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\dbxdrivers.ini"; DestDir: "{app}"
-Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\dbxconnections.ini"; DestDir: "{app}"
+Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\dbxdrivers.ini"; DestDir: "{localappdata}"
+Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\dbxconnections.ini"; DestDir: "{localappdata}"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\printreptopdf\bin64\printreptopdf.exe"; DestDir: "{app}"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\activex\bin64\Reportman.ocx"; DestDir: "{app}"
 

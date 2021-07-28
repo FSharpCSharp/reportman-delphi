@@ -159,7 +159,6 @@ object FRpDBXConfigVCL: TFRpDBXConfigVCL
           Caption = 'ToolButton4'
           Enabled = False
           ImageIndex = 5
-          OnClick = ToolButton4Click
         end
         object ToolButton3: TToolButton
           Left = 142
