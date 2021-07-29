@@ -77,9 +77,7 @@ uses
   rpinfoprovft in '..\..\..\rpinfoprovft.pas',
   rpfreetype2 in '..\..\..\rpfreetype2.pas',
   rptextdriver in '..\..\..\rptextdriver.pas',
-  rphtmldriver in '..\..\..\rphtmldriver.pas',
-  rpexceldriver in '..\..\..\rpexceldriver.pas' {FRpExcelProgress},
-  rpgdidriver in '..\..\..\rpgdidriver.pas' {FRpVCLProgress};
+  rphtmldriver in '..\..\..\rphtmldriver.pas';
 
 var
  separator:string;
@@ -493,6 +491,7 @@ begin
    else
    begin
     WriteToStdError(E.Message+LINE_FEED+E.StackTrace+LINE_FEED);
+    WriteToStdError(E.StackTrace+LINE_FEED);
    end;
    ExitCode:=1;
   end;

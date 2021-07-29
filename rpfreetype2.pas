@@ -27,7 +27,7 @@ uses
 
 const
 {$IFDEF LINUX}
- C_FREETYPE='libfreetype.so.6';
+ C_FREETYPE='libfreetype.so';
 {$ENDIF}
 {$IFDEF MSWINDOWS}
  C_FREETYPE='freetype6.dll';
@@ -84,7 +84,7 @@ type
   FT_Long = Int64;
   FT_Pos=Int32;
 {$ELSE}
- FT_Long = longint;
+xx FT_Long = longint;
  FT_Pos=integer;
 {$ENDIF}
   FT_Pointer = Pointer;

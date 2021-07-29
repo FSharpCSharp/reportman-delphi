@@ -48,9 +48,6 @@
         <Projects Include="..\server\web\repwebserver.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="repmandxe2.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -194,23 +191,14 @@
     <Target Name="repwebserver:Make">
         <MSBuild Projects="..\server\web\repwebserver.dproj" Targets="Make"/>
     </Target>
-    <Target Name="repmandxe2">
-        <MSBuild Projects="repmandxe2.dproj"/>
-    </Target>
-    <Target Name="repmandxe2:Clean">
-        <MSBuild Projects="repmandxe2.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="repmandxe2:Make">
-        <MSBuild Projects="repmandxe2.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="repmandxp;printreptopdf;reptotxt;txttorep;reportman;compilerep;metaviewxp;printrepxp;metaprintxp;rptranslate;WebReportManX;reportserverappxp;repwebexe;repserverconfigxp;repwebserver;repmandxe2"/>
+        <CallTarget Targets="repmandxp;printreptopdf;reptotxt;txttorep;reportman;compilerep;metaviewxp;printrepxp;metaprintxp;rptranslate;WebReportManX;reportserverappxp;repwebexe;repserverconfigxp;repwebserver"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="repmandxp:Clean;printreptopdf:Clean;reptotxt:Clean;txttorep:Clean;reportman:Clean;compilerep:Clean;metaviewxp:Clean;printrepxp:Clean;metaprintxp:Clean;rptranslate:Clean;WebReportManX:Clean;reportserverappxp:Clean;repwebexe:Clean;repserverconfigxp:Clean;repwebserver:Clean;repmandxe2:Clean"/>
+        <CallTarget Targets="repmandxp:Clean;printreptopdf:Clean;reptotxt:Clean;txttorep:Clean;reportman:Clean;compilerep:Clean;metaviewxp:Clean;printrepxp:Clean;metaprintxp:Clean;rptranslate:Clean;WebReportManX:Clean;reportserverappxp:Clean;repwebexe:Clean;repserverconfigxp:Clean;repwebserver:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="repmandxp:Make;printreptopdf:Make;reptotxt:Make;txttorep:Make;reportman:Make;compilerep:Make;metaviewxp:Make;printrepxp:Make;metaprintxp:Make;rptranslate:Make;WebReportManX:Make;reportserverappxp:Make;repwebexe:Make;repserverconfigxp:Make;repwebserver:Make;repmandxe2:Make"/>
+        <CallTarget Targets="repmandxp:Make;printreptopdf:Make;reptotxt:Make;txttorep:Make;reportman:Make;compilerep:Make;metaviewxp:Make;printrepxp:Make;metaprintxp:Make;rptranslate:Make;WebReportManX:Make;reportserverappxp:Make;repwebexe:Make;repserverconfigxp:Make;repwebserver:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

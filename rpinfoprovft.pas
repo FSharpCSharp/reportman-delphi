@@ -146,6 +146,8 @@ begin
 {$ENDIF}
 {$IFDEF LINUX}
  alist.Add('/usr/share/fonts/truetype');
+ //alist.Add('/usr/share/fonts/opentype');
+ //alist.Add('/usr/share/fonts/type1');
  alist.Add('/usr/local/share/fonts');
 (* diderror:=false;
  alist.clear;
@@ -189,6 +191,7 @@ var
  afilename:string;
  errorface:FT_Error;
  aface:FT_Face;
+// afaceRec:FT_FaceRec;
  fontpaths1:TStrings;
  direc:string;
 begin
@@ -201,6 +204,45 @@ begin
  fontfiles.Sorted:=true;
  fontpaths:=TStringList.Create;
  fontpaths1:=TStringList.Create;
+ aface:=nil;
+
+(* aface.num_faces:=0;
+ aface.face_index:=0;
+ aface.face_flags:=0;
+ aface.style_flags:=0;
+ aface.num_glyphs:=0;
+ aface.family_name:=nil;
+ aface.style_name:=nil;
+ aface.num_fixed_sizes:=0;
+ aface.available_sizes:=nil;
+ aface.num_charmaps:=0;
+ aface.charmaps:=nil;
+ aface.generic.data:=nil;
+ aface.generic.finalizer:=nil;
+ aface.bbox.xMin:=0;
+ aface.bbox.yMin:=0;
+ aface.bbox.yMax:=0;
+ aface.bbox.yMin:=0;
+ aface.bbox.yMax:=0;
+ aface.units_per_EM:=0;
+ aface.ascender:=0;
+ aface.descender:=0;
+ aface.height:=0;
+ aface.max_advance_width:=0;
+ aface.max_advance_height:=0;
+ aface.underline_position:=0;
+ aface.underline_thickness:=0;
+ aface.glyph:=nil;
+ aface.size:=nil;
+ aface.charmap:=nil;
+ aface.driver.z:=nil;
+ aface.memory.z:=nil;
+ aface.sizes_list.z:=nil;
+ aface.autohint.data:=nil;
+ aface.autohint.finalizer:=nil;
+ aface.extensions:=nil;
+ aface.internal.z:=nil;    *)
+
 
  GetFontsDirectories(fontpaths);
  fontfiles.Clear;
@@ -294,8 +336,84 @@ begin
     SysUtils.FindClose(F);
    end;
   end;
+  retvalue:=SysUtils.FindFirst(fontpaths.strings[i]+C_DIRSEPARATOR+'*.otf',faAnyFile,F);
+  if 0=retvalue then
+  begin
+   try
+    while retvalue=0 do
+    begin
+     if ((F.Name<>'.') AND (F.Name<>'..')) then
+     begin
+      if (f.Attr AND faDirectory)=0 then
+       fontfiles.Add(fontpaths.strings[i]+C_DIRSEPARATOR+F.Name);
+     end;
+     retvalue:=SysUtils.FindNext(F);
+    end;
+   finally
+    SysUtils.FindClose(F);
+   end;
+  end;
+  retvalue:=SysUtils.FindFirst(fontpaths.strings[i]+C_DIRSEPARATOR+'*.t1',faAnyFile,F);
+  if 0=retvalue then
+  begin
+   try
+    while retvalue=0 do
+    begin
+     if ((F.Name<>'.') AND (F.Name<>'..')) then
+     begin
+      if (f.Attr AND faDirectory)=0 then
+       fontfiles.Add(fontpaths.strings[i]+C_DIRSEPARATOR+F.Name);
+     end;
+     retvalue:=SysUtils.FindNext(F);
+    end;
+   finally
+    SysUtils.FindClose(F);
+   end;
+  end;
 {$IFDEF LINUX}
   direc:=fontpaths.strings[i]+C_DIRSEPARATOR+'*.TTF';
+  retvalue:=SysUtils.FindFirst(direc,faAnyFile,F);
+  if 0=retvalue then
+  begin
+   try
+    while retvalue=0 do
+    begin
+     if ((F.Name<>'.') AND (F.Name<>'..')) then
+     begin
+      if (f.Attr AND faDirectory)=0 then
+      begin
+       direc:=fontpaths.strings[i]+C_DIRSEPARATOR+F.Name;
+       fontfiles.Add(direc);
+      end;
+     end;
+     retvalue:=SysUtils.FindNext(F);
+    end;
+   finally
+    SysUtils.FindClose(F);
+   end;
+  end;
+  direc:=fontpaths.strings[i]+C_DIRSEPARATOR+'*.OTF';
+  retvalue:=SysUtils.FindFirst(direc,faAnyFile,F);
+  if 0=retvalue then
+  begin
+   try
+    while retvalue=0 do
+    begin
+     if ((F.Name<>'.') AND (F.Name<>'..')) then
+     begin
+      if (f.Attr AND faDirectory)=0 then
+      begin
+       direc:=fontpaths.strings[i]+C_DIRSEPARATOR+F.Name;
+       fontfiles.Add(direc);
+      end;
+     end;
+     retvalue:=SysUtils.FindNext(F);
+    end;
+   finally
+    SysUtils.FindClose(F);
+   end;
+  end;
+  direc:=fontpaths.strings[i]+C_DIRSEPARATOR+'*.T1';
   retvalue:=SysUtils.FindFirst(direc,faAnyFile,F);
   if 0=retvalue then
   begin
@@ -329,9 +447,14 @@ begin
  for i:=0 to fontfiles.Count-1 do
  begin
   afilename:=fontfiles.strings[i];
-  errorface:=FT_New_Face(ftlibrary,Pchar(afilename),0,aface);
+  aface:=nil;
+  errorface:=FT_New_Face(ftlibrary,Pchar(afilename),-1,aface);
   if errorface=0 then
   begin
+   errorface:=FT_New_Face(ftlibrary,Pchar(afilename),0,aface);
+   if (errorface = 0) then
+   begin
+
    try
     // Add it only if it's a TrueType or OpenType font
     // Type1 fonts also supported
@@ -440,6 +563,7 @@ begin
     end;
    finally
     FT_Done_Face(aface);
+   end;
    end;
   end;
  end;

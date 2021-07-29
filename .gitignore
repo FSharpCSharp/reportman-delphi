@@ -30,3 +30,9 @@ repman/utils/txttorep/txttorep.res
 repman/utils/reptotxt/reptotxt.res
 repman/utils/printreptopdf/printreptopdf
 server/web/repwebserver.dll
+server/app/reportserverappxp.res
+server/config/repserverconfigxp.res
+server/web/repwebexe.res
+server/web/repwebserver.res
+repman/utils/printreptopdf/printreptopdf.res
+repman/utils/rptranslator/rptranslate.res

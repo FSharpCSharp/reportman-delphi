@@ -12,7 +12,7 @@ object FMain: TFMain
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
@@ -87,7 +87,7 @@ object FMain: TFMain
         Left = 68
         Top = 3
         Width = 133
-        Height = 21
+        Height = 24
         Style = csDropDownList
         TabOrder = 0
         OnClick = ComboOrderClick
@@ -144,7 +144,7 @@ object FMain: TFMain
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
-      TitleFont.Height = -11
+      TitleFont.Height = -13
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       OnDrawColumnCell = GridEditDrawColumnCell
@@ -419,7 +419,7 @@ object FMain: TFMain
     Left = 240
     Top = 104
     Bitmap = {
-      494C010108000900100013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000900040013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000004C000000390000000100200000000000B043
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -26,7 +26,7 @@ uses
   Firedac.VCLUI.Wait,
 {$ENDIF}
 {$IFDEF VCLNOTATION}
-  VCL.Imaging.jpeg, VCL.Imaging.pngimage,
+  VCL.Imaging.jpeg, VCL.Imaging.pngimage, System.Win.registry,
 {$ENDIF}
 {$IFNDEF FORWEBAX}
   rpmdchart,
@@ -42,7 +42,7 @@ uses
   rpbasereport, rpreport,
 {$IFDEF USETEECHART}
 {$IFDEF VCLNOTATION}
-  VCLTee.Chart, VCLTee.Series, rpdrawitem,System.Win.registry,
+  VCLTee.Chart, VCLTee.Series, rpdrawitem,
   VCLTee.teEngine, VCLTee.ArrowCha, VCLTee.BubbleCh, VCLTee.GanttCh,
   VCLTee.teeFunci, VCLTee.TeCanvas,
 {$IFDEF TEECHARTPRO}

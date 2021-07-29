@@ -461,6 +461,9 @@ function EncodeADOPassword(astring:String):String;
 procedure GetDotNetDrivers(alist:TStrings);
 procedure GetDotNet2Drivers(alist:TStrings);
 procedure ExtractUnionFields(var datasetname:string;alist:TStrings);
+{$IFDEF FIREDAC}
+procedure ConvertParamsFromDBXToFDac(base:TFDConnection);
+{$ENDIF}
 
 implementation
 
@@ -713,12 +716,14 @@ procedure ConvertParamsFromDBXToIBX(base:TIBDatabase);
 var
  index:integer;
  params:TStrings;
+ drivername:string;
 begin
  params:=base.Params;
  index:=params.IndexOfName('DriverName');
  if index>=0 then
  begin
-  if UpperCase(params.Values['DriverName'])<>'INTERBASE' then
+  drivername:= UpperCase(params.Values['DriverName']);
+  if ((drivername<>'INTERBASE') AND  (drivername<>'FIREBIRD')) then
    Raise Exception.Create(SRpDriverAliasIsNotInterbase);
   params.Delete(index);
  end;
@@ -2614,12 +2619,8 @@ begin
     rpfiredac:
      begin
 {$IFDEF FIREDAC}
-      TFDQuery(FSQLInternalQuery).Connection:=
-        baseinfo.FFDConnection;
-      TFDQuery(FSQLInternalQuery).SQL.Text:=SQLsentence;
-      TFDQuery(FSQLInternalQuery).Transaction:=baseinfo.FFDTransaction;
-      //TFDQuery(FSQLInternalQuery).Unidirectional:=true;
-      TFDQuery(FSQLInternalQuery).DataSource:=nil;
+        TFDQuery(FSQLInternalQuery).ParamByName(param.Name).DataType:=atype;
+        TFDQuery(FSQLInternalQuery).ParamByName(param.Name).Value:=avalue;
 {$ENDIF}
      end;
      end;

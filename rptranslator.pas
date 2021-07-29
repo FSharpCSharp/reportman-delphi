@@ -318,7 +318,7 @@ begin
 {$IFDEF FPC}
  keyuser:=HKEY_CURRENT_USER;
 {$ELSE}
-if (sizeof(pointer)>4) then
+  if (sizeof(pointer)>4) then
     keyuser :=  $80000001
   else
    keyuser:=HKEY_CURRENT_USER;
