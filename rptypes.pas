@@ -4045,7 +4045,8 @@ begin
 {$IFDEF FPC}
  SysUtils.FileWrite(handle,MemStream.Memory^,MemStream.Size);
 {$ELSE}
-  raise Exception.Create('Not implemented');
+ SysUtils.FileWrite(handle,MemStream.Memory^,MemStream.Size);
+  //raise Exception.Create('Not implemented');
   //__write(handle,MemStream.Memory^,MemStream.Size);
 //  writed:=__write(1,MemStream.Memory^,MemStream.Size);
 {$ENDIF}

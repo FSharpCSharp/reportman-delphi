@@ -146,8 +146,8 @@ begin
 {$ENDIF}
 {$IFDEF LINUX}
  alist.Add('/usr/share/fonts/truetype');
- //alist.Add('/usr/share/fonts/opentype');
- //alist.Add('/usr/share/fonts/type1');
+ alist.Add('/usr/share/fonts/opentype');
+ alist.Add('/usr/share/fonts/type1');
  alist.Add('/usr/local/share/fonts');
 (* diderror:=false;
  alist.clear;
@@ -182,6 +182,26 @@ begin
 {$ENDIF}
 end;
 
+function FileToBytes(const AName: string; var Bytes: TBytes): Boolean;
+var
+  Stream: TFileStream;
+begin
+  if not FileExists(AName) then
+  begin
+    Result := False;
+    Exit;
+  end;
+  Stream := TFileStream.Create(AName, fmOpenRead);
+  try
+    SetLength(Bytes, Stream.Size);
+    Stream.ReadBuffer(Pointer(Bytes)^, Stream.Size);
+  finally
+    Stream.Free;
+  end;
+  Result := True;
+end;
+
+
 procedure TRpFTInfoProvider.InitLibrary;
 var
  i:integer;
@@ -194,6 +214,8 @@ var
 // afaceRec:FT_FaceRec;
  fontpaths1:TStrings;
  direc:string;
+ bytes: TBytes;
+ afilename2: AnsiString;
 begin
  if Assigned(fontlist) then
   exit;
@@ -447,11 +469,21 @@ begin
  for i:=0 to fontfiles.Count-1 do
  begin
   afilename:=fontfiles.strings[i];
+  afilename2:=afilename;
+//  FileToBytes(afileName,bytes);
   aface:=nil;
-  errorface:=FT_New_Face(ftlibrary,Pchar(afilename),-1,aface);
-  if errorface=0 then
+  errorface:=FT_New_Face(ftlibrary,PAnsichar(afilename2),-1,aface);
+  if (aface.num_faces>1) then
   begin
-   errorface:=FT_New_Face(ftlibrary,Pchar(afilename),0,aface);
+    errorface:=FT_New_Face(ftlibrary,PAnsichar(afilename2),-1,aface);
+  end;
+
+//  if errorface=0 then
+  begin
+
+   errorface:=FT_New_Face(ftlibrary,PAnsichar(afilename2),0,aface);
+   //errorface:=FT_New_Memory_Face(ftlibrary,bytes,Length(bytes),0,aface);
+
    if (errorface = 0) then
    begin
 
@@ -861,10 +893,12 @@ end;
 procedure TRpLogFont.OpenFont;
 var
  kerningfile:string;
+ filename2:AnsiString;
 begin
  if faceinit then
   exit;
- CheckFreeType(FT_New_Face(ftlibrary,PChar(filename),0,ftface));
+ filename2:=filename;
+ CheckFreeType(FT_New_Face(ftlibrary,PAnsiChar(filename2),0,ftface));
  faceinit:=true;
  if type1 then
  begin
@@ -872,7 +906,7 @@ begin
   kerningfile:=ChangeFileExt(filename,'.afm');
   if FileExists(kerningfile) then
   begin
-   CheckFreeType(FT_Attach_File(ftface,Pchar(kerningfile)));
+   CheckFreeType(FT_Attach_File(ftface,PAnsichar(kerningfile)));
   end;
  end;
  // Don't need scale, but this is a scale that returns

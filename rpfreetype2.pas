@@ -6,6 +6,9 @@
  *
  ******************************************************************)
 
+ // Another link to freetype
+ // https://github.com/macite/BugSplat/blob/master/SimpleBugSplat%20Desktop/lib/FreeType.pas
+
 unit rpfreetype2;
 
 interface
@@ -28,6 +31,7 @@ uses
 const
 {$IFDEF LINUX}
  C_FREETYPE='libfreetype.so';
+ //C_FREETYPE='freetype';
 {$ENDIF}
 {$IFDEF MSWINDOWS}
  C_FREETYPE='freetype6.dll';
@@ -74,25 +78,26 @@ type
   FT_memory=record z:Pointer;end;
   FT_ListRec=record z:Pointer;end;
   FT_Face_Internal=record z:Pointer;end;
-  FT_Int    = Integer;
+  FT_Int    = longint;
   FT_Error = FT_Int;
   FT_Byte = Byte;
   PFT_Byte = ^Byte;
-  FT_String = char;
-  PFT_String = PChar;
+  FT_String = AnsiChar;
+  PFT_String = PAnsiChar;
 {$IFDEF CPUX64}
-  FT_Long = Int64;
-  FT_Pos=Int32;
+      FT_Fixed  = int64;
+      FT_Long   = int64;
+      FT_Pos     = Int64;
 {$ELSE}
-xx FT_Long = longint;
- FT_Pos=integer;
+      FT_Fixed  = longint;
+      FT_Long   = longint;
+      FT_Pos     = longint;
 {$ENDIF}
   FT_Pointer = Pointer;
   FT_ULong = Cardinal;
   FT_UInt = Cardinal;
   FT_Short=smallint;
   FT_UShort=Word;
-  FT_Fixed=Integer;
   FT_Bitmap_Size=record
     height:FT_Short;
     width:FT_Short;
@@ -180,7 +185,7 @@ xx FT_Long = longint;
     n_contours:smallint;      //* number of contours in glyph        */
     n_points:smallint;        //* number of points in the glyph      */
     points:PFT_Vector;          //* the outline's points               */
-    tags:Pchar;            //* the points flags                   */
+    tags:PAnsichar;            //* the points flags                   */
     contours:^smallint ;        //* the contour end points             */
 
     flags:integer;           // outline masks                      */
@@ -294,10 +299,13 @@ xx FT_Long = longint;
 
   TFT_Init_FreeType =function (var alibrary:FT_Library):FT_Error;cdecl;
   TFT_Done_FreeType=function (alibrary:FT_Library):FT_Error;cdecl;
-  TFT_New_Face=function (alibrary:FT_Library;filepathname:PChar;
+  TFT_New_Face=function (alibrary:FT_Library;filepathname:PAnsiChar;
+               face_index:FT_Long;var aface:FT_Face):FT_Error;cdecl;
+  TFT_New_Memory_Face=function (alibrary:FT_Library;buffer:FT_Pointer;
+                bufferLength: FT_Int;
                face_index:FT_Long;var aface:FT_Face):FT_Error;cdecl;
   TFT_Done_Face=function  (aface : FT_Face ) : FT_Error;cdecl;
-  TFT_Attach_File=function (aface:FT_Face;filepathname:PChar):FT_Error;cdecl;
+  TFT_Attach_File=function (aface:FT_Face;filepathname:PAnsiChar):FT_Error;cdecl;
 
 
   FT_Parameter=record
@@ -350,6 +358,7 @@ var
   FT_Init_FreeType:TFT_Init_FreeType;
   FT_Done_FreeType:TFT_Done_FreeType;
   FT_New_Face:TFT_New_Face;
+  FT_New_Memory_Face:TFT_New_Memory_Face;
   FT_Done_Face:TFT_Done_Face;
   FT_Get_Char_Index:TFT_Get_Char_Index;
   FT_Load_Glyph:TFT_Load_Glyph;
@@ -391,7 +400,7 @@ end;
 
 procedure LoadFreeType;
 {$IFDEF MSWINDOWS}
-  function GetProcAddr(ProcName: PChar): Pointer;
+  function GetProcAddr(ProcName: PAnsiChar): Pointer;
   begin
     Result := GetProcAddress(FreeTypeLib, ProcName);
     if not Assigned(Result) then
@@ -428,7 +437,7 @@ if FreeTypeLib=0 then
 {$ENDIF}
 
 {$IFDEF MSWINDOWS}
-  FreeTypeLib := LoadLibrary(PChar(C_FREETYPE));
+  FreeTypeLib := LoadLibrary(PAnsiChar(C_FREETYPE));
   if (FreeTypeLib <= HINSTANCE_ERROR) then
    Raise Exception.Create('Error opening:'+C_FREETYPE);
 {$ENDIF}
@@ -437,6 +446,7 @@ if FreeTypeLib=0 then
  FT_Init_FreeType:=GetProcAddr('FT_Init_FreeType');
  FT_Done_FreeType:=GetProcAddr('FT_Done_FreeType');
  FT_New_Face:=GetProcAddr('FT_New_Face');
+ FT_New_Memory_Face:=GetProcAddr('FT_New_Memory_Face');
  FT_Done_Face:=GetProcAddr('FT_Done_Face');
  FT_Get_Char_Index:=GetProcAddr('FT_Get_Char_Index');
  FT_Load_Glyph:=GetProcAddr('FT_Load_Glyph');
