@@ -318,10 +318,11 @@ begin
 {$IFDEF FPC}
  keyuser:=HKEY_CURRENT_USER;
 {$ELSE}
-  if (sizeof(pointer)>4) then
-    keyuser :=  $80000001
-  else
-   keyuser:=HKEY_CURRENT_USER;
+  keyuser := $80000001;
+//  if (sizeof(pointer)>4) then
+//    keyuser :=  $80000001
+//  else
+//   keyuser:=HKEY_CURRENT_USER;
 {$ENDIF}
   GetLocaleInfo(GetThreadLocale, LOCALE_SABBREVLANGNAME, LocaleName, SizeOf(LocaleName));
   Result := '';

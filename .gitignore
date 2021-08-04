@@ -36,3 +36,10 @@ server/web/repwebexe.res
 server/web/repwebserver.res
 repman/utils/printreptopdf/printreptopdf.res
 repman/utils/rptranslator/rptranslate.res
+server/web/bin64/repwebserver.dll
+activex/reportman.res
+repman/bin64/net2/DocumentFormat.OpenXml.dll
+repman/bin64/net2/DocumentFormat.OpenXml.xml
+repman/bin64/net2/System.Data.SQLite.xml
+repman/bin64/net2/x64/SQLite.Interop.dll
+repman/bin64/net2/x86/SQLite.Interop.dll

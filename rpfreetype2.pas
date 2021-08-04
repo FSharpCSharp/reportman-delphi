@@ -437,7 +437,7 @@ if FreeTypeLib=0 then
 {$ENDIF}
 
 {$IFDEF MSWINDOWS}
-  FreeTypeLib := LoadLibrary(PAnsiChar(C_FREETYPE));
+  FreeTypeLib := LoadLibrary(C_FREETYPE);
   if (FreeTypeLib <= HINSTANCE_ERROR) then
    Raise Exception.Create('Error opening:'+C_FREETYPE);
 {$ENDIF}

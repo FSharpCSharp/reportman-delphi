@@ -8,7 +8,7 @@
 
 [Setup]
 AppName=Report Manager Server and Tools(x64)
-AppVersion=3.4.5
+AppVersion=3.4.6
 DefaultDirName={pf}\Report Manager
 DefaultGroupName=Report Manager
 UninstallDisplayIcon={app}\repmandxp.exe
@@ -25,8 +25,8 @@ ArchitecturesInstallIn64BitMode=x64
 AppPublisher=Toni Martir
 AppPublisherURL=http://reportman.sourceforge.net
 VersionInfoProductName=Report Manager Tools
-VersionInfoProductVersion=3.4.5
-OutputBaseFilename=reportman_server_3_4_5tools_x64
+VersionInfoProductVersion=3.4.6
+OutputBaseFilename=reportman_server_3_4_6tools_x64
 
 [Files]
 Source: "C:\Users\toni\Documents\prog\toni\reportman\server\app\bin64\reportserverappxp.exe"; DestDir: "{app}"
@@ -35,8 +35,8 @@ Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\metaview\bin64
 Source: "C:\Users\toni\Documents\prog\toni\reportman\server\web\bin64\repwebexe.exe"; DestDir: "{app}\Web"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\server\web\bin64\repwebserver.dll"; DestDir: "{app}\Web"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\server\web\*.html"; DestDir: "{app}\Web\Templates"
-Source: "C:\Users\toni\Documents\prog\toni\reportman\webactivex\reportman.htm"; DestDir: "{app}\Web\SamplePlugin"
-Source: "C:\Users\toni\Documents\prog\toni\reportman\webactivex\bin64\WebReportManX.ocx"; DestDir: "{app}\Web"
+;Source: "C:\Users\toni\Documents\prog\toni\reportman\webactivex\reportman.htm"; DestDir: "{app}\Web\SamplePlugin"
+;Source: "C:\Users\toni\Documents\prog\toni\reportman\webactivex\bin64\WebReportManX.ocx"; DestDir: "{app}\Web"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\printreptopdf\bin64\printreptopdf.exe"; DestDir: "{app}"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\printrep\bin64\printrepxp.exe"; DestDir: "{app}"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\metaprint\bin64\metaprintxp.exe"; DestDir: "{app}"
@@ -44,6 +44,7 @@ Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\reportmanres.*"; Des
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\rptranslator\bin64\rptranslate.exe"; DestDir: "{app}\Translation"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\rptranslator\rptranslateres.*"; DestDir: "{app}\Translation"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\activex\bin64\Reportman.ocx"; DestDir: "{app}"
+
 ;Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\compilerep\bin64\compilerep.exe"; DestDir: "{app}"
 ;Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\upx.exe"; DestDir: "{app}"
 

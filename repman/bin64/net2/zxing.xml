@@ -4535,6 +4535,19 @@
             <summary>
             Interface for a smart class to encode some content into a barcode
             </summary>
+            <summary>
+            Interface for a smart class to encode some content into a barcode
+            </summary>
+        </member>
+        <member name="M:ZXing.IBarcodeWriter.Write(System.String)">
+            <summary>
+            Creates a visual representation of the contents
+            </summary>
+        </member>
+        <member name="M:ZXing.IBarcodeWriter.Write(ZXing.Common.BitMatrix)">
+            <summary>
+            Returns a rendered instance of the barcode which is given by a BitMatrix.
+            </summary>
         </member>
         <member name="P:ZXing.IBarcodeWriter.Format">
             <summary>

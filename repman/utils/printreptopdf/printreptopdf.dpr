@@ -28,7 +28,7 @@ uses
   SysUtils,
   Classes,
   {$IFDEF MSWINDOWS}
-  ActiveX,
+  ActiveX,rpexceldriver,rpgdidriver,
   {$IFDEF USEVARIANTS}
   {$IFNDEF MIDASOUT}
   midaslib,

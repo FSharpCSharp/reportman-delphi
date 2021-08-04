@@ -130,7 +130,8 @@ uses
   rppreviewcontrol in '..\rppreviewcontrol.pas',
   rppreviewmeta in '..\rppreviewmeta.pas',
   Vcl.Styles,
-  rpDelphiZXIngQRCode in '..\rpDelphiZXIngQRCode.pas';
+  rpDelphiZXIngQRCode in '..\rpDelphiZXIngQRCode.pas',
+  FireDAC.Phys.ODBCMeta in 'FireDAC.Phys.ODBCMeta.pas';
 
 {$R *.res}
 

@@ -19,17 +19,18 @@
         </li>
         <li>Can be used from any <a href="internatsupport.html" target="_blank">programming 
           language</a>.</li>
+        <li>New Linux 64bit support for printreptopdf command line tool.</li>
         <li><a href="serversmp.html"><b>Simetric multiprocessing support</b></a></li>
         <li>Cross platform TCP<b> <a href="serverintro.html">Report Server</a> 
           and <a href="serverclient.html">Report Server client</a></b>.</li>
         <li>Cross platform <b><a href="webserverintro.html">Web Report Server</a></b>.</li>
         <li>Report Manager <a href="installwebreport.html" target="_blank"><b>Internet 
-          explorer plugin</b></a>.</li>
-        <li>Small footprint, the engine can be embedded inside your exe.</li>
+          explorer plugin (deprecated)</b></a>.</li>
+        <li>The engine can be embedded inside your exe (.net, delphi and builder components).</li>
         <li><b>Band based</b> report designer, very easy and similar to MSAccess, 
           Visual Foxpro....</li>
         <li>Report definition files are very small (most <b>reports fit in less 
-          than 5Kbytes</b>)</li>
+          than 5Kbytes, native and XML format (mandatory for .Net)</b>)</li>
         <li><b>Expression evaluator</b> with builtin functions and access to database 
           fields</li>
         <li><b>Report parameters</b>, define them, assign them to querys at run 
@@ -40,24 +41,18 @@
           and <strong>HTML.</strong></li>
         <li>Custom text output: For each expression inside the report you can 
           define a export line and position to build custom text output.</li>
-        <li>Exports to Excel (Windows) or plain text file or ready to print formated 
-          file for dot matrix printers.</li>
-        <li>Supports Delphi 5E-6PE-7PE-8, Kylix 2-3,C++Builder 4E, it should work 
-          also with C++ Builder 5E-6 and Delphi 4E</li>
-        <li>If you are using Windows you can select between VCL (no Qt) graphic 
-          driver and CLX graphics driver.</li>
-        <li>You can print <b>texts (multiline), images, shapes, lines, barcodes,charts</b>...</li>
+        <li>Exports to Excel (Windows), CSV file or plain text file or ready to print formated 
+          file for dot matrix printers (multiple output formats).</li>
+        <li>Supports Delphi 5E-6PE-7PE-8-XE 10.4, Kylix 2-3 (deprecated),C++Builder 4E</li>
+        <li>You can print <b>texts (multiline), images, shapes, lines, barcodes (including QR),charts</b>...</li>
         <li><b>Multilanguage</b> support <b>for the interface and the reports</b>, 
           runtime and designer. A <b>translation application</b> is provided, 
-          if you want to localize report manager to a still not translated language 
-          use it.</li>
+          if you want to localize Report Manager.</li>
         <li><b><a name="childsub"></a>Child subreports</b> (many to many)</li>
         <li><b><a name="external"></a>External sections </b>(share the same section 
           in different reports)</li>
         <li><b>Print anything anywhere</b>, with Page position expression and 
           Page number expresion. </li>
-        <li><strong>Report compiler</strong> (Windows only), generate a single 
-          exe with your report embedded to distribute it (about 300Kbytes)</li>
       </ul>
     </td>
   </tr>
@@ -67,16 +62,16 @@
   <tr> 
     <td> 
       <ul>
-        <li> Any <b>TDataset descendant</b> passed from Delphi/Kylix.</li>
+        <li> Any <b>TDataset descendant</b> passed from Delphi/Builder.</li>
+        <li> Any <b>Dataview </b> passed from .Net.</li>
         <li>Windows: Borland database engine (DBase, Paradox, Interbase, Oracle, 
           DB2, SQL Server, ODBC) </li>
         <li> Windows: Microsoft Data Access Objects (Microsoft Jet, ODBC...) </li>
-        <li>Windows: Interbase Objects (IBO)</li>
+        <li>Windows: Interbase Express (IBX)</li>
         <li> Windows & Linux: DBExpress (Interbase, MySQL, PostgreSQL, DB2, Oracle,DB2,Informix, 
           ODBC)</li>
-        <li> Windows & Linux: Native Access to Interbase (IBX, no additional libraries 
-          needed)</li>
-        <li> Windows & Linux: Borland Native simple local file database (MyBase)</li>
+        <li> Windows & Linux: Native simple local file database (MyBase)</li>
+        <li> Windows & Linux: Firedac Database drivers: Multiple databases </li>
         <li>Windows &amp; Linux: <a href="http://zeoslib.sourceforge.net" target="_blank">Zeos 
           database objects</a>, native access to Interbase/Firebird,MySQL, PostgreSQL...</li>
       </ul>
@@ -226,6 +221,7 @@
         <li>Multiple barcode types support</li>
         <li>The barcode is readed from a expression or database field</li>
         <li>You can set the size of the barcode, the ratio, checksum...</li>
+        <li>QR barcode width autolevel</li>
       </ul>
     </td>
   </tr>
