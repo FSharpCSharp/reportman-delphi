@@ -7,11 +7,17 @@
 <body>
 <h2>Report Manager Web Server</h2>
 <h3>Installation</h3>
-<p><b>Installing Report Manager web server in Microsoft IIS 5</b></p>
+<p><b>Installing Report Manager web server in Microsoft Internet Information services</b></p>
 <p>Usually you copy the application (rpwebserver.dll) into a directory with privileges 
   to execute binary files.</p>
+<p>
+  Install the required features: Internet Information Services and ISAPI Filters and CGI support.
+</p>
 <p>Open the Internet Information Services administration tool, create a directory 
-  (cgi-bin) and alter properties to allow executing applications.</p>
+  (cgi-bin) and alter properties to allow executing applications if necessary.
+  </p>
+  <p> Select the folder and handler mappings option, modify enable execution.</p>
+  <p>Select the main node of the IIS Server, click on ISAPI and CGI restrictions and add the executable to the list allowing the execution</p>
 <p><img src="images/webserverinstall1.jpg" width="523" height="376"></p>
 <p><img src="images/webserverinstall2.jpg" width="461" height="465"></p>
 <p>You can test the installation by calling the application with /version command:</p>
