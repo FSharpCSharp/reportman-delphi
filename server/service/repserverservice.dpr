@@ -33,8 +33,6 @@ uses
 {$R *.RES}
 
 begin
- if Not IsWindowsNT then
-  Raise Exception.Create(SRpWindowsNTRequired);
  Application.Initialize;
  Application.Title := 'Report Manager Service';
  Application.CreateForm(TReportManServer, ReportManServer);
