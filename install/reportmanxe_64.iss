@@ -8,7 +8,7 @@
 
 [Setup]
 AppName=Report Manager Designer (x64)
-AppVersion=3.4.6
+AppVersion=3.4.8
 DefaultDirName={commonpf}\Report Manager
 DefaultGroupName=Report Manager
 UninstallDisplayIcon={app}\repmandxp.exe
@@ -25,8 +25,8 @@ ArchitecturesInstallIn64BitMode=x64
 AppPublisher=Toni Martir
 AppPublisherURL=http://reportman.sourceforge.net
 VersionInfoProductName=Report Manager
-VersionInfoProductVersion=3.4.6
-OutputBaseFilename=reportman_designer_3_4_6_x64
+VersionInfoProductVersion=3.4.8
+OutputBaseFilename=reportman_designer_3_4_8_x64
 
 [Files]
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\bin64\repmandxp.exe"; DestDir: "{app}"
@@ -46,6 +46,8 @@ Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\rptranslator\b
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\rptranslator\rptranslateres.*"; DestDir: "{app}\Translation"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\server\app\bin64\reportserverappxp.exe"; DestDir: "{app}"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\server\config\bin64\repserverconfigxp.exe"; DestDir: "{app}"
+Source: "C:\Users\toni\Documents\prog\toni\reportman\server\service\bin64\repserverservice.exe"; DestDir: "{app}"
+Source: "C:\Users\toni\Documents\prog\toni\reportman\server\service\bin64\serviceinstall.exe"; DestDir: "{app}"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\repman\utils\metaview\bin64\metaviewxp.exe"; DestDir: "{app}"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\server\web\bin64\repwebexe.exe"; DestDir: "{app}\Web"
 Source: "C:\Users\toni\Documents\prog\toni\reportman\server\web\bin64\repwebserver.dll"; DestDir: "{app}\Web"

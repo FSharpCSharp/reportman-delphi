@@ -74,12 +74,6 @@ procedure TFStartService.AppIdle(Sender:TObject;var done:boolean);
 begin
  Application.OnIdle:=nil;
  done:=true;
- if Not IsWindowsNT then
- begin
-  ShowMessage(SRpWindowsNTRequired);
-  Close;
- end
- else
   RefreshServiceStatus;
 end;
 

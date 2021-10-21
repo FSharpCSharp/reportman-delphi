@@ -123,6 +123,8 @@
         <DCC_DcuOutput>.\dcu32</DCC_DcuOutput>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+        <DCC_Define>REPMANRELEASE;$(DCC_Define)</DCC_Define>
+        <Icon_MainIcon>printrepxp_Icon1.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
@@ -133,6 +135,8 @@
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <DCC_ExeOutput>.\bin64</DCC_ExeOutput>
         <DCC_DcuOutput>.\dcu64</DCC_DcuOutput>
+        <DCC_Define>REPMANRELEASE;$(DCC_Define)</DCC_Define>
+        <Icon_MainIcon>printrepxp_Icon.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <Version>7.0</Version>
