@@ -1,0 +1,70 @@
+package reportman_vcl;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE COMPILINGREPMANPACKAGE}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Reportman VCL'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  reportman_rtl,
+  vclimg,
+  vcl,
+  vclFireDAC,
+  Tee;
+
+contains
+  rpgdidriver in '..\..\rpgdidriver.pas',
+  rpmaskedit in '..\..\rpmaskedit.pas',
+  rpgdifonts in '..\..\rpgdifonts.pas',
+  rpgraphutilsvcl in '..\..\rpgraphutilsvcl.pas' {FRpMessageDlgVCL},
+  rpvgraphutils in '..\..\rpvgraphutils.pas',
+  rpgraphicex in '..\..\rpgraphicex.pas',
+  rpgraphiccompression in '..\..\rpgraphiccompression.pas',
+  rpgraphicStrings in '..\..\rpgraphicStrings.pas',
+  rpgraphiccolor in '..\..\rpgraphiccolor.pas',
+  rpregvcl in '..\..\rpregvcl.pas',
+  rpvclreport in '..\..\rpvclreport.pas',
+  rprfvparams in '..\..\rprfvparams.pas' {FRpRTParams},
+  rpmdfsearchvcl in '..\..\rpmdfsearchvcl.pas' {FRpSearchParamVCL},
+  rpvpreview in '..\..\rpvpreview.pas',
+  rppreviewcontrol in '..\..\rppreviewcontrol.pas',
+  rppreviewmeta in '..\..\rppreviewmeta.pas',
+  rpexceldriver in '..\..\rpexceldriver.pas' {FRpExcelProgress},
+  rppagesetupvcl in '..\..\rppagesetupvcl.pas',
+  rpmdprintconfigvcl in '..\..\rpmdprintconfigvcl.pas' {FRpPrinterConfigVCL},
+  rpfmainmetaviewvcl in '..\..\rpfmainmetaviewvcl.pas' {FRpMainMetaVCL},
+  rpmdfaboutvcl in '..\..\rpmdfaboutvcl.pas' {FRpAboutBoxVCL},
+  rpfmetaviewvcl in '..\..\rpfmetaviewvcl.pas',
+  rpmdclitreevcl in '..\..\rpmdclitreevcl.pas' {FRpCliTreeVCL: TFrame},
+  rpexpredlgvcl in '..\..\rpexpredlgvcl.pas' {FRpExpredialogVCL},
+  rpdbgridvcl in '..\..\rpdbgridvcl.pas',
+  rpdbdatetimepicker in '..\..\rpdbdatetimepicker.pas',
+  rpactivexreport in '..\..\rpactivexreport.pas',
+  rpwebmetaclient in '..\..\rpwebmetaclient.pas';
+
+end.

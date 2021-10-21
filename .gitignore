@@ -102,3 +102,6 @@ repman/bin32/net2/MySql.Data.dll
 repman/bin32/net2/printreport.exe.config
 repman/bin32/net2/printreport.pdb
 repman/bin32/net2/Reportman.Designer.dll
+packages/11.0/reportman_designvcl.res
+packages/11.0/reportman_rtl.res
+packages/11.0/reportman_vcl.res
