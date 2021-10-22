@@ -7,12 +7,11 @@ object FRpMainMetaVCL: TFRpMainMetaVCL
   Color = clBtnFace
   ParentFont = True
   KeyPreview = True
-  OldCreateOrder = True
   Position = poScreenCenter
   ShowHint = True
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 20
 end

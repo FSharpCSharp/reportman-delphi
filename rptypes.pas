@@ -328,6 +328,7 @@ function GetPathName(astring:string):string;
 function GetFirstName(astring:string):string;
 function TextToType1Font(value:string):TRpType1Font;
 function Type1FontToText(value:TRpType1Font):string;
+procedure CopyStreamContent(source: TStream; destination: TStream);
 {$IFNDEF DOTNETD}
 procedure WriteToStdError(astring:String);
 procedure WriteStreamToStdOutput(astream:TStream);
@@ -703,6 +704,48 @@ const
  varDecimalType=14;
 
 
+procedure CopyStreamContent(source: TStream; destination: TStream);
+var buffer: PByte;
+var readed: LongInt;
+var toread: LongInt;
+var pending: LongInt;
+var buflen: LongInt;
+begin
+ buflen:=500;
+ GetMem(buffer,buflen);
+ try
+  pending:=source.Size;
+  toread:=pending;
+  if (pending>buflen) then
+  begin
+   toread:=buflen;
+  end
+  else
+  begin
+   toread:=pending;
+  end;
+  readed := source.Read(buffer^,toread);
+  while (readed <> 0) do
+  begin
+   destination.Write(buffer^,readed);
+   pending:=pending-readed;
+   if (pending>buflen) then
+   begin
+    toread:=buflen;
+   end
+   else
+   begin
+    toread:=pending;
+   end;
+   if (toread>0) then
+    readed := source.Read(buffer^,toread)
+   else
+    readed:=0;
+  end;
+ finally
+  FreeMem(Buffer);
+ end
+end;
 
 function FormatVariant(displayformat:string;Value:Variant;
  paramtype:TRpParamType;printnulls:boolean):widestring;

@@ -44,6 +44,8 @@ type
       Shift: TShiftState);
   private
     { Private declarations }
+    procedure AppIdle(Sender:TObject;var done:boolean);
+
   public
     { Public declarations }
     MFrame:TFRpMetaVCL;
@@ -62,18 +64,48 @@ uses rppdfdriver;
 
 {$R *.dfm}
 
+procedure TFRpMainMetaVCL.AppIdle(Sender:TObject;var done:boolean);
+begin
+ Application.OnIdle:=nil;
+ done:=false;
+ try
+  if Assigned(MFrame) then
+  begin
+   //DisableControls(true);
+   try
+    MFrame.Parent:=self;
+   finally
+    // EnableControls;
+   end;
+  end;
+ finally
+  //if TRpPreviewControl(PreviewControl).Report.ErrorProcessing then
+  // Close;
+ end;
+{ except
+  on E:Exception do
+  begin
+   Close;
+   Raise;
+  end;
+ end;
+}
+end;
+
+
 function PreviewMetafile(metafile:TRpMetafileReport;aform:TWinControl;
  ShowPrintDialog:Boolean;ShowExit:Boolean):TFRpMetaVCL;
 var
  dia:TFRpMainMetaVCL;
  MFrame:TFRpMetaVCL;
  FForm:TWinControl;
+ OldIdleHandler : TIdleEvent;
 begin
  if not assigned(aform) then
  begin
   dia:=TFRpMainMetaVCL.Create(Application);
   MFrame:=dia.MFrame;
-  MFrame.Parent:=dia;
+  MFrame.Parent:=nil;
   FForm:=dia;
  end
  else
@@ -86,6 +118,11 @@ begin
  end;
  MFrame.BExit.Visible:=ShowExit;
  MFrame.Exit1.Visible:=ShowExit;
+ if not Assigned(aform) then
+ begin
+  OldIdleHandler := Application.OnIdle;
+  Application.OnIdle:= dia.AppIdle;
+ end;
  try
    MFrame.ShowPrintDialog:=ShowPrintDialog;
    MFrame.metafile:=metafile;
@@ -117,7 +154,10 @@ begin
     dia.ShowModal;
  finally
   if not assigned(aform) then
+  begin
+   Application.OnIdle :=  OldIdleHandler;
    dia.free;
+  end;
  end;
  Result:=MFrame;
 end;
@@ -126,7 +166,7 @@ end;
 procedure TFRpMainMetaVCL.FormCreate(Sender: TObject);
 begin
  MFrame:=TFRpMetaVCL.Create(Self);
- MFrame.Parent:=Self;
+ // MFrame.Parent:=Self;
  MFrame.AForm:=self;
  Caption:=SRpRepMetafile;
 // Application.Title:=SRpRepMetafile;

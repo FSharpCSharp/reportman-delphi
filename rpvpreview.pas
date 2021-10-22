@@ -269,7 +269,7 @@ end;
 
 procedure TFRpVPreview.FormCreate(Sender: TObject);
 begin
-  //ScaleToolBar(BToolBar);
+//   ScaleToolBar(BToolBar);
   SaveDialog1.Filter:=SRpRepMetafile+'|*.rpmf|'+
    SRpPDFFile+'|*.pdf|'+
    SRpPDFFileUn+'|*.pdf|'+

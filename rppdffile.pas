@@ -599,7 +599,9 @@ begin
  begin
   FCompressionStream := TCompressionStream.Create(clDefault,FTempStream);
   try
-   FCompressionStream.CopyFrom(FsTempStream, 0);
+   FsTempStream.Seek(0,soBeginning);
+   CopyStreamContent(FsTempStream, FCompressionStream);
+   // FCompressionStream.CopyFrom(FsTempStream);
   finally
    FCompressionStream.Free;
   end;
@@ -655,7 +657,9 @@ begin
  begin
   FCompressionStream := TCompressionStream.Create(clDefault,FTempStream);
   try
-   FCompressionStream.CopyFrom(FsTempStream, 0);
+   FsTempStream.Seek(0, soBeginning);
+   CopyStreamContent(FsTempStream, FCompressionStream);
+   //FCompressionStream.CopyFrom(FsTempStream, FsTempStream.Size);
   finally
    FCompressionStream.Free;
   end;
@@ -1782,7 +1786,9 @@ begin
    begin
     FCompressionStream := TCompressionStream.Create(clDefault,astream);
     try
-     FCompressionStream.CopyFrom(FImageStream, 0);
+     FImageStream.Seek(0, soBeginning);
+     CopyStreamContent(FImageStream, FCompressionStream);
+     // FCompressionStream.CopyFrom(FImageStream, FImageStream.Size);
     finally
      FCompressionStream.Free;
     end;
@@ -3142,7 +3148,9 @@ begin
    begin
     FCompressionStream := TCompressionStream.Create(clDefault,FTempStream);
     try
-     FCompressionStream.CopyFrom(adata.fontdata,adata.fontdata.Size);
+     adata.fontdata.Seek(0,soBeginning);
+     CopyStreamContent(adata.fontdata, FCompressionStream);
+     // FCompressionStream.CopyFrom(adata.fontdata,adata.fontdata.Size);
     finally
      FCompressionStream.Free;
     end;

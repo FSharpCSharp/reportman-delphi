@@ -799,7 +799,8 @@ begin
     try
      WriteReportXML(Self,memstream);
      memstream.Seek(0,soFromBeginning);
-     zstream.CopyFrom(memstream,memstream.size);
+     CopyStreamContent(memstream, zstream);
+     // zstream.CopyFrom(memstream,memstream.size);
     finally
      memstream.free;
     end;

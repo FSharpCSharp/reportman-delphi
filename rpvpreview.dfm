@@ -9,7 +9,6 @@ object FRpVPreview: TFRpVPreview
   Color = clBtnFace
   ParentFont = True
   KeyPreview = True
-  OldCreateOrder = True
   Position = poScreenCenter
   ShowHint = True
   OnCloseQuery = FormCloseQuery
@@ -18,14 +17,15 @@ object FRpVPreview: TFRpVPreview
   OnMouseWheelDown = FormMouseWheelDown
   OnMouseWheelUp = FormMouseWheelUp
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 20
   object BToolBar: TToolBar
     Left = 0
     Top = 0
-    Width = 758
-    Height = 22
+    Width = 756
+    Height = 26
     AutoSize = True
-    ButtonWidth = 26
+    ButtonHeight = 26
+    ButtonWidth = 27
     Caption = 'BToolBar'
     Color = clBtnFace
     Images = VirtualImageList1
@@ -37,15 +37,21 @@ object FRpVPreview: TFRpVPreview
       Action = AFirst
     end
     object ToolButton2: TToolButton
-      Left = 26
+      Left = 27
       Top = 0
       Action = APrevious
     end
     object EPageNum: TRpMaskEdit
-      Left = 52
+      Left = 54
       Top = 0
-      Width = 45
-      Height = 22
+      Width = 39
+      Height = 26
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 1
       OnKeyDown = EPageNumKeyDown
       Text = '0'
@@ -53,17 +59,17 @@ object FRpVPreview: TFRpVPreview
       DisplayMask = '###,######0'
     end
     object ToolButton3: TToolButton
-      Left = 97
+      Left = 93
       Top = 0
       Action = ANext
     end
     object ToolButton4: TToolButton
-      Left = 123
+      Left = 120
       Top = 0
       Action = ALast
     end
     object ToolButton5: TToolButton
-      Left = 149
+      Left = 147
       Top = 0
       Width = 6
       Caption = 'ToolButton5'
@@ -72,12 +78,12 @@ object FRpVPreview: TFRpVPreview
       Style = tbsSeparator
     end
     object ToolButton6: TToolButton
-      Left = 155
+      Left = 153
       Top = 0
       Action = APrint
     end
     object ToolButton7: TToolButton
-      Left = 181
+      Left = 180
       Top = 0
       Action = ASave
     end
@@ -93,7 +99,7 @@ object FRpVPreview: TFRpVPreview
       OnClick = AMailToExecute
     end
     object ToolButton16: TToolButton
-      Left = 248
+      Left = 253
       Top = 0
       Width = 6
       Caption = 'ToolButton16'
@@ -102,17 +108,17 @@ object FRpVPreview: TFRpVPreview
       Style = tbsSeparator
     end
     object ToolButton10: TToolButton
-      Left = 254
+      Left = 259
       Top = 0
       Action = APageSetup
     end
     object ToolButton9: TToolButton
-      Left = 280
+      Left = 286
       Top = 0
       Action = AParams
     end
     object ToolButton18: TToolButton
-      Left = 306
+      Left = 313
       Top = 0
       Width = 6
       Caption = 'ToolButton18'
@@ -121,33 +127,33 @@ object FRpVPreview: TFRpVPreview
       Style = tbsSeparator
     end
     object ToolButton11: TToolButton
-      Left = 312
+      Left = 319
       Top = 0
       Action = AScale100
     end
     object ToolButton12: TToolButton
-      Left = 338
+      Left = 346
       Top = 0
       Action = AScaleWide
     end
     object ToolButton13: TToolButton
-      Left = 364
+      Left = 373
       Top = 0
       Action = AScaleFull
       PopupMenu = MEntireMenu
     end
     object ToolButton14: TToolButton
-      Left = 390
+      Left = 400
       Top = 0
       Action = AScaleLess
     end
     object ToolButton15: TToolButton
-      Left = 416
+      Left = 427
       Top = 0
       Action = AScaleMore
     end
     object ToolButton19: TToolButton
-      Left = 442
+      Left = 454
       Top = 0
       Width = 6
       Caption = 'ToolButton19'
@@ -156,10 +162,16 @@ object FRpVPreview: TFRpVPreview
       Style = tbsSeparator
     end
     object ESearch: TRpMaskEdit
-      Left = 448
+      Left = 460
       Top = 0
-      Width = 80
-      Height = 22
+      Width = 72
+      Height = 26
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 2
       OnChange = ESearchChange
       OnKeyDown = ESearchKeyDown
@@ -167,12 +179,12 @@ object FRpVPreview: TFRpVPreview
       DisplayMask = '###,######0'
     end
     object ToolButton20: TToolButton
-      Left = 528
+      Left = 532
       Top = 0
       Action = AFind
     end
     object ToolButton17: TToolButton
-      Left = 554
+      Left = 559
       Top = 0
       Width = 7
       Caption = 'ToolButton17'
@@ -181,15 +193,15 @@ object FRpVPreview: TFRpVPreview
       Style = tbsSeparator
     end
     object BExit: TToolButton
-      Left = 561
+      Left = 566
       Top = 0
       Action = AExit
     end
     object BCancel: TButton
-      Left = 587
+      Left = 593
       Top = 0
       Width = 112
-      Height = 22
+      Height = 26
       Action = ACancel
       TabOrder = 0
       Visible = False
@@ -198,8 +210,8 @@ object FRpVPreview: TFRpVPreview
   object ImageList1: TImageList
     Height = 19
     Width = 19
-    Left = 128
-    Top = 64
+    Left = 112
+    Top = 160
     Bitmap = {
       494C010110001300040013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000004C0000005F0000000100200000000000D070
@@ -1148,8 +1160,8 @@ object FRpVPreview: TFRpVPreview
   end
   object ActionList1: TActionList
     Images = VirtualImageList1
-    Left = 200
-    Top = 68
+    Left = 192
+    Top = 180
     object AFirst: TAction
       Category = 'Page'
       Caption = 'First page'
@@ -1298,8 +1310,8 @@ object FRpVPreview: TFRpVPreview
       'compressed|*.pdf|Excel File|*.xls'
     Options = [ofHideReadOnly, ofNoChangeDir, ofEnableSizing]
     Title = 'Save Metafile As'
-    Left = 240
-    Top = 84
+    Left = 328
+    Top = 140
   end
   object MEntireMenu: TPopupMenu
     OnPopup = MEntireMenuPopup
@@ -1657,112 +1669,95 @@ object FRpVPreview: TFRpVPreview
     Top = 208
   end
   object VirtualImageList1: TVirtualImageList
-    DisabledGrayscale = False
-    DisabledSuffix = '_Disabled'
     Images = <
       item
         CollectionIndex = 0
         CollectionName = 'Item1'
-        Disabled = False
         Name = 'Item1'
       end
       item
         CollectionIndex = 1
         CollectionName = 'Item2'
-        Disabled = False
         Name = 'Item2'
       end
       item
         CollectionIndex = 2
         CollectionName = 'Item3'
-        Disabled = False
         Name = 'Item3'
       end
       item
         CollectionIndex = 3
         CollectionName = 'Item4'
-        Disabled = False
         Name = 'Item4'
       end
       item
         CollectionIndex = 4
         CollectionName = 'Item5'
-        Disabled = False
         Name = 'Item5'
       end
       item
         CollectionIndex = 5
         CollectionName = 'Item6'
-        Disabled = False
         Name = 'Item6'
       end
       item
         CollectionIndex = 6
         CollectionName = 'Item7'
-        Disabled = False
         Name = 'Item7'
       end
       item
         CollectionIndex = 7
         CollectionName = 'Item8'
-        Disabled = False
         Name = 'Item8'
       end
       item
         CollectionIndex = 8
         CollectionName = 'Item9'
-        Disabled = False
         Name = 'Item9'
       end
       item
         CollectionIndex = 9
         CollectionName = 'Item10'
-        Disabled = False
         Name = 'Item10'
       end
       item
         CollectionIndex = 10
         CollectionName = 'Item11'
-        Disabled = False
         Name = 'Item11'
       end
       item
         CollectionIndex = 11
         CollectionName = 'Item12'
-        Disabled = False
         Name = 'Item12'
       end
       item
         CollectionIndex = 12
         CollectionName = 'Item13'
-        Disabled = False
         Name = 'Item13'
       end
       item
         CollectionIndex = 13
         CollectionName = 'Item14'
-        Disabled = False
         Name = 'Item14'
       end
       item
         CollectionIndex = 14
         CollectionName = 'Item15'
-        Disabled = False
         Name = 'Item15'
       end
       item
         CollectionIndex = 15
         CollectionName = 'Item16'
-        Disabled = False
         Name = 'Item16'
       end
       item
         CollectionIndex = 16
         CollectionName = 'mailOutlook48'
-        Disabled = False
         Name = 'mailOutlook48'
       end>
     ImageCollection = ImageCollection1
+    Width = 20
+    Height = 20
     Left = 456
     Top = 264
   end

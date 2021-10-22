@@ -962,7 +962,8 @@ begin
     ssize:=FMemStream.Size;
     Stream.Write(ssize,sizeof(ssize));
     FMemStream.Seek(0,soFromBeginning);
-    Stream.CopyFrom(FMemStream,ssize);
+    CopyStreamContent(FMemStream, Stream);
+    // Stream.CopyFrom(FMemStream,ssize);
    end;
   end;
   separator:=integer(rpFPage);

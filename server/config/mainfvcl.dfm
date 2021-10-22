@@ -1,84 +1,84 @@
 object FMainVCL: TFMainVCL
   Left = 134
   Top = 83
-  Width = 642
-  Height = 494
+  Width = 666
+  Height = 510
   HorzScrollBar.Range = 389
   VertScrollBar.Range = 161
   ActiveControl = ComboHost
   Caption = 'Report Manager Server configuration'
   Color = clBtnFace
   ParentFont = True
-  OldCreateOrder = True
   Position = poScreenCenter
   ShowHint = True
   OnClose = FormClose
   OnCreate = FormCreate
-  DesignSize = (
-    626
-    455)
   PixelsPerInch = 96
-  TextHeight = 13
+  DesignSize = (
+    648
+    463)
+  TextHeight = 20
   object LHost: TLabel
     Left = 12
     Top = 12
-    Width = 22
-    Height = 13
+    Width = 31
+    Height = 20
     Caption = 'Host'
   end
   object LPort: TLabel
-    Left = 489
+    Left = 513
     Top = 8
-    Width = 20
-    Height = 13
+    Width = 26
+    Height = 20
     Anchors = [akTop, akRight]
     Caption = 'Port'
+    ExplicitLeft = 489
   end
   object GUser: TGroupBox
     Left = 8
     Top = 44
-    Width = 615
+    Width = 639
     Height = 117
     Anchors = [akLeft, akTop, akRight]
     Caption = 'User information'
     TabOrder = 1
-    ExplicitWidth = 524
+    ExplicitWidth = 615
     DesignSize = (
-      615
+      639
       117)
     object LUserName: TLabel
       Left = 8
       Top = 24
-      Width = 51
-      Height = 13
+      Width = 70
+      Height = 20
       Caption = 'User name'
     end
     object LPassword: TLabel
       Left = 8
       Top = 52
-      Width = 46
-      Height = 13
+      Width = 61
+      Height = 20
       Caption = 'Password'
     end
     object EUserName: TEdit
       Left = 112
       Top = 20
-      Width = 495
-      Height = 21
+      Width = 519
+      Height = 28
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
       Text = 'Admin'
-      ExplicitWidth = 404
+      ExplicitWidth = 495
     end
     object EPassword: TEdit
       Left = 112
       Top = 48
-      Width = 495
-      Height = 21
+      Width = 519
+      Height = 28
       Anchors = [akLeft, akTop, akRight]
       PasswordChar = '*'
       TabOrder = 2
-      ExplicitWidth = 404
+      ExplicitWidth = 495
     end
     object BConnect: TButton
       Left = 8
@@ -93,15 +93,15 @@ object FMainVCL: TFMainVCL
   object GServerinfo: TGroupBox
     Left = 4
     Top = 44
-    Width = 616
+    Width = 640
     Height = 325
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Server information'
     TabOrder = 2
     Visible = False
-    ExplicitWidth = 525
+    ExplicitWidth = 616
     DesignSize = (
-      616
+      640
       325)
     object BCloseConnection: TButton
       Left = 8
@@ -115,42 +115,42 @@ object FMainVCL: TFMainVCL
     object PControl: TPageControl
       Left = 8
       Top = 12
-      Width = 605
+      Width = 629
       Height = 269
       ActivePage = TabUsers
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
-      ExplicitWidth = 514
+      ExplicitWidth = 605
       object TabUsers: TTabSheet
         Caption = 'Users'
         DesignSize = (
-          597
-          241)
+          621
+          234)
         object GUsers: TGroupBox
           Left = 0
           Top = 0
-          Width = 593
+          Width = 617
           Height = 105
           Anchors = [akLeft, akTop, akRight]
           Caption = 'Users'
           TabOrder = 0
-          ExplicitWidth = 502
+          ExplicitWidth = 593
           DesignSize = (
-            593
+            617
             105)
           object LUsers: TListBox
             Left = 4
             Top = 12
-            Width = 425
+            Width = 449
             Height = 85
             Anchors = [akLeft, akTop, akRight]
-            ItemHeight = 13
+            ItemHeight = 20
             TabOrder = 0
             OnClick = LUsersClick
-            ExplicitWidth = 334
+            ExplicitWidth = 425
           end
           object BDeleteUser: TButton
-            Left = 432
+            Left = 456
             Top = 72
             Width = 153
             Height = 25
@@ -158,10 +158,10 @@ object FMainVCL: TFMainVCL
             Caption = 'Delete'
             TabOrder = 3
             OnClick = BDeleteUserClick
-            ExplicitLeft = 341
+            ExplicitLeft = 432
           end
           object BAddUser: TButton
-            Left = 432
+            Left = 456
             Top = 13
             Width = 153
             Height = 24
@@ -169,10 +169,10 @@ object FMainVCL: TFMainVCL
             Caption = 'Add'
             TabOrder = 1
             OnClick = BAddUserClick
-            ExplicitLeft = 341
+            ExplicitLeft = 432
           end
           object BChangePassword: TButton
-            Left = 432
+            Left = 456
             Top = 41
             Width = 153
             Height = 28
@@ -180,7 +180,7 @@ object FMainVCL: TFMainVCL
             Caption = 'Change Password'
             TabOrder = 2
             OnClick = BChangePasswordClick
-            ExplicitLeft = 341
+            ExplicitLeft = 432
           end
         end
         object GGroups: TGroupBox
@@ -195,7 +195,7 @@ object FMainVCL: TFMainVCL
             Top = 16
             Width = 121
             Height = 81
-            ItemHeight = 13
+            ItemHeight = 20
             TabOrder = 0
           end
           object BAddGroup: TButton
@@ -220,24 +220,24 @@ object FMainVCL: TFMainVCL
         object GUserGroups: TGroupBox
           Left = 236
           Top = 108
-          Width = 357
+          Width = 381
           Height = 105
           Anchors = [akLeft, akTop, akRight]
           Caption = 'The user is member of this groups'
           TabOrder = 2
-          ExplicitWidth = 266
+          ExplicitWidth = 357
           DesignSize = (
-            357
+            381
             105)
           object LUserGroups: TListBox
             Left = 40
             Top = 20
-            Width = 313
+            Width = 337
             Height = 77
             Anchors = [akLeft, akTop, akRight]
-            ItemHeight = 13
+            ItemHeight = 20
             TabOrder = 0
-            ExplicitWidth = 222
+            ExplicitWidth = 313
           end
           object BAddUserGroup: TBitBtn
             Left = 4
@@ -339,24 +339,24 @@ object FMainVCL: TFMainVCL
         Caption = 'Aliases'
         ImageIndex = 2
         DesignSize = (
-          597
-          241)
+          621
+          234)
         object GReportDirectories: TGroupBox
           Left = 0
           Top = 0
-          Width = 597
+          Width = 621
           Height = 133
           Anchors = [akLeft, akTop, akRight]
           Caption = 'Report server directories'
           TabOrder = 0
-          ExplicitWidth = 528
+          ExplicitWidth = 597
           DesignSize = (
-            597
+            621
             133)
           object DBGrid1: TDBGrid
             Left = 4
             Top = 16
-            Width = 589
+            Width = 613
             Height = 81
             Anchors = [akLeft, akTop, akRight]
             DataSource = SDirectories
@@ -364,8 +364,8 @@ object FMainVCL: TFMainVCL
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
+            TitleFont.Height = -15
+            TitleFont.Name = 'Segoe UI'
             TitleFont.Style = []
           end
           object BAddAlias: TButton
@@ -389,7 +389,7 @@ object FMainVCL: TFMainVCL
           object BPreviewTree: TButton
             Left = 280
             Top = 99
-            Width = 313
+            Width = 337
             Height = 30
             Anchors = [akLeft, akTop, akRight]
             Caption = 'Preview Report Tree'
@@ -409,31 +409,31 @@ object FMainVCL: TFMainVCL
             Top = 16
             Width = 185
             Height = 81
-            ItemHeight = 13
+            ItemHeight = 20
             TabOrder = 0
           end
         end
         object GAliasGroups: TGroupBox
           Left = 200
           Top = 136
-          Width = 397
+          Width = 421
           Height = 105
           Anchors = [akLeft, akTop, akRight]
           Caption = 'This alias is accessible by this user groups'
           TabOrder = 2
-          ExplicitWidth = 328
+          ExplicitWidth = 397
           DesignSize = (
-            397
+            421
             105)
           object LAliasGroups: TListBox
             Left = 40
             Top = 20
-            Width = 353
+            Width = 377
             Height = 77
             Anchors = [akLeft, akTop, akRight]
-            ItemHeight = 13
+            ItemHeight = 20
             TabOrder = 0
-            ExplicitWidth = 284
+            ExplicitWidth = 353
           end
           object BDeleteAliasGroup: TBitBtn
             Left = 4
@@ -536,8 +536,8 @@ object FMainVCL: TFMainVCL
         ImageIndex = 2
         object PBotTasks: TPanel
           Left = 0
-          Top = 212
-          Width = 597
+          Top = 205
+          Width = 621
           Height = 29
           Align = alBottom
           TabOrder = 0
@@ -563,15 +563,15 @@ object FMainVCL: TFMainVCL
         object GTasks: TDBGrid
           Left = 0
           Top = 0
-          Width = 597
-          Height = 212
+          Width = 621
+          Height = 205
           Align = alClient
           DataSource = SData
           TabOrder = 1
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
+          TitleFont.Height = -15
+          TitleFont.Name = 'Segoe UI'
           TitleFont.Style = []
           Visible = False
         end
@@ -581,36 +581,37 @@ object FMainVCL: TFMainVCL
   object ComboHost: TComboBox
     Left = 92
     Top = 8
-    Width = 391
-    Height = 21
+    Width = 415
+    Height = 28
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     Items.Strings = (
       'localhost')
-    ExplicitWidth = 300
+    ExplicitWidth = 391
   end
   object LMessages: TListBox
     Left = 4
     Top = 372
-    Width = 616
-    Height = 81
+    Width = 640
+    Height = 97
     Anchors = [akLeft, akTop, akRight, akBottom]
     Color = clInfoBk
-    ItemHeight = 13
+    ItemHeight = 20
     TabOrder = 3
-    ExplicitWidth = 525
-    ExplicitHeight = 70
+    ExplicitWidth = 616
+    ExplicitHeight = 81
   end
   object ComboPort: TComboBox
-    Left = 541
+    Left = 565
     Top = 8
     Width = 77
-    Height = 21
+    Height = 28
     Anchors = [akTop, akRight]
     TabOrder = 4
     Text = '3060'
     Items.Strings = (
       '3060')
+    ExplicitLeft = 541
   end
   object Trans: TRpTranslator
     Active = False

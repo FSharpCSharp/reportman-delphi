@@ -1,2 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject/>
+<BorlandProject>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="..\..\..\reportman"/>
+    <File Path="..\..\rpmdprotocol.pas"/>
+    <File Path="..\..\rpmdrepclient.pas"/>
+    <File Path="..\..\rpmdrepclient.dfm"/>
+    <File Path="mainfvcl.pas"/>
+    <File Path="mainfvcl.dfm"/>
+    <File Path="unewaliasvcl.pas"/>
+    <File Path="unewaliasvcl.dfm"/>
+    <File Path="unewuservcl.pas"/>
+    <File Path="unewuservcl.dfm"/>
+    <File Path="ureptreevcl.pas"/>
+    <File Path="ureptreevcl.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

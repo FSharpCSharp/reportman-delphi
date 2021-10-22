@@ -9,11 +9,12 @@ object FRpMetaVCL: TFRpMetaVCL
   TabOrder = 0
   OnMouseWheelDown = FrameMouseWheelDown
   OnMouseWheelUp = FrameMouseWheelUp
+  PixelsPerInch = 96
   object Splitter1: TSplitter
     Left = 0
-    Top = 30
+    Top = 124
     Width = 7
-    Height = 357
+    Height = 263
     Beveled = True
     ExplicitTop = 29
     ExplicitHeight = 220
@@ -22,84 +23,76 @@ object FRpMetaVCL: TFRpMetaVCL
     Left = 0
     Top = 0
     Width = 840
-    Height = 30
+    Height = 124
     AutoSize = True
-    ButtonHeight = 30
-    ButtonWidth = 38
+    ButtonHeight = 36
+    ButtonWidth = 62
     Caption = 'BToolBar'
     Images = VirtualImageList1
     TabOrder = 0
-    Wrapable = False
     object ToolButton8: TToolButton
       Left = 0
       Top = 0
       Action = AOpen
-      ImageName = 'Item7'
     end
     object ToolButton1: TToolButton
-      Left = 38
+      Left = 62
       Top = 0
       Action = AFirst
-      ImageName = 'Item1'
     end
     object ToolButton2: TToolButton
-      Left = 76
+      Left = 124
       Top = 0
       Action = APrevious
-      ImageName = 'Item2'
     end
     object EPageNum: TRpMaskEdit
-      Left = 114
+      Left = 186
       Top = 0
       Width = 44
-      Height = 30
+      Height = 36
       TabOrder = 1
       OnKeyDown = EPageNumKeyDown
       Text = '0'
       EditType = teinteger
     end
     object ToolButton3: TToolButton
-      Left = 158
+      Left = 230
       Top = 0
       Action = ANext
-      ImageName = 'Item3'
     end
     object ToolButton4: TToolButton
-      Left = 196
+      Left = 292
       Top = 0
       Action = ALast
-      ImageName = 'Item4'
     end
     object ToolButton14: TToolButton
-      Left = 234
+      Left = 0
       Top = 0
       Width = 8
       Caption = 'ToolButton14'
       ImageIndex = 8
       ImageName = 'Item9'
+      Wrap = True
       Style = tbsSeparator
     end
     object ToolButton6: TToolButton
-      Left = 242
-      Top = 0
+      Left = 0
+      Top = 44
       Action = APrint
-      ImageName = 'Item5'
     end
     object ToolButton7: TToolButton
-      Left = 280
-      Top = 0
+      Left = 62
+      Top = 44
       Action = ASave
-      ImageName = 'Item6'
     end
     object ToolButton10: TToolButton
-      Left = 318
-      Top = 0
+      Left = 124
+      Top = 44
       Action = AMailTo
-      ImageName = 'Item16'
     end
     object ToolButton15: TToolButton
-      Left = 356
-      Top = 0
+      Left = 186
+      Top = 44
       Width = 8
       Caption = 'ToolButton15'
       ImageIndex = 8
@@ -107,48 +100,44 @@ object FRpMetaVCL: TFRpMetaVCL
       Style = tbsSeparator
     end
     object ToolButton5: TToolButton
-      Left = 364
-      Top = 0
+      Left = 194
+      Top = 44
       Action = AScale100
-      ImageName = 'Item9'
     end
     object ToolButton9: TToolButton
-      Left = 402
-      Top = 0
+      Left = 256
+      Top = 44
       Action = AScaleWide
-      ImageName = 'Item10'
     end
     object ToolButton11: TToolButton
-      Left = 440
-      Top = 0
+      Left = 318
+      Top = 44
       Action = AScaleFull
-      ImageName = 'Item11'
       PopupMenu = MEntireMenu
     end
     object ToolButton12: TToolButton
-      Left = 478
-      Top = 0
+      Left = 380
+      Top = 44
       Action = AScaleLess
-      ImageName = 'Item12'
     end
     object ToolButton13: TToolButton
-      Left = 516
-      Top = 0
+      Left = 442
+      Top = 44
       Action = AScaleMore
-      ImageName = 'Item13'
     end
     object ToolButton16: TToolButton
-      Left = 554
-      Top = 0
+      Left = 0
+      Top = 44
       Width = 8
       Caption = 'ToolButton16'
       ImageIndex = 8
       ImageName = 'Item9'
+      Wrap = True
       Style = tbsSeparator
     end
     object BConfig: TToolButton
-      Left = 562
-      Top = 0
+      Left = 0
+      Top = 88
       DropdownMenu = MPrintMenu
       ImageIndex = 14
       ImageName = 'Item15'
@@ -156,8 +145,8 @@ object FRpMetaVCL: TFRpMetaVCL
       OnClick = BConfigClick
     end
     object ToolButton18: TToolButton
-      Left = 615
-      Top = 0
+      Left = 81
+      Top = 88
       Width = 8
       Caption = 'ToolButton18'
       ImageIndex = 8
@@ -165,10 +154,10 @@ object FRpMetaVCL: TFRpMetaVCL
       Style = tbsSeparator
     end
     object ESearch: TRpMaskEdit
-      Left = 623
-      Top = 0
+      Left = 89
+      Top = 88
       Width = 100
-      Height = 30
+      Height = 36
       TabOrder = 3
       OnChange = ESearchChange
       OnKeyDown = ESearchKeyDown
@@ -176,14 +165,13 @@ object FRpMetaVCL: TFRpMetaVCL
       DisplayMask = '###,######0'
     end
     object ToolButton19: TToolButton
-      Left = 723
-      Top = 0
+      Left = 189
+      Top = 88
       Action = AFind
-      ImageName = 'Item17'
     end
     object ToolButton17: TToolButton
-      Left = 761
-      Top = 0
+      Left = 251
+      Top = 88
       Width = 8
       Caption = 'ToolButton17'
       ImageIndex = 8
@@ -191,25 +179,24 @@ object FRpMetaVCL: TFRpMetaVCL
       Style = tbsSeparator
     end
     object BExit: TToolButton
-      Left = 769
-      Top = 0
+      Left = 259
+      Top = 88
       Action = AExit
-      ImageName = 'Item8'
     end
     object BCancel: TButton
-      Left = 807
-      Top = 0
+      Left = 321
+      Top = 88
       Width = 106
-      Height = 30
+      Height = 36
       Action = ACancel
       TabOrder = 0
       Visible = False
     end
     object PPBar: TPanel
-      Left = 913
-      Top = 0
+      Left = 427
+      Top = 88
       Width = 104
-      Height = 30
+      Height = 36
       BorderStyle = bsSingle
       TabOrder = 2
       Visible = False
@@ -217,7 +204,7 @@ object FRpMetaVCL: TFRpMetaVCL
         Left = 1
         Top = 1
         Width = 98
-        Height = 24
+        Height = 30
         Align = alClient
         TabOrder = 0
       end
@@ -232,8 +219,6 @@ object FRpMetaVCL: TFRpMetaVCL
       item
         Width = 50
       end>
-    ExplicitTop = 283
-    ExplicitWidth = 451
   end
   object ActionList1: TActionList
     Images = VirtualImageList1
@@ -245,6 +230,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Enabled = False
       Hint = 'Goes to the first page of the report'
       ImageIndex = 0
+      ImageName = 'Item1'
       OnExecute = AFirstExecute
     end
     object APrevious: TAction
@@ -253,6 +239,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Enabled = False
       Hint = 'Shows the previous page'
       ImageIndex = 1
+      ImageName = 'Item2'
       OnExecute = APreviousExecute
     end
     object ANext: TAction
@@ -261,6 +248,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Enabled = False
       Hint = 'Shows the next page'
       ImageIndex = 2
+      ImageName = 'Item3'
       OnExecute = ANextExecute
     end
     object ALast: TAction
@@ -269,6 +257,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Enabled = False
       Hint = 'Goes to the last page of the report'
       ImageIndex = 3
+      ImageName = 'Item4'
       OnExecute = ALastExecute
     end
     object APrint: TAction
@@ -277,6 +266,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Enabled = False
       Hint = 'Prints the metafile'
       ImageIndex = 4
+      ImageName = 'Item5'
       OnExecute = APrintExecute
     end
     object ASave: TAction
@@ -284,6 +274,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Caption = 'Save...'
       Enabled = False
       ImageIndex = 5
+      ImageName = 'Item6'
       OnExecute = ASaveExecute
     end
     object AOpen: TAction
@@ -291,6 +282,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Caption = 'Open'
       Hint = 'Open a metafile report'
       ImageIndex = 6
+      ImageName = 'Item7'
       OnExecute = AOpenExecute
     end
     object AExit: TAction
@@ -298,6 +290,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Caption = 'Exit'
       Hint = 'Close the application'
       ImageIndex = 7
+      ImageName = 'Item8'
       OnExecute = AExitExecute
     end
     object AScale100: TAction
@@ -305,6 +298,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Caption = 'Normal scale'
       Hint = 'Shows the report in real size'
       ImageIndex = 8
+      ImageName = 'Item9'
       OnExecute = AScale100Execute
     end
     object AScaleWide: TAction
@@ -312,6 +306,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Caption = 'Scale to window'
       Hint = 'Scale the view to window width'
       ImageIndex = 9
+      ImageName = 'Item10'
       OnExecute = AScaleWideExecute
     end
     object AScaleFull: TAction
@@ -319,12 +314,14 @@ object FRpMetaVCL: TFRpMetaVCL
       Caption = 'Scale to full page'
       Hint = 'Scale the view to view full pagte'
       ImageIndex = 10
+      ImageName = 'Item11'
       OnExecute = AScaleFullExecute
     end
     object AScaleLess: TAction
       Category = 'View'
       Caption = 'Zoom-'
       ImageIndex = 11
+      ImageName = 'Item12'
       OnExecute = AScaleLessExecute
     end
     object AScaleMore: TAction
@@ -332,6 +329,7 @@ object FRpMetaVCL: TFRpMetaVCL
       Caption = 'Zoom+'
       Hint = 'Zooms in the view'
       ImageIndex = 12
+      ImageName = 'Item13'
       OnExecute = AScaleMoreExecute
     end
     object ACancel: TAction
@@ -371,12 +369,14 @@ object FRpMetaVCL: TFRpMetaVCL
       Caption = 'Printer Setup...'
       Hint = 'Shows the printer setup dialog'
       ImageIndex = 14
+      ImageName = 'Item15'
       OnExecute = APrintSetupExecute
     end
     object APrintersConfiguration: TAction
       Category = 'Preferences'
       Caption = 'Printers Configuration'
       ImageIndex = 14
+      ImageName = 'Item15'
       OnExecute = APrintersConfigurationExecute
     end
     object AAsyncExec: TAction
@@ -391,12 +391,14 @@ object FRpMetaVCL: TFRpMetaVCL
       Enabled = False
       Hint = 'Sends the reports to a e-mail destination'
       ImageIndex = 15
+      ImageName = 'Item16'
       OnExecute = AMailToExecute
     end
     object AFind: TAction
       Caption = 'Find'
       Hint = 'Find next page'
       ImageIndex = 16
+      ImageName = 'Item17'
       OnExecute = AFindExecute
     end
   end
@@ -1919,109 +1921,90 @@ object FRpMetaVCL: TFRpMetaVCL
     Top = 168
   end
   object VirtualImageList1: TVirtualImageList
-    DisabledGrayscale = False
-    DisabledSuffix = '_Disabled'
     Images = <
       item
         CollectionIndex = 0
         CollectionName = 'Item1'
-        Disabled = False
         Name = 'Item1'
       end
       item
         CollectionIndex = 1
         CollectionName = 'Item2'
-        Disabled = False
         Name = 'Item2'
       end
       item
         CollectionIndex = 2
         CollectionName = 'Item3'
-        Disabled = False
         Name = 'Item3'
       end
       item
         CollectionIndex = 3
         CollectionName = 'Item4'
-        Disabled = False
         Name = 'Item4'
       end
       item
         CollectionIndex = 4
         CollectionName = 'Item5'
-        Disabled = False
         Name = 'Item5'
       end
       item
         CollectionIndex = 5
         CollectionName = 'Item6'
-        Disabled = False
         Name = 'Item6'
       end
       item
         CollectionIndex = 6
         CollectionName = 'Item7'
-        Disabled = False
         Name = 'Item7'
       end
       item
         CollectionIndex = 7
         CollectionName = 'Item8'
-        Disabled = False
         Name = 'Item8'
       end
       item
         CollectionIndex = 8
         CollectionName = 'Item9'
-        Disabled = False
         Name = 'Item9'
       end
       item
         CollectionIndex = 9
         CollectionName = 'Item10'
-        Disabled = False
         Name = 'Item10'
       end
       item
         CollectionIndex = 10
         CollectionName = 'Item11'
-        Disabled = False
         Name = 'Item11'
       end
       item
         CollectionIndex = 11
         CollectionName = 'Item12'
-        Disabled = False
         Name = 'Item12'
       end
       item
         CollectionIndex = 12
         CollectionName = 'Item13'
-        Disabled = False
         Name = 'Item13'
       end
       item
         CollectionIndex = 13
         CollectionName = 'Item14'
-        Disabled = False
         Name = 'Item14'
       end
       item
         CollectionIndex = 14
         CollectionName = 'Item15'
-        Disabled = False
         Name = 'Item15'
       end
       item
         CollectionIndex = 15
         CollectionName = 'Item16'
-        Disabled = False
         Name = 'Item16'
       end
       item
         CollectionIndex = 16
         CollectionName = 'Item17'
-        Disabled = False
         Name = 'Item17'
       end>
     ImageCollection = ImageCollection1
