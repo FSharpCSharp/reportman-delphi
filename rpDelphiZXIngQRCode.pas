@@ -52,7 +52,7 @@ type
 implementation
 
 uses
-  contnrs, Math, Classes;
+  contnrs, Math, Classes, SysUtils;
 
 type
   TByteArray = array of Byte;
@@ -2364,6 +2364,11 @@ begin
     end else
     begin
       Version.Free;
+      if (VersionNum = 40) then
+      begin
+        raise Exception.Create('Maximum input bytes for level 40 reached: ' +
+          IntToStr(numDataBytes) + ' actual bytes including ECC: ' + IntToStr(TotalInputBytes));
+      end;
     end;
   end;
 end;
@@ -2418,7 +2423,7 @@ end;
 
 function TVersion.GetECBlocksForLevel(ECLevel: TErrorCorrectionLevel): TECBlocks;
 begin
-  Result := ECBlocks[ECLevel.Ordinal];
+  Result := ECBlocks[ECLevel.FBits];
 end;
 
 function TVersion.GetTotalCodewords: Integer;
@@ -3489,7 +3494,7 @@ var
   Y: Integer;
 begin
   Level := TErrorCorrectionLevel.Create;
-  Level.FBits := 1;
+  Level.FBits := 0;
   Encoder := TEncoder.Create;
   QRCode := TQRCode.Create;
   try
