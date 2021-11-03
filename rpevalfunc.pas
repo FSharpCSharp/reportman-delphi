@@ -598,16 +598,6 @@ implementation
 
 uses rpeval,Math,IniFiles;
 
-function VarIsString(avar:Variant):Boolean;
-var
- avartype:integer;
-begin
- Result:=false;
- avartype:=VarType(avar);
- // 258 = WideString Delphi 2009
- if (avartype=varstring) or (avartype=varOleStr) or (avartype=258) then
-  Result:=true;
-end;
 
 {**************************************************************************}
 

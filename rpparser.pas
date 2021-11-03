@@ -22,7 +22,7 @@ interface
 
 
 uses Classes,sysutils,
- rpmdconsts,rptypeval;
+ rpmdconsts,rptypeval, System.Character;
 type
 
 
@@ -212,26 +212,6 @@ begin
   P := FSourcePtr;
   FTokenPtr := P;
   case FBuffer[P] of
-    // Identifiers
-{$IFDEF DOTNETD}
-    'A'..'Z', 'a'..'z','_':
-{$ENDIF}
-{$IFNDEF DOTNETD}
-    'A'..'Z', 'a'..'z','á','à','é','è','í','ó','ò','ú', 'Ñ','ñ','_',
-     'ä','Ä','ö','Ö','ü','Ü','Á','À','É','È','Í','Ó','Ò','Ú','ß':
-{$ENDIF}
-      begin
-        Inc(P);
-{$IFDEF DOTNETD}
-        while FBuffer[P] in ['A'..'Z', 'a'..'z','0'..'9', '_','.'] do
-{$ENDIF}
-{$IFNDEF DOTNETD}
-        while FBuffer[P] in ['A'..'Z', 'a'..'z','á','à','é','è','í','ó','ò','ú', 'Ñ','ñ','0'..'9','_','.',
-         'ä','Ä','ö','Ö','ü','Ü','Á','À','É','È','Í','Ó','Ò','Ú','ß'] do
-{$ENDIF}
-          Inc(P);
-        Result := toSymbol;
-      end;
     // Identifiers with blanks into brackets
     '[':
       begin
@@ -410,11 +390,24 @@ begin
           FFloatType := #0;
       end;
   else
+    // Check for identifier
     Result := Char(FBuffer[P]);
-    if Result <> toEOF then
+    if (Result.IsLetterOrDigit or (Result = '_')) then
     begin
-     Result:=toSymbol;
-     Inc(P);
+      Inc(P);
+      while (FBuffer[P].IsLetterOrDigit or (FBuffer[P] in ['_','.'])) do
+      // while FBuffer[P] in ['A'..'Z', 'a'..'z','á','à','é','è','í','ó','ò','ú', 'Ñ','ñ','0'..'9','_','.',
+      //  'ä','Ä','ö','Ö','ü','Ü','Á','À','É','È','Í','Ó','Ò','Ú','ß'] do
+        Inc(P);
+      Result := toSymbol;
+    end
+    else
+    begin
+      if Result <> toEOF then
+      begin
+       Result:=toSymbol;
+       Inc(P);
+      end;
     end;
   end;
   FSourcePtr := P;

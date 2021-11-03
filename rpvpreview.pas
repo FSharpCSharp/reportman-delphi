@@ -268,7 +268,17 @@ begin
 end;
 
 procedure TFRpVPreview.FormCreate(Sender: TObject);
+var
+ dpiAwareContext:DPI_AWARENESS_CONTEXT;
+ dpiAware: DPI_AWARENESS;
 begin
+  dpiAwareContext:=GetThreadDpiAwarenessContext;
+  dpiAware:=GetAwarenessFromDpiAwarenessContext(dpiAwareContext);
+  if ((dpiAware = DPI_AWARENESS_UNAWARE) or (dpiAware = DPI_AWARENESS_INVALID)) then
+  begin
+   btoolbar.Images:=ImageList1;
+   ActionList1.Images:=ImageList1;
+  end;
 //   ScaleToolBar(BToolBar);
   SaveDialog1.Filter:=SRpRepMetafile+'|*.rpmf|'+
    SRpPDFFile+'|*.pdf|'+

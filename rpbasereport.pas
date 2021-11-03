@@ -1337,7 +1337,7 @@ var
  index:integer;
  dataset:TDataset;
 begin
- if (not ( (VarType(Params[0])=varString) or (VarType(Params[0])=varOleStr) )) then
+  if (not VarIsString(Params[0])) then
    Raise TRpNamedException.Create(SRpEvalType,
          IdenName);
  Result:=true;

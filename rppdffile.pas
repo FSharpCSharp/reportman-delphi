@@ -1630,6 +1630,7 @@ begin
  FImageStream:=TMemoryStream.Create;
  try
   format:='';
+  indexed:=false;
   GetJPegInfo(abitmap,bitmapwidth,bitmapheight,format);
   isjpeg:=(format='JPEG');
   if isjpeg then

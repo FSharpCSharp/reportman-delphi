@@ -43,20 +43,17 @@ object FRpStructureVCL: TFRpStructureVCL
           Left = 42
           Top = 0
           Action = ADelete
-          ImageName = 'Item4'
         end
         object ToolButton3: TToolButton
           Left = 69
           Top = 0
           Action = AUp
-          ImageName = 'Item1'
         end
         object ToolButton4: TToolButton
           Left = 96
           Top = 0
           Action = ADown
           AutoSize = True
-          ImageName = 'Item2'
         end
       end
       object RView: TTreeView
@@ -473,18 +470,21 @@ object FRpStructureVCL: TFRpStructureVCL
       Caption = 'AUp'
       Hint = 'Moves the section up'
       ImageIndex = 0
+      ImageName = 'Item1'
       OnExecute = AUpExecute
     end
     object ADown: TAction
       Caption = 'ADown'
       Hint = 'Moves the section down'
       ImageIndex = 1
+      ImageName = 'Item2'
       OnExecute = ADownExecute
     end
     object ADelete: TAction
       Caption = 'Delete section'
       Hint = 'Delete the selected section'
       ImageIndex = 3
+      ImageName = 'Item4'
       OnExecute = ADeleteExecute
     end
   end
