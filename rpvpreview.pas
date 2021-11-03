@@ -283,8 +283,8 @@ begin
   SaveDialog1.Filter:=SRpRepMetafile+'|*.rpmf|'+
    SRpPDFFile+'|*.pdf|'+
    SRpPDFFileUn+'|*.pdf|'+
-   SRpExcelFile+'|*.xls|'+
-   SRpExcelFileNoMulti+'|*.xls|'+
+   SRpExcelFile+'|*.xlsx|'+
+   SRpExcelFileNoMulti+'|*.xlsx|'+
    SRpPlainFile+'|*.txt|'+
    SRpBitmapFile+'|*.bmp|'+
    SRpHtmlFile+'|*.html|'+
