@@ -897,6 +897,7 @@ var
   npng: TPngImage;
 {$ENDIF}
   propx, propy: double;
+  penWidth:integer;
 begin
   // Switch to device points
   oldhandle := 0;
@@ -1062,7 +1063,10 @@ begin
         Canvas.Pen.Style := TPenStyle(obj.PenStyle);
         Canvas.Brush.Color := CLXColorToVCLColor(obj.BrushColor);
         Canvas.Brush.Style := TBrushStyle(abrushstyle);
-        Canvas.Pen.Width := Round(dpix * obj.PenWidth / TWIPS_PER_INCHESS);
+        penWidth:=Round(dpix * obj.PenWidth / TWIPS_PER_INCHESS);
+        if (penWidth>=0) then
+          Canvas.Pen.Width := penWidth;
+
         X := Canvas.Pen.Width div 2;
         Y := X;
         W := Width - Canvas.Pen.Width + 1;
@@ -1086,7 +1090,7 @@ begin
         end;
         case TRpShapeType(obj.DrawStyle) of
           rpsRectangle, rpsSquare:
-            if (Canvas.Pen.Width = 0) then
+            if (penWidth < 0) then
             begin
               newrec.Left := X + posx;
               newrec.Top := Y + posy;

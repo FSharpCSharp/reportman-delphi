@@ -8,7 +8,7 @@
 {       Code Base From Nishita's PDF Creation (TNPDF)   }
 {       info@nishita.com                                }
 {                                                       }
-{       Copyright (c) 1994-2019 Toni Martir             }
+{       Copyright (c) 1994-2021 Toni Martir             }
 {       toni@reportman.es                                   }
 {                                                       }
 {       Converted to CLX (not Visual CLX)               }

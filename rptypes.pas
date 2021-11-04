@@ -366,6 +366,7 @@ function Roundfloat(num:double;redondeo:double):double;
 
 {$IFDEF MSWINDOWS}
 function RpCharToOem(source:AnsiString):AnsiString;
+function IsWindows10orUpper: boolean;
 {$ENDIF}
 
 {$IFDEF DOTNETD}
@@ -1495,10 +1496,36 @@ begin
     Add(S);
 end;
 
+var
+  user32lib:THandle = 0;
+  isWindows10: boolean = false;
+
 {$IFDEF MSWINDOWS}
+function IsWindows10orUpper: boolean;
+var
+ GetThreadDpiAwarenessContextAddress: Pointer;
+begin
+ if (user32lib <>0) then
+ begin
+   Result:=isWindows10;
+   exit;
+ end;
+ user32lib:=LoadLibrary('user32.dll');
+ if user32lib=0 then
+   RaiseLastOsError;
+ GetThreadDpiAwarenessContextAddress := GetProcAddress(user32lib,'GetThreadDpiAwarenessContext');
+ if not Assigned(GetThreadDpiAwarenessContextAddress) then
+ begin
+  IsWindows10:=false;
+ end
+ else
+ begin
+  IsWindows10:=true;
+ end;
+end;
+
 function IsWindowsNT:Boolean;
 begin
-{$IFNDEF DOTNETD}
  try
   if Not obtainedversion then
   begin
@@ -1515,15 +1542,6 @@ begin
    raise;
   end;
  end;
-{$ENDIF}
-{$IFDEF DOTNETD}
-//  osinfo.dwOSVersionInfoSize:=sizeof(osinfo);
-//  System.Console.WriteLine(osinfo.dwOSVersionInfoSize);
-//  if Not GetVersionEx(osinfo) then
-// GetVersionEx does not return the required size
-//   System.Console.WriteLine(osinfo.dwOSVersionInfoSize);
- Result:=true;
-{$ENDIF}
 end;
 {$ENDIF}
 

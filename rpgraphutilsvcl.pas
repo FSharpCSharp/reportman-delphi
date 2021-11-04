@@ -79,9 +79,9 @@ function RpMessageBox(const Text: WideString; const Caption: WideString = '';
 function RpInputBox(const ACaption, APrompt, ADefault:WideString ):WideString;
 procedure FillTreeView(ATree:TTreeView;alist:TStringList);
 function GetFullFileName (ANode:TTreeNode;dirseparator:char):String;
-function CLXColorToVCLColor (CLXColor:integer):integer;
+function CLXColorToVCLColor (CLXColor:integer):TColor;
 procedure RpShowMessage(const Text: WideString);
-procedure ScaleToolBar(ntoolbar:TToolBar);
+// procedure ScaleToolBar(ntoolbar:TToolBar);
 function  ScaleDpi(value:integer):integer;
 function  UnScaleDpi(value:integer):integer;
 
@@ -109,7 +109,7 @@ function RegQueryValueEx(hKey: LongWord; lpValueName: PChar;
 
 const DEFAULT_DPI=96;
 
-procedure ScaleToolBar(ntoolbar:TToolBar);
+(*procedure ScaleToolBar(ntoolbar:TToolBar);
 var
  newdpi:integer;
  newscale:double;
@@ -131,7 +131,7 @@ begin
 
  end;
 end;
-
+*)
 function  ScaleDpi(value:integer):integer;
 var
  newdpi:integer;
@@ -527,7 +527,7 @@ begin
  end;
 end;
 
-function CLXColorToVCLColor(CLXColor:integer):integer;
+function CLXColorToVCLColor(CLXColor:integer):TColor;
 begin
  Result:=CLXColor AND $00FFFFFF;
 end;

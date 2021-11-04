@@ -206,8 +206,15 @@ function ShowPreview(previewcontrol:TRpPreviewMeta;
 var
  dia:TFRpVPreview;
   OldIdleHandler : TIdleEvent;
+ // dpiAwareContext:DPI_AWARENESS_CONTEXT;
+ //dpiAware: DPI_AWARENESS;
 begin
  OldIdleHandler := Application.OnIdle;
+ if (IsWindows10orUpper) then
+ begin
+  // dpiAwareContext:=GetThreadDpiAwarenessContext;
+  // dpiAware:=GetAwarenessFromDpiAwarenessContext(dpiAwareContext);
+ end;
  dia:=TFRpVPreview.Create(Application);
  try
   previewcontrol.OnWorkProgress:=dia.RepProgress;
@@ -230,7 +237,7 @@ begin
   dia.ShowModal();
   Result:=dia.printed;
  finally
-    Application.OnIdle := OldIdleHandler;
+  Application.OnIdle := OldIdleHandler;
   previewcontrol.OnWorkProgress:=nil;
   previewcontrol.OnPageDrawn:=nil;
   previewcontrol.Parent:=nil;
@@ -246,11 +253,14 @@ begin
  try
   if Assigned(FPreviewControl) then
   begin
-   DisableControls(true);
-   try
-    FPreviewControl.Parent:=self;
-   finally
-    EnableControls;
+   if (FPreviewControl.Parent<>Self) then
+   begin
+     DisableControls(true);
+     try
+      FPreviewControl.Parent:=self;
+     finally
+      EnableControls;
+     end;
    end;
   end;
  finally
@@ -271,15 +281,24 @@ procedure TFRpVPreview.FormCreate(Sender: TObject);
 var
  dpiAwareContext:DPI_AWARENESS_CONTEXT;
  dpiAware: DPI_AWARENESS;
+ doScale:boolean;
+ buttonheight:integer;
 begin
-  dpiAwareContext:=GetThreadDpiAwarenessContext;
-  dpiAware:=GetAwarenessFromDpiAwarenessContext(dpiAwareContext);
-  if ((dpiAware = DPI_AWARENESS_UNAWARE) or (dpiAware = DPI_AWARENESS_INVALID)) then
+  doScale := true;
+  if (IsWindows10orUpper) then
   begin
+    dpiAwareContext:=GetThreadDpiAwarenessContext;
+    dpiAware:=GetAwarenessFromDpiAwarenessContext(dpiAwareContext);
+    doScale:=((dpiAware = DPI_AWARENESS_UNAWARE) or (dpiAware = DPI_AWARENESS_INVALID));
+  end;
+  if (doScale) then
+  begin
+   // Fix black background for ActiveX control when non dpi aware
    btoolbar.Images:=ImageList1;
    ActionList1.Images:=ImageList1;
   end;
-//   ScaleToolBar(BToolBar);
+  buttonheight:=btoolbar.Height;
+   // ScaleToolBar(BToolBar);
   SaveDialog1.Filter:=SRpRepMetafile+'|*.rpmf|'+
    SRpPDFFile+'|*.pdf|'+
    SRpPDFFileUn+'|*.pdf|'+

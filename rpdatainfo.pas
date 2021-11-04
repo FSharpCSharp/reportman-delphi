@@ -3117,11 +3117,13 @@ begin
  if (not FileExists(driverfilename)) then
  begin
   driverfilename:=GetPublicPathSlash+'dbxdrivers.ini';
+  configfilename:=GetPublicPathSlash+'dbxconnections.ini';
  end;
 {$ENDIF}
  if (not FileExists(driverfilename)) then
  begin
-  driverfilename:=Obtainininamelocaluserconfig('','Programs','dbxdrivers')
+  driverfilename:=Obtainininamelocaluserconfig('','','dbxdrivers');
+  configfilename:=Obtainininamelocaluserconfig('','','dbxconnections');
  end;
  if FileExists(driverfilename) then
  begin
@@ -3130,6 +3132,8 @@ begin
  else
  begin
 {$IFDEF MSWINDOWS}
+  driverfilename:=GetPublicPathSlash+'dbxdrivers.ini';
+  configfilename:=GetPublicPathSlash+'dbxconnections.ini';
    // Load the dbxdrivers file from the resource
    resname:='DBXDRIVERSFILE';
    hFind := FindResource(HInstance, PChar(resname),RT_RCDATA);
@@ -3189,16 +3193,6 @@ begin
     Raise Exception.Create(SRpConfigFileNotExists+' - '+DBXDRIVERFILENAME);
   end;
 {$ENDIF}
- end;
-{$IFDEF MSWINDOWS}
- if (not FileExists(configfilename)) then
- begin
-  configfilename:=GetPublicPathSlash+'dbxconnections.ini';
- end;
-{$ENDIF}
- if (not FileExists(configfilename)) then
- begin
-  configfilename:=Obtainininamelocaluserconfig('','Programs','dbxconnections')
  end;
  if FileExists(configfilename) then
  begin

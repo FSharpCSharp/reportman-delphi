@@ -2,12 +2,11 @@ object FRpMainFVCL: TFRpMainFVCL
   Left = 810
   Top = 196
   Caption = 'Report Manager Designer'
-  ClientHeight = 581
-  ClientWidth = 772
+  ClientHeight = 586
+  ClientWidth = 967
   Color = clBtnFace
   ParentFont = True
   Menu = MainMenu1
-  OldCreateOrder = True
   ShowHint = True
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -16,11 +15,11 @@ object FRpMainFVCL: TFRpMainFVCL
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 20
   object BStatus: TStatusBar
     Left = 0
-    Top = 560
-    Width = 772
+    Top = 565
+    Width = 967
     Height = 21
     Panels = <
       item
@@ -30,10 +29,10 @@ object FRpMainFVCL: TFRpMainFVCL
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 772
-    Height = 63
+    Width = 967
+    Height = 26
     AutoSize = True
-    ButtonHeight = 25
+    ButtonHeight = 26
     ButtonWidth = 26
     Caption = 'ToolBar1'
     Color = clBtnFace
@@ -175,20 +174,19 @@ object FRpMainFVCL: TFRpMainFVCL
       Style = tbsCheck
     end
     object ToolButton10: TToolButton
-      Left = 0
+      Left = 366
       Top = 0
       Width = 13
       Caption = 'ToolButton10'
       ImageIndex = 14
       ImageName = 'Item15'
-      Wrap = True
       Style = tbsSeparator
     end
     object ComboScale: TComboBox
-      Left = 0
-      Top = 38
+      Left = 379
+      Top = 0
       Width = 62
-      Height = 21
+      Height = 28
       Style = csDropDownList
       DropDownCount = 12
       TabOrder = 0
@@ -207,28 +205,28 @@ object FRpMainFVCL: TFRpMainFVCL
         '400%')
     end
     object BDelete: TToolButton
-      Left = 62
-      Top = 38
+      Left = 441
+      Top = 0
       Action = ADelete
     end
     object ToolButton11: TToolButton
-      Left = 88
-      Top = 38
+      Left = 467
+      Top = 0
       Action = ACut
     end
     object ToolButton12: TToolButton
-      Left = 114
-      Top = 38
+      Left = 493
+      Top = 0
       Action = ACopy
     end
     object ToolButton13: TToolButton
-      Left = 140
-      Top = 38
+      Left = 519
+      Top = 0
       Action = APaste
     end
     object ToolButton14: TToolButton
-      Left = 166
-      Top = 38
+      Left = 545
+      Top = 0
       Width = 11
       Caption = 'ToolButton14'
       ImageIndex = 17
@@ -236,28 +234,28 @@ object FRpMainFVCL: TFRpMainFVCL
       Style = tbsSeparator
     end
     object ToolButton15: TToolButton
-      Left = 177
-      Top = 38
+      Left = 556
+      Top = 0
       Action = ALeft
     end
     object ToolButton16: TToolButton
-      Left = 203
-      Top = 38
+      Left = 582
+      Top = 0
       Action = ARight
     end
     object ToolButton17: TToolButton
-      Left = 229
-      Top = 38
+      Left = 608
+      Top = 0
       Action = AUp
     end
     object ToolButton18: TToolButton
-      Left = 255
-      Top = 38
+      Left = 634
+      Top = 0
       Action = ADown
     end
     object ToolButton19: TToolButton
-      Left = 281
-      Top = 38
+      Left = 660
+      Top = 0
       Width = 14
       Caption = 'ToolButton19'
       ImageIndex = 25
@@ -265,50 +263,52 @@ object FRpMainFVCL: TFRpMainFVCL
       Style = tbsSeparator
     end
     object ToolButton20: TToolButton
-      Left = 295
-      Top = 38
+      Left = 674
+      Top = 0
       Action = AAlignLeft
     end
     object ToolButton21: TToolButton
-      Left = 321
-      Top = 38
+      Left = 700
+      Top = 0
       Action = AAlignRight
     end
     object ToolButton22: TToolButton
-      Left = 347
-      Top = 38
+      Left = 726
+      Top = 0
       Action = AAlignUp
     end
     object ToolButton23: TToolButton
-      Left = 373
-      Top = 38
+      Left = 752
+      Top = 0
       Action = AAlignDown
     end
     object ToolButton24: TToolButton
-      Left = 399
-      Top = 38
+      Left = 778
+      Top = 0
       Action = AAlignHorz
     end
     object ToolButton25: TToolButton
-      Left = 425
-      Top = 38
+      Left = 804
+      Top = 0
       Action = AAlignVert
     end
   end
   object mainscrollbox: TPanel
     Left = 0
-    Top = 63
-    Width = 772
-    Height = 497
+    Top = 26
+    Width = 967
+    Height = 539
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
     Visible = False
+    ExplicitTop = 22
+    ExplicitHeight = 543
     object Splitter1: TSplitter
       Left = 197
       Top = 0
       Width = 8
-      Height = 497
+      Height = 539
       Beveled = True
       ResizeStyle = rsUpdate
       OnMoved = Splitter1Moved
@@ -318,10 +318,11 @@ object FRpMainFVCL: TFRpMainFVCL
       Left = 0
       Top = 0
       Width = 197
-      Height = 497
+      Height = 539
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitHeight = 543
       object Splitter2: TSplitter
         Left = 0
         Top = 0
@@ -2728,208 +2729,175 @@ object FRpMainFVCL: TFRpMainFVCL
     Top = 122
   end
   object VirtualImageList1: TVirtualImageList
-    DisabledGrayscale = False
-    DisabledSuffix = '_Disabled'
     Images = <
       item
         CollectionIndex = 0
         CollectionName = 'Item1'
-        Disabled = False
         Name = 'Item1'
       end
       item
         CollectionIndex = 1
         CollectionName = 'Item2'
-        Disabled = False
         Name = 'Item2'
       end
       item
         CollectionIndex = 2
         CollectionName = 'Item3'
-        Disabled = False
         Name = 'Item3'
       end
       item
         CollectionIndex = 3
         CollectionName = 'Item4'
-        Disabled = False
         Name = 'Item4'
       end
       item
         CollectionIndex = 4
         CollectionName = 'Item5'
-        Disabled = False
         Name = 'Item5'
       end
       item
         CollectionIndex = 5
         CollectionName = 'Item6'
-        Disabled = False
         Name = 'Item6'
       end
       item
         CollectionIndex = 6
         CollectionName = 'Item7'
-        Disabled = False
         Name = 'Item7'
       end
       item
         CollectionIndex = 7
         CollectionName = 'Item8'
-        Disabled = False
         Name = 'Item8'
       end
       item
         CollectionIndex = 8
         CollectionName = 'Item9'
-        Disabled = False
         Name = 'Item9'
       end
       item
         CollectionIndex = 9
         CollectionName = 'Item10'
-        Disabled = False
         Name = 'Item10'
       end
       item
         CollectionIndex = 10
         CollectionName = 'Item11'
-        Disabled = False
         Name = 'Item11'
       end
       item
         CollectionIndex = 11
         CollectionName = 'Item12'
-        Disabled = False
         Name = 'Item12'
       end
       item
         CollectionIndex = 12
         CollectionName = 'Item13'
-        Disabled = False
         Name = 'Item13'
       end
       item
         CollectionIndex = 13
         CollectionName = 'Item14'
-        Disabled = False
         Name = 'Item14'
       end
       item
         CollectionIndex = 14
         CollectionName = 'Item15'
-        Disabled = False
         Name = 'Item15'
       end
       item
         CollectionIndex = 15
         CollectionName = 'Item16'
-        Disabled = False
         Name = 'Item16'
       end
       item
         CollectionIndex = 16
         CollectionName = 'Item17'
-        Disabled = False
         Name = 'Item17'
       end
       item
         CollectionIndex = 17
         CollectionName = 'Item18'
-        Disabled = False
         Name = 'Item18'
       end
       item
         CollectionIndex = 18
         CollectionName = 'Item19'
-        Disabled = False
         Name = 'Item19'
       end
       item
         CollectionIndex = 19
         CollectionName = 'Item20'
-        Disabled = False
         Name = 'Item20'
       end
       item
         CollectionIndex = 20
         CollectionName = 'Item21'
-        Disabled = False
         Name = 'Item21'
       end
       item
         CollectionIndex = 21
         CollectionName = 'Item22'
-        Disabled = False
         Name = 'Item22'
       end
       item
         CollectionIndex = 22
         CollectionName = 'Item23'
-        Disabled = False
         Name = 'Item23'
       end
       item
         CollectionIndex = 23
         CollectionName = 'Item24'
-        Disabled = False
         Name = 'Item24'
       end
       item
         CollectionIndex = 24
         CollectionName = 'Item25'
-        Disabled = False
         Name = 'Item25'
       end
       item
         CollectionIndex = 25
         CollectionName = 'Item26'
-        Disabled = False
         Name = 'Item26'
       end
       item
         CollectionIndex = 26
         CollectionName = 'Item27'
-        Disabled = False
         Name = 'Item27'
       end
       item
         CollectionIndex = 27
         CollectionName = 'Item28'
-        Disabled = False
         Name = 'Item28'
       end
       item
         CollectionIndex = 28
         CollectionName = 'Item29'
-        Disabled = False
         Name = 'Item29'
       end
       item
         CollectionIndex = 29
         CollectionName = 'Item30'
-        Disabled = False
         Name = 'Item30'
       end
       item
         CollectionIndex = 30
         CollectionName = 'Item31'
-        Disabled = False
         Name = 'Item31'
       end
       item
         CollectionIndex = 31
         CollectionName = 'Item32'
-        Disabled = False
         Name = 'Item32'
       end
       item
         CollectionIndex = 32
         CollectionName = 'Item33'
-        Disabled = False
         Name = 'Item33'
       end>
     ImageCollection = ImageCollection1
+    Width = 19
+    Height = 19
     Left = 304
     Top = 335
   end

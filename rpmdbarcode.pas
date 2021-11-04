@@ -3105,7 +3105,7 @@ var
   dif:integer;
   isBlack:boolean;
 begin
-  PenWidth:=0;
+  PenWidth:=-100;
   metaPage:=meta.Pages[meta.CurrentPage];
   QRCode := TRpDelphiZXingQRCode.Create;
   try
