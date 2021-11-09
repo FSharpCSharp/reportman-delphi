@@ -108,3 +108,4 @@ packages/11.0/reportman_designvcl.res
 packages/11.0/reportman_rtl.res
 packages/11.0/reportman_vcl.res
 server/web/bin32/repwebserver.dll
+repman/utils/printreptopdf/printreptopdf._@emb_.tmp
