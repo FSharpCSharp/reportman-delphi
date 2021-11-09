@@ -2423,7 +2423,7 @@ end;
 
 function TVersion.GetECBlocksForLevel(ECLevel: TErrorCorrectionLevel): TECBlocks;
 begin
-  Result := ECBlocks[ECLevel.FBits];
+  Result := ECBlocks[ECLevel.Ordinal];
 end;
 
 function TVersion.GetTotalCodewords: Integer;
@@ -3494,7 +3494,8 @@ var
   Y: Integer;
 begin
   Level := TErrorCorrectionLevel.Create;
-  Level.FBits := 0;
+  // Level.FBits := 0;
+  Level.FBits := 1;
   Encoder := TEncoder.Create;
   QRCode := TQRCode.Create;
   try

@@ -41,7 +41,7 @@ const
 {$ENDIF}
 
 const
- RM_VERSION='3.4.9';
+ RM_VERSION='3.4.11';
  REPMAN_WEBSITE='http://reportman.sourceforge.net';
  MAX_PAGECOUNT=999999;
 type
