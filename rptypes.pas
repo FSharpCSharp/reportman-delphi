@@ -4193,11 +4193,11 @@ begin
  alen:=GetTempPath(0,nil);
  if alen=0 then
   RaiseLastOsError;
- apath:=AllocMem(alen+1);
+ apath:=AllocMem(alen*2+2);
  try
   if 0=GetTempPath(alen,apath) then
    RaiseLastOsError;
-  Result:=StrPas(apath);
+  Result:=String.Copy(apath);
  finally
   FreeMem(apath);
  end;
@@ -5237,10 +5237,10 @@ begin
  Result:='';
  if Length(source)<1 then
   exit;
- abuf:=AllocMem(Length(source)+1);
+ abuf:=AllocMem(Length(source)*2+2);
  try
   CharToOemA(PAnsiChar(source),abuf);
-  Result:=StrPas(abuf);
+  Result:=string.Copy(abuf);
   for i:=1 to Length(Result) do
   begin
    // The Euro symbol
@@ -5277,7 +5277,7 @@ var
  abuffer:Pchar;
  ares:DWORD;
 begin
- abuffer:=AllocMem(DEFSIZE+2);
+ abuffer:=AllocMem(DEFSIZE*2+2);
  try
   ares:=Windows.GetEnvironmentVariable(PChar(aname),abuffer,DEFSIZE);
   if ares=0 then
@@ -5288,10 +5288,10 @@ begin
    begin
     FreeMem(abuffer);
     abuffer:=nil;
-    abuffer:=AllocMem(ares+2);
+    abuffer:=AllocMem(ares*2+2);
     Windows.GetEnvironmentVariable(PChar(aname),abuffer,ares+1);
    end;
-   Result:=StrPas(abuffer);
+   Result:=String.Copy(abuffer);
   end;
  finally
   FreeMem(abuffer);
