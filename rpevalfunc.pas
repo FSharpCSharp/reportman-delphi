@@ -41,7 +41,7 @@ uses
 {$IFDEF USEINDY}
   IdCoderMIME,
 {$ENDIF}
-  rptypeval,rptypes,rpmdcharttypes;
+  rptypeval,rptypes,rpmdcharttypes, System.NetEncoding;
 
 type
 
@@ -2986,8 +2986,8 @@ begin
  inherited Create(AOwner);
  FParamcount:=1;
  IdenName:='StringToBin';
- Help:=SRpDecode64;
- model:='function '+'StringToBin'+'(s:string):binary';
+ Help:=SRpStringToBin;
+ model:='function '+'StringToBin'+'(base64:string):binary';
  aParams:='';
 end;
 
@@ -2996,13 +2996,35 @@ end;
 function TIdenStringToBin.GeTRpValue:TRpValue;
 var
 // i:integer;
- astring:string;
+ astring:AnsiString;
  p:pointer;
+ astring2: AnsiString;
+ amemStream: TMemoryStream;
+ nparam:string;
 begin
  if Not VarIsString(Params[0]) then
    Raise TRpNamedException.Create(SRpEvalType,
          IdenName);
- astring:=String(Params[0]);
+ Result:=TNetEncoding.Base64.DecodeStringToBytes(Params[0]);
+ (*astring:=AnsiString(Params[0]);
+ TNetEncoding.Base64.DecodeStringToBytes(...);
+ amemStream:=TMemoryStream.Create;
+ try
+  amemStream.Write(astring[1],Length(astring));
+  MIMEDecode(amemStream);
+  amemStream.Seek(0, TSeekOrigin.soBeginning);
+  Result:=VarArrayCreate([0,Length(astring)-1],varByte);
+  p:=VarArrayLock(Result);
+  try
+   amemStream.Read(p^,amemStream.Size);
+  finally
+   VarArrayUnlock(Result);
+  end;
+ finally
+  amemStream.free;
+ end;
+   *)
+(* TNetEncoding.Base64.DecodeStringToBytes(...);
  if Length(astring)>0 then
  begin
   Result:=VarArrayCreate([0,Length(astring)-1],varByte);
@@ -3010,13 +3032,14 @@ begin
 //   begin
 //    Result[i-1]:=byte(astring[i]);
 //   end;
+  astring2 := AnsiString(astring);
   p:=VarArrayLock(Result);
   try
-   Move(astring[1],p^,Length(astring));
+   Move(astring2[1],p^,Length(astring2));
   finally
    VarArrayUnlock(Result);
   end;
- end;
+ end;*)
 end;
 
 

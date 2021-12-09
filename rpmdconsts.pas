@@ -1351,7 +1351,7 @@ var
   SRpErrorGeneratingFax:WideString='Error generating fax';
   SRpErrorFilter:WideString='Error on filter';
   SRpDecode64:WideString='Decode base 64 string';
-  SRpStringToBin:WideString='Converts string to binary stream';
+  SRpStringToBin:WideString='Converts string base64 to binary stream';
   SRpLoadfile:WideString='Loads a file inside a string';
   SRpDefaultCopies:WideString='Default printer copies';
 
