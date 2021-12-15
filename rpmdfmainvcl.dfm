@@ -30,9 +30,9 @@ object FRpMainFVCL: TFRpMainFVCL
     Left = 0
     Top = 0
     Width = 967
-    Height = 26
+    Height = 25
     AutoSize = True
-    ButtonHeight = 26
+    ButtonHeight = 25
     ButtonWidth = 26
     Caption = 'ToolBar1'
     Color = clBtnFace
@@ -295,20 +295,18 @@ object FRpMainFVCL: TFRpMainFVCL
   end
   object mainscrollbox: TPanel
     Left = 0
-    Top = 26
+    Top = 25
     Width = 967
-    Height = 539
+    Height = 540
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
     Visible = False
-    ExplicitTop = 22
-    ExplicitHeight = 543
     object Splitter1: TSplitter
       Left = 197
       Top = 0
       Width = 8
-      Height = 539
+      Height = 540
       Beveled = True
       ResizeStyle = rsUpdate
       OnMoved = Splitter1Moved
@@ -318,11 +316,10 @@ object FRpMainFVCL: TFRpMainFVCL
       Left = 0
       Top = 0
       Width = 197
-      Height = 539
+      Height = 540
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitHeight = 543
       object Splitter2: TSplitter
         Left = 0
         Top = 0

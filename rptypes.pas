@@ -437,9 +437,15 @@ procedure MIMEEncode(amemstream:TMemoryStream;DestStream:TStream);
 function MIMEEncodeString(amemstream:TMemoryStream):string;
 {$ENDIF}
 function EscapeCodedToString(astring:string):string;
-
+function Is64BitPlatform:boolean;
 
 implementation
+
+function Is64BitPlatform:boolean;
+begin
+ Result:=SizeOf(Pointer)=8;
+end;
+
 
 procedure SetForcePaperName(var apagesize:TPageSizeQt;source:string);
 var

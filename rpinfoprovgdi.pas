@@ -96,9 +96,7 @@ end;
 procedure TRpGDIInfoProvider.SelectFont(pdffont:TRpPDFFOnt);
 var
  LogFont:TLogFont;
-{$IFDEF DOTNETD}
  i:integer;
-{$ENDIF}
 {$IFDEF DOTNETD}
  afontname:string;
 {$ENDIF}
@@ -144,17 +142,14 @@ begin
  // Improving quality
  LogFont.lfQuality:=PROOF_QUALITY;
  LogFont.lfPitchAndFamily:=FF_DONTCARE or DEFAULT_PITCH;
-{$IFNDEF DOTNETD}
- StrPCopy(LogFont.lffACEnAME,Copy(pdffont.WFontName,1,LF_FACESIZE));
-{$ENDIF}
-{$IFDEF DOTNETD}
- afontname:=Copy(pdffont.WFontName,1,LF_FACESIZE);
- for i:=1 to Length(afontname) do
+ for i := 0 to LF_FACESIZE-1 do
  begin
-  LogFont.lfFaceName[i-1]:=afontname[i];
+  logfont.lfFaceName[i]:=WideChar(0);
  end;
- LogFont.lfFaceName[Length(afontname)]:=chr(0);
-{$ENDIF}
+StrPCopy(LogFont.lffACEnAME,Copy(pdffont.WFontName,1,LF_FACESIZE));
+
+
+
  Fonthandle:= CreateFontIndirect(LogFont);
  SelectObject(adc,fonthandle);
 end;
@@ -165,21 +160,12 @@ end;
 {$IFNDEF DOTNETD}
 procedure TRpGDIInfoProvider.FillFontData(pdffont:TRpPDFFont;data:TRpTTFontData);
 var
-{$IFNDEF DOTNETD}
  potm:POUTLINETEXTMETRIC;
-{$ENDIF}
-{$IFDEF DOTNETD}
- potm:^OUTLINETEXTMETRIC;
-{$ENDIF}
  asize:integer;
  embeddable:boolean;
  logx:integer;
  multipli:double;
-{$IFDEF DELPHI2009UP}
- apchar:PWideChar;
-{$ELSE}
- apchar:PAnsiChar;
-{$ENDIF}
+ apchar:string;
  alog:LOGFONT;
  acomp:byte;
 {$IFDEF USEKERNING}
@@ -199,26 +185,13 @@ begin
    logx:=GetDeviceCaps(adc,LOGPIXELSX);
    data.postcriptname:=StringReplace(pdfFont.WFontName,' ','',[rfReplaceAll]);
    data.Encoding:='WinAnsiEncoding';
-{$IFDEF DELPHI2009UP}
    asize:=GetOutlineTextMetricsW(adc,0,nil);
-{$ELSE}
-   asize:=GetOutlineTextMetricsA(adc,0,nil);
-{$ENDIF}
    if asize>0 then
    begin
-{$IFNDEF DOTNETD}
     potm:=AllocMem(asize);
-{$ENDIF}
-{$IFDEF DOTNETD}
-    potm:=Marshal.AllocHGlobal(sizeof(OUTLINETEXTMETRIC));
-{$ENDIF}
     try
-
-{$IFDEF DELPHI2009UP}
      newsize:=GetOutlineTextMetricsW(adc,asize,potm);
-{$ELSE}
-     newsize:=GetOutlineTextMetricsA(adc,asize,potm);
-{$ENDIF}
+
      if (newsize<>0) then
      begin
       if (potm^.otmfsType AND $8000)=0 then
@@ -242,29 +215,33 @@ begin
       // Windows does not allow Type1 fonts
       data.Type1:=false;
 
-{$IFDEF DELPHI2009UP}
-      apchar:=PWideChar(Integer(potm)+potm^.otmpFamilyName);
+     if (Is64BitPlatform) then
+     begin
+      apchar:=PWideChar(Long64(potm)+Long64(potm^.otmpFamilyName));
+      UniqueString(apchar);
+      data.FamilyName:=apchar;
+      UniqueString(data.FamilyName);
+      apchar:=PWideChar(Long64(potm)+Long64(potm^.otmpFullName));
+      UniqueString(apchar);
+      data.FullName:=apchar;
+      apchar:=PWideChar(Long64(potm)+Long64(potm^.otmpStyleName));
+      UniqueString(apchar);
+      data.StyleName:=apchar;
+      apchar:=PWideChar(Long64(potm)+Long64(potm^.otmpFaceName));
+      uniqueString(apchar);
+      data.FaceName:=apchar;
+     end
+     else
+     begin
+      apchar:=PWideChar(Integer(potm)+Integer(potm^.otmpFamilyName));
       data.FamilyName:=StrPas(PWideChar(apchar));
-      apchar:=PWideChar(Integer(potm)+potm^.otmpFullName);
-      data.FullName:=StrPas(apchar);
-      apchar:=PWideChar(Integer(potm)+potm^.otmpStyleName);
-      data.StyleName:=StrPas(apchar);
-      apchar:=PWideChar(Integer(potm)+potm^.otmpFaceName);
-      data.FaceName:=StrPas(apchar);
-{$ELSE}
-      apchar:=PAnsiChar(Integer(potm)+potm^.otmpFamilyName);
-      data.FamilyName:=StrPas(apchar);
-      apchar:=PAnsiChar(Integer(potm)+potm^.otmpFullName);
-      data.FullName:=StrPas(apchar);
-      apchar:=PAnsiChar(Integer(potm)+potm^.otmpStyleName);
-      data.StyleName:=StrPas(apchar);
-      apchar:=PAnsiChar(Integer(potm)+potm^.otmpFaceName);
-      data.FaceName:=StrPas(apchar);
-//      data.FamilyName:=StrPas(PAnsiChar(@apchar[Integer(potm^.otmpFamilyName)]));
-//      data.FullName:=StrPas(PAnsiChar(@apchar[Integer(potm^.otmpFullName)]));
-//      data.StyleName:=StrPas(PAnsiChar(@apchar[Integer(potm^.otmpStyleName)]));
-//      data.FaceName:=StrPas(PAnsiChar(@apchar[Integer(potm^.otmpFaceName)]));
-{$ENDIF}
+      apchar:=PWideChar(Integer(potm)+Integer(potm^.otmpFullName));
+      data.FullName:=apchar;
+      apchar:=PWideChar(Integer(potm)+Integer(potm^.otmpStyleName));
+      data.StyleName:=apchar;
+      apchar:=PWideChar(Integer(potm)+Integer(potm^.otmpFaceName));
+      data.FaceName:=apchar;
+     end;
 
 
       data.ItalicAngle:=Round(potm^.otmItalicAngle/10);

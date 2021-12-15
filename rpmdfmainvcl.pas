@@ -1339,7 +1339,9 @@ var
  frompage,topage,copies:integer;
  doprint:boolean;
  pconfig:TPrinterConfig;
+ astream:TMemoryStream;
 begin
+
  pconfig.Changed:=false;
  try
  if (report.DatabaseInfo.Count>0) then
@@ -1377,7 +1379,13 @@ begin
      rpgdidriver.PrintMetafile(report.Metafile,Caption,true,allpages,frompage,topage,copies,collate,false);
     end
     else
-     rpgdidriver.PrintReport(report,Caption,true,allpages,frompage,topage,copies,collate);
+    begin
+       astream:=TMemoryStream.Create;
+      astream.Clear;
+     //rpgdidriver.ExportReportToPDFMetaStream(report,'',
+     //  false,true,1,9999,1,false,astream,true,false,true);
+      rpgdidriver.PrintReport(report,Caption,true,allpages,frompage,topage,copies,collate);
+    end;
     finally
      report.Metafile.BlockPrinterSelection:=false;
     end;
