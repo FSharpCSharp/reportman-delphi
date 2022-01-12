@@ -3655,6 +3655,16 @@ begin
     Raise Exception.Create(SRpDriverNotSupported+' - '+SrpDriverDBX);
 {$ENDIF}
    end;
+  rpfiredac:
+   begin
+{$IFDEF FIREDAC}
+    FSQLInternalQuery:=TFDQuery.Create(nil);
+    TFDQuery(FSQLInternalQuery).Connection:=FDConnection;
+    TFDQuery(FSQLInternalQuery).SQL.Text:=SQLsentence;
+{$ELSE}
+    Raise Exception.Create(SRpDriverNotSupported+' - '+SrpDriverDBX);
+{$ENDIF}
+   end;
   rpdataibx:
    begin
 {$IFDEF USEIBX}
@@ -3752,6 +3762,22 @@ begin
        TSQLQuery(FSQLInternalQuery).ParamByName(paramName).DataType:=
           VariantTypeToDataType(avariant);
        TSQLQuery(FSQLInternalQuery).ParamByName(paramName).Value:=avariant;
+      end;
+{$ENDIF}
+     end;
+    rpfiredac:
+     begin
+{$IFDEF FIREDAC}
+      if assigned(astream) then
+      begin
+       TFDQuery(FSQLInternalQuery).ParamByName(paramName).DataType:=ftBlob;
+       TFDQuery(FSQLInternalQuery).ParamByName(paramName).LoadFromStream(astream,ftBlob);
+      end
+      else
+      begin
+       TFDQuery(FSQLInternalQuery).ParamByName(paramName).DataType:=
+          VariantTypeToDataType(avariant);
+       TFDQuery(FSQLInternalQuery).ParamByName(paramName).Value:=avariant;
       end;
 {$ENDIF}
      end;
@@ -3891,6 +3917,12 @@ begin
     begin
  {$IFDEF USEIBO}
      TIBOQuery(FSQLInternalQuery).ExecSQL;
+ {$ENDIF}
+    end;
+  rpfiredac:
+    begin
+ {$IFDEF FIREDAC}
+     TFDQuery(FSQLInternalQuery).ExecSQL;
  {$ENDIF}
     end;
   end;
