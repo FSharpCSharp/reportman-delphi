@@ -638,10 +638,6 @@ begin
    if Not afield.IsNull then
     ZQuery.Params.Items[i].Value:=afield.Value;
   end
-  else
-  begin
-   raise Exception.Create('Parameter Unassigned, Name: ' + ZQuery.Params.Items[i].Name);
-  end
  end;
 end;
 

@@ -22,7 +22,7 @@ uses Classes,SysUtils,Windows,rpinfoprovid,SyncObjs,
 {$IFDEF DOTNETD}
  System.Runtime.InteropServices,
 {$ENDIF}
-    rpmdconsts,rptypes;
+    rpmdconsts,rptypes, VCL.Graphics;
 
 const
  MAXKERNINGS=10000;
@@ -33,8 +33,9 @@ type
    var p5: TGCPResults; p6: DWORD): DWORD;stdcall;
  // external 'gdi32.dll' name 'GetCharacterPlacementW'
  TRpGDIInfoProvider=class(TRpInfoProvider)
-//  adc:HDC;
+  adc:HDC;
   fonthandle:THandle;
+  bitmap: VCL.Graphics.TBitmap;
   currentname:String;
   currentstyle:integer;
   GetCharPlac:TGetCharPlac;
@@ -49,9 +50,9 @@ type
 
 implementation
 
-var
- adc:ThAndle;
- critsec:TCriticalSection;
+//var
+// adc:ThAndle;
+// critsec:TCriticalSection;
 const
  TTF_PRECISION=1000;
 
@@ -65,17 +66,11 @@ begin
  currentstyle:=0;
  fonthandle:=0;
  gdilib:=0;
- critsec.Enter;
- try
-  if adc=0 then
-  begin
-   ddc:=GetDC(0);
-   adc:=CreateCompatibleDC(ddc);
-   ReleaseDC(0,ddc);
-  end;
- finally
-  critsec.Leave;
- end;
+ bitmap:=VCL.Graphics.TBitmap.Create;
+ bitmap.PixelFormat:=pf32bit;
+ bitmap.Width:=10;
+ bitmap.Height:=10;
+ adc:=bitmap.Canvas.Handle;
   gdilib:=LoadLibrary('gdi32.dll');
   if gdilib=0 then
    RaiseLastOsError;
@@ -90,6 +85,7 @@ begin
   DeleteObject(fonthandle);
  if gdilib<>0 then
   FreeLibrary(gdilib);
+ bitmap.Free;
  inherited destroy;
 end;
 
@@ -100,6 +96,7 @@ var
 {$IFDEF DOTNETD}
  afontname:string;
 {$ENDIF}
+ lastError:Integer;
 begin
  if ((currentname=pdffont.WFontName) and (currentstyle=pdffont.Style)) then
   exit;
@@ -146,11 +143,16 @@ begin
  begin
   logfont.lfFaceName[i]:=WideChar(0);
  end;
-StrPCopy(LogFont.lffACEnAME,Copy(pdffont.WFontName,1,LF_FACESIZE));
-
-
+ StrPCopy(LogFont.lffACEnAME,Copy(pdffont.WFontName,1,LF_FACESIZE));
 
  Fonthandle:= CreateFontIndirect(LogFont);
+ if (FontHandle=0) then
+ begin   
+  lasterror:=System.GetLastError();
+  raise Exception.Create('Error calling CreateFontIndirect for font: ' + pdffont.WFontName + 
+   ' System Error Code: ' + IntToStr(lasterror));   
+ end;
+
  SelectObject(adc,fonthandle);
 end;
 
@@ -426,7 +428,6 @@ var
 {$IFDEF DELPHI2009UP}
  gcp:windows.tagGCP_RESULTSW;
 {$ENDIF}
-
  astring:WideString;
 begin
  glyphindex:=0;
@@ -440,8 +441,8 @@ begin
  end;
  SelectFont(pdffont);
  logx:=GetDeviceCaps(adc,LOGPIXELSX);
-  if not GetCharABCWidthsW(adc,aint,aint,aabc[1]) then
-   RaiseLastOSError;
+//   if not GetCharABCWidthsW(adc,aint,aint,aabc[1]) then
+//   RaiseLastOSError;
   gcp.lStructSize:=sizeof(gcp);
   gcp.lpOutString:=nil;
   gcp.lpOrder:=nil;
@@ -453,16 +454,14 @@ begin
   gcp.nMaxFit:=1;
   astring:='';
   astring:=astring+charcode+Widechar(0);
-{$IFDEF CHARPLACBOOL}
-  if GetCharPlac(adc,PWideChar(astring),1,9,gcp,GCP_DIACRITIC)=0 then
-   RaiseLastOSError;
-{$ENDIF}
-{$IFNDEF CHARPLACBOOL}
   if GetCharacterPlacementW(adc,PWideChar(astring),1,0,gcp,GCP_DIACRITIC)=0 then
    RaiseLastOSError;
-{$ENDIF}
   data.loadedglyphs[aint]:=WideChar(glyphindex);
   data.loadedg[aint]:=true;
+
+   if not GetCharABCWidthsI(adc,glyphindex,1,nil,aabc[1]) then
+     RaiseLastOSError;
+
  Result:=Round(
    (Integer(aabc[1].abcA)+Integer(aabc[1].abcB)+Integer(aabc[1].abcC))/logx*72000/TTF_PRECISION
    );
@@ -503,11 +502,6 @@ begin
 end;
 
 initialization
-adc:=0;
-critsec:=TCriticalSection.Create;
 finalization
-if adc<>0 then
- ReleaseDC(0,adc);
-critsec.Free;
 
 end.
