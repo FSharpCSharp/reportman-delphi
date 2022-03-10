@@ -627,6 +627,7 @@ var
  i:integer;
  afield:TField;
 begin
+
  for i:=0 to ZQuery.Params.Count-1 do
  begin
   afield:=Dataset.FindField(ZQuery.Params.Items[i].Name);
@@ -636,7 +637,7 @@ begin
    ZQuery.Params.Items[i].DataType:=afield.DataType;
    if Not afield.IsNull then
     ZQuery.Params.Items[i].Value:=afield.Value;
-  end;
+  end
  end;
 end;
 
@@ -2647,7 +2648,14 @@ begin
        else
 {$ENDIF}
         FMasterSource.DataSet:=datainfosource.Dataset;
-       AssignParamValuesS(TSQlQuery(FSQLInternalQuery),datainfosource.Dataset);
+        try
+          AssignParamValuesS(TSQlQuery(FSQLInternalQuery),datainfosource.Dataset);
+        except
+         on E:Exception do
+         begin
+          raise Exception.Create(E.Message + ' DataSet: ' + Alias);
+         end
+        end;
 //       TSQLQuery(FSQLInternalQuery).DataSource:=FMasterSource;
 //       if datainfosource.cached then
 //        FMasterSource.DataSet:=datainfosource.CachedDataset
