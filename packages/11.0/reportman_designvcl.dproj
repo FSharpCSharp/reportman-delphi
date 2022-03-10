@@ -119,7 +119,6 @@
         <DCCReference Include="FireDACMySQLDriver.dcp"/>
         <DCCReference Include="FireDACADSDriver.dcp"/>
         <DCCReference Include="adortl.dcp"/>
-        <DCCReference Include="ibxpress.dcp"/>
         <DCCReference Include="reportman_rtl.dcp"/>
         <DCCReference Include="reportman_vcl.dcp"/>
         <DCCReference Include="designide.dcp"/>

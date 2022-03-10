@@ -433,7 +433,7 @@ begin
     RpShowMessage(SRpConnectionOk);
     FDConnection.Connected:=False;
    finally
-    FIBDatabase.Free;
+    FDConnection.Free;
    end;
  end
  else

@@ -50,7 +50,6 @@ requires
   FireDACIBDriver,
   FireDACMySQLDriver,
   FireDACADSDriver,
-  ibxpress,
   adortl;
 
 contains
