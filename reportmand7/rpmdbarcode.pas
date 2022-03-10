@@ -87,6 +87,8 @@ type
    FUpdated:boolean;
    FRotation:SmallInt;
    FBColor:integer;
+   FBackColor:integer;
+   FTransparent:boolean;
    FECCLevel,FNumRows,FNumColumns:Integer;
    FTruncated:Boolean;
    FCodewords:TSPDF417CodewordList;
@@ -197,7 +199,9 @@ type
    property DisplayFormat:Widestring read FDisplayformat write FDisplayFormat;
    property Rotation:smallint read FRotation write FRotation default 0;
    property BColor:integer read FBColor write FBColor default $0;
-   // PDF417
+   property BackColor:integer read FBackColor write FBackColor default $FFFFFF;
+   property Transparent : Boolean read FTransparent write FTransparent default false;
+     // PDF417
    property NumColumns:Integer read FNumColumns write FNumColumns default 0;
    property NumRows:Integer read FNumRows write FNumRows default 0;
    property ECCLevel : Integer read FECCLevel write SetECCLevel default -1;
@@ -330,6 +334,7 @@ begin
   FNumRows:=0;
   FNumColumns:=0;
   FTruncated:=false;
+  FBackColor := $FFFFFF;
 end;
 
 
@@ -441,6 +446,12 @@ begin
            end
         else
            tmp := string(CurrentText);
+  if Length(tmp)<8 then
+  begin
+    Result:='';
+    Exit;
+  end;
+
 
 	result := '505';   // Startcode
 
@@ -506,6 +517,12 @@ begin
 	end
 	else
 		tmp := string(CurrentText);
+
+  if Length(tmp)<13 then
+  begin
+    Result:='';
+    Exit;
+  end;
 
 	LK := StrToInt(tmp[1]);
 	tmp := copy(tmp,2,12);
@@ -812,12 +829,7 @@ const tabelle_128: array[0..102] of TCode128 = (
 	( a:')'; b:')'; c:'09'; data:'221213'; ),
 	( a:'*'; b:'*'; c:'10'; data:'221312'; ),
 	( a:'+'; b:'+'; c:'11'; data:'231212'; ),
-{$IFDEF DOTNETD}
-	( a:''''; b:''''; c:'12'; data:'112232'; ),
-{$ENDIF}
-{$IFNDEF DOTNETD}
 	( a:'´'; b:'´'; c:'12'; data:'112232'; ),
-{$ENDIF}
 	( a:'-'; b:'-'; c:'13'; data:'122132'; ),
 	( a:'.'; b:'.'; c:'14'; data:'122231'; ),
 	( a:'/'; b:'/'; c:'15'; data:'113222'; ),
@@ -907,12 +919,7 @@ const tabelle_128: array[0..102] of TCode128 = (
 	( a:' '; b:' '; c:'99'; data:'113141'; ),
 	( a:' '; b:' '; c:'  '; data:'114131'; ),
 	( a:' '; b:' '; c:'  '; data:'311141'; ),
-{$IFDEF DOTNETD}
-	( a:'?'; b:'?'; c:'  '; data:'411131'; )
-{$ENDIF}
-{$IFNDEF DOTNETD}
 	( a:'¿'; b:'¿'; c:'  '; data:'411131'; )
-{$ENDIF}
 	);
 
 StartA = '211412';
@@ -968,10 +975,10 @@ var
  isalpha:boolean;
  index:integer;
 begin
- if FText[i]='�' then
+ if FText[i]=Chr($BF) then
   inc(i);
  acopy:=Copy(ftext,i,Length(FText));
- index:=Pos('�',acopy);
+ index:=Pos(Chr($BF),acopy);
  if index>0 then
   acopy:=copy(acopy,1,index-1);
  if (length(acopy) mod 2)<>0 then
@@ -996,7 +1003,7 @@ begin
   Result:=bcCode128C;
 end;
 
-var i, idx: integer;
+var i, idx,idxC: integer;
 	startcode: AnsiString;
 	checksum : integer;
         newtyp:TRpBarcodeType;
@@ -1030,11 +1037,13 @@ begin
    result := result+Convert(startcode);    // Startcode
 //  numint:=0;
   // Look for EAN control
-  if FText[i]='�' then
+  idxC := 1;
+  if FText[i]=Chr($BF) then
   begin
    result:=Result+Convert('411131');
    Inc(checksum, 102*i);
    inc(i);
+   inc(idxC);
    if i>Length(FText) then
     break;
   end;
@@ -1051,12 +1060,12 @@ begin
       Inc(checksum, idx*(i));
       inc(i);
       if Length(FText)>=i then
-       if FText[i]='�' then
+       if FText[i]=chr($BF) then
        begin
         result:=Result+Convert('411131');
         Inc(checksum, 102*i);
         inc(i);
-        break;
+        continue;
        end;
      end;
     end;
@@ -1065,29 +1074,33 @@ begin
      cadc:='';
      While i<=Length(FText) do
      begin
+      if Length(FText)>=i then
+       if FText[i]=chr($BF) then
+       begin
+        result:=Result+Convert('411131');
+        Inc(checksum, 102*idxC);
+        inc(i);
+        Inc(idxC);
+        continue;
+       end;
       cadc:=cadc+FText[i];
       if length(cadc)>1 then
       begin
        idx := Find_Code128C(cadc);
        if idx < 0 then
-	idx := Find_Code128C('00');
+	      idx := Find_Code128C('00');
 // Fix by Chris Gradussen
 // first pair of 2 digits multiply by 1 instead of 2
 // second pair of 2 digits multiply by 2 instead of 4...
 //       Inc(checksum, (idx*i)); Original line
-       Inc(checksum,(idx*(i div 2)));
+//       Inc(checksum,(idx*(i div 2)));
+       Inc(checksum,(idx*(idxC)));
+       Inc(idxC);
        result := result + Convert(tabelle_128[idx].data);
        cadc:='';
       end;
       inc(i);
-      if Length(FText)>=i then
-       if FText[i]='�' then
-       begin
-        result:=Result+Convert('411131');
-        Inc(checksum, 102*i);
-        inc(i);
-        break;
-       end;
+
      end;
     end;
   end;
@@ -1531,116 +1544,169 @@ data[] :
 	'C'   black           150%*Ratio          2/5  (used for PostNet)
 	'D'   black           200%*Ratio          2/5  (used for PostNet)
 }
-procedure TRpBarcode.DoLines(data: AnsiString; FLeft,FTop:integer;meta:TRpMetaFileReport);
+procedure TRpBarcode.DoLines(data: AnsiString; FLeft, FTop: integer;
+  meta: TRpMetafileReport);
 
 type
-	TLineType = (white, black, black_half);
-	// black_half means a black line with 2/5 height (used for PostNet)
+  TLineType = (white, black, black_half);
+  // black_half means a black line with 2/5 height (used for PostNet)
 
-var i:integer;
-	lt : TLineType;
-	xadd:integer;   //
-	awidth, aheight:integer;
-	a,b,c,d,     // Edges of a line (we need 4 Point because the line
-					 // is a recangle
-	orgin : TPoint;
-	alpha:double;
-        PenWidth:integer;
-        PenColor:integer;
-        BrushColor:integer;
+var
+  i: integer;
+  lt: TLineType;
+  xadd: integer; //
+  awidth, aheight: integer;
+  A, b, c, d, // Edges of a line (we need 4 Point because the line
+  // is a recangle
+  orgin: TPoint;
+  alpha: double;
+  PenWidth: integer;
+  PenColor: integer;
+  BrushColor: integer;
+  drawline: boolean;
 begin
-  if typ=bcCodePDF417 then
+  if Typ = bcCodePDF417 then
   begin
-   Draw2DBarcode(FLeft,FTop,meta);
-   exit;
+    Draw2DBarcode(FLeft, FTop, meta);
+    Exit;
   end;
-  if typ=bcCodeQr then
+  if Typ = bcCodeQr then
   begin
-   DrawQrBarcode(FLeft,FTop,meta);
-   exit;
+    DrawQrBarcode(FLeft, FTop, meta);
+    Exit;
   end;
 
-	xadd := 0;
-	orgin.x := FLeft;
-	orgin.y := FTop;
-	alpha := Rotation/10*pi / 180.0;
+  xadd := 0;
+  orgin.x := FLeft;
+  orgin.y := FTop;
+  alpha := Rotation / 10 * pi / 180.0;
 
-        PenWidth := 0;
-        for i:=1 to Length(data) do  // examine the pattern string
-	begin
-		case data[i] of
-			'0': begin awidth := modules[0]; lt := white; end;
-			'1': begin awidth := modules[1]; lt := white; end;
-			'2': begin awidth := modules[2]; lt := white; end;
-			'3': begin awidth := modules[3]; lt := white; end;
+  PenWidth := 0;
+  for i := 1 to Length(data) do // examine the pattern string
+  begin
+    drawline := true;
+    case data[i] of
+      '0':
+        begin
+          awidth := modules[0];
+          lt := white;
+        end;
+      '1':
+        begin
+          awidth := modules[1];
+          lt := white;
+        end;
+      '2':
+        begin
+          awidth := modules[2];
+          lt := white;
+        end;
+      '3':
+        begin
+          awidth := modules[3];
+          lt := white;
+        end;
 
-			'5': begin awidth := modules[0]; lt := black; end;
-			'6': begin awidth := modules[1]; lt := black; end;
-			'7': begin awidth := modules[2]; lt := black; end;
-			'8': begin awidth := modules[3]; lt := black; end;
-			'A': begin awidth := modules[0]; lt := black_half; end;
-        		'B': begin awidth := modules[1]; lt := black_half; end;
-			'C': begin awidth := modules[2]; lt := black_half; end;
-			'D': begin awidth := modules[3]; lt := black_half; end;
-               		else
-			begin
-	        		// something went wrong
-				// mistyped pattern table
-				raise Exception.Create(SRpWrongBarcodeType+':'+data);
-				end;
-			end;
-			if (lt = black) or (lt = black_half) then
-			begin
-				PenColor := BColor;
-			end
-			else
-			begin
-				PenColor := $FFFFFF;
-			end;
-			BrushColor := PenColor;
+      '5':
+        begin
+          awidth := modules[0];
+          lt := black;
+        end;
+      '6':
+        begin
+          awidth := modules[1];
+          lt := black;
+        end;
+      '7':
+        begin
+          awidth := modules[2];
+          lt := black;
+        end;
+      '8':
+        begin
+          awidth := modules[3];
+          lt := black;
+        end;
+      'A':
+        begin
+          awidth := modules[0];
+          lt := black_half;
+        end;
+      'B':
+        begin
+          awidth := modules[1];
+          lt := black_half;
+        end;
+      'C':
+        begin
+          awidth := modules[2];
+          lt := black_half;
+        end;
+      'D':
+        begin
+          awidth := modules[3];
+          lt := black_half;
+        end;
+    else
+      begin
+        // something went wrong
+        // mistyped pattern table
+        raise Exception.Create(SRpWrongBarcodeType + ':' + data);
+      end;
+    end;
+    if (lt = black) or (lt = black_half) then
+    begin
+      PenColor := BColor;
+    end
+    else
+    begin
+      if (Transparent) then
+      begin
+       drawline := false;
+      end
+      else
+      begin
+        PenColor := BackColor;
+      end;
+    end;
+    if (drawline) then
+    begin
+      BrushColor := PenColor;
 
-			if lt = black_half then
-				aheight := PrintHeight * 2 div 5
-			else
-				aheight := PrintHeight;
+      if lt = black_half then
+        aheight := PrintHeight * 2 div 5
+      else
+        aheight := PrintHeight;
 
+      A.x := xadd;
+      A.y := 0;
 
+      b.x := xadd;
+      b.y := aheight;
 
+      c.x := xadd + awidth;
+      c.y := aheight;
 
+      d.x := xadd + awidth;
+      d.y := 0;
 
-			a.x := xadd;
-			a.y := 0;
+      // a,b,c,d builds the rectangle we want to draw
 
-			b.x := xadd;
-			b.y := aheight;
+      // rotate the rectangle
+      A := Translate2D(Rotate2D(A, alpha), orgin);
+      b := Translate2D(Rotate2D(b, alpha), orgin);
+      c := Translate2D(Rotate2D(c, alpha), orgin);
+      d := Translate2D(Rotate2D(d, alpha), orgin);
 
-			c.x := xadd+awidth;
-			c.y := aheight;
+      // draw the rectangle
+      meta.Pages[meta.CurrentPage].NewDrawObject(A.y, A.x, c.x - A.x, c.y - A.y,
+        integer(rpsRectangle), 0, BrushColor, 0, PenWidth, PenColor);
+    end;
+    // Polygon([a,b,c,d]);
 
-			d.x := xadd+awidth;
-			d.y := 0;
-
-			// a,b,c,d builds the rectangle we want to draw
-
-
-			// rotate the rectangle
-			a := Translate2D(Rotate2D(a, alpha), orgin);
-			b := Translate2D(Rotate2D(b, alpha), orgin);
-			c := Translate2D(Rotate2D(c, alpha), orgin);
-			d := Translate2D(Rotate2D(d, alpha), orgin);
-
-			// draw the rectangle
-  meta.Pages[meta.CurrentPage].NewDrawObject(a.y,a.x,c.x-a.x,c.y-a.y,
-  integer(rpsRectangle),0,BrushColor,0,PenWidth,PenColor);
-//			Polygon([a,b,c,d]);
-
-
-			xadd := xadd + awidth;
-  	end;
+    xadd := xadd + awidth;
+  end;
 end;
-
-
-
 
 procedure TRpBarcode.Evaluate;
 var
@@ -1885,7 +1951,7 @@ var
   NumErrorCodewords : Integer;
   ErrorLevel        : Integer;
   j                 : Integer;
-                                            
+
 begin
   { Set the error correction level automatically if needed }
   ErrorLevel := GetRealErrorLevel;
@@ -1974,7 +2040,7 @@ begin
       temp := (929 - temp) mod 929;
       BaseReg[j] := (BaseReg[j - 1] + temp) mod 929;
     end;
-    temp := (CoeffReg[ECClen - 1] * wrap) mod 929;      
+    temp := (CoeffReg[ECClen - 1] * wrap) mod 929;
     temp := (929 - temp) mod 929;
     BaseReg[0]:= temp;
   end;
@@ -2469,7 +2535,7 @@ var
   Digits     : array [0..MAX_DIGITS_NUM] of Integer;
                              // 15 base 900 digits = 45 base 10 digits
   SP         : Integer;
-  
+
 begin
   {Assert: S must be non-empty
            it must contain just the ASCII characters '0' to '9' (so no
@@ -2578,7 +2644,7 @@ begin
 
   if Position <= CodeLen then begin
     if (FCode[Position] = '\') and
-       (Position < CodeLen) then begin 
+       (Position < CodeLen) then begin
       case FCode[Position + 1] of
         '0'..'9' : begin
           try
@@ -2635,7 +2701,7 @@ begin
           NewChar := Byte (FCode[Position]);
           Inc (Position);
         end;
-      end;   
+      end;
     end else begin
       NewChar := Byte (FCode[Position]);
       Inc (Position);
@@ -2730,7 +2796,7 @@ procedure TRpBarcode.DrawRightRowIndicator (RowNumber     : Integer;
 var
   Codeword   : Integer;
   ErrorLevel : Integer;
-  
+
 begin
   ErrorLevel := GetRealErrorLevel;
   CodeWord := 0;
@@ -3037,14 +3103,16 @@ var
   BrushColor:Integer;
   PenWidth:Integer;
   dif:integer;
+  isBlack:boolean;
 begin
-  PenWidth:=0;
+  PenWidth:=-100;
   metaPage:=meta.Pages[meta.CurrentPage];
   QRCode := TRpDelphiZXingQRCode.Create;
   try
-    QRCode.Data := CurrentText;
-    QRCode.Encoding := qrAlphanumeric;
+    QRCode.Encoding := qrAuto;
+    // QRCode.ECCBits:= Self.ECCLevel;
     QRCode.QuietZone := 4;
+    QRCode.Data := CurrentText;
     squareWidth:=Width div QRCode.Columns;
     squareHeight:=Height div QRCode.Rows;
     // Center barcode in rectangle
@@ -3064,19 +3132,23 @@ begin
     begin
       for Column := 0 to QRCode.Columns - 1 do
       begin
-        if (QRCode.IsBlack[Row, Column]) then
+        isBlack := QRCode.IsBlack[Row, Column];
+        if (isBlack) then
         begin
  				 PenColor := BColor;
          BrushColor := PenColor;
         end
         else
         begin
-          PenColor := $FFFFFF;
-    			BrushColor := PenColor;
+         PenColor := BackColor;
+         BrushColor := PenColor;
         end;
-        meta.Pages[meta.CurrentPage].NewDrawObject(
-            FTop+Row*squareHeight,FLeft+Column*squareWidth,squareWidth,squareHeight,
-            integer(rpsRectangle),0,BrushColor,0,PenWidth,PenColor);
+        if (isBlack OR (Not Transparent)) then
+        begin
+          meta.Pages[meta.CurrentPage].NewDrawObject(
+              FTop+Row*squareHeight,FLeft+Column*squareWidth,squareWidth,squareHeight,
+              integer(rpsRectangle),0,BrushColor,0,PenWidth,PenColor);
+        end;
        end;
     end;
   finally

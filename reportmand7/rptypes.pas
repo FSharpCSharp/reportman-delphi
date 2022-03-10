@@ -1,4 +1,4 @@
-{*******************************************************}
+﻿{*******************************************************}
 {                                                       }
 {       Report Manager                                  }
 {                                                       }
@@ -423,6 +423,7 @@ procedure MIMEEncode(amemstream:TMemoryStream;DestStream:TStream);
 function MIMEEncodeString(amemstream:TMemoryStream):string;
 {$ENDIF}
 function EscapeCodedToString(astring:string):string;
+procedure CopyStreamContent(source: TStream; destination: TStream);
 
 
 implementation
@@ -588,7 +589,7 @@ var
 begin
  vtype:=Vartype(avar);
  Result:=(vtype in [varSmallInt,varInteger,varSingle,varDouble,VarCurrency,
-  varShortInt,varByte,varWord,varLongWord,varInt64,varUInt64]) OR (vtype=273);
+  varShortInt,varByte,varWord,varLongWord,varInt64,$0015]) OR (vtype=273); // VarUint64
 end;
 
 function VarIsInteger(avar:Variant):Boolean;
@@ -5314,6 +5315,50 @@ end;
 
 {$ENDIF}
 
+
+
+procedure CopyStreamContent(source: TStream; destination: TStream);
+var buffer: PByte;
+var readed: LongInt;
+var toread: LongInt;
+var pending: LongInt;
+var buflen: LongInt;
+begin
+ buflen:=500;
+ GetMem(buffer,buflen);
+ try
+  pending:=source.Size;
+  toread:=pending;
+  if (pending>buflen) then
+  begin
+   toread:=buflen;
+  end
+  else
+  begin
+   toread:=pending;
+  end;
+  readed := source.Read(buffer^,toread);
+  while (readed <> 0) do
+  begin
+   destination.Write(buffer^,readed);
+   pending:=pending-readed;
+   if (pending>buflen) then
+   begin
+    toread:=buflen;
+   end
+   else
+   begin
+    toread:=pending;
+   end;
+   if (toread>0) then
+    readed := source.Read(buffer^,toread)
+   else
+    readed:=0;
+  end;
+ finally
+  FreeMem(Buffer);
+ end
+end;
 
 
 

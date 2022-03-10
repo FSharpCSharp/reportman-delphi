@@ -8,7 +8,7 @@
 {       Code Base From Nishita's PDF Creation (TNPDF)   }
 {       info@nishita.com                                }
 {                                                       }
-{       Copyright (c) 1994-2019 Toni Martir             }
+{       Copyright (c) 1994-2021 Toni Martir             }
 {       toni@reportman.es                                   }
 {                                                       }
 {       Converted to CLX (not Visual CLX)               }
@@ -67,7 +67,10 @@ uses Classes,Sysutils,rpinfoprovid,
 {$ENDIF}
 {$ENDIF}
 {$IFDEF MSWINDOWS}
- rpinfoprovgdi,Windows,
+{$IFNDEF FPC}
+ rpinfoprovgdi,
+{$ENDIF}
+ Windows,
 {$ENDIF}
 {$IFDEF DOTNETD}
  Graphics,System.Runtime.InteropServices,
@@ -109,7 +112,9 @@ type
    FFontTTData:TStringList;
    FImageIndexes:TStringList;
 {$IFDEF MSWINDOWS}
+{$IFNDEF FPC}
    FGDIInfoProvider:TRpGDIInfoProvider;
+{$ENDIF}
 {$ENDIF}
 {$IFDEF LINUX}
   FFtInfoProvider:TRpFtInfoProvider;
@@ -430,8 +435,10 @@ begin
  FImageIndexes:=TStringList.Create;
  FImageIndexes.Sorted:=true;
 {$IFDEF MSWINDOWS}
+{$IFNDEF FPC}
  FGDIInfoProvider:=TRpGDIInfoProvider.Create;
  FInfoProvider:=FGDIInfoProvider;
+{$ENDIF}
 {$ENDIF}
 {$IFDEF LINUX}
  FFtInfoProvider:=TRpFtInfoProvider.Create;
@@ -454,7 +461,9 @@ begin
  FFont.free;
  FFontTTData.free;
 {$IFDEF MSWINDOWS}
+{$IFNDEF FPC}
  FGDIInfoProvider.free;
+{$ENDIF}
 {$ENDIF}
 {$IFDEF LINUX}
  FFtInfoProvider.free;
@@ -590,7 +599,9 @@ begin
  begin
   FCompressionStream := TCompressionStream.Create(clDefault,FTempStream);
   try
-   FCompressionStream.CopyFrom(FsTempStream, 0);
+   FsTempStream.Seek(0,soBeginning);
+   CopyStreamContent(FsTempStream, FCompressionStream);
+   // FCompressionStream.CopyFrom(FsTempStream);
   finally
    FCompressionStream.Free;
   end;
@@ -646,7 +657,9 @@ begin
  begin
   FCompressionStream := TCompressionStream.Create(clDefault,FTempStream);
   try
-   FCompressionStream.CopyFrom(FsTempStream, 0);
+   FsTempStream.Seek(0, soBeginning);
+   CopyStreamContent(FsTempStream, FCompressionStream);
+   //FCompressionStream.CopyFrom(FsTempStream, FsTempStream.Size);
   finally
    FCompressionStream.Free;
   end;
@@ -815,14 +828,27 @@ var
  olddecimalseparator:char;
 {$ENDIF}
 begin
- olddecimalseparator:=decimalseparator;
- decimalseparator:='.';
+{$IFDEF DELPHI2009UP}
+ olddecimalseparator:=FormatSettings.DecimalSeparator;
+
+ FormatSettings.DecimalSeparator:='.';
  try
   Result:=FormatCurr('######0.00',(((FFile.FPageHeight-Value)/FResolution)*CONS_PDFRES)-FontSize);
  finally
-  decimalseparator:=olddecimalseparator;
+  FormatSettings.DecimalSeparator:=olddecimalseparator;
  end;
+{$ELSE}
+ olddecimalseparator:=DecimalSeparator;
+
+ DecimalSeparator:='.';
+ try
+  Result:=FormatCurr('######0.00',(((FFile.FPageHeight-Value)/FResolution)*CONS_PDFRES)-FontSize);
+ finally
+  DecimalSeparator:=olddecimalseparator;
+ end;
+{$ENDIF}
 end;
+
 
 function NumberToText(Value:double):string;
 var
@@ -833,6 +859,15 @@ var
  olddecimalseparator:char;
 {$ENDIF}
 begin
+{$IFDEF DELPHI2009UP}
+ olddecimalseparator:=FormatSettings.decimalseparator;
+ FormatSettings.decimalseparator:='.';
+ try
+  Result:=FormatCurr('######0.00',Value);
+ finally
+  FormatSettings.decimalseparator:=olddecimalseparator;
+ end;
+{$ELSE}
  olddecimalseparator:=decimalseparator;
  decimalseparator:='.';
  try
@@ -840,6 +875,7 @@ begin
  finally
   decimalseparator:=olddecimalseparator;
  end;
+{$ENDIF}
 end;
 
 function TRpPDFCanvas.UnitsToTextX(Value:integer):string;
@@ -851,6 +887,15 @@ var
  olddecimalseparator:char;
 {$ENDIF}
 begin
+{$IFDEF DELPHI2009UP}
+ olddecimalseparator:=FormatSettings.decimalseparator;
+ FormatSettings.decimalseparator:='.';
+ try
+  Result:=FormatCurr('######0.00',(Value/FResolution)*CONS_PDFRES);
+ finally
+  FormatSettings.decimalseparator:=olddecimalseparator;
+ end;
+{$ELSE}
  olddecimalseparator:=decimalseparator;
  decimalseparator:='.';
  try
@@ -858,6 +903,7 @@ begin
  finally
   decimalseparator:=olddecimalseparator;
  end;
+{$ENDIF}
 end;
 
 function TRpPDFCanvas.UnitsToTextY(Value:integer):string;
@@ -869,6 +915,15 @@ var
  olddecimalseparator:char;
 {$ENDIF}
 begin
+{$IFDEF DELPHI2009UP}
+ olddecimalseparator:=FormatSettings.decimalseparator;
+ FormatSettings.decimalseparator:='.';
+ try
+  Result:=FormatCurr('######0.00',((FFile.FPageHeight-Value)/FResolution)*CONS_PDFRES);
+ finally
+  FormatSettings.decimalseparator:=olddecimalseparator;
+ end;
+{$ELSE}
  olddecimalseparator:=decimalseparator;
  decimalseparator:='.';
  try
@@ -876,6 +931,7 @@ begin
  finally
   decimalseparator:=olddecimalseparator;
  end;
+{$ENDIF}
 end;
 
 
@@ -1008,6 +1064,21 @@ var
  olddecimal:char;
 {$ENDIF}
 begin
+{$IFDEF DELPHI2009UP}
+ olddecimal:=FormatSettings.decimalseparator;
+ try
+  FormatSettings.decimalseparator:='.';
+  acolor:=LongWord(color);
+  r:=byte(acolor);
+  Result:=FormatCurr('0.00',r/256);
+  g:=byte(acolor shr 8);
+  Result:=Result+' '+FormatCurr('0.00',g/256);
+  b:=byte(acolor shr 16);
+  Result:=Result+' '+FormatCurr('0.00',b/256);
+ finally
+  FormatSettings.decimalseparator:=olddecimal;
+ end;
+{$ELSE}
  olddecimal:=decimalseparator;
  try
   decimalseparator:='.';
@@ -1021,6 +1092,7 @@ begin
  finally
   decimalseparator:=olddecimal;
  end;
+{$ENDIF}
 end;
 
 
@@ -1193,6 +1265,7 @@ var
  lwidths:TStringList;
  arec:TRect;
  aword:WideString;
+ oldPenStyle:integer;
 begin
  FFile.CheckPrinting;
 
@@ -1216,12 +1289,6 @@ begin
   // Calculates text extent and apply alignment
   recsize:=ARect;
   TextExtent(Text,recsize,wordbreak,singleline);
-  if (not Font.Transparent) then
-  begin
-   BrushColor:=Font.BackColor;
-   BrushStyle:=0;
-   Rectangle(arect.Left, arect.Top, arect.Left+recsize.Right, arect.Top+recsize.Bottom);
-  end;
   // Align bottom or center
   PosY:=ARect.Top;
   if (AlignMent AND AlignmentFlags_AlignBottom)>0 then
@@ -1298,6 +1365,16 @@ begin
        end
        else
         currpos:=PosX;
+       if ((not Font.Transparent) AND (lwords.Count>0)) then
+       begin
+        BrushColor:=Font.BackColor;
+        BrushStyle:=0;
+        oldPenStyle:=PenStyle;
+        PenStyle:=5;
+        Rectangle(currpos, PosY+LineInfo[i].TopPos, currpos+LineInfo[i].Width,PosY+LineInfo[i].TopPos+LineInfo[i].height);
+        PenStyle:=oldPenStyle;
+       end;
+
        for index:=0 to lwords.Count-1 do
        begin
         TextOut(currpos,PosY+LineInfo[i].TopPos,lwords.strings[index],LineInfo[i].Width,Rotation,RightToLeft);
@@ -1312,7 +1389,19 @@ begin
     end;
    end
    else
+   begin
+    if (not Font.Transparent) then
+    begin
+     BrushColor:=Font.BackColor;
+     BrushStyle:=0;
+     oldPenStyle:=PenStyle;
+     PenStyle:=5;
+     Rectangle(PosX, PosY+LineInfo[i].TopPos, PosX+LineInfo[i].Width,PosY+LineInfo[i].TopPos+LineInfo[i].height);
+     PenStyle:=oldPenStyle;
+    end;
+
     TextOut(PosX,PosY+LineInfo[i].TopPos,astring,LineInfo[i].Width,Rotation,RightToLeft);
+   end
   end;
  finally
   if (Clipping or (Rotation<>0)) then
@@ -1533,12 +1622,15 @@ var
   imageindex:integer;
   format:string;
   newstream:boolean;
+  propx,propy:double;
+  W,H:integer;
 begin
  arect:=rec;
  FFile.CheckPrinting;
  FImageStream:=TMemoryStream.Create;
  try
   format:='';
+  indexed:=false;
   GetJPegInfo(abitmap,bitmapwidth,bitmapheight,format);
   isjpeg:=(format='JPEG');
   if isjpeg then
@@ -1695,7 +1787,9 @@ begin
    begin
     FCompressionStream := TCompressionStream.Create(clDefault,astream);
     try
-     FCompressionStream.CopyFrom(FImageStream, 0);
+     FImageStream.Seek(0, soBeginning);
+     CopyStreamContent(FImageStream, FCompressionStream);
+     // FCompressionStream.CopyFrom(FImageStream, FImageStream.Size);
     finally
      FCompressionStream.Free;
     end;
@@ -2415,7 +2509,7 @@ begin
  begin
   // read the values
   FMemBits.Clear;
-  FMemBits.SetSize(imagesize);
+  FMemBits.SetSize(Int64(imagesize));
   if bitcount=32 then
   begin
    SetLength(qvalues,imagesize);
@@ -2487,7 +2581,7 @@ begin
   end
   else*)
   begin
-   FMemBits.SetSize(width*height*3);
+   FMemBits.SetSize(Int64(width*height*3));
    linewidth:=width*3;
    SetLength(buffer,scanwidth);
 	 SetLength(bufdest,linewidth);
@@ -2573,7 +2667,7 @@ begin
   scanwidth:=scanwidth+1;
  SetLength(buffer,scanwidth);
  FMemBits.Clear;
- FMemBits.SetSize(height*origwidth);
+ FMemBits.SetSize(Int64(height*origwidth));
 { if numcolors=2 then
  begin
   amask:=$80;
@@ -2872,7 +2966,7 @@ var
 
 
 begin
- format:='JPEG';
+ format:='JPEG'; 
  // Checks it's a jpeg image
  readed:=astream.Read(c1,1);
  if readed<1 then
@@ -2906,6 +3000,12 @@ begin
   if ((c1=Ord('G')) AND (c2=Ord('I'))) then
   begin
    format:='GIF';
+   astream.seek(0,soFromBeginning);
+   exit;
+  end;
+  if ((c1=137) AND (c2=Ord('P'))) then
+  begin
+   format:='PNG';
    astream.seek(0,soFromBeginning);
    exit;
   end;
@@ -2991,6 +3091,8 @@ begin
   InfoProvider.FillFontData(Font,adata);
   if adata.fontdata.size>0 then
    adata.embedded:=Font.Name=poEmbedded;
+  if (Font.Name in [poEmbedded,poLinked]) then
+   adata.isunicode:=true;
   Result:=adata;
  end
  else
@@ -3047,7 +3149,9 @@ begin
    begin
     FCompressionStream := TCompressionStream.Create(clDefault,FTempStream);
     try
-     FCompressionStream.CopyFrom(adata.fontdata,adata.fontdata.Size);
+     adata.fontdata.Seek(0,soBeginning);
+     CopyStreamContent(adata.fontdata, FCompressionStream);
+     // FCompressionStream.CopyFrom(adata.fontdata,adata.fontdata.Size);
     finally
      FCompressionStream.Free;
     end;
@@ -3433,8 +3537,8 @@ begin
    if astring[i] in [WideChar('('),WideChar(')'),WideChar('\')] then
     Result:=Result+'\';
    // Euro exception
-   if astring[i]=widechar(8364) then
-    Result:=Result+chr(128)
+   if (Ord(astring[i])=8364) then
+    Result:=Result+AnsiChar(128)
    else
     Result:=Result+astring[i];
    if (i<Length(astring)) then
@@ -3455,6 +3559,7 @@ function PDFCompatibleText(astring:Widestring;adata:TRpTTFontData;pdffont:TRpPDF
 var
  i:integer;
  isunicode:boolean;
+ nchar:Widechar;
 begin
  isunicode:=false;
  if Assigned(adata) then
@@ -3477,13 +3582,14 @@ begin
   Result:='(';
   for i:=1 to Length(astring) do
   begin
-   if astring[i] in [WideChar('('),WideChar(')'),WideChar('\')] then
+   nchar:=astring[i];
+   if nchar in [WideChar('('),WideChar(')'),WideChar('\')] then
     Result:=Result+'\';
    // Euro character exception
-   if astring[i]=widechar(8364) then
-    Result:=Result+chr(128)
+   if (Ord(nchar)=8364) then
+    Result:=Result+AnsiChar(128)
    else
-    Result:=Result+astring[i];
+    Result:=Result+nchar;
   end;
   Result:=Result+')';
  end;

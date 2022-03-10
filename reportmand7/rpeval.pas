@@ -20,7 +20,7 @@ unit rpeval;
 interface
 
 {$I rpconf.inc}
-{$R rpeval.dcr}
+//{$R rpeval.dcr}
 
 uses
   SysUtils, Classes,DB,rptypeval,

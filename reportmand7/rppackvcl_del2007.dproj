@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-    <DCC_DependencyCheckOutputName>C:\Documents and Settings\All Users\Documentos\RAD Studio\5.0\Bpl\rppackvcl_del2007.bpl</DCC_DependencyCheckOutputName>
+    <DCC_DependencyCheckOutputName>..\..\..\..\..\..\Public\Documents\RAD Studio\5.0\Bpl\rppackvcl_del2007.bpl</DCC_DependencyCheckOutputName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Version>7.0</Version>
@@ -34,12 +34,19 @@
     <DelphiCompile Include="rppackvcl_del2007.dpk">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
-    <DCCReference Include="adortl.dcp" />
-    <DCCReference Include="bdertl.dcp" />
-    <DCCReference Include="dbexpress.dcp" />
-    <DCCReference Include="dbrtl.dcp" />
-    <DCCReference Include="dsnap.dcp" />
-    <DCCReference Include="ibxpress.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\adortl.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\bdertl.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\dbexpress.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\dbrtl.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\dsnap.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\ibxpress.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\rppack_del2007.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\rtl.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\tee.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\vcl.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\vcldb.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\vcljpg.dcp" />
+    <DCCReference Include="$(SystemRoot)\System32\vclx.dcp" />
     <DCCReference Include="rpactivexreport.dcr" />
     <DCCReference Include="rpactivexreport.dcr" />
     <DCCReference Include="rpactivexreport.pas" />
@@ -49,15 +56,8 @@
     <DCCReference Include="rpmaskedit.dcr" />
     <DCCReference Include="rppack_del200.dcp" />
     <DCCReference Include="rppack_del2005.dcp" />
-    <DCCReference Include="rppack_del2007.dcp" />
     <DCCReference Include="rpvclreport.dcr" />
     <DCCReference Include="rpvclreport.dcr" />
-    <DCCReference Include="rtl.dcp" />
-    <DCCReference Include="tee.dcp" />
-    <DCCReference Include="vcl.dcp" />
-    <DCCReference Include="vcldb.dcp" />
-    <DCCReference Include="vcljpg.dcp" />
-    <DCCReference Include="vclx.dcp" />
     <None Include="rpconf.inc" />
   </ItemGroup>
 </Project>
