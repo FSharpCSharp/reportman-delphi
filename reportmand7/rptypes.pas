@@ -4454,6 +4454,7 @@ end;
 var
  Sessionh:LHandle;
  amessage:MapiMessage;
+ how:Cardinal;
 begin
  CheckMAPI(MapiLogOn(0,nil,nil,MAPI_LOGON_UI,0,@Sessionh));
  try
@@ -4530,7 +4531,8 @@ begin
    amessage.lpFiles.nPosition:=0;
    amessage.lpFiles.lpFileType:=nil;
   end;
-  CheckMAPI(MapiSendMail(sessionh,0,amessage,MAPI_DIALOG,0));
+  how:=MAPI_LOGON_UI or MAPI_DIALOG or 4;
+  CheckMAPI(MapiSendMail(sessionh,0,amessage,how,0));
  finally
   CheckMAPI(MapiLogOff(sessionh,0,0,0));
  end;

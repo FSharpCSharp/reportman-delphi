@@ -116,3 +116,4 @@ reportmand7/Debug_Build/
 bpi/
 bpl/
 server/web/bin64/repwebexe.map
+*.map
