@@ -438,6 +438,11 @@ function MIMEEncodeString(amemstream:TMemoryStream):string;
 {$ENDIF}
 function EscapeCodedToString(astring:string):string;
 function Is64BitPlatform:boolean;
+function StringToOem(const S: String): AnsiString;
+
+function AnsiStringToOem(const S: AnsiString): AnsiString;
+
+
 
 implementation
 
@@ -5526,6 +5531,24 @@ begin
  // 258 = WideString Delphi 2009
  if (avartype=varstring) or (avartype=varOleStr) or (avartype=258) then
   Result:=true;
+end;
+
+
+function StringToOem(const S: String): AnsiString;
+begin
+  SetLength(Result, Length(S));
+  if S <> '' then begin
+    CharToOem(PChar(S), PAnsiChar(Result));
+  end;
+end;
+
+function AnsiStringToOem(const S: AnsiString): AnsiString;
+begin
+  Result := S;
+  UniqueString(Result);
+  if S <> '' then begin
+    CharToOemA(PAnsiChar(Result), PAnsiChar(Result));
+  end;
 end;
 
 
