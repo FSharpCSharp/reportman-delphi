@@ -26,7 +26,7 @@ interface
 
 uses
   SysUtils,
-  windows,
+  windows,Messages,
   Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls,rpmetafile, ComCtrls,rphtmldriver,rppreviewcontrol,
   rpgdidriver, ExtCtrls,Menus,rptypes,rpexceldriver,rptextdriver,rpsvgdriver,
@@ -265,7 +265,14 @@ begin
   end;
  finally
   if TRpPreviewControl(PreviewControl).Report.ErrorProcessing then
+  begin
    Close;
+  end
+  else
+  begin
+   // Fix bug toolbar size problem
+   PostMessage(Self.Handle,WM_SIZE,0,0);
+  end;
  end;
 { except
   on E:Exception do

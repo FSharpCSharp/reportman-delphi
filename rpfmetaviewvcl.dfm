@@ -1,20 +1,19 @@
 object FRpMetaVCL: TFRpMetaVCL
   Left = 0
   Top = 0
-  Width = 840
-  Height = 408
+  Width = 755
+  Height = 585
   Align = alClient
   ParentShowHint = False
   ShowHint = True
   TabOrder = 0
   OnMouseWheelDown = FrameMouseWheelDown
   OnMouseWheelUp = FrameMouseWheelUp
-  PixelsPerInch = 96
   object Splitter1: TSplitter
     Left = 0
-    Top = 124
+    Top = 58
     Width = 7
-    Height = 263
+    Height = 506
     Beveled = True
     ExplicitTop = 29
     ExplicitHeight = 220
@@ -22,11 +21,11 @@ object FRpMetaVCL: TFRpMetaVCL
   object BToolBar: TToolBar
     Left = 0
     Top = 0
-    Width = 840
-    Height = 124
+    Width = 755
+    Height = 58
     AutoSize = True
-    ButtonHeight = 36
-    ButtonWidth = 62
+    ButtonHeight = 25
+    ButtonWidth = 26
     Caption = 'BToolBar'
     Images = VirtualImageList1
     TabOrder = 0
@@ -36,63 +35,80 @@ object FRpMetaVCL: TFRpMetaVCL
       Action = AOpen
     end
     object ToolButton1: TToolButton
-      Left = 62
+      Left = 26
       Top = 0
       Action = AFirst
     end
     object ToolButton2: TToolButton
-      Left = 124
+      Left = 52
       Top = 0
       Action = APrevious
     end
     object EPageNum: TRpMaskEdit
-      Left = 186
+      Left = 78
       Top = 0
       Width = 44
-      Height = 36
+      Height = 25
+      AutoSize = False
       TabOrder = 1
       OnKeyDown = EPageNumKeyDown
       Text = '0'
       EditType = teinteger
     end
     object ToolButton3: TToolButton
-      Left = 230
+      Left = 122
       Top = 0
       Action = ANext
     end
     object ToolButton4: TToolButton
-      Left = 292
+      Left = 148
       Top = 0
       Action = ALast
     end
     object ToolButton14: TToolButton
-      Left = 0
+      Left = 174
       Top = 0
       Width = 8
       Caption = 'ToolButton14'
       ImageIndex = 8
       ImageName = 'Item9'
-      Wrap = True
       Style = tbsSeparator
     end
     object ToolButton6: TToolButton
-      Left = 0
-      Top = 44
+      Left = 182
+      Top = 0
       Action = APrint
     end
     object ToolButton7: TToolButton
-      Left = 62
-      Top = 44
+      Left = 208
+      Top = 0
       Action = ASave
     end
     object ToolButton10: TToolButton
-      Left = 124
-      Top = 44
+      Left = 234
+      Top = 0
       Action = AMailTo
     end
+    object PPBar: TPanel
+      Left = 260
+      Top = 0
+      Width = 104
+      Height = 25
+      BorderStyle = bsSingle
+      TabOrder = 2
+      Visible = False
+      object PBar: TProgressBar
+        Left = 1
+        Top = 1
+        Width = 98
+        Height = 19
+        Align = alClient
+        TabOrder = 0
+      end
+    end
     object ToolButton15: TToolButton
-      Left = 186
-      Top = 44
+      Left = 364
+      Top = 0
       Width = 8
       Caption = 'ToolButton15'
       ImageIndex = 8
@@ -100,34 +116,34 @@ object FRpMetaVCL: TFRpMetaVCL
       Style = tbsSeparator
     end
     object ToolButton5: TToolButton
-      Left = 194
-      Top = 44
+      Left = 372
+      Top = 0
       Action = AScale100
     end
     object ToolButton9: TToolButton
-      Left = 256
-      Top = 44
+      Left = 398
+      Top = 0
       Action = AScaleWide
     end
     object ToolButton11: TToolButton
-      Left = 318
-      Top = 44
+      Left = 424
+      Top = 0
       Action = AScaleFull
       PopupMenu = MEntireMenu
     end
     object ToolButton12: TToolButton
-      Left = 380
-      Top = 44
+      Left = 450
+      Top = 0
       Action = AScaleLess
     end
     object ToolButton13: TToolButton
-      Left = 442
-      Top = 44
+      Left = 476
+      Top = 0
       Action = AScaleMore
     end
     object ToolButton16: TToolButton
       Left = 0
-      Top = 44
+      Top = 0
       Width = 8
       Caption = 'ToolButton16'
       ImageIndex = 8
@@ -137,7 +153,7 @@ object FRpMetaVCL: TFRpMetaVCL
     end
     object BConfig: TToolButton
       Left = 0
-      Top = 88
+      Top = 33
       DropdownMenu = MPrintMenu
       ImageIndex = 14
       ImageName = 'Item15'
@@ -145,8 +161,8 @@ object FRpMetaVCL: TFRpMetaVCL
       OnClick = BConfigClick
     end
     object ToolButton18: TToolButton
-      Left = 81
-      Top = 88
+      Left = 45
+      Top = 33
       Width = 8
       Caption = 'ToolButton18'
       ImageIndex = 8
@@ -154,10 +170,11 @@ object FRpMetaVCL: TFRpMetaVCL
       Style = tbsSeparator
     end
     object ESearch: TRpMaskEdit
-      Left = 89
-      Top = 88
-      Width = 100
-      Height = 36
+      Left = 53
+      Top = 33
+      Width = 93
+      Height = 25
+      AutoSize = False
       TabOrder = 3
       OnChange = ESearchChange
       OnKeyDown = ESearchKeyDown
@@ -165,13 +182,13 @@ object FRpMetaVCL: TFRpMetaVCL
       DisplayMask = '###,######0'
     end
     object ToolButton19: TToolButton
-      Left = 189
-      Top = 88
+      Left = 146
+      Top = 33
       Action = AFind
     end
     object ToolButton17: TToolButton
-      Left = 251
-      Top = 88
+      Left = 172
+      Top = 33
       Width = 8
       Caption = 'ToolButton17'
       ImageIndex = 8
@@ -179,51 +196,36 @@ object FRpMetaVCL: TFRpMetaVCL
       Style = tbsSeparator
     end
     object BExit: TToolButton
-      Left = 259
-      Top = 88
+      Left = 180
+      Top = 33
       Action = AExit
     end
     object BCancel: TButton
-      Left = 321
-      Top = 88
+      Left = 206
+      Top = 33
       Width = 106
-      Height = 36
+      Height = 25
       Action = ACancel
       TabOrder = 0
       Visible = False
     end
-    object PPBar: TPanel
-      Left = 427
-      Top = 88
-      Width = 104
-      Height = 36
-      BorderStyle = bsSingle
-      TabOrder = 2
-      Visible = False
-      object PBar: TProgressBar
-        Left = 1
-        Top = 1
-        Width = 98
-        Height = 30
-        Align = alClient
-        TabOrder = 0
-      end
-    end
   end
   object BStatus: TStatusBar
     Left = 0
-    Top = 387
-    Width = 840
+    Top = 564
+    Width = 755
     Height = 21
     Panels = <
       item
         Width = 50
       end>
+    ExplicitTop = 387
+    ExplicitWidth = 840
   end
   object ActionList1: TActionList
     Images = VirtualImageList1
-    Left = 200
-    Top = 68
+    Left = 192
+    Top = 188
     object AFirst: TAction
       Category = 'Page'
       Caption = 'First page'
@@ -408,8 +410,8 @@ object FRpMetaVCL: TFRpMetaVCL
     Filter = 'Report metafiles|*.rpmf'
     FilterIndex = 0
     Title = 'Open'
-    Left = 192
-    Top = 112
+    Left = 88
+    Top = 144
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = 'rpmf'
@@ -419,13 +421,13 @@ object FRpMetaVCL: TFRpMetaVCL
     FilterIndex = 0
     Options = [ofHideReadOnly, ofNoChangeDir, ofEnableSizing]
     Title = 'Save Metafile As'
-    Left = 240
-    Top = 84
+    Left = 368
+    Top = 148
   end
   object MainMenu1: TMainMenu
     Images = ImageList1
-    Left = 156
-    Top = 156
+    Left = 132
+    Top = 236
     object File1: TMenuItem
       Caption = 'File'
       object Open1: TMenuItem
@@ -571,8 +573,8 @@ object FRpMetaVCL: TFRpMetaVCL
   object ImageList1: TImageList
     Height = 19
     Width = 19
-    Left = 128
-    Top = 64
+    Left = 88
+    Top = 192
     Bitmap = {
       494C010111001300040013001300FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000004C0000005F0000000100200000000000D070
@@ -1520,8 +1522,8 @@ object FRpMetaVCL: TFRpMetaVCL
       00000000000000000000}
   end
   object MPrintMenu: TPopupMenu
-    Left = 300
-    Top = 128
+    Left = 324
+    Top = 184
     object PrinterSetup2: TMenuItem
       Action = APrintSetup
     end
@@ -1597,8 +1599,8 @@ object FRpMetaVCL: TFRpMetaVCL
   end
   object MEntireMenu: TPopupMenu
     OnPopup = MEntireMenuPopup
-    Left = 244
-    Top = 160
+    Left = 260
+    Top = 240
     object MEntire1: TMenuItem
       Tag = 1
       Caption = '1'

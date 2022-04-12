@@ -821,6 +821,7 @@ procedure ConvertParamsFromDBXToFDac(base:TFDConnection);
 var
  index:integer;
  params:TStringList;
+ valor: string;
 begin
  params:=TStringList.Create;
  params.Assign(base.Params);
@@ -831,14 +832,26 @@ begin
  if (base.DriverName = 'Firebird') then
  begin
   base.DriverName:='FB';
- end;
- params.Delete(index);
- params.Values['DriverID']:='FB';
-
- index:=params.IndexOfName('Database');
- if index<0 then
-  Raise Exception.Create(SRpNoDatabase);
+  params.Delete(index);
+  params.Values['DriverID']:='FB';
+  index:=params.IndexOfName('Database');
+  if index<0 then
+   Raise Exception.Create(SRpNoDatabase);
  //params.Delete(index);
+ end
+ else
+ begin
+  if (UpperCase(base.DriverName) = 'ODBC') then
+  begin
+   params.Values['DriverID']:='ODBC';
+   index:=params.IndexOfName('ConnectionString');
+   if index<0 then
+    Raise Exception.Create(SRpNoDatabase + ' No connectionstring supplied set DSN in connection string');
+   valor:=params.Values['ConnectionString'];
+   params.Delete(index);
+   params.Values['DataSource'] := valor;
+  end;
+ end;
  index:=params.IndexOfName('BlobSize');
  if index>=0 then
   params.Delete(index);

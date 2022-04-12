@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{14CDDE4C-6E8E-4672-8D60-0C17E25E8090}</ProjectGuid>
+        <ProjectGuid>{75AEED7B-BE35-4593-8201-0E1425A9D772}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
         <Projects Include="repmand.dproj">
