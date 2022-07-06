@@ -1702,20 +1702,8 @@ end;
 function isadelimiter(achar:WideChar):Boolean;
 const
  delimiters:string=' .,-/\=)(*,-'+#10;
-var
- nchar:Char;
- i:integer;
 begin
- Result:=false;
- nchar:=Char(achar);
- for i:=1 to Length(delimiters) do
- begin
-  if nchar=delimiters[i] then
-  begin
-   Result:=true;
-   break;
-  end;
- end;
+ Result:=delimiters.IndexOf(achar)>0;
 end;
 
 function CalcTextExtent(adriver:TRpPrintDriver;maxextent:TPoint;obj:TRpTextObject):integer;
@@ -1785,7 +1773,15 @@ begin
   adriver.TextExtent(obj,newextent);
  end;
  if currentpos<1 then
-  Result:=Length(obj.Text)
+ begin
+  Result:=Length(originalstring);
+  if (Result>0) then
+  begin
+   Result:=1;
+   obj.Text:=Copy(originalstring,1,Result);
+   adriver.TextExtent(obj,newextent);
+  end;
+ end
  else
  begin
   Result:=CurrentPos;

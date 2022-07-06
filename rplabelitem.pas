@@ -491,6 +491,7 @@ begin
  begin
   maxextent.X:=PrintWidth;
   newposition:=CalcTextExtent(adriver.GetFontDriver,maxextent,Textobj);
+
   if newposition<Length(TextObj.Text) then
   begin
    if Not FIsPartial then
@@ -804,7 +805,11 @@ begin
   adriver.TextExtent(aText,Result);
   if ispartial then
   begin
-   Result.Y:=MaxExtent.Y;
+   // Max extent could be negative
+   if (MaxExtent.Y>Result.Y) then
+   begin
+    Result.Y:=MaxExtent.Y;
+   end;
    if forcepartial then
     forcedpartial:=true;
   end;

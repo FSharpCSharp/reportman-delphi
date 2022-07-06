@@ -2061,7 +2061,10 @@ begin
     else
     begin
      nextline := true;
+     if length(astring)>1 then
+     begin
      incomplete:=true;
+     end;
      linebreakpos := 0;
     end;
    end
