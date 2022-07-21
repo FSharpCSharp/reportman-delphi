@@ -29,17 +29,17 @@ const
 
 type
 
- TGetCharPlac=function (DC: HDC; p2: PWideChar; p3, p4:integer;
-   var p5: TGCPResults; p6: DWORD): DWORD;stdcall;
+ //TGetCharPlac=function (DC: HDC; p2: PWideChar; p3, p4:integer;
+ //  var p5: TGCPResults; p6: DWORD): DWORD;stdcall;
  // external 'gdi32.dll' name 'GetCharacterPlacementW'
  TRpGDIInfoProvider=class(TRpInfoProvider)
   adc:HDC;
   fonthandle:THandle;
-  bitmap: VCL.Graphics.TBitmap;
+  //bitmap: VCL.Graphics.TBitmap;
   currentname:String;
   currentstyle:integer;
-  GetCharPlac:TGetCharPlac;
-  gdilib:THandle;
+  //GetCharPlac:TGetCharPlac;
+  //gdilib:THandle;
   procedure SelectFont(pdffont:TRpPDFFOnt);
   procedure FillFontData(pdffont:TRpPDFFont;data:TRpTTFontData);override;
   function GetCharWidth(pdffont:TRpPDFFont;data:TRpTTFontData;charcode:widechar):Integer;override;
@@ -65,27 +65,21 @@ begin
  currentname:='';
  currentstyle:=0;
  fonthandle:=0;
- gdilib:=0;
- bitmap:=VCL.Graphics.TBitmap.Create;
- bitmap.PixelFormat:=pf32bit;
- bitmap.Width:=10;
- bitmap.Height:=10;
- adc:=bitmap.Canvas.Handle;
-  gdilib:=LoadLibrary('gdi32.dll');
-  if gdilib=0 then
-   RaiseLastOsError;
-  GetCharPlac:=GetProcAddress(gdilib,'GetCharacterPlacementW');
-  if not Assigned(GetCharPlac) then
-   RaiseLastOsError;
+ //gdilib:=0;
+ //bitmap:=VCL.Graphics.TBitmap.Create;
+ //bitmap.PixelFormat:=pf32bit;
+ //bitmap.Width:=10;
+ //bitmap.Height:=10;
+ adc:=GetDc(0);
 end;
 
 destructor TRpGDIInfoProvider.destroy;
 begin
  if fonthandle<>0 then
   DeleteObject(fonthandle);
- if gdilib<>0 then
-  FreeLibrary(gdilib);
- bitmap.Free;
+// if gdilib<>0 then
+//  FreeLibrary(gdilib);
+// bitmap.Free;
  inherited destroy;
 end;
 
@@ -348,69 +342,6 @@ end;
 
 
 
-{$IFDEF DOTNETD}
-{$UNSAFECODE ON}
-function TRpGDIInfoProvider.GetCharWidth(pdffont:TRpPDFFont;data:TRpTTFontData;charcode:widechar):integer;unsafe;
-var
- logx:integer;
- aabc:array [1..1] of ABC;
- aint:Word;
- glyphindex:UInt;
- gcp:windows.tagGCP_RESULTS;
- astring:WideString;
-begin
- glyphindex:=0;
- aint:=Ord(charcode);
- if (not (data.isunicode)) then
-   data.isunicode:=true;
- if aint>255 then
-   data.isunicode:=true;
- if data.loaded[aint] then
- begin
-  Result:=data.loadedwidths[aint];
-   exit;
- end;
- SelectFont(pdffont);
- logx:=GetDeviceCaps(adc,LOGPIXELSX);
- if isnt then
- begin
-  if not GetCharABCWidthsW(adc,aint,aint,aabc[1]) then
-   RaiseLastOSError;
-  gcp.lStructSize:=sizeof(gcp);
-  gcp.lpOutString:=nil;
-  gcp.lpOrder:=nil;
-  gcp.lpDx:=nil;
-  gcp.lpCaretPos:=nil;
-  gcp.lpClass:=nil;
-  gcp.lpGlyphs:=IntPtr(@glyphindex);
-  gcp.nGlyphs:=1;
-  gcp.nMaxFit:=1;
-  astring:='';
-  astring:=astring+charcode+Widechar(0);
-  if GetCharacterPlacementW(adc,astring,true,false,gcp,GCP_DIACRITIC)=0 then
-   RaiseLastOSError;
-  data.loadedglyphs[aint]:=WideChar(glyphindex);
-  data.loadedg[aint]:=true;
- end
- else
- begin
-  if not GetCharABCWidths(adc,Cardinal(chr(aint)),Cardinal(chr(aint)),aabc[1]) then
-    RaiseLastOSError;
- end;
- Result:=Round(
-   (Integer(aabc[1].abcA)+Integer(aabc[1].abcB)+Integer(aabc[1].abcC))/logx*72000/TTF_PRECISION
-   );
- data.loadedwidths[aint]:=Result;
- data.loaded[aint]:=true;
- if data.firstloaded>aint then
-  data.firstloaded:=aint;
- if data.lastloaded<aint then
-  data.lastloaded:=aint;
-end;
-{$UNSAFECODE OFF}
-{$ENDIF}
-
-{$IFNDEF DOTNETD}
 function TRpGDIInfoProvider.GetCharWidth(pdffont:TRpPDFFont;data:TRpTTFontData;charcode:widechar):integer;
 var
  logx:integer;
@@ -472,7 +403,6 @@ begin
  if data.lastloaded<aint then
   data.lastloaded:=aint;
 end;
-{$ENDIF}
 
 
 function TRpGDIInfoProvider.GetKerning(pdffont:TRpPDFFont;data:TRpTTFontData;leftchar,rightchar:widechar):integer;

@@ -2224,6 +2224,10 @@ begin
   LHorzRes.Caption := SRpHorzRes;
   LVertRes.Caption := SRpVertRes;
   CheckMono.Caption := SRpMonochrome;
+
+  //Width:=ScaleDpi(Width);
+  //Height:=ScaleDpi(Height);
+
 end;
 
 procedure TFRpVCLProgress.AppIdle(Sender: TObject; var done: boolean);
