@@ -81,8 +81,8 @@ uses Classes,SysUtils,
  {$DEFINE USENEWLINK}
  ZDbcIntfs,ZAbstractRODataset, ZDataset, ZConnection,
 {$ENDIF}
- {$IFDEF FIREDAC}
-  FireDAC.Comp.Client,FireDAC.Stan.Def,FireDAC.DApt,FireDAC.Stan.Option,
+{$IFDEF FIREDAC}
+  FireDAC.Phys, FireDAC.Stan.Intf, FireDAC.Comp.Client,FireDAC.Stan.Def,FireDAC.DApt,FireDAC.Stan.Option,
   FireDAC.Stan.Async, FireDac.ConsoleUI.Wait,
   FireDAC.Phys.ADS,  FireDAC.Phys.ODBCBase,FireDAC.Phys.ODBCWrapper,
   FireDAC.Phys.FB,FireDAC.Phys.IB,FireDAC.Phys.IBBase,
@@ -90,16 +90,23 @@ uses Classes,SysUtils,
   FireDAC.Phys.Intf,
 {$IFNDEF LINUX}
   FireDAC.Phys.MSAcc,
+  FireDAC.Phys.DS,
 {$ENDIF}
   FireDAC.Phys.MySQL,
 
 {$IFDEF DELPHIENTERPRISEDBSTATIC}
-    FireDAC.Phys.ODBC,FireDAC.Phys.MSSQL,
-  FireDAC.Phys.ASA,FireDAC.Phys.DB2,FireDAC.Phys.DS,  FireDAC.Phys.Infx,
-  FireDAC.Phys.TData,FireDAC.Phys.TDBX,FireDAC.Phys.TDBXBase,
-  FireDAC.Phys.Oracle,
+  FireDAC.Phys.MSSQL,
+  FireDAC.Phys.ASA,FireDAC.Phys.DB2,  FireDAC.Phys.Infx,
+  FireDAC.Phys.TData,
+{$IFNDEF LINUX}
+  FireDAC.Phys.TDBX,
+  FireDAC.Phys.TDBXBase,
 {$ENDIF}
- {$ENDIF}
+  FireDAC.Phys.Oracle,
+  FireDAC.Phys.ODBCDef,
+  FireDAC.Phys.ODBC,
+{$ENDIF}
+{$ENDIF}
 {$IFDEF USEBDE}
   dbtables,
 {$ENDIF}

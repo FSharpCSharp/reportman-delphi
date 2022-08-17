@@ -438,9 +438,10 @@ function MIMEEncodeString(amemstream:TMemoryStream):string;
 {$ENDIF}
 function EscapeCodedToString(astring:string):string;
 function Is64BitPlatform:boolean;
+{$IFDEF MSWINDOWS}
 function StringToOem(const S: String): AnsiString;
-
 function AnsiStringToOem(const S: AnsiString): AnsiString;
+{$ENDIF}
 
 
 
@@ -5534,6 +5535,7 @@ begin
 end;
 
 
+{$IFDEF MSWINDOWS}
 function StringToOem(const S: String): AnsiString;
 begin
   SetLength(Result, Length(S));
@@ -5550,6 +5552,7 @@ begin
     CharToOemA(PAnsiChar(Result), PAnsiChar(Result));
   end;
 end;
+{$ENDIF}
 
 
 

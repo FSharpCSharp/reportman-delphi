@@ -340,21 +340,6 @@
 
 {$ENDIF}
 
-// Unsupported database drivers in Linux
-// To enable IBX under Kylix remove the related UNDEF
-// By default is not defined becuase Borland don't provide
-// it in default installation
-{$IFDEF LINUX}
- {$UNDEF USESQLEXPRESS}
- {$UNDEF USEIBX}
- {$UNDEF USEADO}
- {$UNDEF USEBDE}
- {$UNDEF USEIBO}
- // Fixes performance issues in Linux about TStringList
- {$DEFINE USEEVALHASH}
- // Active this if zoombie proceses are created when executing lpr (text output)
- //{$DEFINE ALTLINUXTEXTPRINT}
-{$ENDIF}
 
 // Database drivers to be used when performing a release
 {$IFDEF REPMANRELEASE}
@@ -371,6 +356,22 @@
 {$ENDIF}
 {$ENDIF}
 
+
+// Unsupported database drivers in Linux
+// To enable IBX under Kylix remove the related UNDEF
+// By default is not defined becuase Borland don't provide
+// it in default installation
+{$IFDEF LINUX}
+ {$UNDEF USESQLEXPRESS}
+ {$UNDEF USEIBX}
+ {$UNDEF USEADO}
+ {$UNDEF USEBDE}
+ {$UNDEF USEIBO}
+ // Fixes performance issues in Linux about TStringList
+ {$DEFINE USEEVALHASH}
+ // Active this if zoombie proceses are created when executing lpr (text output)
+ //{$DEFINE ALTLINUXTEXTPRINT}
+{$ENDIF}
 
 
 {$DEFINE USEVARIANTS}

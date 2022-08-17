@@ -30,7 +30,7 @@ uses
 
 const
 {$IFDEF LINUX}
- C_FREETYPE='libfreetype.so';
+ C_FREETYPE='libfreetype.so.6';
  //C_FREETYPE='freetype';
 {$ENDIF}
 {$IFDEF MSWINDOWS}
