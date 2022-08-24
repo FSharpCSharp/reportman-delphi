@@ -1808,6 +1808,9 @@ begin
         FFDInternalConnection:=TFDConnection.Create(nil);
         FFDInternalConnection.Transaction := TFDTransaction.Create(nil);
         FFDConnection:=FFDInternalConnection;
+        FFDConnection.ResourceOptions.MacroCreate:=false;
+        FFDConnection.ResourceOptions.MacroExpand:=false;
+        FFDConnection.ResourceOptions.EscapeExpand:=false;
         FFDConnection.Transaction.Connection := FFDInternalConnection;
         FFDTransaction:=TFDTransaction(FFDInternalConnection.Transaction);
         FFDInternalTransaction:=FFDTransaction;
