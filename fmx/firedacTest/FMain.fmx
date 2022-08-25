@@ -1,13 +1,14 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  ActiveControl = TabItem3
+  ActiveControl = TabItem2
   Caption = 'Firedac Test'
-  ClientHeight = 368
-  ClientWidth = 520
+  ClientHeight = 488
+  ClientWidth = 580
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   DesignerMasterStyle = 0
   object Label1: TLabel
     AutoSize = True
@@ -21,38 +22,40 @@ object Form1: TForm1
   end
   object TabControl1: TTabControl
     Align = Client
-    Size.Width = 520.000000000000000000
-    Size.Height = 368.000000000000000000
+    Size.Width = 580.000000000000000000
+    Size.Height = 488.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     TabPosition = PlatformDefault
     Sizes = (
-      520s
-      342s
-      520s
-      342s
-      520s
-      342s)
+      580s
+      462s
+      580s
+      462s
+      580s
+      462s)
     object TabItem1: TTabItem
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 81.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
       Text = 'Connection'
+      ExplicitSize.cx = 81.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
       object Layout3D1: TLayout3D
         Height = 4.000000000000000000
         Width = 5.000000000000000000
       end
       object ButtonConnect: TButton
         Align = Bottom
-        Position.Y = 306.000000000000000000
-        Size.Width = 520.000000000000000000
+        Position.Y = 426.000000000000000000
+        Size.Width = 580.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
@@ -61,45 +64,140 @@ object Form1: TForm1
       end
       object Panel1: TPanel
         Align = Client
-        Size.Width = 520.000000000000000000
-        Size.Height = 306.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 426.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
+        object ComboDriver: TComboBox
+          Anchors = [akLeft, akTop, akRight]
+          Items.Strings = (
+            'ADS'
+            'ASA'
+            'DB2'
+            'DS'
+            'FB'
+            'IB'
+            'IBLite'
+            'Infx'
+            'Mongo'
+            'MSAcc'
+            'MSSQL'
+            'MySQL'
+            'ODBC'
+            'Ora'
+            'PG'
+            'SQLite'
+            'TData'
+            'TDBX')
+          Position.X = 160.000000000000000000
+          Position.Y = 8.000000000000000000
+          Size.Width = 412.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+        end
+        object Label2: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 8.000000000000000000
+          Text = 'Driver'
+          TabOrder = 1
+        end
+        object MemoParams: TMemo
+          Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+          DataDetectorTypes = []
+          Align = Bottom
+          Anchors = [akLeft, akTop, akRight, akBottom]
+          Position.Y = 42.000000000000000000
+          Size.Width = 580.000000000000000000
+          Size.Height = 384.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Viewport.Width = 576.000000000000000000
+          Viewport.Height = 380.000000000000000000
+        end
       end
     end
     object TabItem2: TTabItem
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 53.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
       Text = 'Query'
+      ExplicitSize.cx = 53.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
       object Button1: TButton
         Align = Bottom
-        Position.Y = 306.000000000000000000
-        Size.Width = 520.000000000000000000
+        Position.Y = 426.000000000000000000
+        Size.Width = 580.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
         Text = 'Open Dataset'
         OnClick = Button1Click
       end
-      object MemoSQL: TMemo
-        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-        DataDetectorTypes = []
-        Lines.Strings = (
-          'SELECT * FROM ANIMALS')
+      object Panel2: TPanel
         Align = Client
-        Size.Width = 520.000000000000000000
-        Size.Height = 306.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 426.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
-        Viewport.Width = 516.000000000000000000
-        Viewport.Height = 302.000000000000000000
+        object MemoSQL: TMemo
+          Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+          DataDetectorTypes = []
+          Lines.Strings = (
+            'SELECT * FROM ANIMALS')
+          Align = Bottom
+          Anchors = [akLeft, akTop, akRight, akBottom]
+          Position.Y = 87.000000000000000000
+          Size.Width = 580.000000000000000000
+          Size.Height = 339.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Viewport.Width = 576.000000000000000000
+          Viewport.Height = 335.000000000000000000
+        end
+        object CheckCreateParams: TCheckBox
+          IsChecked = True
+          Position.X = 16.000000000000000000
+          Position.Y = 8.000000000000000000
+          TabOrder = 2
+          Text = 'Create Params'
+          object CheckCreateMacros: TCheckBox
+            IsChecked = True
+            Position.Y = 24.000000000000000000
+            TabOrder = 4
+            Text = 'Create Macros'
+            object CheckExpandEscapes: TCheckBox
+              IsChecked = True
+              Position.Y = 24.000000000000000000
+              TabOrder = 4
+              Text = 'Expand Escapes'
+              object CheckUnifyParams: TCheckBox
+                Position.X = 152.000000000000000000
+                Position.Y = 3.000000000000000000
+                TabOrder = 4
+                Text = 'Unify Params'
+              end
+            end
+          end
+          object CheckExpandParams: TCheckBox
+            IsChecked = True
+            Position.X = 152.000000000000000000
+            TabOrder = 3
+            Text = 'Expand Params'
+            object CheckExpandMacros: TCheckBox
+              IsChecked = True
+              Position.Y = 24.000000000000000000
+              TabOrder = 3
+              Text = 'Expand Macros'
+            end
+          end
+        end
       end
     end
     object TabItem3: TTabItem
@@ -113,65 +211,66 @@ object Form1: TForm1
       StyleLookup = ''
       TabOrder = 0
       Text = 'Results'
+      ExplicitSize.cx = 58.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
       object Grid1: TGrid
         Align = Client
         CanFocus = True
         ClipChildren = True
-        Size.Width = 520.000000000000000000
-        Size.Height = 342.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 462.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        Viewport.Width = 516.000000000000000000
-        Viewport.Height = 317.000000000000000000
+        Viewport.Width = 576.000000000000000000
+        Viewport.Height = 437.000000000000000000
       end
     end
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'DataSource=ANIMALS'
-      'DriverID=ODBC')
-    Left = 72
-    Top = 104
+      'DataSource=ANIMALS')
+    Left = 448
+    Top = 120
   end
   object FDTransaction1: TFDTransaction
     Connection = FDConnection1
-    Left = 168
-    Top = 104
+    Left = 456
+    Top = 176
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     Transaction = FDTransaction1
-    Left = 72
-    Top = 168
+    Left = 456
+    Top = 224
   end
   object ClientDataSet1: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
-    Left = 264
-    Top = 162
+    Left = 448
+    Top = 346
   end
   object DataSetProvider1: TDataSetProvider
     DataSet = FDQuery1
-    Left = 168
-    Top = 162
+    Left = 408
+    Top = 282
   end
   object DataSource1: TDataSource
     DataSet = ClientDataSet1
-    Left = 368
-    Top = 162
+    Left = 456
+    Top = 282
   end
   object BindSourceDB1: TBindSourceDB
     DataSource = DataSource1
     ScopeMappings = <>
-    Left = 424
-    Top = 80
+    Left = 440
+    Top = 56
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 340
-    Top = 77
+    Left = 380
+    Top = 61
     object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1

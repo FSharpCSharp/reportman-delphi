@@ -1,68 +1,75 @@
-﻿[Button1]
-Coordinates=214,10,53,51
-
-[TabItem1]
-Coordinates=184,146,59,33
-
-[TabItem3]
-Coordinates=105,146,59,33
-
-[DataSource1]
-Coordinates=301,1,77,33
-Visible=False
+﻿[DataSource1]
+Coordinates=388,11,77,33
+Visible=True
 
 [FDConnection1]
 Coordinates=301,133,90,33
 
-[TabControl1]
-Coordinates=10,146,74,33
-
 [DataSetProvider1]
 Coordinates=443,1,100,33
-
-[TabItem2]
-Coordinates=267,78,59,33
-
-[Layout3D1]
-Coordinates=443,56,66,33
 
 [FDTransaction1]
 Coordinates=443,111,92,33
 
-[Grid1]
-Coordinates=95,10,41,51
-Visible=True
-LayerNames=
-
 [ClientDataSet1]
 Coordinates=283,10,87,51
-
-[Panel1]
-Coordinates=202,78,47,33
 
 [Label1]
 Coordinates=151,10,46,51
 
-[MemoSQL]
-Coordinates=10,10,65,51
-
 [FDQuery1]
 Coordinates=10,78,63,51
 
-[ButtonConnect]
-Coordinates=93,78,88,51
-
 []
-Coordinates=408,1,82,33
+Coordinates=259,80,114,33
+Visible=True
+LayerNames=
 
 [Module Settings]
 ModelLayerNames=
 ActiveLayerNames=
 EditingLayerName=
 
+[Layout3D1]
+Coordinates=208,1,66,33
+
+[Label2]
+Coordinates=175,80,46,51
+
+[TabControl1]
+Coordinates=0,136,74,33
+
+[Button1]
+Coordinates=0,0,53,51
+
+[TabItem2]
+Coordinates=411,163,59,33
+
+[Panel1]
+Coordinates=312,221,47,33
+
+[MemoSQL]
+Coordinates=72,1,65,51
+
+[TabItem3]
+Coordinates=411,215,59,33
+
+[TabItem1]
+Coordinates=411,267,59,33
+
+[ComboDriver]
+Coordinates=82,148,84,123
+
+[Grid1]
+Coordinates=175,150,41,51
+Visible=True
+
+[ButtonConnect]
+Coordinates=82,71,88,51
+
 [BindSourceDB1]
-Coordinates=301,1,92,69
+Coordinates=475,11,92,69
 
 [BindingsList1]
-Coordinates=431,1,82,33
+Coordinates=259,80,82,33
 

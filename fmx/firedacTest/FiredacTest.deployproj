@@ -19,6 +19,16 @@
             <Overwrite>True</Overwrite>
             <Required>True</Required>
         </DeployFile>
+        <DeployFile Include="Linux64\Release\FiredacTest" Condition="'$(Config)'=='Release'">
+            <RemoteDir>FiredacTest\</RemoteDir>
+            <RemoteName>FiredacTest</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='Win32'">
         <DeployFile Include="Win32\Debug\FiredacTest.exe" Condition="'$(Config)'=='Debug'">
