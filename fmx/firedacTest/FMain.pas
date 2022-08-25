@@ -36,8 +36,6 @@ type
     FDConnection1: TFDConnection;
     FDTransaction1: TFDTransaction;
     FDQuery1: TFDQuery;
-    ClientDataSet1: TClientDataSet;
-    DataSetProvider1: TDataSetProvider;
     DataSource1: TDataSource;
     TabControl1: TTabControl;
     TabItem1: TTabItem;
@@ -62,6 +60,7 @@ type
     CheckExpandMacros: TCheckBox;
     CheckExpandEscapes: TCheckBox;
     CheckUnifyParams: TCheckBox;
+    FDMemTable1: TFDMemTable;
     procedure ButtonConnectClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -94,9 +93,12 @@ begin
  FDQuery1.ResourceOptions.MacroCreate :=   CheckCreateMacros.IsChecked;
  FDQuery1.ResourceOptions.MacroExpand :=   CheckExpandMacros.IsChecked;
  FDQuery1.SQL.Text := MemoSQL.Text;
-
- ClientDataSet1.Active:=false;
- ClientDataSet1.Active:=true;
+ FDQuery1.Active:=true;
+ try
+  FDMemTable1.CloneCursor(FDQuery1, False, False);
+ finally
+  FDQuery1.Active:=false;
+ end;
  TabControl1.ActiveTab := TabItem3;
 end;
 

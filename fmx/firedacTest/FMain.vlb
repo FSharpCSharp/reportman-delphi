@@ -5,14 +5,8 @@ Visible=True
 [FDConnection1]
 Coordinates=301,133,90,33
 
-[DataSetProvider1]
-Coordinates=443,1,100,33
-
 [FDTransaction1]
 Coordinates=443,111,92,33
-
-[ClientDataSet1]
-Coordinates=283,10,87,51
 
 [Label1]
 Coordinates=151,10,46,51
@@ -21,7 +15,7 @@ Coordinates=151,10,46,51
 Coordinates=10,78,63,51
 
 []
-Coordinates=259,80,114,33
+Coordinates=443,1,100,33
 Visible=True
 LayerNames=
 
