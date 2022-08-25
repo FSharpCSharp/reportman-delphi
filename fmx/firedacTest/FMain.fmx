@@ -1,0 +1,182 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  ActiveControl = TabItem3
+  Caption = 'Firedac Test'
+  ClientHeight = 368
+  ClientWidth = 520
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Label1: TLabel
+    AutoSize = True
+    Position.X = 232.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 218.399993896484400000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Connection Parameters'
+    TabOrder = 0
+  end
+  object TabControl1: TTabControl
+    Align = Client
+    Size.Width = 520.000000000000000000
+    Size.Height = 368.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 1
+    TabPosition = PlatformDefault
+    Sizes = (
+      520s
+      342s
+      520s
+      342s
+      520s
+      342s)
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 81.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Connection'
+      object Layout3D1: TLayout3D
+        Height = 4.000000000000000000
+        Width = 5.000000000000000000
+      end
+      object ButtonConnect: TButton
+        Align = Bottom
+        Position.Y = 306.000000000000000000
+        Size.Width = 520.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Connect'
+        OnClick = ButtonConnectClick
+      end
+      object Panel1: TPanel
+        Align = Client
+        Size.Width = 520.000000000000000000
+        Size.Height = 306.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 53.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Query'
+      object Button1: TButton
+        Align = Bottom
+        Position.Y = 306.000000000000000000
+        Size.Width = 520.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Open Dataset'
+        OnClick = Button1Click
+      end
+      object MemoSQL: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Lines.Strings = (
+          'SELECT * FROM ANIMALS')
+        Align = Client
+        Size.Width = 520.000000000000000000
+        Size.Height = 306.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Viewport.Width = 516.000000000000000000
+        Viewport.Height = 302.000000000000000000
+      end
+    end
+    object TabItem3: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 58.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Results'
+      object Grid1: TGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 520.000000000000000000
+        Size.Height = 342.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 516.000000000000000000
+        Viewport.Height = 317.000000000000000000
+      end
+    end
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'DataSource=ANIMALS'
+      'DriverID=ODBC')
+    Left = 72
+    Top = 104
+  end
+  object FDTransaction1: TFDTransaction
+    Connection = FDConnection1
+    Left = 168
+    Top = 104
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Transaction = FDTransaction1
+    Left = 72
+    Top = 168
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProvider1'
+    Left = 264
+    Top = 162
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = FDQuery1
+    Left = 168
+    Top = 162
+  end
+  object DataSource1: TDataSource
+    DataSet = ClientDataSet1
+    Left = 368
+    Top = 162
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSource = DataSource1
+    ScopeMappings = <>
+    Left = 424
+    Top = 80
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 340
+    Top = 77
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = Grid1
+      Columns = <>
+    end
+  end
+end

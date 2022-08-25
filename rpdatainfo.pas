@@ -1811,6 +1811,7 @@ begin
         FFDConnection.ResourceOptions.MacroCreate:=false;
         FFDConnection.ResourceOptions.MacroExpand:=false;
         FFDConnection.ResourceOptions.EscapeExpand:=false;
+        FFDConnection.ResourceOptions.PreprocessCmdText:=false;
         FFDConnection.Transaction.Connection := FFDInternalConnection;
         FFDTransaction:=TFDTransaction(FFDInternalConnection.Transaction);
         FFDInternalTransaction:=FFDTransaction;
@@ -2184,6 +2185,13 @@ begin
 {$IFDEF FIREDAC}
        FSQLInternalQuery:=TFDQuery.Create(nil);
        TFDQuery(FSQLInternalQuery).FetchOptions.Mode:=fmOnDemand;
+       TFDQuery(FSQLInternalQuery).ResourceOptions.PreprocessCmdText:=false;
+       TFDQuery(FSQLInternalQuery).ResourceOptions.ParamCreate:=true;
+       TFDQuery(FSQLInternalQuery).ResourceOptions.ParamExpand:=true;
+       TFDQuery(FSQLInternalQuery).ResourceOptions.MacroCreate:=false;
+       TFDQuery(FSQLInternalQuery).ResourceOptions.MacroExpand:=false;
+       TFDQuery(FSQLInternalQuery).ResourceOptions.EscapeExpand:=false;
+
        TFDQuery(FSQLInternalQuery).FetchOptions.CursorKind:=ckForwardOnly;
 {$ELSE}
        Raise Exception.Create(SRpDriverNotSupported+' - FireDac');
