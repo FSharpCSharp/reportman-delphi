@@ -347,7 +347,7 @@ var
  logx:integer;
  aabc:array [1..1] of ABC;
  aint:Word;
- glyphindex:UInt;
+ glyphindexes:array[0..5] of UInt;
 {$IFNDEF DELPHI2009UP}
 {$IFDEF VER180}
  gcp:windows.tagGCP_RESULTSW;
@@ -361,7 +361,7 @@ var
 {$ENDIF}
  astring:WideString;
 begin
- glyphindex:=0;
+ // glyphindex:=0;
  aint:=Ord(charcode);
  if aint>255 then
    data.isunicode:=true;
@@ -370,6 +370,12 @@ begin
   Result:=data.loadedwidths[aint];
    exit;
  end;
+ glyphindexes[0]:=0;
+ glyphindexes[1]:=0;
+ glyphindexes[2]:=0;
+ glyphindexes[3]:=0;
+ glyphindexes[4]:=0;
+
  SelectFont(pdffont);
  logx:=GetDeviceCaps(adc,LOGPIXELSX);
 //   if not GetCharABCWidthsW(adc,aint,aint,aabc[1]) then
@@ -380,17 +386,19 @@ begin
   gcp.lpDx:=nil;
   gcp.lpCaretPos:=nil;
   gcp.lpClass:=nil;
-  gcp.lpGlyphs:=@glyphindex;
+  gcp.lpGlyphs:=@glyphindexes;
   gcp.nGlyphs:=1;
   gcp.nMaxFit:=1;
   astring:='';
   astring:=astring+charcode+Widechar(0);
-  if GetCharacterPlacementW(adc,PWideChar(astring),1,0,gcp,GCP_DIACRITIC)=0 then
+  if GetCharacterPlacementW(adc,PWideChar(astring),1,9,gcp,0)=0 then
+  begin
    RaiseLastOSError;
-  data.loadedglyphs[aint]:=WideChar(glyphindex);
+  end;
+  data.loadedglyphs[aint]:=WideChar(glyphindexes[0]);
   data.loadedg[aint]:=true;
 
-   if not GetCharABCWidthsI(adc,glyphindex,1,nil,aabc[1]) then
+   if not GetCharABCWidthsI(adc,glyphindexes[0],1,nil,aabc[1]) then
      RaiseLastOSError;
 
  Result:=Round(
