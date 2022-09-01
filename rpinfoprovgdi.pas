@@ -65,12 +65,18 @@ begin
  currentname:='';
  currentstyle:=0;
  fonthandle:=0;
- //gdilib:=0;
- //bitmap:=VCL.Graphics.TBitmap.Create;
- //bitmap.PixelFormat:=pf32bit;
- //bitmap.Width:=10;
- //bitmap.Height:=10;
+//  gdilib:=LoadLibrary('gdi32.dll');
+//  if gdilib=0 then
+//   RaiseLastOsError;
+//  GetCharPlac:=GetProcAddress(gdilib,'GetCharacterPlacementW');
+//  if not Assigned(GetCharPlac) then
+//   RaiseLastOsError;
+// bitmap:=VCL.Graphics.TBitmap.Create;
+// bitmap.PixelFormat:=pf32bit;
+// bitmap.Width:=10;
+// bitmap.Height:=10;
  adc:=GetDc(0);
+// adc:=bitmap.Canvas.Handle;
 end;
 
 destructor TRpGDIInfoProvider.destroy;
@@ -348,12 +354,13 @@ var
  aabc:array [1..1] of ABC;
  aint:Word;
  glyphindexes:array[0..5] of UInt;
+ glyphindexes2:array[0..1] of DWORD;
 {$IFNDEF DELPHI2009UP}
 {$IFDEF VER180}
- gcp:windows.tagGCP_RESULTSW;
+// gcp:windows.tagGCP_RESULTSW;
 {$ENDIF}
 {$IFNDEF VER180}
- gcp:windows.tagGCP_RESULTSA;
+// gcp:windows.tagGCP_RESULTSA;
 {$ENDIF}
 {$ENDIF}
 {$IFDEF DELPHI2009UP}
@@ -375,11 +382,11 @@ begin
  glyphindexes[2]:=0;
  glyphindexes[3]:=0;
  glyphindexes[4]:=0;
-
+ glyphindexes[5]:=0;
  SelectFont(pdffont);
  logx:=GetDeviceCaps(adc,LOGPIXELSX);
-//   if not GetCharABCWidthsW(adc,aint,aint,aabc[1]) then
-//   RaiseLastOSError;
+ if not GetCharABCWidthsW(adc,aint,aint,aabc[1]) then
+   RaiseLastOSError;
   gcp.lStructSize:=sizeof(gcp);
   gcp.lpOutString:=nil;
   gcp.lpOrder:=nil;
@@ -391,15 +398,34 @@ begin
   gcp.nMaxFit:=1;
   astring:='';
   astring:=astring+charcode+Widechar(0);
-  if GetCharacterPlacementW(adc,PWideChar(astring),1,9,gcp,0)=0 then
+//  if GetCharPlac(adc,PWideChar(astring),1,0,gcp,GCP_DIACRITIC)=0 then
+//   RaiseLastOSError;
+  if GetCharacterPlacementW(adc,PWideChar(astring),1,0,gcp,GCP_DIACRITIC)=0 then
   begin
-   RaiseLastOSError;
+   glyphindexes2[0] := 0;
+   glyphindexes2[1] := 0;
+   if (GetGlyphIndicesW(adc,PWideChar(astring),Length(astring), @glyphindexes2, GGI_MARK_NONEXISTING_GLYPHS) = 0) then
+   begin
+    // ussupported glyph
+    glyphindexes2[0]:=0;
+   end
+   else
+   begin
+     if (glyphindexes2[0] = $ffff) then
+     begin
+       RaiseLastOSError;
+     end
+     else
+     begin
+      glyphindexes[0] := glyphindexes2[0];
+     end;
+   end;
   end;
   data.loadedglyphs[aint]:=WideChar(glyphindexes[0]);
   data.loadedg[aint]:=true;
 
-   if not GetCharABCWidthsI(adc,glyphindexes[0],1,nil,aabc[1]) then
-     RaiseLastOSError;
+//    if not GetCharABCWidthsI(adc,glyphindexes[0],1,nil,aabc[1]) then
+//     RaiseLastOSError;
 
  Result:=Round(
    (Integer(aabc[1].abcA)+Integer(aabc[1].abcB)+Integer(aabc[1].abcC))/logx*72000/TTF_PRECISION
