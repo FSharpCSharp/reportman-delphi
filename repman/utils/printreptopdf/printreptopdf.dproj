@@ -137,7 +137,7 @@
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Linux64)'!=''">
-        <Debugger_RunParams>/home/toni/Descargas/odbct.rep /home/toni/Descargas/odbct.pdf</Debugger_RunParams>
+        <Debugger_RunParams>/home/toni/Documentos/imagen.rep  -pdf imagen.pdf</Debugger_RunParams>
         <Debugger_Launcher>/usr/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
     </PropertyGroup>
