@@ -29,8 +29,18 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         Top = 0
         Action = ANew
       end
-      object ToolButton2: TToolButton
+      object ToolButton7: TToolButton
         Left = 26
+        Top = 0
+        Action = AUp
+      end
+      object ToolButton8: TToolButton
+        Left = 52
+        Top = 0
+        Action = ADown
+      end
+      object ToolButton2: TToolButton
+        Left = 78
         Top = 0
         Width = 23
         Caption = 'ToolButton2'
@@ -38,26 +48,8 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         ImageName = 'Item4'
         Style = tbsSeparator
       end
-      object ToolButton3: TToolButton
-        Left = 49
-        Top = 0
-        Action = ADelete
-      end
-      object ToolButton5: TToolButton
-        Left = 75
-        Top = 0
-        Width = 8
-        Caption = 'ToolButton5'
-        ImageIndex = 5
-        Style = tbsSeparator
-      end
-      object ToolButton6: TToolButton
-        Left = 83
-        Top = 0
-        Action = ARename
-      end
       object ToolButton4: TToolButton
-        Left = 109
+        Left = 101
         Top = 0
         Width = 8
         Caption = 'ToolButton4'
@@ -65,8 +57,26 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         ImageName = 'Item5'
         Style = tbsSeparator
       end
+      object ToolButton3: TToolButton
+        Left = 109
+        Top = 0
+        Action = ADelete
+      end
+      object ToolButton5: TToolButton
+        Left = 135
+        Top = 0
+        Width = 8
+        Caption = 'ToolButton5'
+        ImageIndex = 5
+        Style = tbsSeparator
+      end
+      object ToolButton6: TToolButton
+        Left = 143
+        Top = 0
+        Action = ARename
+      end
       object BParams: TButton
-        Left = 117
+        Left = 169
         Top = 0
         Width = 172
         Height = 25
@@ -97,7 +107,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         Width = 185
         Height = 101
         Align = alLeft
-        ItemHeight = 13
+        ItemHeight = 20
         TabOrder = 0
         OnClick = LDatasetsClick
       end
@@ -115,22 +125,22 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         object LMasterDataset: TLabel
           Left = 6
           Top = 37
-          Width = 73
-          Height = 13
+          Width = 98
+          Height = 20
           Caption = 'Master dataset'
         end
         object LConnection: TLabel
           Left = 4
           Top = 6
-          Width = 54
-          Height = 13
+          Width = 75
+          Height = 20
           Caption = 'Connection'
         end
         object ComboDataSource: TComboBox
           Left = 120
           Top = 34
           Width = 532
-          Height = 21
+          Height = 28
           Style = csDropDownList
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 1
@@ -140,7 +150,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 120
           Top = 3
           Width = 532
-          Height = 21
+          Height = 28
           Style = csDropDownList
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
@@ -190,7 +200,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 189
           Top = 0
           Width = 8
-          Height = 337
+          Height = 330
           Beveled = True
           ExplicitHeight = 293
         end
@@ -198,7 +208,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 197
           Top = 0
           Width = 647
-          Height = 337
+          Height = 330
           Align = alClient
           ScrollBars = ssBoth
           TabOrder = 0
@@ -209,7 +219,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 0
           Top = 0
           Width = 189
-          Height = 337
+          Height = 330
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 1
@@ -244,7 +254,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 0
           Top = 37
           Width = 844
-          Height = 300
+          Height = 293
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
@@ -263,7 +273,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
             Left = 0
             Top = 17
             Width = 844
-            Height = 283
+            Height = 276
             Align = alClient
             ScrollBars = ssBoth
             TabOrder = 1
@@ -277,33 +287,33 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         ImageIndex = 1
         DesignSize = (
           844
-          337)
+          330)
         object LBDEIndexFields: TLabel
           Left = 3
           Top = 72
-          Width = 58
-          Height = 13
+          Width = 78
+          Height = 20
           Caption = 'Index Fields'
         end
         object LIndexName: TLabel
           Left = 3
           Top = 43
-          Width = 58
-          Height = 13
+          Width = 80
+          Height = 20
           Caption = 'Index Name'
         end
         object LTable: TLabel
           Left = 0
           Top = 14
-          Width = 26
-          Height = 13
+          Width = 35
+          Height = 20
           Caption = 'Table'
         end
         object LMasterFields: TLabel
           Left = 3
           Top = 102
-          Width = 61
-          Height = 13
+          Width = 85
+          Height = 20
           Caption = 'Master fields'
         end
         object LNote: TLabel
@@ -320,15 +330,15 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         object LFirstRange: TLabel
           Left = 323
           Top = 3
-          Width = 52
-          Height = 13
+          Width = 69
+          Height = 20
           Caption = 'First range'
         end
         object LLastRange: TLabel
           Left = 480
           Top = 3
-          Width = 51
-          Height = 13
+          Width = 68
+          Height = 20
           Caption = 'Last range'
         end
         object LRange: TLabel
@@ -350,7 +360,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 115
           Top = 69
           Width = 188
-          Height = 21
+          Height = 28
           TabOrder = 2
           OnChange = MSQLChange
           OnDropDown = EBDEIndexFieldsDropDown
@@ -361,7 +371,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 115
           Top = 40
           Width = 188
-          Height = 21
+          Height = 28
           TabOrder = 1
           OnChange = MSQLChange
           OnDropDown = EBDEIndexNameDropDown
@@ -372,7 +382,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 115
           Top = 11
           Width = 188
-          Height = 21
+          Height = 28
           TabOrder = 0
           OnChange = MSQLChange
           OnDropDown = EBDETableDropDown
@@ -383,7 +393,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 115
           Top = 99
           Width = 188
-          Height = 21
+          Height = 28
           TabOrder = 3
           Text = 'EBDEMasterFields'
           OnChange = MSQLChange
@@ -413,40 +423,40 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
         ImageIndex = 3
         DesignSize = (
           844
-          337)
+          330)
         object LIndexFields: TLabel
           Left = 0
           Top = 60
-          Width = 56
-          Height = 13
+          Width = 76
+          Height = 20
           Caption = 'Index fields'
         end
         object LMyBase: TLabel
           Left = 0
           Top = 9
-          Width = 82
-          Height = 13
+          Width = 115
+          Height = 20
           Caption = 'MyBase Filename'
         end
         object LFields: TLabel
           Left = 0
           Top = 33
-          Width = 63
-          Height = 13
+          Width = 89
+          Height = 20
           Caption = 'Field defs file'
         end
         object LMasterfi: TLabel
           Left = 0
           Top = 87
-          Width = 61
-          Height = 13
+          Width = 85
+          Height = 20
           Caption = 'Master fields'
         end
         object EMyBase: TEdit
           Left = 144
           Top = 3
           Width = 698
-          Height = 21
+          Height = 28
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
           OnChange = MSQLChange
@@ -455,7 +465,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 144
           Top = 57
           Width = 698
-          Height = 21
+          Height = 28
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 5
           OnChange = MSQLChange
@@ -494,15 +504,15 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           object LabelUnions: TLabel
             Left = 4
             Top = 20
-            Width = 32
-            Height = 13
+            Width = 45
+            Height = 20
             Caption = 'Unions'
           end
           object ComboUnions: TComboBox
             Left = 4
             Top = 36
             Width = 197
-            Height = 21
+            Height = 28
             Style = csDropDownList
             TabOrder = 0
           end
@@ -539,7 +549,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
             Width = 574
             Height = 192
             Anchors = [akLeft, akTop, akRight, akBottom]
-            ItemHeight = 13
+            ItemHeight = 20
             TabOrder = 5
           end
           object CheckParallelUnion: TCheckBox
@@ -556,7 +566,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 144
           Top = 31
           Width = 497
-          Height = 21
+          Height = 28
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 2
           OnChange = MSQLChange
@@ -575,7 +585,7 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
           Left = 144
           Top = 84
           Width = 698
-          Height = 21
+          Height = 28
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 7
           OnChange = MSQLChange
@@ -1001,6 +1011,20 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
       ImageName = 'Item5'
       OnExecute = ARenameExecute
     end
+    object AUp: TAction
+      Caption = 'Up'
+      Hint = 'Up'
+      ImageIndex = 0
+      ImageName = 'Item1'
+      OnExecute = AUpExecute
+    end
+    object ADown: TAction
+      Caption = 'Down'
+      Hint = 'Down'
+      ImageIndex = 1
+      ImageName = 'Item2'
+      OnExecute = ADownExecute
+    end
   end
   object ImageCollection1: TImageCollection
     Images = <
@@ -1073,37 +1097,30 @@ object FRpDatasetsVCL: TFRpDatasetsVCL
     Top = 246
   end
   object VirtualImageList1: TVirtualImageList
-    DisabledGrayscale = False
-    DisabledSuffix = '_Disabled'
     Images = <
       item
         CollectionIndex = 0
         CollectionName = 'Item1'
-        Disabled = False
         Name = 'Item1'
       end
       item
         CollectionIndex = 1
         CollectionName = 'Item2'
-        Disabled = False
         Name = 'Item2'
       end
       item
         CollectionIndex = 2
         CollectionName = 'Item3'
-        Disabled = False
         Name = 'Item3'
       end
       item
         CollectionIndex = 3
         CollectionName = 'Item4'
-        Disabled = False
         Name = 'Item4'
       end
       item
         CollectionIndex = 4
         CollectionName = 'Item5'
-        Disabled = False
         Name = 'Item5'
       end>
     ImageCollection = ImageCollection1

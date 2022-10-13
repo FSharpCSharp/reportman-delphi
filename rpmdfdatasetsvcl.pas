@@ -110,6 +110,10 @@ type
     CheckParallelUnion: TCheckBox;
     ImageCollection1: TImageCollection;
     VirtualImageList1: TVirtualImageList;
+    AUp: TAction;
+    ADown: TAction;
+    ToolButton7: TToolButton;
+    ToolButton8: TToolButton;
     procedure BParamsClick(Sender: TObject);
     procedure LDatasetsClick(Sender: TObject);
     procedure MSQLChange(Sender: TObject);
@@ -126,6 +130,8 @@ type
     procedure BModifyClick(Sender: TObject);
     procedure LRangeClick(Sender: TObject);
     procedure FrameResize(Sender: TObject);
+    procedure AUpExecute(Sender: TObject);
+    procedure ADownExecute(Sender: TObject);
   private
     { Private declarations }
     Report:TRpReport;
@@ -216,6 +222,9 @@ begin
  ADelete.Caption:=TranslateStr(150,ADelete.Caption);
  ADelete.Hint:=ARename.Caption;
  BParams.Hint:=TranslateStr(152,BParams.Hint);
+ AUp.Hint:=TranslateStr(190,AUp.Hint);
+ ADown.Hint:=TranslateStr(191,ADown.Hint);
+
 
  PBottom.Height:=250;
 
@@ -642,6 +651,28 @@ begin
  end;
 end;
 
+procedure TFRpDatasetsVCL.ADownExecute(Sender: TObject);
+var
+ dinfo:TRpDatainfoitem;
+ index:integer;
+ alias: string;
+begin
+ // Up
+ dinfo:=FindDataInfoItem;
+ alias:=dinfo.Alias;
+ index:=datainfo.IndexOf(Alias);
+ if index<0 then
+  Raise Exception.Create(SRPAliasNotExists);
+ if (index >= datainfo.Count-1) then
+ begin
+   exit;
+ end;
+ datainfo.Swap(index, index + 1);
+ FillDatasets;
+ LDataSets.Selected[index+1]:=true;
+ LDatasetsClick(Self);
+end;
+
 procedure TFRpDatasetsVCL.ANewExecute(Sender: TObject);
 var
  aliasname:string;
@@ -697,6 +728,28 @@ begin
   exit;
  dinfo.Alias:=aliasname;
  FillDatasets;
+end;
+
+procedure TFRpDatasetsVCL.AUpExecute(Sender: TObject);
+var
+ dinfo:TRpDatainfoitem;
+ index:integer;
+ alias: string;
+begin
+ // Up
+ dinfo:=FindDataInfoItem;
+ alias:=dinfo.Alias;
+ index:=datainfo.IndexOf(dinfo.Alias);
+ if index<0 then
+  Raise Exception.Create(SRPAliasNotExists);
+ if (index = 0) then
+ begin
+   exit;
+ end;
+ datainfo.Swap(index, index - 1);
+ FillDatasets;
+ LDataSets.Selected[index-1]:=true;
+ LDatasetsClick(Self);
 end;
 
 procedure  TFRpDatasetsVCL.Removedependences(oldalias:string);

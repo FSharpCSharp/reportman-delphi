@@ -429,6 +429,7 @@ type
    procedure DisableLinks;
    procedure EnableLinks;
    function Add(alias:string):TRpDataInfoItem;
+   procedure Swap(index1, index2: integer);
    function IndexOf(Value:string):integer;
    function ItemByName(AName:string):TRpDataInfoItem;
    property Items[index:integer]:TRpDataInfoItem read GetItem write SetItem;default;
@@ -1093,6 +1094,20 @@ begin
  Result:=TRpDataInfoItem(inherited Add);
  Result.Alias:=alias;
 end;
+
+procedure TRpDataInfoList.Swap(index1, index2: integer);
+var
+ item1: TRpDataInfoItem;
+ item2: TRpDataInfoItem;
+ newItem: TRpDataInfoItem;
+begin
+ newItem := TRpDataInfoItem(inherited Add);
+ newItem.Assign(GetItem(index1));
+ SetItem(index1, GetItem(index2));
+ SetItem(index2, newItem);
+ Delete(Count-1);
+end;
+
 
 function TRpDataInfoList.IndexOf(Value:string):integer;
 var
